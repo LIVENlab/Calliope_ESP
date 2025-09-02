@@ -1,0 +1,171 @@
+---
+import:
+    # Basics
+    - './v07/existing_techs_v7.yaml'
+    - './v07/storage-techs_v7.yaml'
+    - './v07/link-techs_v7.yaml'
+    - './v07/updated_renewable.yaml'
+    - './v07/trade_market_supply_v7.yaml'
+    - './v07/basic_techs.yaml'
+    - 'locations_.yaml'
+    - 'data_tables.yaml'
+    - 'overrides.yaml'
+
+# Data
+config:
+  init:
+    name: Calliope Spain
+    subset:
+      timesteps: ["2018-04-01", "2018-06-10"]
+    calliope_version:  0.7.0
+    resample:
+      timesteps: 3h
+    math_paths:
+      my_extra_math_math: "math.yaml"
+    extra_math: ["my_extra_math_math"]
+    mode: base
+
+  build:
+    backend: "gurobi"
+    objective: min_cost_optimisation
+    ensure_feasibility: false
+    #
+
+  solve:
+    solver: gurobi
+    solver_io: lp
+    solver_options:
+        Method: 2
+        Threads: 6
+        Crossover: -0
+        BarConvTol: 1e-4
+        OptimalityTol: 1e-4
+        FeasibilityTol: 1e-3
+        NumericFocus: 2
+    zero_threshold: 1e-7
+       # Sets the scale of unmet demand, which cannot be too high,otherwise the optimisation will not converge
+
+
+###
+# ---- Interest rate template definition
+###
+# For existing capacity, we will assume an 8% interest rate.
+# For new capacity, we will assume a 5% interest rate.
+# This applies for monetary costs and emissions.
+templates:
+  interest_rate_existing:
+    cost_interest_rate:
+      data: [0.08, 0.08, 0.0]
+      index: [monetary,co2, vul]
+      dims: [costs]
+
+  interest_rate_new:
+    cost_interest_rate:
+      data: [ 0.05, 0.08, 0.0]
+      index: [ monetary,co2, vul ]
+      dims: [ costs ]
+
+###
+# ---- Parameter definition
+###
+parameters:
+    objective_cost_weights:
+        data: [1, 1, 0] # switch according to scenario
+        index: [monetary, co2, vul]
+        dims: ['costs']
+    #bigM: 1e6
+    ###
+    # ---System balance parameters (used in math.yaml)---
+    ###
+    co2_limit: 20603000000.0  # total allowable CO₂ emissions in the spanish_model's currency/unit -- kg according to PNIEC.
+
+
+    # Local import cap limit:
+    # Allow every node to import up to 25% of the total generation.
+    # This avoids problems of one region being the main electricity producer
+
+    local_cap_import_limit: 0.25 # Assumption
+
+    # Wind tech capacity group limits
+    wind_tech_limit_esp_1: 97078.21
+    wind_tech_limit_esp_10: 121190.06
+    wind_tech_limit_esp_11: 128803.82
+    wind_tech_limit_esp_2: 95447.45
+    wind_tech_limit_esp_3: 141329.18
+    wind_tech_limit_esp_4: 56655.05
+    wind_tech_limit_esp_5: 109742.38
+    wind_tech_limit_esp_6: 67464.58
+    wind_tech_limit_esp_7: 10849.19
+    wind_tech_limit_esp_8: 120581.96
+    wind_tech_limit_esp_9: 76813.24  # MW Eurocalliope
+
+    # Wind offshore capacity limits. Extracted from Eurocalliope
+    wind_offshore_techlimit_esp_1: 84550.234
+    wind_offshore_techlimit_esp_10: 14882.073
+    wind_offshore_techlimit_esp_11: 40049.676
+    wind_offshore_techlimit_esp_2: 43443.228
+    wind_offshore_techlimit_esp_3: 0
+    wind_offshore_techlimit_esp_4: 16964.033
+    wind_offshore_techlimit_esp_5: 0
+    wind_offshore_techlimit_esp_6: 46026.718
+    wind_offshore_techlimit_esp_7: 0
+    wind_offshore_techlimit_esp_8: 0
+    wind_offshore_techlimit_esp_9: 0
+
+
+    # Rooftop pv capacities. Extracted from Eurocalliop
+    pv_roof_cap_esp_1: 31208.698 # MW Eurocalliope
+    pv_roof_cap_esp_10: 25708.171   # MW Eurocalliope
+    pv_roof_cap_esp_11: 38942.394 # MW Eurocalliope
+    pv_roof_cap_esp_2: 19865.644   # MW Eurocalliope
+    pv_roof_cap_esp_3: 13174.809   # MW Eurocalliope
+    pv_roof_cap_esp_4: 14412.426   # MW Eurocalliope
+    pv_roof_cap_esp_5: 7097.963  # MW Eurocalliope
+    pv_roof_cap_esp_6: 34634.527  # MW Eurocalliope
+    pv_roof_cap_esp_7: 17512.607  # MW Eurocalliope
+    pv_roof_cap_esp_8: 16046.606  # MW Eurocalliope
+    pv_roof_cap_esp_9: 22633.473 # MW Eurocalliope
+
+
+    # Pumped hydro group caps. Extracted from Eurocalliope
+    pumped_hydro_techlimit_esp_1: 1433
+    pumped_hydro_techlimit_esp_10: 0
+    pumped_hydro_techlimit_esp_11: 1516.76
+    pumped_hydro_techlimit_esp_2: 2627.03
+    pumped_hydro_techlimit_esp_3: 240
+    pumped_hydro_techlimit_esp_4: 0
+    pumped_hydro_techlimit_esp_5: 317.10
+    pumped_hydro_techlimit_esp_6: 538
+    pumped_hydro_techlimit_esp_7: 0
+    pumped_hydro_techlimit_esp_8: 539.61
+    pumped_hydro_techlimit_esp_9: 611.571
+
+    # Storage cap biogas. Extracted from Eurocalliope
+    biogas_to_electricity_cap_1: 3092785.40 # MWh
+    biogas_to_electricity_cap_10: 2288499.37 # MWh
+    biogas_to_electricity_cap_11: 3310107.60 # MWh
+    biogas_to_electricity_cap_2: 3893711.68 # MWh
+    biogas_to_electricity_cap_3: 3653839.90 # MWh
+    biogas_to_electricity_cap_4: 1932289.16 # MWh
+    biogas_to_electricity_cap_5: 2397008.23 # MWh
+    biogas_to_electricity_cap_6: 2752504.56 # MWh
+    biogas_to_electricity_cap_7: 919190.97 # MWh
+    biogas_to_electricity_cap_8: 3100309.61 # MWh
+    biogas_to_electricity_cap_9: 2134753.47 # MWh
+
+    # Biogas resource cap. Extracted from Eurocalliope.
+    biogas_resource_esp_1: 706.11 # MW
+    biogas_resource_esp_10: 522.48 # MW
+    biogas_resource_esp_11: 755.73 #MW
+    biogas_resource_esp_2: 888.97 #MW
+    biogas_resource_esp_3: 834.21 #MW
+    biogas_resource_esp_4: 441.16 #MW
+    biogas_resource_esp_5: 547.26 #MW
+    biogas_resource_esp_6: 628.42 #MW
+    biogas_resource_esp_7: 209.86 #MW
+    biogas_resource_esp_8: 707.83 #MW
+    biogas_resource_esp_9: 487.38 #MW
+
+
+
+

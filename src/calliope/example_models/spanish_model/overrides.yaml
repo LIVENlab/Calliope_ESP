@@ -1,0 +1,114 @@
+---
+overrides:
+    ### Technical overrides ###
+    link_cap_X1: # based on link_cap_1x from EuroCalliope
+        techs.ESP_1_ESP_2_ac_ohl_transmission.flow_cap_max: 7200
+        techs.ESP_1_ESP_2_ac_ohl_transmission.flow_cap_min: 7200
+        techs.ESP_1_PRT_1_ac_ohl_transmission.flow_cap_max: 1200
+        techs.ESP_1_PRT_1_ac_ohl_transmission.flow_cap_min: 1200
+        techs.ESP_10_ESP_11_ac_ohl_transmission.flow_cap_max: 3200
+        techs.ESP_10_ESP_11_ac_ohl_transmission.flow_cap_min: 3200
+        techs.ESP_2_ESP_3_ac_ohl_transmission.flow_cap_max: 19100
+        techs.ESP_2_ESP_3_ac_ohl_transmission.flow_cap_min: 19100
+        techs.ESP_2_ESP_4_ac_ohl_transmission.flow_cap_max: 2400
+        techs.ESP_2_ESP_4_ac_ohl_transmission.flow_cap_min: 2400
+        techs.ESP_2_ESP_8_techs_ac_ohl_transmission.flow_cap_max: 2400
+        techs.ESP_2_ESP_8_techs_ac_ohl_transmission.flow_cap_min: 2400
+        techs.ESP_2_PRT_1_ac_ohl_transmission.flow_cap_max: 950
+        techs.ESP_2_PRT_1_ac_ohl_transmission.flow_cap_min: 950
+        techs.ESP_3_ESP_11_ac_ohl_transmission.flow_cap_max: 2700
+        techs.ESP_3_ESP_11_ac_ohl_transmission.flow_cap_min: 2700
+        techs.ESP_3_ESP_4_ac_ohl_transmission.flow_cap_max: 7100
+        techs.ESP_3_ESP_4_ac_ohl_transmission.flow_cap_min: 7100
+        techs.ESP_3_ESP_5_ac_ohl_transmission.flow_cap_max: 3900
+        techs.ESP_3_ESP_5_ac_ohl_transmission.flow_cap_min: 3900
+        techs.ESP_3_ESP_7_ac_ohl_transmission.flow_cap_max: 10200
+        techs.ESP_3_ESP_7_ac_ohl_transmission.flow_cap_min: 10200
+        techs.ESP_4_ESP_5_techs_ac_ohl_transmission.flow_cap_max: 900
+        techs.ESP_4_ESP_5_techs_ac_ohl_transmission.flow_cap_min: 900
+        techs.ESP_5_ESP_11_ac_ohl_transmission.flow_cap_max: 5700
+        techs.ESP_5_ESP_11_ac_ohl_transmission.flow_cap_min: 5700
+        techs.ESP_5_ESP_6_techs_ac_ohl_transmission.flow_cap_max: 7000
+        techs.ESP_5_ESP_6_techs_ac_ohl_transmission.flow_cap_min: 7000
+        techs.ESP_6_ESP_11_ac_ohl_transmission.flow_cap_max: 1100
+        techs.ESP_6_ESP_11_ac_ohl_transmission.flow_cap_min: 1100
+        techs.ESP_7_ESP_11_ac_ohl_transmission.flow_cap_max: 2100
+        techs.ESP_7_ESP_11_ac_ohl_transmission.flow_cap_min: 2100
+        techs.ESP_7_ESP_8_ac_ohl_transmission.flow_cap_max: 8700
+        techs.ESP_7_ESP_8_ac_ohl_transmission.flow_cap_min: 8700
+        techs.ESP_8_ESP_10_ac_ohl_transmission.flow_cap_max: 4000
+        techs.ESP_8_ESP_10_ac_ohl_transmission.flow_cap_min: 4000
+        techs.ESP_8_ESP_9_ac_ohl_transmission.flow_cap_max: 6100
+        techs.ESP_8_ESP_9_ac_ohl_transmission.flow_cap_min: 6100
+        techs.ESP_8_PRT_2_ac_ohl_transmission.flow_cap_max: 900
+        techs.ESP_8_PRT_2_ac_ohl_transmission.flow_cap_min: 900
+        techs.ESP_9_ESP_10_ac_ohl_transmission.flow_cap_max: 8100
+        techs.ESP_9_ESP_10_ac_ohl_transmission.flow_cap_min: 8100
+        techs.ESP_9_PRT_2_ac_ohl_transmission.flow_cap_max: 500
+        techs.ESP_9_PRT_2_ac_ohl_transmission.flow_cap_min: 500
+        techs.ESP_4_FRA_1_dc_underground_transmission.flow_cap_max: 3500
+        techs.ESP_4_FRA_1_dc_underground_transmission.flow_cap_min: 3500
+        techs.ESP_4_FRA_1_dc_subsea_transmission.flow_cap_max: 2000
+        techs.ESP_4_FRA_1_dc_subsea_transmission.flow_cap_min: 2000
+        techs.ESP_4_FRA_1_ac_ohl_mountain_transmission.flow_cap_max: 1000
+        techs.ESP_4_FRA_1_ac_ohl_mountain_transmission.flow_cap_min: 1000
+        techs.ESP_5_FRA_1_ac_ohl_transmission.flow_cap_max: 100
+        techs.ESP_5_FRA_1_ac_ohl_transmission.flow_cap_min: 100
+        techs.ESP_6_FRA_2_dc_underground_transmission.flow_cap_max: 800
+        techs.ESP_6_FRA_2_dc_underground_transmission.flow_cap_min: 800
+        techs.ESP_6_FRA_2_ac_ohl_mountain_transmission.flow_cap_max: 1000
+        techs.ESP_6_FRA_2_ac_ohl_mountain_transmission.flow_cap_min: 1000
+        techs.ESP_6_FRA_3_dc_subsea_transmission.flow_cap_max: 700
+        techs.ESP_6_FRA_3_dc_subsea_transmission.flow_cap_min: 700
+        techs.ESP_9_MA_dc_subsea_transmission:
+
+### Objective weights ###
+    monetary_testing:
+        parameters:
+           objective_cost_weights:
+                data: [1,0,0]
+                index: [monetary,co2,vul]
+                dims: costs
+
+    monetary_and_emissions_testing:
+      parameters:
+        objective_cost_weights:
+          data: [ 1,1,0 ]
+          index: [ monetary,co2,vul ]
+          dims: costs
+
+    emissions_testing:
+      parameters:
+        objective_cost_weights:
+          data: [0,1,0]
+          index: [ monetary,co2,vul ]
+          dims: costs
+
+    summer_test:
+      init:
+        time_subset: ["2018-06-01", "2018-06-30"]
+        time_resample: 2H
+
+### Interest rate tests
+    ir_existing_10: # Set existing interest rate to 10%
+      templates.interest_rate_existing.cost_interest_rate.data: [0.1, 0.1, 0.0]
+
+    ir_existing_07: # Set existing interest rate to 7%
+      templates.interest_rate_existing.cost_interest_rate.data: [ 0.07, 0.07, 0.0 ]
+
+    ir_new_04: # Set new interest rate to 4%
+        templates.interest_rate_new.cost_interest_rate.data: [0.04, 0.07, 0.0]
+
+
+
+
+scenarios:
+  cost_optimization: ["monetary_testing", "link_cap_X1" ]
+  summer_test: ["monetary_testing", "link_cap_X1", "summer_test"]
+
+  # Testing IR
+  IR_test_1: ["monetary_and_emissions_testing", "link_cap_X1", "ir_existing_10"]
+  IR_test_2: ["monetary_and_emissions_testing", "link_cap_X1", "ir_existing_07"]
+  IR_test_3: ["monetary_and_emissions_testing", "link_cap_X1", "ir_existing_07", "ir_new_04"]
+  IR_test_4: ["emissions_testing", "link_cap_X1", "ir_new_04"]
+  IR_test_5: ["monetary_and_emissions_testing", "link_cap_X1", "ir_new_04"]

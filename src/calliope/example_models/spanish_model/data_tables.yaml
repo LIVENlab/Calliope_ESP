@@ -1,0 +1,83 @@
+---
+
+data_tables:
+    demand_data:
+        data: 'data/electricitydemand.csv'
+        rows: timesteps
+        columns: nodes
+        #carrier: electricity
+        add_dims:
+            techs: demand_tech
+            parameters: sink_use_equals
+
+
+    wind_onshore_capapcity_factors:
+        data: 'data/capacityfactors-wind-onshore.csv'
+        rows: timesteps
+        columns: nodes
+        add_dims:
+            techs: [ existing_wind_onshore, wind_onshore_monopoly_CN, wind_onshore_monopoly_IND, wind_onshore_monopoly_DE,
+                  wind_onshore_monopoly_PT, wind_onshore_monopoly_FR, wind_onshore_monopoly_NDL, wind_onshore_monopoly_ESP,
+                     wind_onshore_competing_CN, wind_onshore_competing_IND, wind_onshore_competing_DE, wind_onshore_competing_PT,
+                     wind_onshore_competing_FR, wind_onshore_competing_NDL, wind_onshore_competing_ESP]
+            parameters: source_use_max
+
+
+    wind_offshore_capacity_factors:
+        data: 'data/capacityfactors-wind-offshore.csv'
+        rows: timesteps
+        columns: nodes
+        add_dims:
+            techs: [wind_offshore_CN, wind_offshore_IND, wind_offshore_DE, wind_offshore_PT,
+                    wind_offshore_FR, wind_offshore_NDL, wind_offshore_ESP  ]
+            parameters: source_use_max
+
+    roof_mounted_pv_capacity_factors:
+        data: 'data/capacityfactors-rooftop-pv.csv'
+        rows: timesteps
+        columns: nodes
+        add_dims:
+            techs: [roof_mounted_pv_CN, roof_mounted_pv_DE, roof_mounted_pv_NL,
+                    roof_mounted_pv_PT, roof_mounted_pv_MY, roof_mounted_pv_ESP]
+            parameters: source_use_max
+
+
+    open_field_pv_capacity_factors:
+        data: 'data/capacityfactors-open-field-pv.csv'
+        rows: timesteps
+        columns: nodes
+        add_dims:
+            techs: [open_field_pv_CN, roof_mounted_pv_DE, roof_mounted_pv_NL,
+                    roof_mounted_pv_PT, roof_mounted_pv_MY, roof_mounted_pv_ESP]
+            parameters: source_use_max
+
+
+    hydro_run_of_river_capacity_factors:
+        data: 'data/capacityfactors-hydro-ror.csv'
+        rows: timesteps
+        columns: nodes
+        add_dims:
+            techs: existing_hydro_run_of_river
+            parameters: source_use_max
+
+    hydro_reservoir_capacity_factors:
+        data: 'data/capacityfactors-hydro-reservoir-inflow.csv'
+        rows: timesteps
+        columns: nodes
+        add_dims:
+            techs: existing_hydro_reservoir
+            parameters: source_use_max
+
+
+
+
+        #hydro_runofriver_CN_capacity_factors:
+      # data: data/wind_offshore_NDL_capacityfactors-wind-offshore.csv #TODO: correct this
+      # rows: timestep
+      # columns: nodes
+      # add_dims:
+      #     techs: hydro_run_of_river_ESP
+      #     parameters: source_use_max
+
+
+

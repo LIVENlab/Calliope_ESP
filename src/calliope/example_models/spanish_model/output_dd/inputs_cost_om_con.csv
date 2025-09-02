@@ -1,0 +1,6 @@
+techs,costs,cost_om_con
+biomass_ESP,monetary,1500.0
+biomass_FR,monetary,1500.0
+biomass_IT,monetary,1500.0
+existing_biogas_to_electricity_supply,monetary,63.45908437668863
+existing_biomass,monetary,150.0

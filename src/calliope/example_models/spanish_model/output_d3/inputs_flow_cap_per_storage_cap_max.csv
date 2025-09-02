@@ -1,0 +1,9 @@
+techs,flow_cap_per_storage_cap_max
+biogas_to_electricity_supply_BEL,0.0033
+biogas_to_electricity_supply_CAN,0.0033
+biogas_to_electricity_supply_FR,0.0033
+biogas_to_electricity_supply_FSM,0.0033
+biogas_to_electricity_supply_UK,0.0033
+biogas_to_electricity_supply_USA,0.0033
+existing_biogas_to_electricity_supply,0.0033
+existing_pumped_hydro,0.167

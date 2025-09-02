@@ -1,0 +1,15 @@
+techs,storage_cap_max
+battery_CN,inf
+battery_CZ,inf
+battery_ESP,inf
+battery_HU,inf
+battery_PL,inf
+battery_US,inf
+biogas_to_electricity_supply_BEL,inf
+biogas_to_electricity_supply_CAN,inf
+biogas_to_electricity_supply_FR,inf
+biogas_to_electricity_supply_FSM,inf
+biogas_to_electricity_supply_UK,inf
+biogas_to_electricity_supply_USA,inf
+existing_biogas_to_electricity_supply,inf
+existing_pumped_hydro,inf

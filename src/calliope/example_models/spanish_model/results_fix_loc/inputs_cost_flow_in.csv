@@ -1,0 +1,10 @@
+techs,costs,cost_flow_in
+el_import_FR,co2,57.0
+el_import_FR,monetary,22.3
+el_import_FR,vul,0.0
+el_import_MA,co2,693.0
+el_import_MA,monetary,35.0
+el_import_MA,vul,0.0
+el_import_PT,co2,389.0
+el_import_PT,monetary,0.28
+el_import_PT,vul,0.0

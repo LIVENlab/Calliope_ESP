@@ -1,0 +1,17 @@
+techs,energy_ramping
+biogas_to_electricity_supply_BEL,0.1
+biogas_to_electricity_supply_CAN,0.1
+biogas_to_electricity_supply_FR,0.1
+biogas_to_electricity_supply_FSM,0.1
+biogas_to_electricity_supply_UK,0.1
+biogas_to_electricity_supply_USA,0.1
+biomass_ESP,0.1
+biomass_FR,0.1
+biomass_IT,0.1
+existing_biogas_to_electricity_supply,0.1
+existing_biomass,0.1
+existing_ccgt,0.15
+existing_chp,0.2
+existing_coal,0.6
+existing_hydro_run_of_river,0.1
+existing_oil_and_other,0.05

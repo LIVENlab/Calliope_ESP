@@ -1,0 +1,185 @@
+---
+templates:
+  battery: # 180 Lithium ion battery storage Danish energy data 2025
+    name: 'Battery storage'
+    base_tech: storage
+    template: interest_rate_new
+    carrier_in: electricity
+    carrier_out: electricity
+    #flow_cap_max: .inf # Corrected to.inf
+    flow_in_eff: 0.9273 # Eurocalliope
+    flow_out_eff: 0.9273
+    storage_cap_max: .inf # Corrected to.inf
+    energy_eff: 0.95  # 0.86 round trip efficiency
+    storage_loss: 0 # Assumption
+    lifetime: 25
+    flow_cap_min: 0
+    #flow_cap_per_storage_cap_min: 0.25 # Italy spanish_model
+    cost_storage_cap:
+      data: [900] # Assumption based on Eurocalliope (EUR2015/MWh), 802 $2015
+      index: [monetary]
+      dims: ['costs']
+    cost_om_annual:
+      data: [8100]
+      index: [monetary]
+      dims: [costs]
+    cost_om_prod:
+      data: [ 1.94 ]
+      index: [ monetary ]
+      dims: [ costs ]
+
+techs:
+  pumped_hydro_CN:
+      name: Pumped hydro turbine CN.
+      base_tech: storage
+      template: interest_rate_new
+      carrier_in: electricity
+      carrier_out: electricity
+      lifetime: 50
+      energy_eff: 0.75 # 160 Pumped hydro storage, danish energy agency
+      cost_flow_cap:
+        data: [5222, 13808, 0.5]  # EUR/MW # kg CO2/MW
+        index: [monetary, co2, vulnerability]
+        dims: ['costs']
+      cost_om_prod:
+        data: [ 5.0 ]     # (EUR2013/MW/yr) from [@JRC:2014] Table 14
+        index: [ monetary ]
+        dims: [ costs ]
+      cost_om_annual:
+        data: [8507]      # ( EUR2013/MW/yr) 3% from [@JRC:2014] Table 14
+        index: [monetary]
+        dims: [costs]
+      cost_interest_rate:
+        data: [0.05, 0.035, 0.1]  # 5% interest rate
+        index: [monetary, co2, vulnerability]
+        dims: ['costs']
+
+  pumped_hydro_ESP:
+    name: pumped SPAIN.
+    base_tech: supply
+    template: interest_rate_new
+    carrier_out: electricity
+    source_unit: per_cap
+    lifetime: 60
+    cost_flow_cap:
+      data: [ 139025, 4180, 0.5 ]      # (EUR2013/MW) from [@JRC:2014] Table 12
+      index: [ monetary, co2, vul ]
+      dims: [ costs ]
+    cost_om_prod:
+      data: [ 5 ]   # (EUR2013/MW/yr) from [@JRC:2014] Table 12
+      index: [ monetary ]
+      dims: [ costs ]
+    cost_om_annual:
+      data: [ 101100 ]    # (EUR2013/MW/yr) from [@JRC:2014] Table 12
+      index: [ monetary ]
+      dims: [ costs ]
+    cost_interest_rate:
+      data: [ 0.05, 0.035, 0.1 ]  # 5% interest rate
+      index: [ monetary, co2, vul]
+      dims: [ 'costs' ]
+
+  # """" Batteries """" Considered code: 85065090
+  battery_CN:
+      name: Battery CN
+      template: battery
+      cost_flow_cap:
+          data: [14708, 38889, 0.53]  # Eur/MW # # kg Co2/ MW
+          index: [monetary, co2, vul]
+          dims: ['costs']
+
+  battery_CZ:
+      name: Battery CZ
+      template: battery
+      cost_flow_cap:
+          data: [17265, 45652, 0.1]  # Eur/MW # # kg Co2/ MW
+          index: [monetary, co2, vul]
+          dims: ['costs']
+
+
+  battery_US:
+      name: Battery US
+      template: battery
+      cost_flow_cap:
+          data: [15608, 41272, 0.08]  # Eur/MW # # kg Co2/ MW TODO: ADAPT MAGNITUDE
+          index: [monetary, co2, vul]
+          dims: ['costs']
+
+  battery_HU:
+      name: Battery PT
+      template: battery
+      cost_flow_cap:
+          data: [19201, 50772, 0.07]  # Eur/MW # # kg Co2/ MW TODO: ADAPT MAGNITUDE
+          index: [ monetary, co2, vul]
+          dims: ['costs']
+
+  battery_PL:
+      name: Battery CN
+      template: battery
+      cost_flow_cap:
+          data: [17559, 46430, 0.06]  # Eur/MW # # kg Co2/ MW T
+          index: [ monetary, co2, vul ]
+          dims: ['costs']
+
+  battery_ESP:
+    name: Battery ESP
+    template: battery
+    cost_flow_cap:
+      data: [ 50886, 5779, 0.03 ]  # Eur/MW # # kg Co2/ MW
+      index: [ monetary, co2, vul]
+      dims: ['costs']
+
+    # Hydro technologies will only have one supplier for > 10000kW power -China
+
+  # pumped_hydro_pure_CN:  --> Removed due to lack of data
+  #     name: 'Pumped hydro power storage-China'
+  #     base_tech: storage
+  #     carrier_in: electricity
+  #     carrier_out: electricity
+  #     flow_cap_max: .inf
+  #     storage_cap_max: .inf
+  #     energy_eff: 0.8832 # 0.78 round-trip
+  #     lifetime: 55
+  #     cost_flow_cap:
+  #       data: [1, 1, 0.5] # TODO: update
+  #       index: [monetary, co2, vul]
+  #       dims: ['costs']
+  #     cost_storage_cap:
+  #       data: [73575.66] # (EUR2015/MWh), 80 $2015
+  #       index: [monetary]
+  #       dims: ['costs']
+  #     #energy_cap: 103.833246 # (10,000 EUR2015/MW), 1129 $2015
+  #     cost_om_annual :
+  #         data: [7357.260000000001] # (EUR2015/MW/year), 8 $2015
+  #         index: [monetary]
+  #         dims: ['costs']
+  #     cost_om_prod:
+  #         data: [0001.0200000000000001] # (EUR2015/MWh), 1 $2015, rounded to 1€ for numeric range
+  #         index: [monetary]
+  #         dims: ['costs']
+
+  # pumped_hydro_pure_ESP:
+  #   name: 'Pumped hydro power storage-ESP'
+  #   base_tech: storage
+  #   carrier_in: electricity
+  #   carrier_out: electricity
+  #   flow_cap_max: .inf # Corrected to.inf
+  #   storage_cap_max: .inf # Corrected to.inf
+  #   energy_eff: 0.8832 # 0.78 round-trip
+  #   lifetime: 55
+  #   cost_flow_cap:
+  #     data: [ 1, 1, 0.5] # TODO:
+  #     index: [ monetary, co2, vul]
+  #     dims: ['costs']
+  #   storage_cap:
+  #     data: [73575.66] # (EUR2015/MWh), 80 $2015
+  #     index: [monetary]
+  #     dims: ['costs']
+  #   #energy_cap: 103.833246 # (10,000 EUR2015/MW), 1129 $2015
+  #   cost_om_annuald:
+  #     data: [7357.260000000001] # (EUR2015/MW/year), 8 $2015
+  #     index: [monetary]
+  #     dims: ['costs']
+  #   cost_om_prod:
+  #     data: [0001.0200000000000001] # (EUR2015/MWh), 1 $2015, rounded to 1€ for numeric range
+  #     index: monetary
+  #     dims: ['costs']

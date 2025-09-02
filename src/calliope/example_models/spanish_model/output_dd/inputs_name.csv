@@ -1,0 +1,146 @@
+techs,name
+ESP_10_ESP_11_ac_ohl_transmission,High voltage AC transmission line
+ESP_1_ESP_2_ac_ohl_transmission,High voltage AC transmission line
+ESP_1_PRT_1_ac_ohl_transmission,High voltage AC transmission line
+ESP_2_ESP_3_ac_ohl_transmission,High voltage AC transmission line
+ESP_2_ESP_4_ac_ohl_transmission,High voltage AC transmission line
+ESP_2_ESP_8_techs_ac_ohl_transmission,High voltage AC transmission line
+ESP_2_PRT_1_ac_ohl_transmission,High voltage AC transmission line
+ESP_3_ESP_11_ac_ohl_transmission,High voltage AC transmission line
+ESP_3_ESP_4_ac_ohl_transmission,High voltage AC transmission line
+ESP_3_ESP_5_ac_ohl_transmission,High voltage AC transmission line
+ESP_3_ESP_7_ac_ohl_transmission,High voltage AC transmission line
+ESP_4_ESP_5_techs_ac_ohl_transmission,High voltage AC transmission line
+ESP_4_FRA_1_ac_ohl_mountain_transmission,High voltage AC transmission line
+ESP_4_FRA_1_dc_subsea_transmission,DC power transmission
+ESP_4_FRA_1_dc_underground_transmission,DC power transmission
+ESP_5_ESP_11_ac_ohl_transmission,High voltage AC transmission line
+ESP_5_ESP_6_techs_ac_ohl_transmission,High voltage AC transmission line
+ESP_5_FRA_1_ac_ohl_transmission,High voltage AC transmission line
+ESP_6_ESP_11_ac_ohl_transmission,High voltage AC transmission line
+ESP_6_FRA_2_ac_ohl_mountain_transmission,DC power transmission
+ESP_6_FRA_2_dc_underground_transmission,DC power transmission
+ESP_6_FRA_3_dc_subsea_transmission,DC power transmission
+ESP_7_ESP_11_ac_ohl_transmission,High voltage AC transmission line
+ESP_7_ESP_8_ac_ohl_transmission,High voltage AC transmission line
+ESP_8_ESP_10_ac_ohl_transmission,High voltage AC transmission line
+ESP_8_ESP_9_ac_ohl_transmission,High voltage AC transmission line
+ESP_8_PRT_2_ac_ohl_transmission,High voltage AC transmission line
+ESP_9_ESP_10_ac_ohl_transmission,High voltage AC transmission line
+ESP_9_MA_dc_subsea_transmission,DC power transmission
+ESP_9_PRT_2_ac_ohl_transmission,High voltage AC transmission line
+PRT_1_PRT_2_ac_ohl_transmission,High voltage AC transmission line
+Trade_Markets_ESP_10_natural_gas_transmission,Natural gas transmission link_from international trade
+Trade_Markets_ESP_11_coal_transmission,Coal transmission link_from international trade
+Trade_Markets_ESP_11_natural_gas_transmission,Natural gas transmission link_from international trade
+Trade_Markets_ESP_11_oil_fuel_transmission,Oil transmission link_from international trade
+Trade_Markets_ESP_11_uranium_transmission,Uranium transmission link_from international trade
+Trade_Markets_ESP_1_coal_transmission,Coal transmission link_from international trade
+Trade_Markets_ESP_1_natural_gas_transmission,Natural gas transmission link_from international trade
+Trade_Markets_ESP_2_coal_transmission,Coal transmission link_from international trade
+Trade_Markets_ESP_2_natural_gas_transmission,Natural gas transmission link_from international trade
+Trade_Markets_ESP_2_oil_fuel_transmission,Oil transmission link_from international trade
+Trade_Markets_ESP_2_uranium_transmission,Uranium transmission link_from international trade
+Trade_Markets_ESP_3_natural_gas_transmission,Natural gas transmission link_from international trade
+Trade_Markets_ESP_4_natural_gas_transmission,Natural gas transmission link_from international trade
+Trade_Markets_ESP_5_coal_transmission,Coal transmission link_from international trade
+Trade_Markets_ESP_5_natural_gas_transmission,Natural gas transmission link_from international trade
+Trade_Markets_ESP_6_natural_gas_transmission,Natural gas transmission link_from international trade
+Trade_Markets_ESP_6_oil_fuel_transmission,Oil transmission link_from international trade
+Trade_Markets_ESP_6_uranium_transmission,Uranium transmission link_from international trade
+Trade_Markets_ESP_7_coal_transmission,Coal transmission link_from international trade
+Trade_Markets_ESP_7_natural_gas_transmission,Natural gas transmission link_from international trade
+Trade_Markets_ESP_7_uranium_transmission,Uranium transmission link_from international trade
+Trade_Markets_ESP_8_uranium_transmission,Uranium transmission link_from international trade
+Trade_Markets_ESP_9_coal_transmission,Coal transmission link_from international trade
+Trade_Markets_ESP_9_natural_gas_transmission,Natural gas transmission link_from international trade
+battery_CN,Battery CN
+battery_CZ,Battery CZ
+battery_ESP,Battery ESP
+battery_HU,Battery PT
+battery_PL,Battery CN
+battery_US,Battery IT
+biogas_to_electricity_supply_BEL,Electricity from anaerobically digested biofuel-BEL
+biogas_to_electricity_supply_CAN,Electricity from anaerobically digested biofuel-CAN
+biogas_to_electricity_supply_FR,Electricity from anaerobically digested biofuel-FR
+biogas_to_electricity_supply_FSM,Electricity from anaerobically digested biofuel-FSM
+biogas_to_electricity_supply_UK,Electricity from anaerobically digested biofuel-UK
+biogas_to_electricity_supply_USA,Electricity from anaerobically digested biofuel-USA
+biomass_ESP,biomass turbine ESP
+biomass_FR,biomass turbine FR
+biomass_IT,biomass turbine IT
+coal_AUS,Coal imports from Australia
+coal_COL,Coal imports from Colombia
+coal_ITA,Coal imports from Italia
+coal_RUS,Coal imports from Russia
+coal_USA,Coal imports from USA
+demand_tech,Electricity demand
+el_import_FR,Electricity imports from France
+el_import_MA,Electricity imports from Portugal
+el_import_PT,Electricity imports from Portugal
+existing_biogas_to_electricity_supply,Existing Electricity from anaerobically digested biofuel
+existing_biomass,Existing Solid biomass power plant
+existing_ccgt,Combined cycle gas turbine
+existing_chp,Combined heat and power
+existing_coal,Coal power plant
+existing_hydro_reservoir,Existing Hydro electricity with a reservoir.
+existing_hydro_run_of_river,Existing Run of river hydro electricity
+existing_nuclear,Nuclear power
+existing_oil_and_other,Other existing fossil fuels plant
+existing_open_field_pv,existing open field PV
+existing_pumped_hydro,Existing Pumped hydro pure
+existing_rooftop_pv,existing rooftop PV
+existing_wind_onshore,existing onshore wind
+existing_wte,Waste-to-energy plant
+natural_gas_DEU,NG-gas imports from Germany
+natural_gas_DNK,NG-gas imports from Denmark
+natural_gas_DZA,NG-gas imports from Algeria
+natural_gas_NOR,NG-gas imports from Norway
+natural_gas_PT,NG-gas imports from Portugal
+natural_gas_liquid_DZA,NG-Liquid imports from Algeria
+natural_gas_liquid_NGA,NG-Liquid imports from Nigeria
+natural_gas_liquid_QAT,NG-Liquid imports from Qatar
+natural_gas_liquid_RUS,NG-Liquid imports from Russia
+natural_gas_liquid_USA,NG-Liquid imports from USA
+oil_LBY,Oil imports from Lby
+oil_MEX,Oil imports from Mexico
+oil_NGA,Oil imports from Nigeria
+oil_SA,Oil imports from SA
+oil_USA,Oil imports from SA
+open_field_pv_CN,Open field PV CN
+open_field_pv_DE,Open field PV DE
+open_field_pv_ESP,Open field PV ESP
+open_field_pv_MY,Open field PV MY
+open_field_pv_NL,Open field PV NL
+open_field_pv_PT,Open field PV PT
+pumped_hydro_CN,Pumped hydro turbine CN.
+pumped_hydro_ESP,pumped SPAIN.
+roof_mounted_pv_CN,Roof mounted PV CN
+roof_mounted_pv_DE,Roof mounted PV DE
+roof_mounted_pv_ESP,Roof mounted PV - ESP
+roof_mounted_pv_MY,Roof mounted PV MY
+roof_mounted_pv_NL,Roof mounted PV NL
+roof_mounted_pv_PT,Roof mounted PV PT
+uranium_UK,Uranium imports from UK
+uranium_USA,Uranium imports from USA
+wind_offshore_CN,Wind CN
+wind_offshore_DE,Wind DE
+wind_offshore_ESP,Wind offshore NDL
+wind_offshore_FR,Wind FR
+wind_offshore_IND,Wind onffshore IND
+wind_offshore_NDL,Wind offshore NDL
+wind_offshore_PT,Wind PT
+wind_onshore_competing_CN,Wind onshore competing CN
+wind_onshore_competing_DE,Wind onshore competing DE
+wind_onshore_competing_ESP,Wind onshore competing ESP
+wind_onshore_competing_FR,Wind onshore competing FR
+wind_onshore_competing_IND,Wind onshore competing IND
+wind_onshore_competing_NDL,Wind onshore competing NDL
+wind_onshore_competing_PT,Wind onshore competing PT
+wind_onshore_monopoly_CN,Wind CN
+wind_onshore_monopoly_DE,Wind DE
+wind_onshore_monopoly_ESP,Wind ESP
+wind_onshore_monopoly_FR,Wind FR
+wind_onshore_monopoly_IND,Wind IND
+wind_onshore_monopoly_NDL,Wind NDL
+wind_onshore_monopoly_PT,Wind PT

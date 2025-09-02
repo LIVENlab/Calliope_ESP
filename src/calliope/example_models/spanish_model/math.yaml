@@ -1,0 +1,1197 @@
+
+global_expressions:
+  # Copied from - https://github.com/calliope-project/calliope/blob/main/docs/user_defined_math/examples/net_import_share.yaml
+  flow_out_transmission_techs:
+    foreach: [nodes, techs, carriers, timesteps]
+    where: base_tech==transmission
+    equations:
+      - expression: flow_out
+    default: 0
+
+parameters:
+  co2_limit:
+    description: System-wide CO2 cap
+    unit: mass
+    default: .nan
+  local_cap_import_limit:
+    description: Share limit on imports relative to total energy balance
+    unit: unitless
+    default: 1
+
+  # Wind onshore capacity group limits (power)
+  wind_tech_limit_esp_1: {unit: power, default: .nan}
+  wind_tech_limit_esp_2: {unit: power, default: .nan}
+  wind_tech_limit_esp_3: {unit: power, default: .nan}
+  wind_tech_limit_esp_4: {unit: power, default: .nan}
+  wind_tech_limit_esp_5: {unit: power, default: .nan}
+  wind_tech_limit_esp_6: {unit: power, default: .nan}
+  wind_tech_limit_esp_7: {unit: power, default: .nan}
+  wind_tech_limit_esp_8: {unit: power, default: .nan}
+  wind_tech_limit_esp_9: {unit: power, default: .nan}
+  wind_tech_limit_esp_10: {unit: power, default: .nan}
+  wind_tech_limit_esp_11: {unit: power, default: .nan}
+
+  # Wind offshore capacity group limits (power)
+  wind_offshore_techlimit_esp_1: {unit: power, default: .nan}
+  wind_offshore_techlimit_esp_2: {unit: power, default: .nan}
+  wind_offshore_techlimit_esp_3: {unit: power, default: .nan}
+  wind_offshore_techlimit_esp_4: {unit: power, default: .nan}
+  wind_offshore_techlimit_esp_5: {unit: power, default: .nan}
+  wind_offshore_techlimit_esp_6: {unit: power, default: .nan}
+  wind_offshore_techlimit_esp_7: {unit: power, default: .nan}
+  wind_offshore_techlimit_esp_8: {unit: power, default: .nan}
+  wind_offshore_techlimit_esp_9: {unit: power, default: .nan}
+  wind_offshore_techlimit_esp_10: {unit: power, default: .nan}
+  wind_offshore_techlimit_esp_11: {unit: power, default: .nan}
+
+  # Rooftop PV caps (power)
+  pv_roof_cap_esp_1: {unit: power, default: .nan}
+  pv_roof_cap_esp_2: {unit: power, default: .nan}
+  pv_roof_cap_esp_3: {unit: power, default: .nan}
+  pv_roof_cap_esp_4: {unit: power, default: .nan}
+  pv_roof_cap_esp_5: {unit: power, default: .nan}
+  pv_roof_cap_esp_6: {unit: power, default: .nan}
+  pv_roof_cap_esp_7: {unit: power, default: .nan}
+  pv_roof_cap_esp_8: {unit: power, default: .nan}
+  pv_roof_cap_esp_9: {unit: power, default: .nan}
+  pv_roof_cap_esp_10: {unit: power, default: .nan}
+  pv_roof_cap_esp_11: {unit: power, default: .nan}
+
+  # Pumped hydro group caps (power)
+  pumped_hydro_techlimit_esp_1: {unit: power, default: .nan}
+  pumped_hydro_techlimit_esp_2: {unit: power, default: .nan}
+  pumped_hydro_techlimit_esp_3: {unit: power, default: .nan}
+  pumped_hydro_techlimit_esp_4: {unit: power, default: .nan}
+  pumped_hydro_techlimit_esp_5: {unit: power, default: .nan}
+  pumped_hydro_techlimit_esp_6: {unit: power, default: .nan}
+  pumped_hydro_techlimit_esp_7: {unit: power, default: .nan}
+  pumped_hydro_techlimit_esp_8: {unit: power, default: .nan}
+  pumped_hydro_techlimit_esp_9: {unit: power, default: .nan}
+  pumped_hydro_techlimit_esp_10: {unit: power, default: .nan}
+  pumped_hydro_techlimit_esp_11: {unit: power, default: .nan}
+
+  # Biogas storage caps (energy)
+  biogas_to_electricity_cap_1: {unit: energy, default: .nan}
+  biogas_to_electricity_cap_2: {unit: energy, default: .nan}
+  biogas_to_electricity_cap_3: {unit: energy, default: .nan}
+  biogas_to_electricity_cap_4: {unit: energy, default: .nan}
+  biogas_to_electricity_cap_5: {unit: energy, default: .nan}
+  biogas_to_electricity_cap_6: {unit: energy, default: .nan}
+  biogas_to_electricity_cap_7: {unit: energy, default: .nan}
+  biogas_to_electricity_cap_8: {unit: energy, default: .nan}
+  biogas_to_electricity_cap_9: {unit: energy, default: .nan}
+  biogas_to_electricity_cap_10: {unit: energy, default: .nan}
+  biogas_to_electricity_cap_11: {unit: energy, default: .nan}
+
+  # Biogas resource caps (power)
+  biogas_resource_esp_1: {unit: power, default: .nan}
+  biogas_resource_esp_2: {unit: power, default: .nan}
+  biogas_resource_esp_3: {unit: power, default: .nan}
+  biogas_resource_esp_4: {unit: power, default: .nan}
+  biogas_resource_esp_5: {unit: power, default: .nan}
+  biogas_resource_esp_6: {unit: power, default: .nan}
+  biogas_resource_esp_7: {unit: power, default: .nan}
+  biogas_resource_esp_8: {unit: power, default: .nan}
+  biogas_resource_esp_9: {unit: power, default: .nan}
+  biogas_resource_esp_10: {unit: power, default: .nan}
+  biogas_resource_esp_11: {unit: power, default: .nan}
+
+constraints:
+  ###  --- System balance constraints --- ###
+  systemwide_co2_cap:
+    title: System-wide carbon emissions cap
+    description: "Cap total CO2 emissions across the system"
+    equations:
+      - expression: $total_co2 <= co2_limit
+    sub_expressions:
+      total_co2:
+        - expression: sum(cost[costs=co2], over=[nodes, techs, carriers, timesteps])
+    active: True
+
+  # Test group constraint fuels
+  # grouped_cap_
+
+  # Individual import cap constraints #TODO: Create a general expression instead of the clumsy multiple solution
+  import_cap_ESP_1:
+    description: Limit upper bound on annual electricity imports a in the model as a share of combined electricty flows in those ESP_1.
+    equations:
+        - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    sub_expressions:
+      total_energy_balance:
+        - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps])
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_1]"
+      carrier: # The carrier for which to limit imports
+        - expression: electricity
+
+  import_cap_ESP_2:
+    description: Limit upper bound on annual electricity imports a in the model as a share of combined electricty flows in those ESP_1.
+    equations:
+      - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    sub_expressions:
+      total_energy_balance:
+        - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps])
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_2]"
+      carrier: # The carrier for which to limit imports
+        - expression: electricity
+
+  import_cap_ESP_3:
+    description: Limit upper bound on annual electricity imports a in the model as a share of combined electricty flows in those ESP_1.
+    equations:
+      - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    sub_expressions:
+      total_energy_balance:
+        - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps])
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_3]"
+      carrier: # The carrier for which to limit imports
+        - expression: electricity
+
+  import_cap_ESP_4:
+    description: Limit upper bound on annual electricity imports a in the model as a share of combined electricty flows in those ESP_1.
+    equations:
+      - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    sub_expressions:
+      total_energy_balance:
+        - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps])
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_4]"
+      carrier: # The carrier for which to limit imports
+        - expression: electricity
+
+  import_cap_ESP_5:
+    description: Limit upper bound on annual electricity imports a in the model as a share of combined electricty flows in those ESP_1.
+    equations:
+      - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    sub_expressions:
+      total_energy_balance:
+        - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps])
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_5]"
+      carrier: # The carrier for which to limit imports
+        - expression: electricity
+
+  import_cap_ESP_6:
+    description: Limit upper bound on annual electricity imports a in the model as a share of combined electricty flows in those ESP_1.
+    equations:
+      - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    sub_expressions:
+      total_energy_balance:
+        - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps])
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_6]"
+      carrier: # The carrier for which to limit imports
+        - expression: electricity
+
+  import_cap_ESP_7:
+    description: Limit upper bound on annual electricity imports a in the model as a share of combined electricty flows in those ESP_1.
+    equations:
+      - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    sub_expressions:
+      total_energy_balance:
+        - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps])
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_7]"
+      carrier: # The carrier for which to limit imports
+        - expression: electricity
+
+
+  import_cap_ESP_8:
+    description: Limit upper bound on annual electricity imports a in the model as a share of combined electricty flows in those ESP_1.
+    equations:
+      - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    sub_expressions:
+      total_energy_balance:
+        - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps])
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_8]"
+      carrier: # The carrier for which to limit imports
+        - expression: electricity
+
+  import_cap_ESP_9:
+    description: Limit upper bound on annual electricity imports a in the model as a share of combined electricty flows in those ESP_1.
+    equations:
+      - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    sub_expressions:
+      total_energy_balance:
+        - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps])
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_9]"
+      carrier: # The carrier for which to limit imports
+        - expression: electricity
+
+  import_cap_ESP_10:
+    description: Limit upper bound on annual electricity imports a in the model as a share of combined electricty flows in those ESP_1.
+    equations:
+      - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    sub_expressions:
+      total_energy_balance:
+        - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps])
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_10]"
+      carrier: # The carrier for which to limit imports
+        - expression: electricity
+
+  import_cap_ESP_11:
+    description: Limit upper bound on annual electricity imports a in the model as a share of combined electricty flows in those ESP_1.
+    equations:
+      - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    sub_expressions:
+      total_energy_balance:
+        - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier], over=[nodes, techs, timesteps])
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_11]"
+      carrier: # The carrier for which to limit imports
+        - expression: electricity
+
+
+  ### --- Wind onshore total group cap constraints ---
+  total_wind_cap_1:
+    description: Maximum total flow capacity for specified wind technologies in ESP_1
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_1
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_1]"
+      wind:
+        - expression: "[existing_wind_onshore, wind_onshore_monopoly_CN, wind_onshore_monopoly_IND,
+         wind_onshore_monopoly_DE, wind_onshore_monopoly_PT, wind_onshore_monopoly_FR,
+          wind_onshore_monopoly_NDL, wind_onshore_monopoly_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_cap_2:
+    description: Maximum total flow capacity for specified wind technologies in ESP_2
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_2
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_2]"
+      wind:
+        - expression: "[existing_wind_onshore, wind_onshore_monopoly_CN, wind_onshore_monopoly_IND,
+         wind_onshore_monopoly_DE, wind_onshore_monopoly_PT, wind_onshore_monopoly_FR,
+          wind_onshore_monopoly_NDL, wind_onshore_monopoly_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_cap_3:
+    description: Maximum total flow capacity for specified wind technologies in ESP_3
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_3
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_3]"
+      wind:
+        - expression: "[existing_wind_onshore, wind_onshore_monopoly_CN, wind_onshore_monopoly_IND,
+         wind_onshore_monopoly_DE, wind_onshore_monopoly_PT, wind_onshore_monopoly_FR,
+          wind_onshore_monopoly_NDL, wind_onshore_monopoly_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_cap_4:
+    description: Maximum total flow capacity for specified wind technologies in ESP_4
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_4
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_4]"
+      wind:
+        - expression: "[existing_wind_onshore, wind_onshore_monopoly_CN, wind_onshore_monopoly_IND,
+         wind_onshore_monopoly_DE, wind_onshore_monopoly_PT, wind_onshore_monopoly_FR,
+          wind_onshore_monopoly_NDL, wind_onshore_monopoly_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_cap_5:
+    description: Maximum total flow capacity for specified wind technologies in ESP_5
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_5
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_5]"
+      wind:
+        - expression: "[existing_wind_onshore, wind_onshore_monopoly_CN, wind_onshore_monopoly_IND,
+         wind_onshore_monopoly_DE, wind_onshore_monopoly_PT, wind_onshore_monopoly_FR,
+          wind_onshore_monopoly_NDL, wind_onshore_monopoly_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_cap_6:
+    description: Maximum total flow capacity for specified wind technologies in ESP_6
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_6
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_6]"
+      wind:
+        - expression: "[existing_wind_onshore, wind_onshore_monopoly_CN, wind_onshore_monopoly_IND,
+         wind_onshore_monopoly_DE, wind_onshore_monopoly_PT, wind_onshore_monopoly_FR,
+          wind_onshore_monopoly_NDL, wind_onshore_monopoly_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_cap_7:
+    description: Maximum total flow capacity for specified wind technologies in ESP_7
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_7
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_7]"
+      wind:
+        - expression: "[existing_wind_onshore, wind_onshore_monopoly_CN, wind_onshore_monopoly_IND,
+         wind_onshore_monopoly_DE, wind_onshore_monopoly_PT, wind_onshore_monopoly_FR,
+          wind_onshore_monopoly_NDL, wind_onshore_monopoly_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_cap_8:
+    description: Maximum total flow capacity for specified wind technologies in ESP_8
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_8
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_8]"
+      wind:
+        - expression: "[existing_wind_onshore, wind_onshore_monopoly_CN, wind_onshore_monopoly_IND,
+         wind_onshore_monopoly_DE, wind_onshore_monopoly_PT, wind_onshore_monopoly_FR,
+          wind_onshore_monopoly_NDL, wind_onshore_monopoly_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_cap_9:
+    description: Maximum total flow capacity for specified wind technologies in ESP_9
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_9
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_9]"
+      wind:
+        - expression: "[existing_wind_onshore, wind_onshore_monopoly_CN, wind_onshore_monopoly_IND,
+         wind_onshore_monopoly_DE, wind_onshore_monopoly_PT, wind_onshore_monopoly_FR,
+          wind_onshore_monopoly_NDL, wind_onshore_monopoly_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_cap_10:
+    description: Maximum total flow capacity for specified wind technologies in ESP_10
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_10
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_10]"
+      wind:
+        - expression: "[existing_wind_onshore, wind_onshore_monopoly_CN, wind_onshore_monopoly_IND,
+         wind_onshore_monopoly_DE, wind_onshore_monopoly_PT, wind_onshore_monopoly_FR,
+          wind_onshore_monopoly_NDL, wind_onshore_monopoly_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_cap_11:
+    description: Maximum total flow capacity for specified wind technologies in ESP_11
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_11
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_11]"
+      wind:
+        - expression: "[existing_wind_onshore, wind_onshore_monopoly_CN, wind_onshore_monopoly_IND,
+         wind_onshore_monopoly_DE, wind_onshore_monopoly_PT, wind_onshore_monopoly_FR,
+          wind_onshore_monopoly_NDL, wind_onshore_monopoly_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+
+  ### --- Wind offshore total cap constraints
+  total_wind_offshore_cap_1:
+    description: Maximum total flow capacity for specified wind technologies in ESP_1
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass], over=[nodes,techs]) <= wind_offshore_techlimit_esp_1
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_1]"
+      wind_offshore:
+        - expression: "[wind_offshore_CN, wind_offshore_IND, wind_offshore_DE, wind_offshore_PT,
+        wind_offshore_FR, wind_offshore_NDL, wind_offshore_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_offshore_cap_2:
+    description: Maximum total flow capacity for specified wind technologies in ESP_2
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass], over=[nodes,techs]) <= wind_offshore_techlimit_esp_2
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_2]"
+      wind_offshore:
+        - expression: "[wind_offshore_CN, wind_offshore_IND, wind_offshore_DE,wind_offshore_PT,
+          wind_offshore_FR, wind_offshore_NDL, wind_offshore_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_offshore_cap_3:
+    description: Maximum total flow capacity for specified wind technologies in ESP_3
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass], over=[nodes,techs]) <= wind_offshore_techlimit_esp_3
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_3]"
+      wind_offshore:
+        - expression: "[wind_offshore_CN, wind_offshore_IND, wind_offshore_DE,wind_offshore_PT,
+        wind_offshore_FR, wind_offshore_NDL, wind_offshore_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_offshore_cap_4:
+    description: Maximum total flow capacity for specified wind technologies in ESP_4
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass], over=[nodes,techs]) <= wind_offshore_techlimit_esp_4
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_4]"
+      wind_offshore:
+        - expression: "[wind_offshore_CN, wind_offshore_IND, wind_offshore_DE,wind_offshore_PT,
+        wind_offshore_FR, wind_offshore_NDL, wind_offshore_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_offshore_cap_5:
+    description: Maximum total flow capacity for specified wind technologies in ESP_5
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass], over=[nodes,techs]) <= wind_offshore_techlimit_esp_5
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_5]"
+      wind_offshore:
+        - expression: "[wind_offshore_CN, wind_offshore_IND, wind_offshore_DE,wind_offshore_PT,
+        wind_offshore_FR, wind_offshore_NDL, wind_offshore_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_offshore_cap_6:
+    description: Maximum total flow capacity for specified wind technologies in ESP_6
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass], over=[nodes,techs]) <= wind_offshore_techlimit_esp_6
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_6]"
+      wind_offshore:
+        - expression: "[wind_offshore_CN, wind_offshore_IND, wind_offshore_DE,wind_offshore_PT,
+        wind_offshore_FR, wind_offshore_NDL, wind_offshore_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_offshore_cap_7:
+    description: Maximum total flow capacity for specified wind technologies in ESP_7
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass], over=[nodes,techs]) <= wind_offshore_techlimit_esp_7
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_7]"
+      wind_offshore:
+        - expression: "[wind_offshore_CN, wind_offshore_IND, wind_offshore_DE,wind_offshore_PT,
+        wind_offshore_FR, wind_offshore_NDL, wind_offshore_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_offshore_cap_8:
+    description: Maximum total flow capacity for specified wind technologies in ESP_8
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass], over=[nodes,techs]) <= wind_offshore_techlimit_esp_8
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_8]"
+      wind_offshore:
+        - expression: "[wind_offshore_CN, wind_offshore_IND, wind_offshore_DE,wind_offshore_PT,
+        wind_offshore_FR, wind_offshore_NDL, wind_offshore_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_offshore_cap_9:
+    description: Maximum total flow capacity for specified wind technologies in ESP_9
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass], over=[nodes,techs]) <= wind_offshore_techlimit_esp_9
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_9]"
+      wind_offshore:
+        - expression: "[wind_offshore_CN, wind_offshore_IND, wind_offshore_DE,wind_offshore_PT,
+        wind_offshore_FR, wind_offshore_NDL, wind_offshore_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_offshore_cap_10:
+    description: Maximum total flow capacity for specified wind technologies in ESP_10
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass], over=[nodes,techs]) <= wind_offshore_techlimit_esp_10
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_10]"
+      wind_offshore:
+        - expression: "[wind_offshore_CN, wind_offshore_IND, wind_offshore_DE,wind_offshore_PT,
+        wind_offshore_FR, wind_offshore_NDL, wind_offshore_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_wind_offshore_cap_11:
+    description: Maximum total flow capacity for specified wind technologies in ESP_11
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass], over=[nodes,techs]) <= wind_offshore_techlimit_esp_11
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_11]"
+      wind_offshore:
+        - expression: "[wind_offshore_CN, wind_offshore_IND, wind_offshore_DE,wind_offshore_PT,
+        wind_offshore_FR, wind_offshore_NDL, wind_offshore_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  ### --- Solar pv rooftop total cap constraints
+
+  total_rooftop_cap_1:
+    description: Maximum total flow capacity for specified rooftop in ESP_1
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_1
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_1]"
+      rooftop_techs:
+        - expression: "[existing_rooftop_pv, roof_mounted_pv_CN, roof_mounted_pv_DE, roof_mounted_pv_PT, roof_mounted_pv_NL,
+                roof_mounted_pv_MY, roof_mounted_pv_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_rooftop_cap_2:
+    description: Maximum total flow capacity for specified rooftop in ESP_2
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_2
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_2]"
+      rooftop_techs:
+        - expression: "[existing_rooftop_pv, roof_mounted_pv_CN, roof_mounted_pv_DE, roof_mounted_pv_PT, roof_mounted_pv_NL,
+                roof_mounted_pv_MY, roof_mounted_pv_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_rooftop_cap_3:
+    description: Maximum total flow capacity for specified rooftop in ESP_3
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_3
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_3]"
+      rooftop_techs:
+        - expression: "[existing_rooftop_pv, roof_mounted_pv_CN, roof_mounted_pv_DE, roof_mounted_pv_PT, roof_mounted_pv_NL,
+                roof_mounted_pv_MY, roof_mounted_pv_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_rooftop_cap_4:
+    description: Maximum total flow capacity for specified rooftop in ESP_4
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_4
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_4]"
+      rooftop_techs:
+        - expression: "[existing_rooftop_pv, roof_mounted_pv_CN, roof_mounted_pv_DE, roof_mounted_pv_PT, roof_mounted_pv_NL,
+                roof_mounted_pv_MY, roof_mounted_pv_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_rooftop_cap_5:
+    description: Maximum total flow capacity for specified rooftop in ESP_5
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_5
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_5]"
+      rooftop_techs:
+        - expression: "[existing_rooftop_pv, roof_mounted_pv_CN, roof_mounted_pv_DE, roof_mounted_pv_PT, roof_mounted_pv_NL,
+                roof_mounted_pv_MY, roof_mounted_pv_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_rooftop_cap_6:
+    description: Maximum total flow capacity for specified rooftop in ESP_6
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_6
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_6]"
+      rooftop_techs:
+        - expression: "[existing_rooftop_pv, roof_mounted_pv_CN, roof_mounted_pv_DE, roof_mounted_pv_PT, roof_mounted_pv_NL,
+                roof_mounted_pv_MY, roof_mounted_pv_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_rooftop_cap_7:
+    description: Maximum total flow capacity for specified rooftop in ESP_7
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_7
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_7]"
+      rooftop_techs:
+        - expression: "[existing_rooftop_pv, roof_mounted_pv_CN, roof_mounted_pv_DE, roof_mounted_pv_PT, roof_mounted_pv_NL,
+                roof_mounted_pv_MY, roof_mounted_pv_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_rooftop_cap_8:
+    description: Maximum total flow capacity for specified rooftop in ESP_8
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_8
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_8]"
+      rooftop_techs:
+        - expression: "[existing_rooftop_pv, roof_mounted_pv_CN, roof_mounted_pv_DE, roof_mounted_pv_PT, roof_mounted_pv_NL,
+                roof_mounted_pv_MY, roof_mounted_pv_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_rooftop_cap_9:
+    description: Maximum total flow capacity for specified rooftop in ESP_9
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_9
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_9]"
+      rooftop_techs:
+        - expression: "[existing_rooftop_pv, roof_mounted_pv_CN, roof_mounted_pv_DE, roof_mounted_pv_PT, roof_mounted_pv_NL,
+                roof_mounted_pv_MY, roof_mounted_pv_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_rooftop_cap_10:
+    description: Maximum total flow capacity for specified rooftop in ESP_10
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_10
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_10]"
+      rooftop_techs:
+        - expression: "[existing_rooftop_pv, roof_mounted_pv_CN, roof_mounted_pv_DE, roof_mounted_pv_PT, roof_mounted_pv_NL,
+                roof_mounted_pv_MY, roof_mounted_pv_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_rooftop_cap_11:
+    description: Maximum total flow capacity for specified rooftop in ESP_11
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_11
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_11]"
+      rooftop_techs:
+        - expression: "[existing_rooftop_pv, roof_mounted_pv_CN, roof_mounted_pv_DE, roof_mounted_pv_PT, roof_mounted_pv_NL,
+                roof_mounted_pv_MY, roof_mounted_pv_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+
+  # Pumped hydro capacity group caps
+  total_pumped_cap_1:
+    description: Maximum total flow capacity for specified hydro pumped storage in ESP_1
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pumped_hydro_techlimit_esp_1
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_1]"
+      pumped_techs:
+        - expression: "[existing_pumped_hydro, pumped_hydro_CN, pumped_hydro_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_pumped_cap_2:
+    description: Maximum total flow capacity for specified hydro pumped storage in ESP_2
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pumped_hydro_techlimit_esp_2
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_2]"
+      pumped_techs:
+        - expression: "[existing_pumped_hydro, pumped_hydro_CN, pumped_hydro_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_pumped_cap_3:
+    description: Maximum total flow capacity for specified hydro pumped storage in ESP_3
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pumped_hydro_techlimit_esp_3
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_3]"
+      pumped_techs:
+        - expression: "[existing_pumped_hydro, pumped_hydro_CN, pumped_hydro_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+
+  total_pumped_cap_4:
+    description: Maximum total flow capacity for specified hydro pumped storage in ESP_4
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pumped_hydro_techlimit_esp_4
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_4]"
+      pumped_techs:
+        - expression: "[existing_pumped_hydro, pumped_hydro_CN, pumped_hydro_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_pumped_cap_5:
+    description: Maximum total flow capacity for specified hydro pumped storage in ESP_5
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pumped_hydro_techlimit_esp_5
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_5]"
+      pumped_techs:
+        - expression: "[existing_pumped_hydro, pumped_hydro_CN, pumped_hydro_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_pumped_cap_6:
+    description: Maximum total flow capacity for specified hydro pumped storage in ESP_6
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pumped_hydro_techlimit_esp_6
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_6]"
+      pumped_techs:
+        - expression: "[existing_pumped_hydro, pumped_hydro_CN, pumped_hydro_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_pumped_cap_7:
+    description: Maximum total flow capacity for specified hydro pumped storage in ESP_7
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pumped_hydro_techlimit_esp_7
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_7]"
+      pumped_techs:
+        - expression: "[existing_pumped_hydro, pumped_hydro_CN, pumped_hydro_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_pumped_cap_8:
+    description: Maximum total flow capacity for specified hydro pumped storage in ESP_8
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pumped_hydro_techlimit_esp_8
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_8]"
+      pumped_techs:
+        - expression: "[existing_pumped_hydro, pumped_hydro_CN, pumped_hydro_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_pumped_cap_9:
+    description: Maximum total flow capacity for specified hydro pumped storage in ESP_9
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pumped_hydro_techlimit_esp_9
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_9]"
+      pumped_techs:
+        - expression: "[existing_pumped_hydro, pumped_hydro_CN, pumped_hydro_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+
+  total_pumped_cap_10:
+    description: Maximum total flow capacity for specified hydro pumped storage in ESP_10
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pumped_hydro_techlimit_esp_10
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_10]"
+      pumped_techs:
+        - expression: "[existing_pumped_hydro, pumped_hydro_CN, pumped_hydro_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+  total_pumped_cap_11:
+    description: Maximum total flow capacity for specified hydro pumped storage in ESP_11
+    equations:
+      - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass], over=[nodes,techs]) <= pumped_hydro_techlimit_esp_11
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_11]"
+      pumped_techs:
+        - expression: "[existing_pumped_hydro, pumped_hydro_CN, pumped_hydro_ESP]"
+      carrier_pass:
+        - expression: 'electricity'
+    active: true
+
+
+
+  # Biogas capacity caps
+  storage_biogas_cap_esp_1:
+    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    equations:
+      - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) == biogas_to_electricity_cap_1
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_1]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+  storage_biogas_cap_esp_2:
+    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    equations:
+      - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) == biogas_to_electricity_cap_2
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_2]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+  storage_biogas_cap_esp_3:
+    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    equations:
+      - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) == biogas_to_electricity_cap_3
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_3]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+  storage_biogas_cap_esp_4:
+    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    equations:
+      - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) == biogas_to_electricity_cap_4
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_4]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+  storage_biogas_cap_esp_5:
+    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    equations:
+      - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) == biogas_to_electricity_cap_5
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_5]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+  storage_biogas_cap_esp_6:
+    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    equations:
+      - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) == biogas_to_electricity_cap_6
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_6]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+  storage_biogas_cap_esp_7:
+    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    equations:
+      - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) == biogas_to_electricity_cap_7
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_7]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+  storage_biogas_cap_esp_8:
+    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    equations:
+      - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) == biogas_to_electricity_cap_8
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_8]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+  storage_biogas_cap_esp_9:
+    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    equations:
+      - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) == biogas_to_electricity_cap_9
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_9]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+
+    active: true
+
+  storage_biogas_cap_esp_10:
+    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    equations:
+      - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) == biogas_to_electricity_cap_10
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_10]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+  storage_biogas_cap_esp_11:
+    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    equations:
+      - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) == biogas_to_electricity_cap_11
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_11]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+
+  biogas_cap_resource_esp_1:
+    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    equations:
+      - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) <= biogas_resource_esp_1
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_1]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+  biogas_cap_resource_esp_2:
+    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    equations:
+      - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) <= biogas_resource_esp_2
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_2]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+
+  biogas_cap_resource_esp_3:
+    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    equations:
+      - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) <= biogas_resource_esp_3
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_3]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+  biogas_cap_resource_esp_4:
+    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    equations:
+      - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) <= biogas_resource_esp_4
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_4]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+  biogas_cap_resource_esp_5:
+    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    equations:
+      - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) <= biogas_resource_esp_5
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_5]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+  biogas_cap_resource_esp_6:
+    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    equations:
+      - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) <= biogas_resource_esp_6
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_6]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+  biogas_cap_resource_esp_7:
+    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    equations:
+      - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) <= biogas_resource_esp_7
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_7]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+  biogas_cap_resource_esp_8:
+    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    equations:
+      - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) <= biogas_resource_esp_8
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_8]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+  biogas_cap_resource_esp_9:
+    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    equations:
+      - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) <= biogas_resource_esp_9
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_9]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+  biogas_cap_resource_esp_10:
+    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    equations:
+      - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) <= biogas_resource_esp_10
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_10]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true
+
+  biogas_cap_resource_esp_11:
+    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    equations:
+      - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs]) <= biogas_resource_esp_11
+    slices:
+      node_group: # The subset of nodes in which to limit heat imports
+        - expression: "[ESP_11]"
+      biogas_techs:
+        - expression: "[existing_biogas_to_electricity_supply, biogas_to_electricity_supply_FR,
+               biogas_to_electricity_supply_CAN, biogas_to_electricity_supply_USA,
+               biogas_to_electricity_supply_FSM, biogas_to_electricity_supply_UK,
+               biogas_to_electricity_supply_BEL]"
+    active: true

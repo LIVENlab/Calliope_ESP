@@ -1,0 +1,489 @@
+---
+templates:
+    dc_transmission:
+        name: 'DC power transmission'
+        base_tech: transmission
+        carrier_in: electricity
+        carrier_out: electricity
+        #flow_cap_max: 0.1
+        flow_out_eff_per_distance: 0.99
+        lifetime: 60 # [@JRC:2014]
+
+
+    ac_transmission:
+        name: "High voltage AC transmission line"
+        base_tech: transmission
+        carrier_in: electricity
+        carrier_out: electricity
+        flow_out_eff_per_distance: 0.95 # (1/m)
+        lifetime: 60 # [@JRC:2014]
+        #flow_cap_max: 40000 # (MW) (fixed from 100,000 MW original units)
+
+
+    # International trade transmission
+    uranium_transmission:
+        name: "Uranium transmission link_from international trade"
+        base_tech: transmission
+        carrier_in: uranium
+        carrier_out: uranium
+        lifetime: 60 # [@JRC:2014]
+        flow_out_eff: 1.0
+
+    coal_transmission:
+        name: "Coal transmission link_from international trade"
+        base_tech: transmission
+        carrier_in: coal
+        carrier_out: coal
+        lifetime: 60 # [@JRC:2014]
+        flow_out_eff: 1.0
+
+
+    natural_gas_transmission:
+        name: "Natural gas transmission link_from international trade"
+        base_tech: transmission
+        carrier_in: natural_gas
+        carrier_out: natural_gas
+        lifetime: 60 # [@JRC:2014]
+        flow_out_eff: 1.0
+        cost_om_annual:
+            data: [ 0 ]
+            index: [ monetary ]
+            dims: [ costs ]
+        cost_flow_cap:
+            data: [0]
+            index: [ monetary ]
+            dims: [ costs ]
+
+    oil_fuel_transmission:
+        name: "Oil transmission link_from international trade"
+        base_tech: transmission
+        carrier_in: oil
+        carrier_out: oil
+        lifetime: 60
+        flow_out_eff: 1.0
+        cost_om_annual:
+            data: [0]
+            index: [ monetary ]
+            dims: [ costs ]
+        cost_flow_cap:
+            data: [ 0 ]
+            index: [ monetary ]
+            dims: [ costs ]
+
+
+techs:
+    ESP_1_ESP_2_ac_ohl_transmission:
+        link_from: ESP_1
+        link_to: ESP_2
+        template: ac_transmission
+
+        cost_flow_cap:
+            data: [175000]
+            index: [ monetary ]
+            dims: [ costs ]
+
+    ESP_1_PRT_1_ac_ohl_transmission:
+        link_from: ESP_1
+        link_to: PRT_1
+        template: ac_transmission
+
+        cost_flow_cap:
+            data: [175000] # EUR/MW
+            index: [monetary]
+            dims: [costs]
+
+    ESP_10_ESP_11_ac_ohl_transmission:
+        link_from: ESP_10
+        link_to: ESP_11
+        template: ac_transmission
+
+        cost_flow_cap:
+            data: [175000] # EUR/MW
+            index: [monetary]
+            dims: [costs]
+
+    ESP_2_ESP_3_ac_ohl_transmission:
+        link_from: ESP_2
+        link_to: ESP_3
+        template: ac_transmission
+        cost_flow_cap:
+            data: [175000] # EUR/MW
+            index: [monetary]
+            dims: [costs]
+
+    ESP_2_ESP_4_ac_ohl_transmission:
+        link_from: ESP_2
+        link_to: ESP_4
+        template: ac_transmission
+
+        cost_flow_cap:
+            data: [175000]
+            index: [monetary]
+            dims: [costs]
+
+    ESP_2_ESP_8_techs_ac_ohl_transmission:
+        link_from: ESP_2
+        link_to: ESP_8
+        template: ac_transmission
+        cost_flow_cap:
+            data: [175000]
+            index: [monetary]
+            dims: [costs]
+
+
+    ESP_2_PRT_1_ac_ohl_transmission:
+        link_from: ESP_2
+        link_to: PRT_1
+        template: ac_transmission
+
+        cost_flow_cap:
+            data: [175000]
+            index: [monetary]
+            dims: [costs]
+
+    ESP_3_ESP_11_ac_ohl_transmission:
+        link_from: ESP_3
+        link_to: ESP_11
+        template: ac_transmission
+        cost_flow_cap:
+            data: [175000]
+            index: [monetary]
+            dims: [costs] #
+
+    ESP_3_ESP_4_ac_ohl_transmission:
+        link_from: ESP_3
+        link_to: ESP_4
+        template: ac_transmission
+        cost_flow_cap:
+            data: [175000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+    ESP_3_ESP_5_ac_ohl_transmission:
+        link_from: ESP_3
+        link_to: ESP_5
+        template: ac_transmission
+        cost_flow_cap:
+            data: [175000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+    ESP_3_ESP_7_ac_ohl_transmission:
+        link_from: ESP_2
+        link_to: ESP_4
+        template: ac_transmission
+        cost_flow_cap:
+            data: [175000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+    ESP_4_ESP_5_techs_ac_ohl_transmission:
+        link_from: ESP_4
+        link_to: ESP_5
+        template: ac_transmission
+        cost_flow_cap:
+            data: [175000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+    ESP_5_ESP_11_ac_ohl_transmission:
+        link_from: ESP_5
+        link_to: ESP_11
+        template: ac_transmission
+        cost_flow_cap:
+            data: [175000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+    ESP_5_ESP_6_techs_ac_ohl_transmission:
+        link_from: ESP_5
+        link_to: ESP_6
+        template: ac_transmission
+        cost_flow_cap:
+            data: [175000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+    ESP_6_ESP_11_ac_ohl_transmission:
+        link_from: ESP_6
+        link_to: ESP_11
+        template: ac_transmission
+        cost_flow_cap:
+            data: [175000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+    ESP_7_ESP_11_ac_ohl_transmission:
+        link_from: ESP_7
+        link_to: ESP_11
+        template: ac_transmission
+        cost_flow_cap:
+            data: [175000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+    ESP_7_ESP_8_ac_ohl_transmission:
+        link_from: ESP_7
+        link_to: ESP_8
+        template: ac_transmission
+        cost_flow_cap:
+            data: [175000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+    ESP_8_ESP_10_ac_ohl_transmission:
+        link_from: ESP_8
+        link_to: ESP_10
+        template: ac_transmission
+        cost_flow_cap:
+            data: [175000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+    ESP_8_ESP_9_ac_ohl_transmission:
+        link_from: ESP_8
+        link_to: ESP_9
+        template: ac_transmission
+        cost_flow_cap:
+            data: [175000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+    ESP_8_PRT_2_ac_ohl_transmission:
+        link_from: ESP_8
+        link_to: PRT_2
+        template: ac_transmission
+        cost_flow_cap:
+            data: [175000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+    ESP_9_ESP_10_ac_ohl_transmission:
+        link_from: ESP_9
+        link_to: ESP_10
+        template: ac_transmission
+        cost_flow_cap:
+            data: [175000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+    ESP_9_PRT_2_ac_ohl_transmission:
+        link_from: ESP_9
+        link_to: PRT_2
+        template: ac_transmission
+        cost_flow_cap:
+            data: [175000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+    PRT_1_PRT_2_ac_ohl_transmission:
+        link_from: PRT_1
+        link_to: PRT_2
+        template: ac_transmission
+        cost_flow_cap:
+            data: [175000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+
+    ESP_4_FRA_1_dc_underground_transmission:
+        link_from: ESP_4
+        link_to: FRA_1
+        template: dc_transmission
+        cost_flow_cap:
+            data: [755000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+    ESP_4_FRA_1_dc_subsea_transmission:
+        link_from: ESP_4
+        link_to: FRA_1
+        template: dc_transmission
+        cost_flow_cap:
+            data: [942000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+    ESP_4_FRA_1_ac_ohl_mountain_transmission:
+        link_from: ESP_4
+        link_to: FRA_1
+        template: ac_transmission
+        cost_flow_cap:
+            data: [ 516000 ]
+            index: [ monetary ]
+            dims: [ costs ]  # (100,000 MW)
+
+    ESP_5_FRA_1_ac_ohl_transmission:
+        link_from: ESP_5
+        link_to: FRA_1
+        template: ac_transmission
+        cost_flow_cap:
+            data: [ 175000 ]
+            index: [ monetary ]
+            dims: [ costs ]  # (100,000 MW)
+
+    ESP_6_FRA_2_dc_underground_transmission:
+        link_from: ESP_6
+        link_to: FRA_2
+        template: dc_transmission
+        cost_flow_cap:
+            data: [755000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+
+    ESP_6_FRA_2_ac_ohl_mountain_transmission:
+        link_from: ESP_6
+        link_to: FRA_2
+        template: dc_transmission
+        cost_flow_cap:
+            data: [516000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+
+    ESP_6_FRA_3_dc_subsea_transmission:
+        link_from: ESP_6
+        link_to: FRA_3
+        template: dc_transmission
+        one_way: true
+        cost_flow_cap:
+            data: [942000]
+            index: [monetary]
+            dims: [costs]  # (100,000 MW)
+
+    ESP_9_MA_dc_subsea_transmission: #link_toDO: adapt values
+        link_from: ESP_6
+        link_to: FRA_3
+        template: dc_transmission
+        one_way: true
+        cost_flow_cap:
+            data: [942000]
+            index: [monetary]
+            dims: [costs]
+
+    Trade_Markets_ESP_1_natural_gas_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_1
+        template: natural_gas_transmission
+
+    Trade_Markets_ESP_1_coal_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_1
+        template: coal_transmission
+
+    Trade_Markets_ESP_2_natural_gas_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_2
+        template: natural_gas_transmission
+
+    Trade_Markets_ESP_2_coal_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_2
+        template: coal_transmission
+
+    Trade_Markets_ESP_2_uranium_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_2
+        template: uranium_transmission
+    Trade_Markets_ESP_2_oil_fuel_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_2
+        template: oil_fuel_transmission
+
+    Trade_Markets_ESP_3_natural_gas_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_3
+        template: natural_gas_transmission
+
+    Trade_Markets_ESP_4_natural_gas_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_4
+        template: natural_gas_transmission
+
+
+    Trade_Markets_ESP_5_natural_gas_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_5
+        template: natural_gas_transmission
+
+    Trade_Markets_ESP_5_coal_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_5
+        template: coal_transmission
+
+    Trade_Markets_ESP_6_natural_gas_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_6
+        template: natural_gas_transmission
+
+
+    Trade_Markets_ESP_6_uranium_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_6
+        template: uranium_transmission
+
+    Trade_Markets_ESP_6_oil_fuel_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_6
+        template: oil_fuel_transmission
+
+    Trade_Markets_ESP_7_natural_gas_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_7
+        template: natural_gas_transmission
+
+
+    Trade_Markets_ESP_7_coal_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_7
+        template: coal_transmission
+
+    Trade_Markets_ESP_7_uranium_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_7
+        template: uranium_transmission
+
+
+    Trade_Markets_ESP_8_uranium_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_8
+        template: uranium_transmission
+
+    Trade_Markets_ESP_9_natural_gas_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_9
+        template: natural_gas_transmission
+
+
+    Trade_Markets_ESP_9_coal_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_9
+        template: coal_transmission
+
+
+    Trade_Markets_ESP_10_natural_gas_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_10
+        template: natural_gas_transmission
+
+
+    Trade_Markets_ESP_11_natural_gas_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_11
+        template: natural_gas_transmission
+
+    Trade_Markets_ESP_11_coal_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_11
+        template: coal_transmission
+
+    Trade_Markets_ESP_11_uranium_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_11
+        template: uranium_transmission
+
+    Trade_Markets_ESP_11_oil_fuel_transmission:
+        link_from: Trade_Markets
+        link_to: ESP_11
+        template: oil_fuel_transmission

@@ -1,0 +1,272 @@
+---
+# This file contains different supply definitions of energy carriers
+
+templates:
+  coal:
+    name: Coal imports
+    carrier_out: coal
+    base_tech: supply
+    lifetime: 25 # Check if this makes any sense here #TODO
+    cost_flow_cap: # No costs associted to capacity
+      data: [ 0, 0, 0 ] # EUR /MW
+      index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+      dims: costs
+
+  uranium:
+    name: Uranium imports
+    carrier_out: uranium
+    base_tech: supply
+    lifetime: 25
+    cost_flow_cap: # No costs associted to capacity
+      data: [ 0, 0, 0 ] # EUR /MW
+      index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+      dims: costs
+
+  natural_gas:
+    name: Natural gas imports (gas)
+    carrier_out: natural_gas
+    base_tech: supply
+    lifetime: 25
+    cost_flow_cap: # No costs associted to capacity
+      data: [ 0, 0, 0 ] # EUR /MW
+      index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+      dims: costs
+
+  natural_gas_liquid:
+    name: Natural gas imports (liquid)
+    carrier_out: natural_gas
+    base_tech: supply
+    lifetime: 25
+    cost_flow_cap: # No costs associted to capacity
+      data: [ 0, 0, 0 ] # EUR /MW
+      index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+      dims: costs
+
+  oil:
+      name: oil
+      carrier_out: oil
+      base_tech: supply
+      lifetime: 25
+      cost_flow_cap: # No costs associted to capacity
+        data: [ 0, 0, 0 ] # EUR /MW
+        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        dims: costs
+
+
+
+techs:
+  # #####  Coal   ##### Costs information --> product_relevant_regions, col[J,Q]
+  coal_RUS:
+      name: "Coal imports from Russia"
+      template: coal
+      cost_flow_out:
+        data: [3.79, 10.01, 0.5] # EUR /MWh
+        index: [monetary, co2, vul] # kg CO2-eq/ kWh of product
+        dims: costs
+
+  coal_COL:
+      name: "Coal imports from Colombia"
+      template: coal
+      cost_flow_out:
+        data: [ 3.53, 9.34, 0.5 ] #
+        index: [ monetary, co2, vul] # kg CO2-eq/ kWh of product
+        dims: costs
+
+  coal_AUS:
+      name: "Coal imports from Australia"
+      template: coal
+      cost_flow_out:
+        data: [ 5.03, 13.31, 0.5 ] #
+        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        dims: costs
+
+
+  coal_USA:
+      name: "Coal imports from USA"
+      template: coal
+      cost_flow_out:
+        data: [6.22, 16.44, 0.5] # EUR /kWh
+        index: [ monetary, co2, vul] # kg CO2-eq/ kWh of product
+        dims: costs
+
+  coal_ITA:
+      name: "Coal imports from Italia"
+      template: coal
+      cost_flow_out:
+        data: [ 3.63, 9.59, 0.5 ] # EUR /kWh
+        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        dims: costs
+
+  ### URANIUM ####### Enriched uranium ---- Costs information --> product_relevant_regions, col[J,R]
+  uranium_UK:
+      name: "Uranium imports from UK"
+      template: uranium
+      cost_flow_out:
+        data: [ 0.183, 0.48, 0.5] # EUR /kWh
+        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        dims: costs
+
+  uranium_USA:
+      name: "Uranium imports from USA"
+      template: uranium
+      cost_flow_out:
+        data: [ 0.18, 0.46, 0.5 ] # EUR /kWh
+        index: [ monetary, co2, vul] # kg CO2-eq/ kWh of product
+        dims: costs
+
+
+  #### Natural gas--liquid #### Liquid petroleum gas and other gaseous hydrocarbons
+  natural_gas_liquid_USA:
+      name: "NG-Liquid imports from USA"
+      template: natural_gas_liquid
+      cost_flow_out:
+        data: [ 8.97, 23.72, 0.5 ] # EUR /kWh
+        index: [ monetary, co2, vul] # kg CO2-eq/ kWh of product
+        dims: costs
+
+
+  natural_gas_liquid_RUS:
+      name: "NG-Liquid imports from Russia"
+      template: natural_gas_liquid
+      cost_flow_out:
+        data: [ 6.39, 16.89, 0.5] # EUR /kWh
+        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        dims: costs
+
+
+  natural_gas_liquid_NGA:
+      name: "NG-Liquid imports from Nigeria"
+      template: natural_gas_liquid
+      cost_flow_out:
+        data: [5.12, 13.54, 0.5 ] # EUR /kWh
+        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        dims: costs
+
+
+  natural_gas_liquid_DZA:
+      name: "NG-Liquid imports from Algeria"
+      template: natural_gas_liquid
+      cost_flow_out:
+        data: [4.32, 12.62, 0.5 ] # EUR / MWh
+        index: [monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        dims: costs
+
+
+  natural_gas_liquid_QAT:
+      name: "NG-Liquid imports from Qatar"
+      template: natural_gas_liquid
+      cost_flow_out:
+        data: [4.772, 12.62, 0.5] # EUR /MWh
+        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        dims: costs
+
+  # Natural gas -gas  Gaseous petroleum gas and other gaseous hydrocarbons
+  natural_gas_DZA:
+      name: "NG-gas imports from Algeria"
+      template: natural_gas
+      cost_flow_out:
+        data: [ 3.635, 9.61, 0.5] # EUR /MWh
+        index: [ monetary, co2, vul] # kg CO2-eq/ kWh of product
+        dims: costs
+
+  natural_gas_NOR:
+      name: "NG-gas imports from Norway"
+      template: natural_gas_liquid
+      cost_flow_out:
+        data: [ 3.755, 9.93, 0.5] # EUR /MWh
+        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        dims: costs
+
+  natural_gas_PT:
+      name: "NG-gas imports from Portugal"
+      template: natural_gas_liquid
+      cost_flow_out:
+        data: [ 9.447, 24.97, 0.5] # EUR /MWh
+        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        dims: costs
+
+  natural_gas_DNK:
+      name: "NG-gas imports from Denmark"
+      template: natural_gas_liquid
+      cost_flow_out:
+        data: [ 9.04, 23.9, 0.5] # EUR /MWh
+        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        dims: costs
+
+  natural_gas_DEU:
+      name: "NG-gas imports from Germany"
+      template: natural_gas_liquid
+      cost_flow_out:
+        data: [ 497.88, 1316.50, 0.5 ] # EUR /MWh
+        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        dims: costs
+
+  natural_gas_BEL:
+      name: "NG-gas imports from Belgium"
+      template: natural_gas_liquid
+
+      cost_flow_out:
+        data: [ 11.87, 31.40, 0.5 ] # EUR /MWh
+        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        dims: costs
+
+  #### Oil ##### Crude petroleum or bituminous mineral oils
+  oil_NGA:
+      name: "Oil imports from Nigeria"
+      template: oil
+      cost_flow_out:
+        data: [ 7.58, 20.05, 0.5 ] # EUR /MWh
+        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        dims: costs
+
+  oil_MEX:
+      name: "Oil imports from Mexico"
+      template: oil
+      cost_flow_out:
+        data: [ 6.25, 16.5, 0.5] # EUR /MWh
+        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        dims: costs
+
+  oil_LBY:
+      name: "Oil imports from Lby"
+      template: oil
+
+      cost_flow_out:
+        data: [ 7.37, 19.5, 0.5 ] # EUR /MWh
+        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        dims: costs
+
+  oil_USA:
+      name: "Oil imports from SA"
+      template: oil
+      cost_flow_out:
+        data: [ 7.93, 20.97, 0.5 ] # EUR /MWh
+        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        dims: costs
+
+  oil_SA:
+      name: "Oil imports from SA"
+      template: oil
+      cost_flow_out:
+        data: [ 7.24, 19.14, 0.5 ] # EUR /MWh
+        index: [ monetary, co2 , vul] # kg CO2-eq/ kWh of product
+        dims: costs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

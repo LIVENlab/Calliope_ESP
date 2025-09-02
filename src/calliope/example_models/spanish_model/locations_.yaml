@@ -1,0 +1,1156 @@
+---
+nodes:
+  ESP_1:
+    latitude: 42.756727134423606
+    longitude: -7.9103430789768225
+    available_area: 1804.030863210559
+    techs:
+      demand_tech:
+      existing_wind_onshore:
+        flow_cap_max: 3828.15
+        flow_cap_min: 3828.15
+      existing_chp:
+        flow_cap_max: 2001.2
+        flow_cap_min: 2001.2
+      existing_biomass:
+        flow_cap_max: 78.3
+        flow_cap_min: 78.3
+      existing_biogas_to_electricity_supply:
+        flow_cap_max: 25.79
+        flow_cap_min: 25.79
+      existing_hydro_run_of_river:
+        flow_cap_max: 235.26
+        flow_cap_min: 235.259
+      existing_pumped_hydro:
+        flow_cap_max: 513.6
+        flow_cap_min: 513.6
+      existing_hydro_reservoir:
+        flow_cap_max: 2824.48
+        flow_cap_min: 2824.48
+      existing_nuclear:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_coal:
+        flow_cap_max: 4351.0
+        flow_cap_min: 0
+      existing_ccgt:
+        flow_cap_max: 664.2
+        flow_cap_min: 0
+      existing_wte:
+        flow_cap_max: 139.07
+        flow_cap_min: 0
+      existing_rooftop_pv:
+        flow_cap_max: 0.65
+        flow_cap_min: 0.65
+      existing_open_field_pv:
+        flow_cap_max: 16.68
+        flow_cap_min: 16.68
+      existing_oil_and_other:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      open_field_pv_CN:
+      open_field_pv_DE:
+      open_field_pv_NL:
+      open_field_pv_PT:
+      open_field_pv_MY:
+      open_field_pv_ESP:
+      roof_mounted_pv_CN:
+      roof_mounted_pv_DE:
+      roof_mounted_pv_NL:
+      roof_mounted_pv_PT:
+      roof_mounted_pv_MY:
+      roof_mounted_pv_ESP:
+      wind_onshore_monopoly_CN:
+      wind_onshore_monopoly_IND:
+      wind_onshore_monopoly_DE:
+      wind_onshore_monopoly_PT:
+      wind_onshore_monopoly_FR:
+      wind_onshore_monopoly_ESP:
+      wind_onshore_monopoly_NDL:
+      wind_onshore_competing_CN:
+      wind_onshore_competing_IND:
+      wind_onshore_competing_DE:
+      wind_onshore_competing_PT:
+      wind_onshore_competing_FR:
+      wind_onshore_competing_NDL:
+      wind_onshore_competing_ESP:
+      wind_offshore_CN:
+      wind_offshore_IND:
+      wind_offshore_DE:
+      wind_offshore_PT:
+      wind_offshore_FR:
+      wind_offshore_NDL:
+      wind_offshore_ESP:
+      pumped_hydro_CN:
+      pumped_hydro_ESP:
+      biomass_IT:
+      biomass_FR:
+      biomass_ESP:
+      biogas_to_electricity_supply_FR:
+      biogas_to_electricity_supply_CAN:
+      biogas_to_electricity_supply_USA:
+      biogas_to_electricity_supply_FSM:
+      biogas_to_electricity_supply_UK:
+      biogas_to_electricity_supply_BEL:
+      battery_CN:
+      battery_CZ:
+      battery_US:
+      battery_HU:
+      battery_PL:
+      battery_ESP:
+  ESP_10:
+    latitude: 37.68090575943503
+    longitude: -3.588739304583343
+    available_area: 18555.36784157902
+    techs:
+      demand_tech:
+      existing_wind_onshore:
+        flow_cap_max: 262.776
+        flow_cap_min: 262.776
+      existing_pumped_hydro:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_chp:
+        flow_cap_max: 3252
+        flow_cap_min: 3252
+      existing_biomass:
+        flow_cap_max: 6.28
+        flow_cap_min: 6.28
+      existing_biogas_to_electricity_supply:
+        flow_cap_max: 2.07
+        flow_cap_min: 2.07
+      existing_hydro_run_of_river:
+        flow_cap_max: 24.17
+        flow_cap_min: 24.17
+      existing_hydro_reservoir:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_nuclear:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_coal:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_ccgt:
+        flow_cap_max: 328.018
+        flow_cap_min: 0
+      existing_wte:
+        flow_cap_max: 9.68
+        flow_cap_min: 0
+      existing_rooftop_pv:
+        flow_cap_max: 16.41
+        flow_cap_min: 16.41
+      existing_open_field_pv:
+        flow_cap_max: 420.69
+        flow_cap_min: 420.69
+      existing_oil_and_other:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      open_field_pv_CN:
+      open_field_pv_DE:
+      open_field_pv_NL:
+      open_field_pv_PT:
+      open_field_pv_MY:
+      open_field_pv_ESP:
+      roof_mounted_pv_CN:
+      roof_mounted_pv_DE:
+      roof_mounted_pv_NL:
+      roof_mounted_pv_PT:
+      roof_mounted_pv_MY:
+      roof_mounted_pv_ESP:
+      wind_onshore_monopoly_CN:
+      wind_onshore_monopoly_IND:
+      wind_onshore_monopoly_DE:
+      wind_onshore_monopoly_PT:
+      wind_onshore_monopoly_FR:
+      wind_onshore_monopoly_ESP:
+      wind_onshore_monopoly_NDL:
+      wind_onshore_competing_CN:
+      wind_onshore_competing_IND:
+      wind_onshore_competing_DE:
+      wind_onshore_competing_PT:
+      wind_onshore_competing_FR:
+      wind_onshore_competing_NDL:
+      wind_onshore_competing_ESP:
+      wind_offshore_CN:
+      wind_offshore_IND:
+      wind_offshore_DE:
+      wind_offshore_PT:
+      wind_offshore_FR:
+      wind_offshore_NDL:
+      wind_offshore_ESP:
+      biomass_IT:
+      biomass_FR:
+      biomass_ESP:
+      biogas_to_electricity_supply_FR:
+      biogas_to_electricity_supply_CAN:
+      biogas_to_electricity_supply_USA:
+      biogas_to_electricity_supply_FSM:
+      biogas_to_electricity_supply_UK:
+      biogas_to_electricity_supply_BEL:
+      battery_CN:
+      battery_CZ:
+      battery_US:
+      battery_HU:
+      battery_PL:
+      battery_ESP:
+      pumped_hydro_CN:
+      pumped_hydro_ESP:
+  ESP_11:
+    latitude: 39.167873464255464
+    longitude: -1.4544684252789575
+    available_area: 30957.46957938373
+    techs:
+      demand_tech:
+      existing_wind_onshore:
+        flow_cap_max: 1193.24
+        flow_cap_min: 1193.24
+      existing_pumped_hydro:
+        flow_cap_max: 1476.35
+        flow_cap_min: 1476.35
+      existing_chp:
+        flow_cap_max: 2923.97
+        flow_cap_min: 2923.97
+      existing_biomass:
+        flow_cap_max: 10.44
+        flow_cap_min: 10.44
+      existing_biogas_to_electricity_supply:
+        flow_cap_max: 3.44
+        flow_cap_min: 3.44
+      existing_hydro_run_of_river:
+        flow_cap_max: 53.4
+        flow_cap_min: 53.4
+      existing_hydro_reservoir:
+        flow_cap_max: 542.2
+        flow_cap_min: 542.2
+      existing_nuclear:
+        flow_cap_max: 1063.94
+        flow_cap_min: 1063.94
+      existing_coal:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_ccgt:
+        flow_cap_max: 536.326
+        flow_cap_min: 0
+      existing_wte:
+        flow_cap_max: 63.09
+        flow_cap_min: 0
+      existing_rooftop_pv:
+        flow_cap_max: 13.05
+        flow_cap_min: 13.05
+      existing_open_field_pv:
+        flow_cap_max: 334.52
+        flow_cap_min: 334.52
+      existing_oil_and_other:
+        flow_cap_max: 8.47
+        flow_cap_min: 0
+      open_field_pv_CN:
+      open_field_pv_DE:
+      open_field_pv_NL:
+      open_field_pv_PT:
+      open_field_pv_MY:
+      open_field_pv_ESP:
+      roof_mounted_pv_CN:
+      roof_mounted_pv_DE:
+      roof_mounted_pv_NL:
+      roof_mounted_pv_PT:
+      roof_mounted_pv_MY:
+      roof_mounted_pv_ESP:
+      wind_onshore_monopoly_CN:
+      wind_onshore_monopoly_IND:
+      wind_onshore_monopoly_DE:
+      wind_onshore_monopoly_PT:
+      wind_onshore_monopoly_FR:
+      wind_onshore_monopoly_ESP:
+      wind_onshore_monopoly_NDL:
+      wind_onshore_competing_CN:
+      wind_onshore_competing_IND:
+      wind_onshore_competing_DE:
+      wind_onshore_competing_PT:
+      wind_onshore_competing_FR:
+      wind_onshore_competing_NDL:
+      wind_onshore_competing_ESP:
+      wind_offshore_CN:
+      wind_offshore_IND:
+      wind_offshore_DE:
+      wind_offshore_PT:
+      wind_offshore_FR:
+      wind_offshore_NDL:
+      wind_offshore_ESP:
+      biomass_IT:
+      biomass_FR:
+      biomass_ESP:
+      biogas_to_electricity_supply_FR:
+      biogas_to_electricity_supply_CAN:
+      biogas_to_electricity_supply_USA:
+      biogas_to_electricity_supply_FSM:
+      biogas_to_electricity_supply_UK:
+      biogas_to_electricity_supply_BEL:
+      battery_CN:
+      battery_CZ:
+      battery_US:
+      battery_HU:
+      battery_PL:
+      battery_ESP:
+      pumped_hydro_CN:
+      pumped_hydro_ESP:
+  ESP_2:
+    latitude: 42.235589166452144
+    longitude: -5.767809087157458
+    available_area: 20425.103235207494
+    techs:
+      demand_tech:
+      existing_wind_onshore:
+        flow_cap_max: 5605.505
+        flow_cap_min: 5605.505
+      existing_pumped_hydro:
+        flow_cap_max: 1238
+        flow_cap_min: 1238
+      existing_chp:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_biomass:
+        flow_cap_max: 47.46
+        flow_cap_min: 47.46
+      existing_biogas_to_electricity_supply:
+        flow_cap_max: 15.63
+        flow_cap_min: 15.63
+      existing_hydro_run_of_river:
+        flow_cap_max: 48.6
+        flow_cap_min: 48.6
+      existing_hydro_reservoir:
+        flow_cap_max: 2685.24
+        flow_cap_min: 2685.24
+      existing_nuclear:
+        flow_cap_max: 455.29
+        flow_cap_min: 455.29
+      existing_coal:
+        flow_cap_max: 2595.23
+        flow_cap_min: 0
+      existing_ccgt:
+        flow_cap_max: 896.41
+        flow_cap_min: 0
+      existing_wte:
+        flow_cap_max: 9.93
+        flow_cap_min: 0
+      existing_rooftop_pv:
+        flow_cap_max: 18.6
+        flow_cap_min: 18.6
+      existing_open_field_pv:
+        flow_cap_max: 476.98
+        flow_cap_min: 476.98
+      existing_oil_and_other:
+        flow_cap_max: 1.6
+        flow_cap_min: 0
+      open_field_pv_CN:
+      open_field_pv_DE:
+      open_field_pv_NL:
+      open_field_pv_PT:
+      open_field_pv_MY:
+      open_field_pv_ESP:
+      roof_mounted_pv_CN:
+      roof_mounted_pv_DE:
+      roof_mounted_pv_NL:
+      roof_mounted_pv_PT:
+      roof_mounted_pv_MY:
+      roof_mounted_pv_ESP:
+      wind_onshore_monopoly_CN:
+      wind_onshore_monopoly_IND:
+      wind_onshore_monopoly_DE:
+      wind_onshore_monopoly_PT:
+      wind_onshore_monopoly_FR:
+      wind_onshore_monopoly_ESP:
+      wind_onshore_monopoly_NDL:
+      wind_onshore_competing_CN:
+      wind_onshore_competing_IND:
+      wind_onshore_competing_DE:
+      wind_onshore_competing_PT:
+      wind_onshore_competing_FR:
+      wind_onshore_competing_NDL:
+      wind_onshore_competing_ESP:
+      wind_offshore_CN:
+      wind_offshore_IND:
+      wind_offshore_DE:
+      wind_offshore_PT:
+      wind_offshore_FR:
+      wind_offshore_NDL:
+      wind_offshore_ESP:
+      biomass_IT:
+      biomass_FR:
+      biomass_ESP:
+      biogas_to_electricity_supply_FR:
+      biogas_to_electricity_supply_CAN:
+      biogas_to_electricity_supply_USA:
+      biogas_to_electricity_supply_FSM:
+      biogas_to_electricity_supply_UK:
+      biogas_to_electricity_supply_BEL:
+      battery_CN:
+      battery_CZ:
+      battery_US:
+      battery_HU:
+      battery_PL:
+      battery_ESP:
+      pumped_hydro_CN:
+      pumped_hydro_ESP:
+  ESP_3:
+    latitude: 41.56021911349556
+    longitude: -3.7343026058912554
+    available_area: 38722.08812505007
+    techs:
+      demand_tech:
+      existing_wind_onshore:
+        flow_cap_max: 449.62
+        flow_cap_min: 449.62
+      existing_pumped_hydro:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_chp:
+        flow_cap_max: 800
+        flow_cap_min: 800
+      existing_biomass:
+        flow_cap_max: 3.49
+        flow_cap_min: 3.49
+      existing_biogas_to_electricity_supply:
+        flow_cap_max: 1.15
+        flow_cap_min: 1.15
+      existing_hydro_run_of_river:
+        flow_cap_max: 29.13
+        flow_cap_min: 29.13
+      existing_hydro_reservoir:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_nuclear:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_coal:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_ccgt:
+        flow_cap_max: 42.04
+        flow_cap_min: 0
+      existing_wte:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_rooftop_pv:
+        flow_cap_max: 3.21
+        flow_cap_min: 3.21
+      existing_open_field_pv:
+        flow_cap_max: 82.25
+        flow_cap_min: 82.25
+      existing_oil_and_other:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      open_field_pv_CN:
+      open_field_pv_DE:
+      open_field_pv_NL:
+      open_field_pv_PT:
+      open_field_pv_MY:
+      open_field_pv_ESP:
+      roof_mounted_pv_CN:
+      roof_mounted_pv_DE:
+      roof_mounted_pv_NL:
+      roof_mounted_pv_PT:
+      roof_mounted_pv_MY:
+      roof_mounted_pv_ESP:
+      wind_onshore_monopoly_CN:
+      wind_onshore_monopoly_IND:
+      wind_onshore_monopoly_DE:
+      wind_onshore_monopoly_PT:
+      wind_onshore_monopoly_FR:
+      wind_onshore_monopoly_ESP:
+      wind_onshore_monopoly_NDL:
+      wind_onshore_competing_CN:
+      wind_onshore_competing_IND:
+      wind_onshore_competing_DE:
+      wind_onshore_competing_PT:
+      wind_onshore_competing_FR:
+      wind_onshore_competing_NDL:
+      wind_onshore_competing_ESP:
+      wind_offshore_CN:
+        flow_cap_max: 0.0
+      wind_offshore_IND:
+        flow_cap_max: 0.0
+      wind_offshore_DE:
+        flow_cap_max: 0.0
+      wind_offshore_PT:
+        flow_cap_max: 0.0
+      wind_offshore_FR:
+        flow_cap_max: 0.0
+      wind_offshore_NDL:
+        flow_cap_max: 0.0
+      wind_offshore_ESP:
+        flow_cap_max: 0.0
+      biomass_IT:
+      biomass_FR:
+      biomass_ESP:
+      biogas_to_electricity_supply_FR:
+      biogas_to_electricity_supply_CAN:
+      biogas_to_electricity_supply_USA:
+      biogas_to_electricity_supply_FSM:
+      biogas_to_electricity_supply_UK:
+      biogas_to_electricity_supply_BEL:
+      battery_CN:
+      battery_CZ:
+      battery_US:
+      battery_HU:
+      battery_PL:
+      battery_ESP:
+      pumped_hydro_CN:
+      pumped_hydro_ESP:
+  ESP_4:
+    latitude: 42.701172643597786
+    longitude: -2.15010605613969
+    available_area: 5368.592652991414
+    techs:
+      demand_tech:
+      existing_wind_onshore:
+        flow_cap_max: 1138.113
+        flow_cap_min: 1138.113
+      existing_pumped_hydro:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_chp:
+        flow_cap_max: 2873
+        flow_cap_min: 2873
+      existing_biomass:
+        flow_cap_max: 53.58
+        flow_cap_min: 53.58
+      existing_biogas_to_electricity_supply:
+        flow_cap_max: 17.65
+        flow_cap_min: 17.65
+      existing_hydro_run_of_river:
+        flow_cap_max: 53.45
+        flow_cap_min: 53.45
+      existing_hydro_reservoir:
+        flow_cap_max: 114.27
+        flow_cap_min: 114.27
+      existing_nuclear:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_coal:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_ccgt:
+        flow_cap_max: 662.722
+        flow_cap_min: 0
+      existing_wte:
+        flow_cap_max: 112.32
+        flow_cap_min: 0
+      existing_rooftop_pv:
+        flow_cap_max: 7.03
+        flow_cap_min: 7.03
+      existing_open_field_pv:
+        flow_cap_max: 180.17
+        flow_cap_min: 180.17
+      existing_oil_and_other:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      open_field_pv_CN:
+      open_field_pv_DE:
+      open_field_pv_NL:
+      open_field_pv_PT:
+      open_field_pv_MY:
+      open_field_pv_ESP:
+      roof_mounted_pv_CN:
+      roof_mounted_pv_DE:
+      roof_mounted_pv_NL:
+      roof_mounted_pv_PT:
+      roof_mounted_pv_MY:
+      roof_mounted_pv_ESP:
+      wind_onshore_monopoly_CN:
+      wind_onshore_monopoly_IND:
+      wind_onshore_monopoly_DE:
+      wind_onshore_monopoly_PT:
+      wind_onshore_monopoly_FR:
+      wind_onshore_monopoly_ESP:
+      wind_onshore_monopoly_NDL:
+      wind_onshore_competing_CN:
+      wind_onshore_competing_IND:
+      wind_onshore_competing_DE:
+      wind_onshore_competing_PT:
+      wind_onshore_competing_FR:
+      wind_onshore_competing_NDL:
+      wind_onshore_competing_ESP:
+      wind_offshore_CN:
+      wind_offshore_IND:
+      wind_offshore_DE:
+      wind_offshore_PT:
+      wind_offshore_FR:
+      wind_offshore_NDL:
+      wind_offshore_ESP:
+      biomass_IT:
+      biomass_FR:
+      biomass_ESP:
+      biogas_to_electricity_supply_FR:
+      biogas_to_electricity_supply_CAN:
+      biogas_to_electricity_supply_USA:
+      biogas_to_electricity_supply_FSM:
+      biogas_to_electricity_supply_UK:
+      biogas_to_electricity_supply_BEL:
+      battery_CN:
+      battery_CZ:
+      battery_US:
+      battery_HU:
+      battery_PL:
+      battery_ESP:
+      pumped_hydro_CN:
+      pumped_hydro_ESP:
+  ESP_5:
+    latitude: 41.51951355139218
+    longitude: -0.659929673623045
+    available_area: 24124.65581158549
+    techs:
+      demand_tech:
+      existing_wind_onshore:
+        flow_cap_max: 1904.82
+        flow_cap_min: 1904.82
+      existing_pumped_hydro:
+        flow_cap_max: 305
+        flow_cap_min: 305
+      existing_chp:
+        flow_cap_max: 1890.2
+        flow_cap_min: 1890.2
+      existing_biomass:
+        flow_cap_max: 5.03
+        flow_cap_min: 5.03
+      existing_biogas_to_electricity_supply:
+        flow_cap_max: 1.66
+        flow_cap_min: 1.66
+      existing_hydro_run_of_river:
+        flow_cap_max: 211.09
+        flow_cap_min: 211.09
+      existing_hydro_reservoir:
+        flow_cap_max: 771.36
+        flow_cap_min: 771.36
+      existing_nuclear:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_coal:
+        flow_cap_max: 1055.77
+        flow_cap_min: 0
+      existing_ccgt:
+        flow_cap_max: 529.643
+        flow_cap_min: 0
+      existing_wte:
+        flow_cap_max: 49.9
+        flow_cap_min: 0
+      existing_rooftop_pv:
+        flow_cap_max: 6.32
+        flow_cap_min: 6.32
+      existing_open_field_pv:
+        flow_cap_max: 161.97
+        flow_cap_min: 161.97
+      existing_oil_and_other:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      open_field_pv_CN:
+      open_field_pv_DE:
+      open_field_pv_NL:
+      open_field_pv_PT:
+      open_field_pv_MY:
+      open_field_pv_ESP:
+      roof_mounted_pv_CN:
+      roof_mounted_pv_DE:
+      roof_mounted_pv_NL:
+      roof_mounted_pv_PT:
+      roof_mounted_pv_MY:
+      roof_mounted_pv_ESP:
+      wind_onshore_monopoly_CN:
+      wind_onshore_monopoly_IND:
+      wind_onshore_monopoly_DE:
+      wind_onshore_monopoly_PT:
+      wind_onshore_monopoly_FR:
+      wind_onshore_monopoly_ESP:
+      wind_onshore_monopoly_NDL:
+      wind_onshore_competing_CN:
+      wind_onshore_competing_IND:
+      wind_onshore_competing_DE:
+      wind_onshore_competing_PT:
+      wind_onshore_competing_FR:
+      wind_onshore_competing_NDL:
+      wind_onshore_competing_ESP:
+      wind_offshore_CN:
+      wind_offshore_IND:
+      wind_offshore_DE:
+      wind_offshore_PT:
+      wind_offshore_FR:
+      wind_offshore_NDL:
+      wind_offshore_ESP:
+      biomass_IT:
+      biomass_FR:
+      biomass_ESP:
+      biogas_to_electricity_supply_FR:
+      biogas_to_electricity_supply_CAN:
+      biogas_to_electricity_supply_USA:
+      biogas_to_electricity_supply_FSM:
+      biogas_to_electricity_supply_UK:
+      biogas_to_electricity_supply_BEL:
+      battery_CN:
+      battery_CZ:
+      battery_US:
+      battery_HU:
+      battery_PL:
+      battery_ESP:
+      pumped_hydro_CN:
+      pumped_hydro_ESP:
+  ESP_6:
+    latitude: 41.79855126427764
+    longitude: 1.5288267961910351
+    available_area: 6798.149699896574
+    techs:
+      demand_tech:
+      existing_wind_onshore:
+        flow_cap_max: 1268.81
+        flow_cap_min: 1268.81
+      existing_pumped_hydro:
+        flow_cap_max: 534
+        flow_cap_min: 534
+      existing_chp:
+        flow_cap_max: 4005.56
+        flow_cap_min: 4005.56
+      existing_biomass:
+        flow_cap_max: 46.81
+        flow_cap_min: 46.81
+      existing_biogas_to_electricity_supply:
+        flow_cap_max: 15.42
+        flow_cap_min: 15.42
+      existing_hydro_run_of_river:
+        flow_cap_max: 290.27
+        flow_cap_min: 290.27
+      existing_hydro_reservoir:
+        flow_cap_max: 1263.79
+        flow_cap_min: 1263.79
+      existing_nuclear:
+        flow_cap_max: 3032.81
+        flow_cap_min: 3032.81
+      existing_coal:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_ccgt:
+        flow_cap_max: 1109.536
+        flow_cap_min: 0
+      existing_wte:
+        flow_cap_max: 55.79
+        flow_cap_min: 0
+      existing_rooftop_pv:
+        flow_cap_max: 10.0
+        flow_cap_min: 10.0
+      existing_open_field_pv:
+        flow_cap_max: 256.44
+        flow_cap_min: 256.44
+      existing_oil_and_other:
+        flow_cap_max: 3.8
+        flow_cap_min: 3.8
+      open_field_pv_CN:
+      open_field_pv_DE:
+      open_field_pv_NL:
+      open_field_pv_PT:
+      open_field_pv_MY:
+      open_field_pv_ESP:
+      roof_mounted_pv_CN:
+      roof_mounted_pv_DE:
+      roof_mounted_pv_NL:
+      roof_mounted_pv_PT:
+      roof_mounted_pv_MY:
+      roof_mounted_pv_ESP:
+      wind_onshore_monopoly_CN:
+      wind_onshore_monopoly_IND:
+      wind_onshore_monopoly_DE:
+      wind_onshore_monopoly_PT:
+      wind_onshore_monopoly_FR:
+      wind_onshore_monopoly_ESP:
+      wind_onshore_monopoly_NDL:
+      wind_onshore_competing_CN:
+      wind_onshore_competing_IND:
+      wind_onshore_competing_DE:
+      wind_onshore_competing_PT:
+      wind_onshore_competing_FR:
+      wind_onshore_competing_NDL:
+      wind_onshore_competing_ESP:
+      wind_offshore_CN:
+      wind_offshore_IND:
+      wind_offshore_DE:
+      wind_offshore_PT:
+      wind_offshore_FR:
+      wind_offshore_NDL:
+      wind_offshore_ESP:
+      biomass_IT:
+      biomass_FR:
+      biomass_ESP:
+      biogas_to_electricity_supply_FR:
+      biogas_to_electricity_supply_CAN:
+      biogas_to_electricity_supply_USA:
+      biogas_to_electricity_supply_FSM:
+      biogas_to_electricity_supply_UK:
+      biogas_to_electricity_supply_BEL:
+      battery_CN:
+      battery_CZ:
+      battery_US:
+      battery_HU:
+      battery_PL:
+      battery_ESP:
+      pumped_hydro_CN:
+      pumped_hydro_ESP:
+  ESP_7:
+    latitude: 40.495174557032136
+    longitude: -3.717115741047385
+    available_area: 2918.9581568688154
+    techs:
+      demand_tech:
+      existing_wind_onshore:
+        flow_cap_max: 3798.929
+        flow_cap_min: 3798.929
+      existing_pumped_hydro:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_chp:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_biomass:
+        flow_cap_max: 32.03
+        flow_cap_min: 32.03
+      existing_biogas_to_electricity_supply:
+        flow_cap_max: 10.55
+        flow_cap_min: 10.55
+      existing_hydro_run_of_river:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_hydro_reservoir:
+        flow_cap_max: 55.45
+        flow_cap_min: 55.45
+      existing_nuclear:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_coal:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_ccgt:
+        flow_cap_max: 224.64
+        flow_cap_min: 0
+      existing_wte:
+        flow_cap_max: 29.8
+        flow_cap_min: 0
+      existing_rooftop_pv:
+        flow_cap_max: 2.37
+        flow_cap_min: 2.37
+      existing_open_field_pv:
+        flow_cap_max: 60.89
+        flow_cap_min: 60.89
+      existing_oil_and_other:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      open_field_pv_CN:
+      open_field_pv_DE:
+      open_field_pv_NL:
+      open_field_pv_PT:
+      open_field_pv_MY:
+      open_field_pv_ESP:
+      roof_mounted_pv_CN:
+      roof_mounted_pv_DE:
+      roof_mounted_pv_NL:
+      roof_mounted_pv_PT:
+      roof_mounted_pv_MY:
+      roof_mounted_pv_ESP:
+      wind_onshore_monopoly_CN:
+      wind_onshore_monopoly_IND:
+      wind_onshore_monopoly_DE:
+      wind_onshore_monopoly_PT:
+      wind_onshore_monopoly_FR:
+      wind_onshore_monopoly_ESP:
+      wind_onshore_monopoly_NDL:
+      wind_onshore_competing_CN:
+      wind_onshore_competing_IND:
+      wind_onshore_competing_DE:
+      wind_onshore_competing_PT:
+      wind_onshore_competing_FR:
+      wind_onshore_competing_NDL:
+      wind_onshore_competing_ESP:
+      wind_offshore_CN:
+      wind_offshore_IND:
+      wind_offshore_DE:
+      wind_offshore_PT:
+      wind_offshore_FR:
+      wind_offshore_NDL:
+      wind_offshore_ESP:
+      biomass_IT:
+      biomass_FR:
+      biomass_ESP:
+      biogas_to_electricity_supply_FR:
+      biogas_to_electricity_supply_CAN:
+      biogas_to_electricity_supply_USA:
+      biogas_to_electricity_supply_FSM:
+      biogas_to_electricity_supply_UK:
+      biogas_to_electricity_supply_BEL:
+      battery_CN:
+      battery_CZ:
+      battery_US:
+      battery_HU:
+      battery_PL:
+      battery_ESP:
+      pumped_hydro_CN:
+      pumped_hydro_ESP:
+  ESP_8:
+    latitude: 39.244710072703214
+    longitude: -5.150578375759755
+    available_area: 51201.77004980296
+    techs:
+      demand_tech:
+      existing_wind_onshore:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_pumped_hydro:
+        flow_cap_max: 292
+        flow_cap_min: 292
+      existing_chp:
+        flow_cap_max: 800
+        flow_cap_min: 800
+      existing_biomass:
+        flow_cap_max: 76.81
+        flow_cap_min: 76.81
+      existing_biogas_to_electricity_supply:
+        flow_cap_max: 25.04
+        flow_cap_min: 25.04
+      existing_hydro_run_of_river:
+        flow_cap_max: 27.69
+        flow_cap_min: 27.69
+      existing_hydro_reservoir:
+        flow_cap_max: 2514.545
+        flow_cap_min: 2514.545
+      existing_nuclear:
+        flow_cap_max: 3020.54
+        flow_cap_min: 0
+      existing_coal:
+        flow_cap_max: 502.62
+        flow_cap_min: 0
+      existing_ccgt:
+        flow_cap_max: 425.66
+        flow_cap_min: 0
+      existing_wte:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_rooftop_pv:
+        flow_cap_max: 55.73
+        flow_cap_min: 55.73
+      existing_open_field_pv:
+        flow_cap_max: 1429.07
+        flow_cap_min: 1429.07
+      existing_oil_and_other:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      open_field_pv_CN:
+      open_field_pv_DE:
+      open_field_pv_NL:
+      open_field_pv_PT:
+      open_field_pv_MY:
+      open_field_pv_ESP:
+      roof_mounted_pv_CN:
+      roof_mounted_pv_DE:
+      roof_mounted_pv_NL:
+      roof_mounted_pv_PT:
+      roof_mounted_pv_MY:
+      roof_mounted_pv_ESP:
+      wind_onshore_monopoly_CN:
+      wind_onshore_monopoly_IND:
+      wind_onshore_monopoly_DE:
+      wind_onshore_monopoly_PT:
+      wind_onshore_monopoly_FR:
+      wind_onshore_monopoly_ESP:
+      wind_onshore_monopoly_NDL:
+      wind_onshore_competing_CN:
+      wind_onshore_competing_IND:
+      wind_onshore_competing_DE:
+      wind_onshore_competing_PT:
+      wind_onshore_competing_FR:
+      wind_onshore_competing_NDL:
+      wind_onshore_competing_ESP:
+      wind_offshore_CN:
+        flow_cap_max: 0.0
+      wind_offshore_IND:
+        flow_cap_max: 0.0
+      wind_offshore_DE:
+        flow_cap_max: 0.0
+      wind_offshore_PT:
+        flow_cap_max: 0.0
+      wind_offshore_FR:
+        flow_cap_max: 0.0
+      wind_offshore_NDL:
+        flow_cap_max: 0.0
+      wind_offshore_ESP:
+        flow_cap_max: 0.0
+      biomass_IT:
+      biomass_FR:
+      biomass_ESP:
+      biogas_to_electricity_supply_FR:
+      biogas_to_electricity_supply_CAN:
+      biogas_to_electricity_supply_USA:
+      biogas_to_electricity_supply_FSM:
+      biogas_to_electricity_supply_UK:
+      biogas_to_electricity_supply_BEL:
+      battery_CN:
+      battery_CZ:
+      battery_US:
+      battery_HU:
+      battery_PL:
+      battery_ESP:
+      pumped_hydro_CN:
+      pumped_hydro_ESP:
+  ESP_9:
+    latitude: 37.18942134172542
+    longitude: -5.818649679284524
+    available_area: 18623.683894775808
+    techs:
+      demand_tech:
+      existing_wind_onshore:
+        flow_cap_max: 3327.181
+        flow_cap_min: 3327.181
+      existing_pumped_hydro:
+        flow_cap_max: 570
+        flow_cap_min: 570
+      existing_chp:
+        flow_cap_max: 6158.8
+        flow_cap_min: 6158.8
+      existing_biomass:
+        flow_cap_max: 303.51
+        flow_cap_min: 303.51
+      existing_biogas_to_electricity_supply:
+        flow_cap_max: 99.97
+        flow_cap_min: 99.97
+      existing_hydro_run_of_river:
+        flow_cap_max: 193.19
+        flow_cap_min: 193.19
+      existing_hydro_reservoir:
+        flow_cap_max: 272.22
+        flow_cap_min: 272.22
+      existing_nuclear:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      existing_coal:
+        flow_cap_max: 1989.4
+        flow_cap_min: 0
+      existing_ccgt:
+        flow_cap_max: 763.685
+        flow_cap_min: 0
+      existing_wte:
+        flow_cap_max: 63.23
+        flow_cap_min: 0
+      existing_rooftop_pv:
+        flow_cap_max: 32.82
+        flow_cap_min: 32.82
+      existing_open_field_pv:
+        flow_cap_max: 841.44
+        flow_cap_min: 841.44
+      existing_oil_and_other:
+        flow_cap_max: 0
+        flow_cap_min: 0
+      open_field_pv_CN:
+      open_field_pv_DE:
+      open_field_pv_NL:
+      open_field_pv_PT:
+      open_field_pv_MY:
+      open_field_pv_ESP:
+      roof_mounted_pv_CN:
+      roof_mounted_pv_DE:
+      roof_mounted_pv_NL:
+      roof_mounted_pv_PT:
+      roof_mounted_pv_MY:
+      roof_mounted_pv_ESP:
+      wind_onshore_monopoly_CN:
+      wind_onshore_monopoly_IND:
+      wind_onshore_monopoly_DE:
+      wind_onshore_monopoly_PT:
+      wind_onshore_monopoly_FR:
+      wind_onshore_monopoly_ESP:
+      wind_onshore_monopoly_NDL:
+      wind_onshore_competing_CN:
+      wind_onshore_competing_IND:
+      wind_onshore_competing_DE:
+      wind_onshore_competing_PT:
+      wind_onshore_competing_FR:
+      wind_onshore_competing_NDL:
+      wind_onshore_competing_ESP:
+      wind_offshore_CN:
+      wind_offshore_IND:
+      wind_offshore_DE:
+      wind_offshore_PT:
+      wind_offshore_FR:
+      wind_offshore_NDL:
+      wind_offshore_ESP:
+      biomass_IT:
+      biomass_FR:
+      biomass_ESP:
+      biogas_to_electricity_supply_FR:
+      biogas_to_electricity_supply_CAN:
+      biogas_to_electricity_supply_USA:
+      biogas_to_electricity_supply_FSM:
+      biogas_to_electricity_supply_UK:
+      biogas_to_electricity_supply_BEL:
+      battery_CN:
+      battery_CZ:
+      battery_US:
+      battery_HU:
+      battery_PL:
+      battery_ESP:
+      pumped_hydro_CN:
+      pumped_hydro_ESP:
+  FRA_1:
+    latitude: 43.99798277570603
+    longitude: 0.198475920979156
+    available_area: 10.0
+    techs:
+      el_import_FR:
+  FRA_2:
+    latitude: 44.14479466678619
+    longitude: 2.5430929823876918
+    techs:
+      el_import_FR:
+  FRA_3:
+    latitude: 43.837394713381585
+    longitude: 5.676059379874186
+    available_area: 10.0
+    techs:
+      el_import_FR:
+  PRT_1:
+    latitude: 40.928538946933095
+    longitude: -7.7185325644071225
+    available_area: 10.0
+    techs:
+      el_import_PT:
+  PRT_2:
+    latitude: 38.56729057537551
+    longitude: -8.184437556208506
+    available_area: 10.0
+    techs:
+      el_import_PT:
+  MA:
+    latitude: 35.7
+    longitude: -5.411
+    available_area: 10.0
+    techs:
+      el_import_MA:
+  Trade_Markets:
+    latitude: 38.99794
+    longitude: 4.321921
+    available_area: 10.0
+    techs:
+      coal_RUS:
+      coal_COL:
+      coal_AUS:
+      coal_USA:
+      coal_ITA:
+      uranium_UK:
+      uranium_USA:
+      natural_gas_liquid_USA:
+      natural_gas_liquid_RUS:
+      natural_gas_liquid_NGA:
+      natural_gas_liquid_DZA:
+      natural_gas_liquid_QAT:
+      natural_gas_DZA:
+      natural_gas_NOR:
+      natural_gas_PT:
+      natural_gas_DNK:
+      natural_gas_DEU:
+      oil_NGA:
+      oil_MEX:
+      oil_LBY:
+      oil_USA:
+      oil_SA:

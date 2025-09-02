@@ -1,0 +1,7 @@
+techs,costs,cost_interest_rate
+pumped_hydro_CN,co2,0.035
+pumped_hydro_CN,monetary,0.05
+pumped_hydro_CN,vulnerability,0.1
+pumped_hydro_ESP,co2,0.035
+pumped_hydro_ESP,monetary,0.05
+pumped_hydro_ESP,vul,0.1

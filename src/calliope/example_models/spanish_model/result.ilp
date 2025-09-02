@@ -1,0 +1,12 @@
+\ Model _copy
+\ LP format - for model browsing. Use MPS format to capture full model detail.
+\ Signature: 0x819a442792238929
+Minimize
+ 
+Subject To
+ total_pumped_cap_2[]: flow_cap[ESP_2,_existing_pumped_hydro,_electricity]
+   + flow_cap[ESP_2,_pumped_hydro_CN,_electricity]
+   + flow_cap[ESP_2,_pumped_hydro_ESP,_electricity] <= 240.2
+Bounds
+ flow_cap[ESP_2,_existing_pumped_hydro,_electricity] >= 1238
+End

@@ -1,0 +1,6650 @@
+definition:
+  parameters:
+    objective_cost_weights:
+      data:
+      - 1
+      - 0
+      - 0
+      dims: costs
+      index:
+      - monetary
+      - co2
+      - vul
+    co2_limit:
+      data:
+      - 20603000000.0
+      dims:
+      - costs
+      index:
+      - co2
+    local_cap_import_limit: 0.25
+    wind_tech_limit_esp_1: 97078.21
+    wind_tech_limit_esp_10: 121190.06
+    wind_tech_limit_esp_11: 128803.82
+    wind_tech_limit_esp_2: 95447.45
+    wind_tech_limit_esp_3: 141329.18
+    wind_tech_limit_esp_4: 56655.05
+    wind_tech_limit_esp_5: 109742.38
+    wind_tech_limit_esp_6: 67464.58
+    wind_tech_limit_esp_7: 10849.19
+    wind_tech_limit_esp_8: 120581.96
+    wind_tech_limit_esp_9: 76813.24
+    wind_offshore_techlimit_esp_1: 84550.234
+    wind_offshore_techlimit_esp_10: 14882.073
+    wind_offshore_techlimit_esp_11: 40049.676
+    wind_offshore_techlimit_esp_2: 43443.228
+    wind_offshore_techlimit_esp_3: 0
+    wind_offshore_techlimit_esp_4: 16964.033
+    wind_offshore_techlimit_esp_5: 0
+    wind_offshore_techlimit_esp_6: 46026.718
+    wind_offshore_techlimit_esp_7: 0
+    wind_offshore_techlimit_esp_8: 0
+    wind_offshore_techlimit_esp_9: 0
+    pv_roof_cap_esp_1: 31208.698
+    pv_roof_cap_esp_10: 25708.171
+    pv_roof_cap_esp_11: 38942.394
+    pv_roof_cap_esp_2: 19865.644
+    pv_roof_cap_esp_3: 13174.809
+    pv_roof_cap_esp_4: 14412.426
+    pv_roof_cap_esp_5: 7097.963
+    pv_roof_cap_esp_6: 34634.527
+    pv_roof_cap_esp_7: 17512.607
+    pv_roof_cap_esp_8: 16046.606
+    pv_roof_cap_esp_9: 22633.473
+    pumped_hydro_techlimit_esp_1: 1433
+    pumped_hydro_techlimit_esp_10: 0
+    pumped_hydro_techlimit_esp_11: 1516.76
+    pumped_hydro_techlimit_esp_2: 2627.03
+    pumped_hydro_techlimit_esp_3: 240
+    pumped_hydro_techlimit_esp_4: 0
+    pumped_hydro_techlimit_esp_5: 317.1
+    pumped_hydro_techlimit_esp_6: 538
+    pumped_hydro_techlimit_esp_7: 0
+    pumped_hydro_techlimit_esp_8: 539.61
+    pumped_hydro_techlimit_esp_9: 611.571
+    biogas_to_electricity_cap_1: 3092785.4
+    biogas_to_electricity_cap_10: 2288499.37
+    biogas_to_electricity_cap_11: 3310107.6
+    biogas_to_electricity_cap_2: 3893711.68
+    biogas_to_electricity_cap_3: 3653839.9
+    biogas_to_electricity_cap_4: 1932289.16
+    biogas_to_electricity_cap_5: 2397008.23
+    biogas_to_electricity_cap_6: 2752504.56
+    biogas_to_electricity_cap_7: 919190.97
+    biogas_to_electricity_cap_8: 3100309.61
+    biogas_to_electricity_cap_9: 2134753.47
+    biogas_resource_esp_1: 706.11
+    biogas_resource_esp_10: 522.48
+    biogas_resource_esp_11: 755.73
+    biogas_resource_esp_2: 888.97
+    biogas_resource_esp_3: 834.21
+    biogas_resource_esp_4: 441.16
+    biogas_resource_esp_5: 547.26
+    biogas_resource_esp_6: 628.42
+    biogas_resource_esp_7: 209.86
+    biogas_resource_esp_8: 707.83
+    biogas_resource_esp_9: 487.38
+  data_tables:
+    demand_data:
+      data: data/electricitydemand.csv
+      rows: timesteps
+      columns: nodes
+      select:
+      drop:
+      add_dims:
+        techs: demand_tech
+        parameters: sink_use_equals
+      rename_dims:
+    wind_onshore_capapcity_factors:
+      data: data/capacityfactors-wind-onshore.csv
+      rows: timesteps
+      columns: nodes
+      select:
+      drop:
+      add_dims:
+        techs:
+        - existing_wind_onshore
+        - wind_onshore_monopoly_CN
+        - wind_onshore_monopoly_IND
+        - wind_onshore_monopoly_DE
+        - wind_onshore_monopoly_PT
+        - wind_onshore_monopoly_FR
+        - wind_onshore_monopoly_NDL
+        - wind_onshore_monopoly_ESP
+        - wind_onshore_competing_CN
+        - wind_onshore_competing_IND
+        - wind_onshore_competing_DE
+        - wind_onshore_competing_PT
+        - wind_onshore_competing_FR
+        - wind_onshore_competing_NDL
+        - wind_onshore_competing_ESP
+        parameters: source_use_max
+      rename_dims:
+    wind_offshore_capacity_factors:
+      data: data/capacityfactors-wind-offshore.csv
+      rows: timesteps
+      columns: nodes
+      select:
+      drop:
+      add_dims:
+        techs:
+        - wind_offshore_CN
+        - wind_offshore_IND
+        - wind_offshore_DE
+        - wind_offshore_PT
+        - wind_offshore_FR
+        - wind_offshore_NDL
+        - wind_offshore_ESP
+        parameters: source_use_max
+      rename_dims:
+    roof_mounted_pv_capacity_factors:
+      data: data/capacityfactors-rooftop-pv.csv
+      rows: timesteps
+      columns: nodes
+      select:
+      drop:
+      add_dims:
+        techs:
+        - roof_mounted_pv_CN
+        - roof_mounted_pv_DE
+        - roof_mounted_pv_NL
+        - roof_mounted_pv_PT
+        - roof_mounted_pv_MY
+        - roof_mounted_pv_ESP
+        parameters: source_use_max
+      rename_dims:
+    open_field_pv_capacity_factors:
+      data: data/capacityfactors-open-field-pv.csv
+      rows: timesteps
+      columns: nodes
+      select:
+      drop:
+      add_dims:
+        techs:
+        - open_field_pv_CN
+        - roof_mounted_pv_DE
+        - roof_mounted_pv_NL
+        - roof_mounted_pv_PT
+        - roof_mounted_pv_MY
+        - roof_mounted_pv_ESP
+        parameters: source_use_max
+      rename_dims:
+    hydro_run_of_river_capacity_factors:
+      data: data/capacityfactors-hydro-ror.csv
+      rows: timesteps
+      columns: nodes
+      select:
+      drop:
+      add_dims:
+        techs: existing_hydro_run_of_river
+        parameters: source_use_max
+      rename_dims:
+    hydro_reservoir_capacity_factors:
+      data: data/capacityfactors-hydro-reservoir-inflow.csv
+      rows: timesteps
+      columns: nodes
+      select:
+      drop:
+      add_dims:
+        techs: existing_hydro_reservoir
+        parameters: source_use_max
+      rename_dims:
+  nodes:
+    ESP_1:
+      active: true
+      latitude: 42.756727134423606
+      longitude: -7.9103430789768225
+      techs:
+        demand_tech:
+        existing_wind_onshore:
+          flow_cap_max: 3828.15
+          flow_cap_min: 3828.15
+        existing_chp:
+          flow_cap_max: 2001.2
+          flow_cap_min: 2001.2
+        existing_biomass:
+          flow_cap_max: 78.3
+          flow_cap_min: 78.3
+        existing_biogas_to_electricity_supply:
+          flow_cap_max: 25.79
+          flow_cap_min: 25.79
+        existing_hydro_run_of_river:
+          flow_cap_max: 235.26
+          flow_cap_min: 235.259
+        existing_pumped_hydro:
+          flow_cap_max: 513.6
+          flow_cap_min: 513.6
+        existing_hydro_reservoir:
+          flow_cap_max: 2824.48
+          flow_cap_min: 2824.48
+        existing_nuclear:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_coal:
+          flow_cap_max: 4351.0
+          flow_cap_min: 0
+        existing_ccgt:
+          flow_cap_max: 664.2
+          flow_cap_min: 0
+        existing_wte:
+          flow_cap_max: 139.07
+          flow_cap_min: 0
+        existing_rooftop_pv:
+          flow_cap_max: 0.65
+          flow_cap_min: 0.65
+        existing_open_field_pv:
+          flow_cap_max: 16.68
+          flow_cap_min: 16.68
+        existing_oil_and_other:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        open_field_pv_CN:
+        open_field_pv_DE:
+        open_field_pv_NL:
+        open_field_pv_PT:
+        open_field_pv_MY:
+        open_field_pv_ESP:
+        roof_mounted_pv_CN:
+        roof_mounted_pv_DE:
+        roof_mounted_pv_NL:
+        roof_mounted_pv_PT:
+        roof_mounted_pv_MY:
+        roof_mounted_pv_ESP:
+        wind_onshore_monopoly_CN:
+        wind_onshore_monopoly_IND:
+        wind_onshore_monopoly_DE:
+        wind_onshore_monopoly_PT:
+        wind_onshore_monopoly_FR:
+        wind_onshore_monopoly_ESP:
+        wind_onshore_monopoly_NDL:
+        wind_onshore_competing_CN:
+        wind_onshore_competing_IND:
+        wind_onshore_competing_DE:
+        wind_onshore_competing_PT:
+        wind_onshore_competing_FR:
+        wind_onshore_competing_NDL:
+        wind_onshore_competing_ESP:
+        wind_offshore_CN:
+        wind_offshore_IND:
+        wind_offshore_DE:
+        wind_offshore_PT:
+        wind_offshore_FR:
+        wind_offshore_NDL:
+        wind_offshore_ESP:
+        pumped_hydro_CN:
+        pumped_hydro_ESP:
+        biomass_IT:
+        biomass_FR:
+        biomass_ESP:
+        biogas_to_electricity_supply_FR:
+        biogas_to_electricity_supply_CAN:
+        biogas_to_electricity_supply_USA:
+        biogas_to_electricity_supply_FSM:
+        biogas_to_electricity_supply_UK:
+        biogas_to_electricity_supply_BEL:
+        battery_CN:
+        battery_CZ:
+        battery_US:
+        battery_HU:
+        battery_PL:
+        battery_ESP:
+      available_area: 1804.030863210559
+    ESP_10:
+      active: true
+      latitude: 37.68090575943503
+      longitude: -3.588739304583343
+      techs:
+        existing_wind_onshore:
+          flow_cap_max: 262.776
+          flow_cap_min: 262.776
+        existing_pumped_hydro:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_chp:
+          flow_cap_max: 3252
+          flow_cap_min: 3252
+        existing_biomass:
+          flow_cap_max: 6.28
+          flow_cap_min: 6.28
+        existing_biogas_to_electricity_supply:
+          flow_cap_max: 2.07
+          flow_cap_min: 2.07
+        existing_hydro_run_of_river:
+          flow_cap_max: 24.17
+          flow_cap_min: 24.17
+        existing_hydro_reservoir:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_nuclear:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_coal:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_ccgt:
+          flow_cap_max: 328.018
+          flow_cap_min: 0
+        existing_wte:
+          flow_cap_max: 9.68
+          flow_cap_min: 0
+        existing_rooftop_pv:
+          flow_cap_max: 16.41
+          flow_cap_min: 16.41
+        existing_open_field_pv:
+          flow_cap_max: 420.69
+          flow_cap_min: 420.69
+        existing_oil_and_other:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        open_field_pv_CN:
+        open_field_pv_DE:
+        open_field_pv_NL:
+        open_field_pv_PT:
+        open_field_pv_MY:
+        open_field_pv_ESP:
+        roof_mounted_pv_CN:
+        roof_mounted_pv_DE:
+        roof_mounted_pv_NL:
+        roof_mounted_pv_PT:
+        roof_mounted_pv_MY:
+        roof_mounted_pv_ESP:
+        wind_onshore_monopoly_CN:
+        wind_onshore_monopoly_IND:
+        wind_onshore_monopoly_DE:
+        wind_onshore_monopoly_PT:
+        wind_onshore_monopoly_FR:
+        wind_onshore_monopoly_ESP:
+        wind_onshore_monopoly_NDL:
+        wind_onshore_competing_CN:
+        wind_onshore_competing_IND:
+        wind_onshore_competing_DE:
+        wind_onshore_competing_PT:
+        wind_onshore_competing_FR:
+        wind_onshore_competing_NDL:
+        wind_onshore_competing_ESP:
+        wind_offshore_CN:
+        wind_offshore_IND:
+        wind_offshore_DE:
+        wind_offshore_PT:
+        wind_offshore_FR:
+        wind_offshore_NDL:
+        wind_offshore_ESP:
+        biomass_IT:
+        biomass_FR:
+        biomass_ESP:
+        biogas_to_electricity_supply_FR:
+        biogas_to_electricity_supply_CAN:
+        biogas_to_electricity_supply_USA:
+        biogas_to_electricity_supply_FSM:
+        biogas_to_electricity_supply_UK:
+        biogas_to_electricity_supply_BEL:
+        battery_CN:
+        battery_CZ:
+        battery_US:
+        battery_HU:
+        battery_PL:
+        battery_ESP:
+        pumped_hydro_CN:
+        pumped_hydro_ESP:
+      demand_tech:
+      available_area: 18555.36784157902
+    ESP_11:
+      active: true
+      latitude: 39.167873464255464
+      longitude: -1.4544684252789575
+      techs:
+        existing_wind_onshore:
+          flow_cap_max: 1193.24
+          flow_cap_min: 1193.24
+        existing_pumped_hydro:
+          flow_cap_max: 1476.35
+          flow_cap_min: 1476.35
+        existing_chp:
+          flow_cap_max: 2923.97
+          flow_cap_min: 2923.97
+        existing_biomass:
+          flow_cap_max: 10.44
+          flow_cap_min: 10.44
+        existing_biogas_to_electricity_supply:
+          flow_cap_max: 3.44
+          flow_cap_min: 3.44
+        existing_hydro_run_of_river:
+          flow_cap_max: 53.4
+          flow_cap_min: 53.4
+        existing_hydro_reservoir:
+          flow_cap_max: 542.2
+          flow_cap_min: 542.2
+        existing_nuclear:
+          flow_cap_max: 1063.94
+          flow_cap_min: 1063.94
+        existing_coal:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_ccgt:
+          flow_cap_max: 536.326
+          flow_cap_min: 0
+        existing_wte:
+          flow_cap_max: 63.09
+          flow_cap_min: 0
+        existing_rooftop_pv:
+          flow_cap_max: 13.05
+          flow_cap_min: 13.05
+        existing_open_field_pv:
+          flow_cap_max: 334.52
+          flow_cap_min: 334.52
+        existing_oil_and_other:
+          flow_cap_max: 8.47
+          flow_cap_min: 0
+        open_field_pv_CN:
+        open_field_pv_DE:
+        open_field_pv_NL:
+        open_field_pv_PT:
+        open_field_pv_MY:
+        open_field_pv_ESP:
+        roof_mounted_pv_CN:
+        roof_mounted_pv_DE:
+        roof_mounted_pv_NL:
+        roof_mounted_pv_PT:
+        roof_mounted_pv_MY:
+        roof_mounted_pv_ESP:
+        wind_onshore_monopoly_CN:
+        wind_onshore_monopoly_IND:
+        wind_onshore_monopoly_DE:
+        wind_onshore_monopoly_PT:
+        wind_onshore_monopoly_FR:
+        wind_onshore_monopoly_ESP:
+        wind_onshore_monopoly_NDL:
+        wind_onshore_competing_CN:
+        wind_onshore_competing_IND:
+        wind_onshore_competing_DE:
+        wind_onshore_competing_PT:
+        wind_onshore_competing_FR:
+        wind_onshore_competing_NDL:
+        wind_onshore_competing_ESP:
+        wind_offshore_CN:
+        wind_offshore_IND:
+        wind_offshore_DE:
+        wind_offshore_PT:
+        wind_offshore_FR:
+        wind_offshore_NDL:
+        wind_offshore_ESP:
+        biomass_IT:
+        biomass_FR:
+        biomass_ESP:
+        biogas_to_electricity_supply_FR:
+        biogas_to_electricity_supply_CAN:
+        biogas_to_electricity_supply_USA:
+        biogas_to_electricity_supply_FSM:
+        biogas_to_electricity_supply_UK:
+        biogas_to_electricity_supply_BEL:
+        battery_CN:
+        battery_CZ:
+        battery_US:
+        battery_HU:
+        battery_PL:
+        battery_ESP:
+        pumped_hydro_CN:
+        pumped_hydro_ESP:
+      available_area: 30957.46957938373
+    ESP_2:
+      active: true
+      latitude: 42.235589166452144
+      longitude: -5.767809087157458
+      techs:
+        existing_wind_onshore:
+          flow_cap_max: 5605.505
+          flow_cap_min: 5605.505
+        existing_pumped_hydro:
+          flow_cap_max: 1238
+          flow_cap_min: 1238
+        existing_chp:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_biomass:
+          flow_cap_max: 47.46
+          flow_cap_min: 47.46
+        existing_biogas_to_electricity_supply:
+          flow_cap_max: 15.63
+          flow_cap_min: 15.63
+        existing_hydro_run_of_river:
+          flow_cap_max: 48.6
+          flow_cap_min: 48.6
+        existing_hydro_reservoir:
+          flow_cap_max: 2685.24
+          flow_cap_min: 2685.24
+        existing_nuclear:
+          flow_cap_max: 455.29
+          flow_cap_min: 455.29
+        existing_coal:
+          flow_cap_max: 2595.23
+          flow_cap_min: 0
+        existing_ccgt:
+          flow_cap_max: 896.41
+          flow_cap_min: 0
+        existing_wte:
+          flow_cap_max: 9.93
+          flow_cap_min: 0
+        existing_rooftop_pv:
+          flow_cap_max: 18.6
+          flow_cap_min: 18.6
+        existing_open_field_pv:
+          flow_cap_max: 476.98
+          flow_cap_min: 476.98
+        existing_oil_and_other:
+          flow_cap_max: 1.6
+          flow_cap_min: 0
+        open_field_pv_CN:
+        open_field_pv_DE:
+        open_field_pv_NL:
+        open_field_pv_PT:
+        open_field_pv_MY:
+        open_field_pv_ESP:
+        roof_mounted_pv_CN:
+        roof_mounted_pv_DE:
+        roof_mounted_pv_NL:
+        roof_mounted_pv_PT:
+        roof_mounted_pv_MY:
+        roof_mounted_pv_ESP:
+        wind_onshore_monopoly_CN:
+        wind_onshore_monopoly_IND:
+        wind_onshore_monopoly_DE:
+        wind_onshore_monopoly_PT:
+        wind_onshore_monopoly_FR:
+        wind_onshore_monopoly_ESP:
+        wind_onshore_monopoly_NDL:
+        wind_onshore_competing_CN:
+        wind_onshore_competing_IND:
+        wind_onshore_competing_DE:
+        wind_onshore_competing_PT:
+        wind_onshore_competing_FR:
+        wind_onshore_competing_NDL:
+        wind_onshore_competing_ESP:
+        wind_offshore_CN:
+        wind_offshore_IND:
+        wind_offshore_DE:
+        wind_offshore_PT:
+        wind_offshore_FR:
+        wind_offshore_NDL:
+        wind_offshore_ESP:
+        biomass_IT:
+        biomass_FR:
+        biomass_ESP:
+        biogas_to_electricity_supply_FR:
+        biogas_to_electricity_supply_CAN:
+        biogas_to_electricity_supply_USA:
+        biogas_to_electricity_supply_FSM:
+        biogas_to_electricity_supply_UK:
+        biogas_to_electricity_supply_BEL:
+        battery_CN:
+        battery_CZ:
+        battery_US:
+        battery_HU:
+        battery_PL:
+        battery_ESP:
+        pumped_hydro_CN:
+        pumped_hydro_ESP:
+      available_area: 20425.103235207494
+    ESP_3:
+      active: true
+      latitude: 41.56021911349556
+      longitude: -3.7343026058912554
+      techs:
+        existing_wind_onshore:
+          flow_cap_max: 449.62
+          flow_cap_min: 449.62
+        existing_pumped_hydro:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_chp:
+          flow_cap_max: 800
+          flow_cap_min: 800
+        existing_biomass:
+          flow_cap_max: 3.49
+          flow_cap_min: 3.49
+        existing_biogas_to_electricity_supply:
+          flow_cap_max: 1.15
+          flow_cap_min: 1.15
+        existing_hydro_run_of_river:
+          flow_cap_max: 29.13
+          flow_cap_min: 29.13
+        existing_hydro_reservoir:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_nuclear:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_coal:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_ccgt:
+          flow_cap_max: 42.04
+          flow_cap_min: 0
+        existing_wte:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_rooftop_pv:
+          flow_cap_max: 3.21
+          flow_cap_min: 3.21
+        existing_open_field_pv:
+          flow_cap_max: 82.25
+          flow_cap_min: 82.25
+        existing_oil_and_other:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        open_field_pv_CN:
+        open_field_pv_DE:
+        open_field_pv_NL:
+        open_field_pv_PT:
+        open_field_pv_MY:
+        open_field_pv_ESP:
+        roof_mounted_pv_CN:
+        roof_mounted_pv_DE:
+        roof_mounted_pv_NL:
+        roof_mounted_pv_PT:
+        roof_mounted_pv_MY:
+        roof_mounted_pv_ESP:
+        wind_onshore_monopoly_CN:
+        wind_onshore_monopoly_IND:
+        wind_onshore_monopoly_DE:
+        wind_onshore_monopoly_PT:
+        wind_onshore_monopoly_FR:
+        wind_onshore_monopoly_ESP:
+        wind_onshore_monopoly_NDL:
+        wind_onshore_competing_CN:
+        wind_onshore_competing_IND:
+        wind_onshore_competing_DE:
+        wind_onshore_competing_PT:
+        wind_onshore_competing_FR:
+        wind_onshore_competing_NDL:
+        wind_onshore_competing_ESP:
+        wind_offshore_CN:
+          flow_cap_max: 0.0
+        wind_offshore_IND:
+          flow_cap_max: 0.0
+        wind_offshore_DE:
+          flow_cap_max: 0.0
+        wind_offshore_PT:
+          flow_cap_max: 0.0
+        wind_offshore_FR:
+          flow_cap_max: 0.0
+        wind_offshore_NDL:
+          flow_cap_max: 0.0
+        wind_offshore_ESP:
+          flow_cap_max: 0.0
+        biomass_IT:
+        biomass_FR:
+        biomass_ESP:
+        biogas_to_electricity_supply_FR:
+        biogas_to_electricity_supply_CAN:
+        biogas_to_electricity_supply_USA:
+        biogas_to_electricity_supply_FSM:
+        biogas_to_electricity_supply_UK:
+        biogas_to_electricity_supply_BEL:
+        battery_CN:
+        battery_CZ:
+        battery_US:
+        battery_HU:
+        battery_PL:
+        battery_ESP:
+        pumped_hydro_CN:
+        pumped_hydro_ESP:
+      available_area: 38722.08812505007
+    ESP_4:
+      active: true
+      latitude: 42.701172643597786
+      longitude: -2.15010605613969
+      techs:
+        existing_wind_onshore:
+          flow_cap_max: 1138.113
+          flow_cap_min: 1138.113
+        existing_pumped_hydro:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_chp:
+          flow_cap_max: 2873
+          flow_cap_min: 2873
+        existing_biomass:
+          flow_cap_max: 53.58
+          flow_cap_min: 53.58
+        existing_biogas_to_electricity_supply:
+          flow_cap_max: 17.65
+          flow_cap_min: 17.65
+        existing_hydro_run_of_river:
+          flow_cap_max: 53.45
+          flow_cap_min: 53.45
+        existing_hydro_reservoir:
+          flow_cap_max: 114.27
+          flow_cap_min: 114.27
+        existing_nuclear:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_coal:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_ccgt:
+          flow_cap_max: 662.722
+          flow_cap_min: 0
+        existing_wte:
+          flow_cap_max: 112.32
+          flow_cap_min: 0
+        existing_rooftop_pv:
+          flow_cap_max: 7.03
+          flow_cap_min: 7.03
+        existing_open_field_pv:
+          flow_cap_max: 180.17
+          flow_cap_min: 180.17
+        existing_oil_and_other:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        open_field_pv_CN:
+        open_field_pv_DE:
+        open_field_pv_NL:
+        open_field_pv_PT:
+        open_field_pv_MY:
+        open_field_pv_ESP:
+        roof_mounted_pv_CN:
+        roof_mounted_pv_DE:
+        roof_mounted_pv_NL:
+        roof_mounted_pv_PT:
+        roof_mounted_pv_MY:
+        roof_mounted_pv_ESP:
+        wind_onshore_monopoly_CN:
+        wind_onshore_monopoly_IND:
+        wind_onshore_monopoly_DE:
+        wind_onshore_monopoly_PT:
+        wind_onshore_monopoly_FR:
+        wind_onshore_monopoly_ESP:
+        wind_onshore_monopoly_NDL:
+        wind_onshore_competing_CN:
+        wind_onshore_competing_IND:
+        wind_onshore_competing_DE:
+        wind_onshore_competing_PT:
+        wind_onshore_competing_FR:
+        wind_onshore_competing_NDL:
+        wind_onshore_competing_ESP:
+        wind_offshore_CN:
+        wind_offshore_IND:
+        wind_offshore_DE:
+        wind_offshore_PT:
+        wind_offshore_FR:
+        wind_offshore_NDL:
+        wind_offshore_ESP:
+        biomass_IT:
+        biomass_FR:
+        biomass_ESP:
+        biogas_to_electricity_supply_FR:
+        biogas_to_electricity_supply_CAN:
+        biogas_to_electricity_supply_USA:
+        biogas_to_electricity_supply_FSM:
+        biogas_to_electricity_supply_UK:
+        biogas_to_electricity_supply_BEL:
+        battery_CN:
+        battery_CZ:
+        battery_US:
+        battery_HU:
+        battery_PL:
+        battery_ESP:
+        pumped_hydro_CN:
+        pumped_hydro_ESP:
+      available_area: 5368.592652991414
+    ESP_5:
+      active: true
+      latitude: 41.51951355139218
+      longitude: -0.659929673623045
+      techs:
+        existing_wind_onshore:
+          flow_cap_max: 1904.82
+          flow_cap_min: 1904.82
+        existing_pumped_hydro:
+          flow_cap_max: 305
+          flow_cap_min: 305
+        existing_chp:
+          flow_cap_max: 1890.2
+          flow_cap_min: 1890.2
+        existing_biomass:
+          flow_cap_max: 5.03
+          flow_cap_min: 5.03
+        existing_biogas_to_electricity_supply:
+          flow_cap_max: 1.66
+          flow_cap_min: 1.66
+        existing_hydro_run_of_river:
+          flow_cap_max: 211.09
+          flow_cap_min: 211.09
+        existing_hydro_reservoir:
+          flow_cap_max: 771.36
+          flow_cap_min: 771.36
+        existing_nuclear:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_coal:
+          flow_cap_max: 1055.77
+          flow_cap_min: 0
+        existing_ccgt:
+          flow_cap_max: 529.643
+          flow_cap_min: 0
+        existing_wte:
+          flow_cap_max: 49.9
+          flow_cap_min: 0
+        existing_rooftop_pv:
+          flow_cap_max: 6.32
+          flow_cap_min: 6.32
+        existing_open_field_pv:
+          flow_cap_max: 161.97
+          flow_cap_min: 161.97
+        existing_oil_and_other:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        open_field_pv_CN:
+        open_field_pv_DE:
+        open_field_pv_NL:
+        open_field_pv_PT:
+        open_field_pv_MY:
+        open_field_pv_ESP:
+        roof_mounted_pv_CN:
+        roof_mounted_pv_DE:
+        roof_mounted_pv_NL:
+        roof_mounted_pv_PT:
+        roof_mounted_pv_MY:
+        roof_mounted_pv_ESP:
+        wind_onshore_monopoly_CN:
+        wind_onshore_monopoly_IND:
+        wind_onshore_monopoly_DE:
+        wind_onshore_monopoly_PT:
+        wind_onshore_monopoly_FR:
+        wind_onshore_monopoly_ESP:
+        wind_onshore_monopoly_NDL:
+        wind_onshore_competing_CN:
+        wind_onshore_competing_IND:
+        wind_onshore_competing_DE:
+        wind_onshore_competing_PT:
+        wind_onshore_competing_FR:
+        wind_onshore_competing_NDL:
+        wind_onshore_competing_ESP:
+        wind_offshore_CN:
+        wind_offshore_IND:
+        wind_offshore_DE:
+        wind_offshore_PT:
+        wind_offshore_FR:
+        wind_offshore_NDL:
+        wind_offshore_ESP:
+        biomass_IT:
+        biomass_FR:
+        biomass_ESP:
+        biogas_to_electricity_supply_FR:
+        biogas_to_electricity_supply_CAN:
+        biogas_to_electricity_supply_USA:
+        biogas_to_electricity_supply_FSM:
+        biogas_to_electricity_supply_UK:
+        biogas_to_electricity_supply_BEL:
+        battery_CN:
+        battery_CZ:
+        battery_US:
+        battery_HU:
+        battery_PL:
+        battery_ESP:
+        pumped_hydro_CN:
+        pumped_hydro_ESP:
+      available_area: 24124.65581158549
+    ESP_6:
+      active: true
+      latitude: 41.79855126427764
+      longitude: 1.5288267961910351
+      techs:
+        existing_wind_onshore:
+          flow_cap_max: 1268.81
+          flow_cap_min: 1268.81
+        existing_pumped_hydro:
+          flow_cap_max: 534
+          flow_cap_min: 534
+        existing_chp:
+          flow_cap_max: 4005.56
+          flow_cap_min: 4005.56
+        existing_biomass:
+          flow_cap_max: 46.81
+          flow_cap_min: 46.81
+        existing_biogas_to_electricity_supply:
+          flow_cap_max: 15.42
+          flow_cap_min: 15.42
+        existing_hydro_run_of_river:
+          flow_cap_max: 290.27
+          flow_cap_min: 290.27
+        existing_hydro_reservoir:
+          flow_cap_max: 1263.79
+          flow_cap_min: 1263.79
+        existing_nuclear:
+          flow_cap_max: 3032.81
+          flow_cap_min: 3032.81
+        existing_coal:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_ccgt:
+          flow_cap_max: 1109.536
+          flow_cap_min: 0
+        existing_wte:
+          flow_cap_max: 55.79
+          flow_cap_min: 0
+        existing_rooftop_pv:
+          flow_cap_max: 10.0
+          flow_cap_min: 10.0
+        existing_open_field_pv:
+          flow_cap_max: 256.44
+          flow_cap_min: 256.44
+        existing_oil_and_other:
+          flow_cap_max: 3.8
+          flow_cap_min: 3.8
+        open_field_pv_CN:
+        open_field_pv_DE:
+        open_field_pv_NL:
+        open_field_pv_PT:
+        open_field_pv_MY:
+        open_field_pv_ESP:
+        roof_mounted_pv_CN:
+        roof_mounted_pv_DE:
+        roof_mounted_pv_NL:
+        roof_mounted_pv_PT:
+        roof_mounted_pv_MY:
+        roof_mounted_pv_ESP:
+        wind_onshore_monopoly_CN:
+        wind_onshore_monopoly_IND:
+        wind_onshore_monopoly_DE:
+        wind_onshore_monopoly_PT:
+        wind_onshore_monopoly_FR:
+        wind_onshore_monopoly_ESP:
+        wind_onshore_monopoly_NDL:
+        wind_onshore_competing_CN:
+        wind_onshore_competing_IND:
+        wind_onshore_competing_DE:
+        wind_onshore_competing_PT:
+        wind_onshore_competing_FR:
+        wind_onshore_competing_NDL:
+        wind_onshore_competing_ESP:
+        wind_offshore_CN:
+        wind_offshore_IND:
+        wind_offshore_DE:
+        wind_offshore_PT:
+        wind_offshore_FR:
+        wind_offshore_NDL:
+        wind_offshore_ESP:
+        biomass_IT:
+        biomass_FR:
+        biomass_ESP:
+        biogas_to_electricity_supply_FR:
+        biogas_to_electricity_supply_CAN:
+        biogas_to_electricity_supply_USA:
+        biogas_to_electricity_supply_FSM:
+        biogas_to_electricity_supply_UK:
+        biogas_to_electricity_supply_BEL:
+        battery_CN:
+        battery_CZ:
+        battery_US:
+        battery_HU:
+        battery_PL:
+        battery_ESP:
+        pumped_hydro_CN:
+        pumped_hydro_ESP:
+      available_area: 6798.149699896574
+    ESP_7:
+      active: true
+      latitude: 40.495174557032136
+      longitude: -3.717115741047385
+      techs:
+        existing_wind_onshore:
+          flow_cap_max: 3798.929
+          flow_cap_min: 3798.929
+        existing_pumped_hydro:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_chp:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_biomass:
+          flow_cap_max: 32.03
+          flow_cap_min: 32.03
+        existing_biogas_to_electricity_supply:
+          flow_cap_max: 10.55
+          flow_cap_min: 10.55
+        existing_hydro_run_of_river:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_hydro_reservoir:
+          flow_cap_max: 55.45
+          flow_cap_min: 55.45
+        existing_nuclear:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_coal:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_ccgt:
+          flow_cap_max: 224.64
+          flow_cap_min: 0
+        existing_wte:
+          flow_cap_max: 29.8
+          flow_cap_min: 0
+        existing_rooftop_pv:
+          flow_cap_max: 2.37
+          flow_cap_min: 2.37
+        existing_open_field_pv:
+          flow_cap_max: 60.89
+          flow_cap_min: 60.89
+        existing_oil_and_other:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        open_field_pv_CN:
+        open_field_pv_DE:
+        open_field_pv_NL:
+        open_field_pv_PT:
+        open_field_pv_MY:
+        open_field_pv_ESP:
+        roof_mounted_pv_CN:
+        roof_mounted_pv_DE:
+        roof_mounted_pv_NL:
+        roof_mounted_pv_PT:
+        roof_mounted_pv_MY:
+        roof_mounted_pv_ESP:
+        wind_onshore_monopoly_CN:
+        wind_onshore_monopoly_IND:
+        wind_onshore_monopoly_DE:
+        wind_onshore_monopoly_PT:
+        wind_onshore_monopoly_FR:
+        wind_onshore_monopoly_ESP:
+        wind_onshore_monopoly_NDL:
+        wind_onshore_competing_CN:
+        wind_onshore_competing_IND:
+        wind_onshore_competing_DE:
+        wind_onshore_competing_PT:
+        wind_onshore_competing_FR:
+        wind_onshore_competing_NDL:
+        wind_onshore_competing_ESP:
+        wind_offshore_CN:
+        wind_offshore_IND:
+        wind_offshore_DE:
+        wind_offshore_PT:
+        wind_offshore_FR:
+        wind_offshore_NDL:
+        wind_offshore_ESP:
+        biomass_IT:
+        biomass_FR:
+        biomass_ESP:
+        biogas_to_electricity_supply_FR:
+        biogas_to_electricity_supply_CAN:
+        biogas_to_electricity_supply_USA:
+        biogas_to_electricity_supply_FSM:
+        biogas_to_electricity_supply_UK:
+        biogas_to_electricity_supply_BEL:
+        battery_CN:
+        battery_CZ:
+        battery_US:
+        battery_HU:
+        battery_PL:
+        battery_ESP:
+        pumped_hydro_CN:
+        pumped_hydro_ESP:
+      available_area: 2918.9581568688154
+    ESP_8:
+      active: true
+      latitude: 39.244710072703214
+      longitude: -5.150578375759755
+      techs:
+        existing_wind_onshore:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_pumped_hydro:
+          flow_cap_max: 292
+          flow_cap_min: 292
+        existing_chp:
+          flow_cap_max: 800
+          flow_cap_min: 800
+        existing_biomass:
+          flow_cap_max: 76.81
+          flow_cap_min: 76.81
+        existing_biogas_to_electricity_supply:
+          flow_cap_max: 25.04
+          flow_cap_min: 25.04
+        existing_hydro_run_of_river:
+          flow_cap_max: 27.69
+          flow_cap_min: 27.69
+        existing_hydro_reservoir:
+          flow_cap_max: 2514.545
+          flow_cap_min: 2514.545
+        existing_nuclear:
+          flow_cap_max: 3020.54
+          flow_cap_min: 0
+        existing_coal:
+          flow_cap_max: 502.62
+          flow_cap_min: 0
+        existing_ccgt:
+          flow_cap_max: 425.66
+          flow_cap_min: 0
+        existing_wte:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_rooftop_pv:
+          flow_cap_max: 55.73
+          flow_cap_min: 55.73
+        existing_open_field_pv:
+          flow_cap_max: 1429.07
+          flow_cap_min: 1429.07
+        existing_oil_and_other:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        open_field_pv_CN:
+        open_field_pv_DE:
+        open_field_pv_NL:
+        open_field_pv_PT:
+        open_field_pv_MY:
+        open_field_pv_ESP:
+        roof_mounted_pv_CN:
+        roof_mounted_pv_DE:
+        roof_mounted_pv_NL:
+        roof_mounted_pv_PT:
+        roof_mounted_pv_MY:
+        roof_mounted_pv_ESP:
+        wind_onshore_monopoly_CN:
+        wind_onshore_monopoly_IND:
+        wind_onshore_monopoly_DE:
+        wind_onshore_monopoly_PT:
+        wind_onshore_monopoly_FR:
+        wind_onshore_monopoly_ESP:
+        wind_onshore_monopoly_NDL:
+        wind_onshore_competing_CN:
+        wind_onshore_competing_IND:
+        wind_onshore_competing_DE:
+        wind_onshore_competing_PT:
+        wind_onshore_competing_FR:
+        wind_onshore_competing_NDL:
+        wind_onshore_competing_ESP:
+        wind_offshore_CN:
+          flow_cap_max: 0.0
+        wind_offshore_IND:
+          flow_cap_max: 0.0
+        wind_offshore_DE:
+          flow_cap_max: 0.0
+        wind_offshore_PT:
+          flow_cap_max: 0.0
+        wind_offshore_FR:
+          flow_cap_max: 0.0
+        wind_offshore_NDL:
+          flow_cap_max: 0.0
+        wind_offshore_ESP:
+          flow_cap_max: 0.0
+        biomass_IT:
+        biomass_FR:
+        biomass_ESP:
+        biogas_to_electricity_supply_FR:
+        biogas_to_electricity_supply_CAN:
+        biogas_to_electricity_supply_USA:
+        biogas_to_electricity_supply_FSM:
+        biogas_to_electricity_supply_UK:
+        biogas_to_electricity_supply_BEL:
+        battery_CN:
+        battery_CZ:
+        battery_US:
+        battery_HU:
+        battery_PL:
+        battery_ESP:
+        pumped_hydro_CN:
+        pumped_hydro_ESP:
+      available_area: 51201.77004980296
+    ESP_9:
+      active: true
+      latitude: 37.18942134172542
+      longitude: -5.818649679284524
+      techs:
+        existing_wind_onshore:
+          flow_cap_max: 3327.181
+          flow_cap_min: 3327.181
+        existing_pumped_hydro:
+          flow_cap_max: 570
+          flow_cap_min: 570
+        existing_chp:
+          flow_cap_max: 6158.8
+          flow_cap_min: 6158.8
+        existing_biomass:
+          flow_cap_max: 303.51
+          flow_cap_min: 303.51
+        existing_biogas_to_electricity_supply:
+          flow_cap_max: 99.97
+          flow_cap_min: 99.97
+        existing_hydro_run_of_river:
+          flow_cap_max: 193.19
+          flow_cap_min: 193.19
+        existing_hydro_reservoir:
+          flow_cap_max: 272.22
+          flow_cap_min: 272.22
+        existing_nuclear:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        existing_coal:
+          flow_cap_max: 1989.4
+          flow_cap_min: 0
+        existing_ccgt:
+          flow_cap_max: 763.685
+          flow_cap_min: 0
+        existing_wte:
+          flow_cap_max: 63.23
+          flow_cap_min: 0
+        existing_rooftop_pv:
+          flow_cap_max: 32.82
+          flow_cap_min: 32.82
+        existing_open_field_pv:
+          flow_cap_max: 841.44
+          flow_cap_min: 841.44
+        existing_oil_and_other:
+          flow_cap_max: 0
+          flow_cap_min: 0
+        open_field_pv_CN:
+        open_field_pv_DE:
+        open_field_pv_NL:
+        open_field_pv_PT:
+        open_field_pv_MY:
+        open_field_pv_ESP:
+        roof_mounted_pv_CN:
+        roof_mounted_pv_DE:
+        roof_mounted_pv_NL:
+        roof_mounted_pv_PT:
+        roof_mounted_pv_MY:
+        roof_mounted_pv_ESP:
+        wind_onshore_monopoly_CN:
+        wind_onshore_monopoly_IND:
+        wind_onshore_monopoly_DE:
+        wind_onshore_monopoly_PT:
+        wind_onshore_monopoly_FR:
+        wind_onshore_monopoly_ESP:
+        wind_onshore_monopoly_NDL:
+        wind_onshore_competing_CN:
+        wind_onshore_competing_IND:
+        wind_onshore_competing_DE:
+        wind_onshore_competing_PT:
+        wind_onshore_competing_FR:
+        wind_onshore_competing_NDL:
+        wind_onshore_competing_ESP:
+        wind_offshore_CN:
+        wind_offshore_IND:
+        wind_offshore_DE:
+        wind_offshore_PT:
+        wind_offshore_FR:
+        wind_offshore_NDL:
+        wind_offshore_ESP:
+        biomass_IT:
+        biomass_FR:
+        biomass_ESP:
+        biogas_to_electricity_supply_FR:
+        biogas_to_electricity_supply_CAN:
+        biogas_to_electricity_supply_USA:
+        biogas_to_electricity_supply_FSM:
+        biogas_to_electricity_supply_UK:
+        biogas_to_electricity_supply_BEL:
+        battery_CN:
+        battery_CZ:
+        battery_US:
+        battery_HU:
+        battery_PL:
+        battery_ESP:
+        pumped_hydro_CN:
+        pumped_hydro_ESP:
+      available_area: 18623.683894775808
+    FRA_1:
+      active: true
+      latitude: 43.99798277570603
+      longitude: 0.198475920979156
+      techs:
+        el_import_FR:
+      available_area: 10.0
+    FRA_2:
+      active: true
+      latitude: 44.14479466678619
+      longitude: 2.5430929823876918
+      techs:
+        el_import_FR:
+    FRA_3:
+      active: true
+      latitude: 43.837394713381585
+      longitude: 5.676059379874186
+      techs:
+        el_import_FR:
+      available_area: 10.0
+    PRT_1:
+      active: true
+      latitude: 40.928538946933095
+      longitude: -7.7185325644071225
+      techs:
+        el_import_PT:
+      available_area: 10.0
+    PRT_2:
+      active: true
+      latitude: 38.56729057537551
+      longitude: -8.184437556208506
+      techs:
+        el_import_PT:
+      available_area: 10.0
+    MA:
+      active: true
+      latitude: 35.7
+      longitude: -5.411
+      techs:
+        el_import_MA:
+      available_area: 10.0
+    Trade_Markets:
+      active: true
+      latitude: 38.99794
+      longitude: 4.321921
+      techs:
+        coal_RUS:
+        coal_COL:
+        coal_AUS:
+        coal_USA:
+        coal_ITA:
+        uranium_UK:
+        uranium_USA:
+        natural_gas_liquid_USA:
+        natural_gas_liquid_RUS:
+        natural_gas_liquid_NGA:
+        natural_gas_liquid_DZA:
+        natural_gas_liquid_QAT:
+        natural_gas_DZA:
+        natural_gas_NOR:
+        natural_gas_PT:
+        natural_gas_DNK:
+        natural_gas_DEU:
+        oil_NGA:
+        oil_MEX:
+        oil_LBY:
+        oil_USA:
+        oil_SA:
+      available_area: 10.0
+  techs:
+    demand_tech:
+      active: true
+      base_tech: demand
+      name: Electricity demand
+      carrier_in: electricity
+    el_import_FR:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Electricity imports from France
+      lifetime: 25
+      cost_flow_in:
+        data:
+        - 22.3
+        - 57
+        - 0.0
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    el_import_PT:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Electricity imports from Portugal
+      lifetime: 25
+      cost_flow_in:
+        data:
+        - 0.28
+        - 389
+        - 0.0
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    el_import_MA:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Electricity imports from Portugal
+      lifetime: 25
+      cost_flow_in:
+        data:
+        - 35.0
+        - 693
+        - 0.0
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    coal_RUS:
+      active: true
+      base_tech: supply
+      carrier_out: coal
+      name: Coal imports from Russia
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 3.79
+        - 10.01
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    coal_COL:
+      active: true
+      base_tech: supply
+      carrier_out: coal
+      name: Coal imports from Colombia
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 3.53
+        - 9.34
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    coal_AUS:
+      active: true
+      base_tech: supply
+      carrier_out: coal
+      name: Coal imports from Australia
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 5.03
+        - 13.31
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    coal_USA:
+      active: true
+      base_tech: supply
+      carrier_out: coal
+      name: Coal imports from USA
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 6.22
+        - 16.44
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    coal_ITA:
+      active: true
+      base_tech: supply
+      carrier_out: coal
+      name: Coal imports from Italia
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 3.63
+        - 9.59
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    uranium_UK:
+      active: true
+      base_tech: supply
+      carrier_out: uranium
+      name: Uranium imports from UK
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 0.183
+        - 0.48
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    uranium_USA:
+      active: true
+      base_tech: supply
+      carrier_out: uranium
+      name: Uranium imports from USA
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 0.18
+        - 0.46
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    natural_gas_liquid_USA:
+      active: true
+      base_tech: supply
+      carrier_out: natural_gas
+      name: NG-Liquid imports from USA
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 8.97
+        - 23.72
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    natural_gas_liquid_RUS:
+      active: true
+      base_tech: supply
+      carrier_out: natural_gas
+      name: NG-Liquid imports from Russia
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 6.39
+        - 16.89
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    natural_gas_liquid_NGA:
+      active: true
+      base_tech: supply
+      carrier_out: natural_gas
+      name: NG-Liquid imports from Nigeria
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 5.12
+        - 13.54
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    natural_gas_liquid_DZA:
+      active: true
+      base_tech: supply
+      carrier_out: natural_gas
+      name: NG-Liquid imports from Algeria
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 4.32
+        - 12.62
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    natural_gas_liquid_QAT:
+      active: true
+      base_tech: supply
+      carrier_out: natural_gas
+      name: NG-Liquid imports from Qatar
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 4.772
+        - 12.62
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    natural_gas_DZA:
+      active: true
+      base_tech: supply
+      carrier_out: natural_gas
+      name: NG-gas imports from Algeria
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 3.635
+        - 9.61
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    natural_gas_NOR:
+      active: true
+      base_tech: supply
+      carrier_out: natural_gas
+      name: NG-gas imports from Norway
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 3.755
+        - 9.93
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    natural_gas_PT:
+      active: true
+      base_tech: supply
+      carrier_out: natural_gas
+      name: NG-gas imports from Portugal
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 9.447
+        - 24.97
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    natural_gas_DNK:
+      active: true
+      base_tech: supply
+      carrier_out: natural_gas
+      name: NG-gas imports from Denmark
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 9.04
+        - 23.9
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    natural_gas_DEU:
+      active: true
+      base_tech: supply
+      carrier_out: natural_gas
+      name: NG-gas imports from Germany
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 497.88
+        - 1316.5
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    natural_gas_BEL:
+      active: true
+      base_tech: supply
+      carrier_out: natural_gas
+      name: NG-gas imports from Belgium
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 11.87
+        - 31.4
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    oil_NGA:
+      active: true
+      base_tech: supply
+      carrier_out: oil
+      name: Oil imports from Nigeria
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 7.58
+        - 20.05
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    oil_MEX:
+      active: true
+      base_tech: supply
+      carrier_out: oil
+      name: Oil imports from Mexico
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 6.25
+        - 16.5
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    oil_LBY:
+      active: true
+      base_tech: supply
+      carrier_out: oil
+      name: Oil imports from Lby
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 7.37
+        - 19.5
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    oil_USA:
+      active: true
+      base_tech: supply
+      carrier_out: oil
+      name: Oil imports from SA
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 7.93
+        - 20.97
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    oil_SA:
+      active: true
+      base_tech: supply
+      carrier_out: oil
+      name: Oil imports from SA
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        - 0
+        - 0
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_flow_out:
+        data:
+        - 7.24
+        - 19.14
+        - 0.5
+        dims: costs
+        index:
+        - monetary
+        - co2
+        - vul
+    open_field_pv_CN:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Open field PV CN
+      lifetime: 40
+      source_unit: per_cap
+      area_use_per_flow_cap: 0.01226
+      cost_om_annual:
+        data:
+        - 9500
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 58801
+        - 155481
+        - 0.4
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    open_field_pv_DE:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Open field PV DE
+      lifetime: 40
+      source_unit: per_cap
+      area_use_per_flow_cap: 0.01226
+      cost_om_annual:
+        data:
+        - 9500
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 77489
+        - 204915
+        - 0.05
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    open_field_pv_NL:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Open field PV NL
+      lifetime: 40
+      source_unit: per_cap
+      area_use_per_flow_cap: 0.01226
+      cost_om_annual:
+        data:
+        - 9500
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 69593
+        - 184035
+        - 0.03
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    open_field_pv_PT:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Open field PV PT
+      lifetime: 40
+      source_unit: per_cap
+      area_use_per_flow_cap: 0.01226
+      cost_om_annual:
+        data:
+        - 9500
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 117709
+        - 311275
+        - 0.03
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    open_field_pv_MY:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Open field PV MY
+      lifetime: 40
+      source_unit: per_cap
+      area_use_per_flow_cap: 0.01226
+      cost_om_annual:
+        data:
+        - 9500
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 86668
+        - 229190
+        - 0.12
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    open_field_pv_ESP:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Open field PV ESP
+      lifetime: 40
+      source_unit: per_cap
+      area_use_per_flow_cap: 0.01226
+      cost_om_annual:
+        data:
+        - 9500
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 687476
+        - 263720
+        - 0.16
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    roof_mounted_pv_CN:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Roof mounted PV CN
+      lifetime: 40
+      source_unit: per_cap
+      area_use_per_flow_cap: 0.00457
+      cost_om_annual:
+        data:
+        - 7900
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 58801
+        - 155497
+        - 0.4
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    roof_mounted_pv_DE:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Roof mounted PV DE
+      lifetime: 40
+      source_unit: per_cap
+      area_use_per_flow_cap: 0.00457
+      cost_om_annual:
+        data:
+        - 7900
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 77489
+        - 204915
+        - 0.05
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    roof_mounted_pv_NL:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Roof mounted PV NL
+      lifetime: 40
+      source_unit: per_cap
+      area_use_per_flow_cap: 0.00457
+      cost_om_annual:
+        data:
+        - 7900
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 69593
+        - 184035
+        - 0.03
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    roof_mounted_pv_PT:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Roof mounted PV PT
+      lifetime: 40
+      source_unit: per_cap
+      area_use_per_flow_cap: 0.00457
+      cost_om_annual:
+        data:
+        - 7900
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 117709
+        - 311275
+        - 0.03
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    roof_mounted_pv_MY:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Roof mounted PV MY
+      lifetime: 40
+      source_unit: per_cap
+      area_use_per_flow_cap: 0.00457
+      cost_om_annual:
+        data:
+        - 7900
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 86668
+        - 229190
+        - 0.12
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    roof_mounted_pv_ESP:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Roof mounted PV - ESP
+      lifetime: 40
+      source_unit: per_cap
+      area_use_per_flow_cap: 0.00457
+      cost_om_annual:
+        data:
+        - 7900
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 687476
+        - 263720
+        - 0.16
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_onshore_monopoly_CN:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind CN
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 1.98
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 16662.66
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 49790
+        - 131655
+        - 0.19
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_onshore_monopoly_IND:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind IND
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 1.98
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 16662.66
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 50435
+        - 133358
+        - 0.15
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_onshore_monopoly_DE:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind DE
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 1.98
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 16662.66
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 17337
+        - 45843
+        - 0.15
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_onshore_monopoly_PT:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind PT
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 1.98
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 16662.66
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 11905
+        - 31480
+        - 0.07
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_onshore_monopoly_FR:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind FR
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 1.98
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 16662.66
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 13122
+        - 34697
+        - 0.02
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_onshore_monopoly_NDL:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind NDL
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 1.98
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 16662.66
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 181182
+        - 95055.3
+        - 0.02
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_onshore_monopoly_ESP:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind ESP
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 1.98
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 16662.66
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 6748
+        - 17843
+        - 0.16
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_onshore_competing_CN:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind onshore competing CN
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 1.98
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 16662.66
+        dims:
+        - costs
+        index:
+        - monetary
+      area_use_per_flow_cap: 12.5
+      cost_flow_cap:
+        data:
+        - 49790
+        - 131655
+        - 0.19
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_onshore_competing_IND:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind onshore competing IND
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 1.98
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 16662.66
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 50435
+        - 133358
+        - 0.15
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_onshore_competing_DE:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind onshore competing DE
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 1.98
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 16662.66
+        dims:
+        - costs
+        index:
+        - monetary
+      area_use_per_flow_cap: 12.5
+      cost_flow_cap:
+        data:
+        - 17337
+        - 45843
+        - 0.15
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_onshore_competing_PT:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind onshore competing PT
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 1.98
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 16662.66
+        dims:
+        - costs
+        index:
+        - monetary
+      area_use_per_flow_cap: 12.5
+      cost_flow_cap:
+        data:
+        - 11905
+        - 31480
+        - 0.07
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_onshore_competing_FR:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind onshore competing FR
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 1.98
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 16662.66
+        dims:
+        - costs
+        index:
+        - monetary
+      area_use_per_flow_cap: 12.5
+      cost_flow_cap:
+        data:
+        - 13122
+        - 34697
+        - 0.02
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_onshore_competing_NDL:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind onshore competing NDL
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 1.98
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 16662.66
+        dims:
+        - costs
+        index:
+        - monetary
+      area_use_per_flow_cap: 12.5
+      cost_flow_cap:
+        data:
+        - 6748
+        - 17843
+        - 0.02
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_onshore_competing_ESP:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind onshore competing ESP
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 1.98
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 16662.66
+        dims:
+        - costs
+        index:
+        - monetary
+      area_use_per_flow_cap: 12.5
+      cost_flow_cap:
+        data:
+        - 62013826
+        - 7043261
+        - 0.16
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_offshore_CN:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind CN
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 2.4
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 32493
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 49790
+        - 131655
+        - 0.19
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_offshore_IND:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind onffshore IND
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 2.4
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 32493
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 50435
+        - 133358
+        - 0.15
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_offshore_DE:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind DE
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 2.4
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 32493
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 17337
+        - 45843
+        - 0.15
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_offshore_PT:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind PT
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 2.4
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 32493
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 11905
+        - 31480
+        - 0.07
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_offshore_FR:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind FR
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 2.4
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 32493
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 13122
+        - 34697
+        - 0.02
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_offshore_NDL:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind offshore NDL
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 2.4
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 32493
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 6748
+        - 17843
+        - 0.02
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    wind_offshore_ESP:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      source_unit: per_cap
+      name: Wind offshore NDL
+      lifetime: 30
+      cost_om_prod:
+        data:
+        - 2.4
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 32493
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 62013826
+        - 7043261
+        - 0.16
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    biomass_IT:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      energy_ramping: 0.1
+      name: biomass turbine IT
+      lifetime: 25
+      interest_rate: 0.1
+      energy_eff: 0.28
+      cost_om_annual:
+        data:
+        - 148872.18
+        dims: costs
+        index:
+        - monetary
+      cost_om_con:
+        data:
+        - 1500
+        dims: costs
+        index:
+        - monetary
+      cost_om_prod:
+        data:
+        - 4.75
+        - 1330
+        dims: costs
+        index:
+        - monetary
+        - co2
+      flow_out_min_relative: 0.2
+      cost_flow_cap:
+        data:
+        - 4440
+        - 11739
+        - 0.5
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    biomass_FR:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      energy_ramping: 0.1
+      name: biomass turbine FR
+      lifetime: 25
+      interest_rate: 0.1
+      energy_eff: 0.28
+      cost_om_annual:
+        data:
+        - 148872.18
+        dims: costs
+        index:
+        - monetary
+      cost_om_con:
+        data:
+        - 1500
+        dims: costs
+        index:
+        - monetary
+      cost_om_prod:
+        data:
+        - 4.75
+        - 1330
+        dims: costs
+        index:
+        - monetary
+        - co2
+      flow_out_min_relative: 0.2
+      cost_flow_cap:
+        data:
+        - 147
+        - 388
+        - 0.5
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    biomass_ESP:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      energy_ramping: 0.1
+      name: biomass turbine ESP
+      lifetime: 25
+      interest_rate: 0.1
+      energy_eff: 0.28
+      cost_om_annual:
+        data:
+        - 148872.18
+        dims: costs
+        index:
+        - monetary
+      cost_om_con:
+        data:
+        - 1500
+        dims: costs
+        index:
+        - monetary
+      cost_om_prod:
+        data:
+        - 4.75
+        - 1330
+        dims: costs
+        index:
+        - monetary
+        - co2
+      flow_out_min_relative: 0.2
+      cost_flow_cap:
+        data:
+        - 2844
+        - 86
+        - 0.5
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    biogas_to_electricity_supply_FR:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Electricity from anaerobically digested biofuel-FR
+      energy_ramping: 0.1
+      flow_cap_per_storage_cap_max: 0.0033
+      storage_cap_max: .inf
+      lifetime: 25
+      energy_eff: 0.4
+      cost_om_prod:
+        data:
+        - 7.443609026
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 9889.3662774
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 2836190
+        - 7499390
+        - 0.5
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    biogas_to_electricity_supply_CAN:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Electricity from anaerobically digested biofuel-CAN
+      energy_ramping: 0.1
+      flow_cap_per_storage_cap_max: 0.0033
+      storage_cap_max: .inf
+      lifetime: 25
+      energy_eff: 0.4
+      cost_om_prod:
+        data:
+        - 7.443609026
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 9889.3662774
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 2444216
+        - 6462942
+        - 0.5
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    biogas_to_electricity_supply_USA:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Electricity from anaerobically digested biofuel-USA
+      energy_ramping: 0.1
+      flow_cap_per_storage_cap_max: 0.0033
+      storage_cap_max: .inf
+      lifetime: 25
+      energy_eff: 0.4
+      cost_om_prod:
+        data:
+        - 7.443609026
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 9889.3662774
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 1463007
+        - 3752886
+        - 0.5
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    biogas_to_electricity_supply_FSM:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Electricity from anaerobically digested biofuel-FSM
+      energy_ramping: 0.1
+      flow_cap_per_storage_cap_max: 0.0033
+      storage_cap_max: .inf
+      lifetime: 25
+      energy_eff: 0.4
+      cost_om_prod:
+        data:
+        - 7.443609026
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 9889.3662774
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 1419302
+        - 3752886
+        - 0.5
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    biogas_to_electricity_supply_UK:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Electricity from anaerobically digested biofuel-UK
+      energy_ramping: 0.1
+      flow_cap_per_storage_cap_max: 0.0033
+      storage_cap_max: .inf
+      lifetime: 25
+      energy_eff: 0.4
+      cost_om_prod:
+        data:
+        - 7.443609026
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 9889.3662774
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 1976764
+        - 5226915
+        - 0.5
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    biogas_to_electricity_supply_BEL:
+      active: true
+      base_tech: supply
+      carrier_out: electricity
+      name: Electricity from anaerobically digested biofuel-BEL
+      energy_ramping: 0.1
+      flow_cap_per_storage_cap_max: 0.0033
+      storage_cap_max: .inf
+      lifetime: 25
+      energy_eff: 0.4
+      cost_om_prod:
+        data:
+        - 7.443609026
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 9889.3662774
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 95855
+        - 253458
+        - 0.5
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    ESP_1_ESP_2_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_1
+      link_to: ESP_2
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 7200
+      flow_cap_min: 7200
+    ESP_1_PRT_1_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_1
+      link_to: PRT_1
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 1200
+      flow_cap_min: 1200
+    ESP_10_ESP_11_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_10
+      link_to: ESP_11
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 3200
+      flow_cap_min: 3200
+    ESP_2_ESP_3_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_2
+      link_to: ESP_3
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 19100
+      flow_cap_min: 19100
+    ESP_2_ESP_4_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_2
+      link_to: ESP_4
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 2400
+      flow_cap_min: 2400
+    ESP_2_ESP_8_techs_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_2
+      link_to: ESP_8
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 2400
+      flow_cap_min: 2400
+    ESP_2_PRT_1_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_2
+      link_to: PRT_1
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 950
+      flow_cap_min: 950
+    ESP_3_ESP_11_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_3
+      link_to: ESP_11
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 2700
+      flow_cap_min: 2700
+    ESP_3_ESP_4_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_3
+      link_to: ESP_4
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 7100
+      flow_cap_min: 7100
+    ESP_3_ESP_5_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_3
+      link_to: ESP_5
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 3900
+      flow_cap_min: 3900
+    ESP_3_ESP_7_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_2
+      link_to: ESP_4
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 10200
+      flow_cap_min: 10200
+    ESP_4_ESP_5_techs_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_4
+      link_to: ESP_5
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 900
+      flow_cap_min: 900
+    ESP_5_ESP_11_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_5
+      link_to: ESP_11
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 5700
+      flow_cap_min: 5700
+    ESP_5_ESP_6_techs_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_5
+      link_to: ESP_6
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 7000
+      flow_cap_min: 7000
+    ESP_6_ESP_11_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_6
+      link_to: ESP_11
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 1100
+      flow_cap_min: 1100
+    ESP_7_ESP_11_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_7
+      link_to: ESP_11
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 2100
+      flow_cap_min: 2100
+    ESP_7_ESP_8_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_7
+      link_to: ESP_8
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 8700
+      flow_cap_min: 8700
+    ESP_8_ESP_10_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_8
+      link_to: ESP_10
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 4000
+      flow_cap_min: 4000
+    ESP_8_ESP_9_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_8
+      link_to: ESP_9
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 6100
+      flow_cap_min: 6100
+    ESP_8_PRT_2_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_8
+      link_to: PRT_2
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 900
+      flow_cap_min: 900
+    ESP_9_ESP_10_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_9
+      link_to: ESP_10
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 8100
+      flow_cap_min: 8100
+    ESP_9_PRT_2_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_9
+      link_to: PRT_2
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 500
+      flow_cap_min: 500
+    PRT_1_PRT_2_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: PRT_1
+      link_to: PRT_2
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+    ESP_4_FRA_1_dc_underground_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: DC power transmission
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.99
+      link_from: ESP_4
+      link_to: FRA_1
+      cost_flow_cap:
+        data:
+        - 755000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 3500
+      flow_cap_min: 3500
+    ESP_4_FRA_1_dc_subsea_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: DC power transmission
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.99
+      link_from: ESP_4
+      link_to: FRA_1
+      cost_flow_cap:
+        data:
+        - 942000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 2000
+      flow_cap_min: 2000
+    ESP_4_FRA_1_ac_ohl_mountain_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_4
+      link_to: FRA_1
+      cost_flow_cap:
+        data:
+        - 516000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 1000
+      flow_cap_min: 1000
+    ESP_5_FRA_1_ac_ohl_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: High voltage AC transmission line
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.95
+      link_from: ESP_5
+      link_to: FRA_1
+      cost_flow_cap:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 100
+      flow_cap_min: 100
+    ESP_6_FRA_2_dc_underground_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: DC power transmission
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.99
+      link_from: ESP_6
+      link_to: FRA_2
+      cost_flow_cap:
+        data:
+        - 755000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 800
+      flow_cap_min: 800
+    ESP_6_FRA_2_ac_ohl_mountain_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: DC power transmission
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.99
+      link_from: ESP_6
+      link_to: FRA_2
+      cost_flow_cap:
+        data:
+        - 516000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 1000
+      flow_cap_min: 1000
+    ESP_6_FRA_3_dc_subsea_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: DC power transmission
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.99
+      link_from: ESP_6
+      link_to: FRA_3
+      one_way: true
+      cost_flow_cap:
+        data:
+        - 942000
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_max: 700
+      flow_cap_min: 700
+    ESP_9_MA_dc_subsea_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: electricity
+      name: DC power transmission
+      carrier_in: electricity
+      lifetime: 60
+      flow_out_eff_per_distance: 0.99
+      link_from: ESP_6
+      link_to: FRA_3
+      one_way: true
+      cost_flow_cap:
+        data:
+        - 942000
+        dims:
+        - costs
+        index:
+        - monetary
+    Trade_Markets_ESP_1_natural_gas_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: natural_gas
+      name: Natural gas transmission link_from international trade
+      carrier_in: natural_gas
+      lifetime: 60
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_out_eff: 1.0
+      cost_om_annual:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      link_from: Trade_Markets
+      link_to: ESP_1
+    Trade_Markets_ESP_1_coal_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: coal
+      name: Coal transmission link_from international trade
+      carrier_in: coal
+      lifetime: 60
+      flow_out_eff: 1.0
+      link_from: Trade_Markets
+      link_to: ESP_1
+    Trade_Markets_ESP_2_natural_gas_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: natural_gas
+      name: Natural gas transmission link_from international trade
+      carrier_in: natural_gas
+      lifetime: 60
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_out_eff: 1.0
+      cost_om_annual:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      link_from: Trade_Markets
+      link_to: ESP_2
+    Trade_Markets_ESP_2_coal_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: coal
+      name: Coal transmission link_from international trade
+      carrier_in: coal
+      lifetime: 60
+      flow_out_eff: 1.0
+      link_from: Trade_Markets
+      link_to: ESP_2
+    Trade_Markets_ESP_2_uranium_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: uranium
+      name: Uranium transmission link_from international trade
+      carrier_in: uranium
+      lifetime: 60
+      flow_out_eff: 1.0
+      link_from: Trade_Markets
+      link_to: ESP_2
+    Trade_Markets_ESP_2_oil_fuel_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: oil
+      name: Oil transmission link_from international trade
+      carrier_in: oil
+      lifetime: 60
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_out_eff: 1.0
+      cost_om_annual:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      link_from: Trade_Markets
+      link_to: ESP_2
+    Trade_Markets_ESP_3_natural_gas_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: natural_gas
+      name: Natural gas transmission link_from international trade
+      carrier_in: natural_gas
+      lifetime: 60
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_out_eff: 1.0
+      cost_om_annual:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      link_from: Trade_Markets
+      link_to: ESP_3
+    Trade_Markets_ESP_4_natural_gas_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: natural_gas
+      name: Natural gas transmission link_from international trade
+      carrier_in: natural_gas
+      lifetime: 60
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_out_eff: 1.0
+      cost_om_annual:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      link_from: Trade_Markets
+      link_to: ESP_4
+    Trade_Markets_ESP_5_natural_gas_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: natural_gas
+      name: Natural gas transmission link_from international trade
+      carrier_in: natural_gas
+      lifetime: 60
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_out_eff: 1.0
+      cost_om_annual:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      link_from: Trade_Markets
+      link_to: ESP_5
+    Trade_Markets_ESP_5_coal_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: coal
+      name: Coal transmission link_from international trade
+      carrier_in: coal
+      lifetime: 60
+      flow_out_eff: 1.0
+      link_from: Trade_Markets
+      link_to: ESP_5
+    Trade_Markets_ESP_6_natural_gas_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: natural_gas
+      name: Natural gas transmission link_from international trade
+      carrier_in: natural_gas
+      lifetime: 60
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_out_eff: 1.0
+      cost_om_annual:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      link_from: Trade_Markets
+      link_to: ESP_6
+    Trade_Markets_ESP_6_uranium_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: uranium
+      name: Uranium transmission link_from international trade
+      carrier_in: uranium
+      lifetime: 60
+      flow_out_eff: 1.0
+      link_from: Trade_Markets
+      link_to: ESP_6
+    Trade_Markets_ESP_6_oil_fuel_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: oil
+      name: Oil transmission link_from international trade
+      carrier_in: oil
+      lifetime: 60
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_out_eff: 1.0
+      cost_om_annual:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      link_from: Trade_Markets
+      link_to: ESP_6
+    Trade_Markets_ESP_7_natural_gas_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: natural_gas
+      name: Natural gas transmission link_from international trade
+      carrier_in: natural_gas
+      lifetime: 60
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_out_eff: 1.0
+      cost_om_annual:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      link_from: Trade_Markets
+      link_to: ESP_7
+    Trade_Markets_ESP_7_coal_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: coal
+      name: Coal transmission link_from international trade
+      carrier_in: coal
+      lifetime: 60
+      flow_out_eff: 1.0
+      link_from: Trade_Markets
+      link_to: ESP_7
+    Trade_Markets_ESP_7_uranium_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: uranium
+      name: Uranium transmission link_from international trade
+      carrier_in: uranium
+      lifetime: 60
+      flow_out_eff: 1.0
+      link_from: Trade_Markets
+      link_to: ESP_7
+    Trade_Markets_ESP_8_uranium_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: uranium
+      name: Uranium transmission link_from international trade
+      carrier_in: uranium
+      lifetime: 60
+      flow_out_eff: 1.0
+      link_from: Trade_Markets
+      link_to: ESP_8
+    Trade_Markets_ESP_9_natural_gas_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: natural_gas
+      name: Natural gas transmission link_from international trade
+      carrier_in: natural_gas
+      lifetime: 60
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_out_eff: 1.0
+      cost_om_annual:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      link_from: Trade_Markets
+      link_to: ESP_9
+    Trade_Markets_ESP_9_coal_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: coal
+      name: Coal transmission link_from international trade
+      carrier_in: coal
+      lifetime: 60
+      flow_out_eff: 1.0
+      link_from: Trade_Markets
+      link_to: ESP_9
+    Trade_Markets_ESP_10_natural_gas_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: natural_gas
+      name: Natural gas transmission link_from international trade
+      carrier_in: natural_gas
+      lifetime: 60
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_out_eff: 1.0
+      cost_om_annual:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      link_from: Trade_Markets
+      link_to: ESP_10
+    Trade_Markets_ESP_11_natural_gas_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: natural_gas
+      name: Natural gas transmission link_from international trade
+      carrier_in: natural_gas
+      lifetime: 60
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_out_eff: 1.0
+      cost_om_annual:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      link_from: Trade_Markets
+      link_to: ESP_11
+    Trade_Markets_ESP_11_coal_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: coal
+      name: Coal transmission link_from international trade
+      carrier_in: coal
+      lifetime: 60
+      flow_out_eff: 1.0
+      link_from: Trade_Markets
+      link_to: ESP_11
+    Trade_Markets_ESP_11_uranium_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: uranium
+      name: Uranium transmission link_from international trade
+      carrier_in: uranium
+      lifetime: 60
+      flow_out_eff: 1.0
+      link_from: Trade_Markets
+      link_to: ESP_11
+    Trade_Markets_ESP_11_oil_fuel_transmission:
+      active: true
+      base_tech: transmission
+      carrier_out: oil
+      name: Oil transmission link_from international trade
+      carrier_in: oil
+      lifetime: 60
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_out_eff: 1.0
+      cost_om_annual:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      link_from: Trade_Markets
+      link_to: ESP_11
+    pumped_hydro_CN:
+      active: true
+      base_tech: storage
+      name: Pumped hydro turbine CN.
+      carrier_in: electricity
+      carrier_out: electricity
+      lifetime: 50
+      energy_eff: 0.75
+      cost_flow_cap:
+        data:
+        - 5222
+        - 13808
+        - 0.5
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vulnerability
+      cost_om_prod:
+        data:
+        - 5.0
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 8507
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_interest_rate:
+        data:
+        - 0.05
+        - 0.035
+        - 0.1
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vulnerability
+    pumped_hydro_ESP:
+      active: true
+      base_tech: supply
+      name: pumped SPAIN.
+      carrier_out: electricity
+      source_unit: per_cap
+      lifetime: 60
+      cost_flow_cap:
+        data:
+        - 139025
+        - 4180
+        - 0.5
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+      cost_om_prod:
+        data:
+        - 5
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 101100
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_interest_rate:
+        data:
+        - 0.05
+        - 0.035
+        - 0.1
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    battery_CN:
+      active: true
+      base_tech: storage
+      carrier_out: electricity
+      name: Battery CN
+      flow_in_eff: 0.9273
+      carrier_in: electricity
+      storage_cap_max: .inf
+      lifetime: 25
+      cost_storage_cap:
+        data:
+        - 900
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_min: 0
+      energy_eff: 0.95
+      cost_om_prod:
+        data:
+        - 1.94
+        dims:
+        - costs
+        index:
+        - monetary
+      storage_loss: 0
+      flow_out_eff: 0.9273
+      cost_om_annual:
+        data:
+        - 8100
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 14708
+        - 38889
+        - 0.53
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    battery_CZ:
+      active: true
+      base_tech: storage
+      carrier_out: electricity
+      name: Battery CZ
+      flow_in_eff: 0.9273
+      carrier_in: electricity
+      storage_cap_max: .inf
+      lifetime: 25
+      cost_storage_cap:
+        data:
+        - 900
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_min: 0
+      energy_eff: 0.95
+      cost_om_prod:
+        data:
+        - 1.94
+        dims:
+        - costs
+        index:
+        - monetary
+      storage_loss: 0
+      flow_out_eff: 0.9273
+      cost_om_annual:
+        data:
+        - 8100
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 17265
+        - 45652
+        - 0.1
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    battery_US:
+      active: true
+      base_tech: storage
+      carrier_out: electricity
+      name: Battery US
+      flow_in_eff: 0.9273
+      carrier_in: electricity
+      storage_cap_max: .inf
+      lifetime: 25
+      cost_storage_cap:
+        data:
+        - 900
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_min: 0
+      energy_eff: 0.95
+      cost_om_prod:
+        data:
+        - 1.94
+        dims:
+        - costs
+        index:
+        - monetary
+      storage_loss: 0
+      flow_out_eff: 0.9273
+      cost_om_annual:
+        data:
+        - 8100
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 15608
+        - 41272
+        - 0.08
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    battery_HU:
+      active: true
+      base_tech: storage
+      carrier_out: electricity
+      name: Battery PT
+      flow_in_eff: 0.9273
+      carrier_in: electricity
+      storage_cap_max: .inf
+      lifetime: 25
+      cost_storage_cap:
+        data:
+        - 900
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_min: 0
+      energy_eff: 0.95
+      cost_om_prod:
+        data:
+        - 1.94
+        dims:
+        - costs
+        index:
+        - monetary
+      storage_loss: 0
+      flow_out_eff: 0.9273
+      cost_om_annual:
+        data:
+        - 8100
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 19201
+        - 50772
+        - 0.07
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    battery_PL:
+      active: true
+      base_tech: storage
+      carrier_out: electricity
+      name: Battery CN
+      flow_in_eff: 0.9273
+      carrier_in: electricity
+      storage_cap_max: .inf
+      lifetime: 25
+      cost_storage_cap:
+        data:
+        - 900
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_min: 0
+      energy_eff: 0.95
+      cost_om_prod:
+        data:
+        - 1.94
+        dims:
+        - costs
+        index:
+        - monetary
+      storage_loss: 0
+      flow_out_eff: 0.9273
+      cost_om_annual:
+        data:
+        - 8100
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 17559
+        - 46430
+        - 0.06
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    battery_ESP:
+      active: true
+      base_tech: storage
+      carrier_out: electricity
+      name: Battery ESP
+      flow_in_eff: 0.9273
+      carrier_in: electricity
+      storage_cap_max: .inf
+      lifetime: 25
+      cost_storage_cap:
+        data:
+        - 900
+        dims:
+        - costs
+        index:
+        - monetary
+      flow_cap_min: 0
+      energy_eff: 0.95
+      cost_om_prod:
+        data:
+        - 1.94
+        dims:
+        - costs
+        index:
+        - monetary
+      storage_loss: 0
+      flow_out_eff: 0.9273
+      cost_om_annual:
+        data:
+        - 8100
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_cap:
+        data:
+        - 50886
+        - 5779
+        - 0.03
+        dims:
+        - costs
+        index:
+        - monetary
+        - co2
+        - vul
+    existing_wind_onshore:
+      active: true
+      base_tech: supply
+      name: existing onshore wind
+      carrier_out: electricity
+      source_unit: per_cap
+      lifetime: 27
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 16397
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_prod:
+        data:
+        - 2.11
+        dims:
+        - costs
+        index:
+        - monetary
+    existing_oil_and_other:
+      active: true
+      base_tech: conversion
+      name: Other existing fossil fuels plant
+      carrier_out: electricity
+      carrier_in: oil
+      energy_eff: 0.35
+      energy_ramping: 0.05
+      lifetime: 35
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 2000
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_prod:
+        data:
+        - 0.3
+        dims:
+        - costs
+        index:
+        - monetary
+    existing_pumped_hydro:
+      active: true
+      base_tech: storage
+      name: Existing Pumped hydro pure
+      carrier_in: electricity
+      carrier_out: electricity
+      energy_eff: 0.75
+      lifetime: 50
+      flow_cap_per_storage_cap_max: 0.167
+      storage_cap_max: .inf
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 8507
+        dims:
+        - costs
+        index:
+        - monetary
+    existing_chp:
+      active: true
+      base_tech: conversion
+      name: Combined heat and power
+      carrier_in: natural_gas
+      carrier_out: electricity
+      energy_ramping: 0.2
+      energy_eff: 0.47
+      lifetime: 25
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 10633.72
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_prod:
+        data:
+        - 5.74
+        dims:
+        - costs
+        index:
+        - monetary
+    existing_biomass:
+      active: true
+      base_tech: supply
+      name: Existing Solid biomass power plant
+      carrier_out: electricity
+      energy_eff: 0.28
+      lifetime: 25
+      energy_ramping: 0.1
+      source_use_max: .inf
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 163759.4
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_prod:
+        data:
+        - 4.77
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_con:
+        data:
+        - 150
+        dims:
+        - costs
+        index:
+        - monetary
+    existing_biogas_to_electricity_supply:
+      active: true
+      base_tech: supply
+      name: Existing Electricity from anaerobically digested biofuel
+      include_storage: true
+      carrier_out: electricity
+      energy_eff: 0.4
+      lifetime: 25
+      storage_cap_max: .inf
+      flow_cap_per_storage_cap_max: 0.0033
+      energy_ramping: 0.1
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 10367.884
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_prod:
+        data:
+        - 7.976
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_con:
+        data:
+        - 63.45908437668863
+        dims:
+        - costs
+        index:
+        - monetary
+    existing_hydro_run_of_river:
+      active: true
+      base_tech: supply
+      name: Existing Run of river hydro electricity
+      carrier_out: electricity
+      source_unit: per_cap
+      lifetime: 60
+      energy_ramping: 0.1
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_flow_out:
+        data:
+        - 5
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 150000
+        dims:
+        - costs
+        index:
+        - monetary
+    existing_hydro_reservoir:
+      active: true
+      base_tech: supply
+      name: Existing Hydro electricity with a reservoir.
+      include_storage: true
+      carrier_out: electricity
+      source_unit: per_cap
+      lifetime: 60
+      flow_cap_per_storage_cap_equals: 0.15
+      cost_flow_out:
+        data:
+        - 5.0
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 175000
+        dims:
+        - costs
+        index:
+        - monetary
+    existing_nuclear:
+      active: true
+      base_tech: conversion
+      name: Nuclear power
+      carrier_in: uranium
+      carrier_out: electricity
+      energy_eff: 0.4
+      lifetime: 50
+      capacity_factor_min: 0.75
+      capacity_factor_max: 0.8
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 76116
+        dims:
+        - costs
+        index:
+        - monetary
+    existing_coal:
+      active: true
+      base_tech: conversion
+      name: Coal power plant
+      carrier_in: coal
+      carrier_out: electricity
+      energy_eff: 0.37
+      energy_ramping: 0.6
+      lifetime: 30
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_prod:
+        data:
+        - 3.21
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 34324.4
+        dims:
+        - costs
+        index:
+        - monetary
+    existing_ccgt:
+      active: true
+      base_tech: conversion
+      name: Combined cycle gas turbine
+      carrier_out: electricity
+      carrier_in: natural_gas
+      energy_eff: 0.58
+      lifetime: 25
+      energy_ramping: 0.15
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 31156.82064
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_prod:
+        data:
+        - 4.678839959
+        dims:
+        - costs
+        index:
+        - monetary
+    existing_wte:
+      active: true
+      base_tech: supply
+      name: Waste-to-energy plant
+      carrier_out: electricity
+      energy_eff: 0.23
+      lifetime: 24
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_prod:
+        data:
+        - 26.9
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 278603.7
+        dims:
+        - costs
+        index:
+        - monetary
+    existing_rooftop_pv:
+      active: true
+      base_tech: supply
+      name: existing rooftop PV
+      carrier_out: electricity
+      lifetime: 30
+      source_unit: per_cap
+      area_use_per_flow_cap: 0.00636
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 16700
+        dims:
+        - costs
+        index:
+        - monetary
+    existing_open_field_pv:
+      active: true
+      base_tech: supply
+      name: existing open field PV
+      carrier_out: electricity
+      lifetime: 25
+      area_use_per_flow_cap: 0.02025
+      source_unit: per_cap
+      cost_flow_cap:
+        data:
+        - 0
+        dims:
+        - costs
+        index:
+        - monetary
+      cost_om_annual:
+        data:
+        - 13600
+        dims:
+        - costs
+        index:
+        - monetary
+config:
+  init:
+    name: Calliope Spain
+    calliope_version: 0.7.0
+    broadcast_param_data: false
+    time_subset:
+    - '2018-01-01'
+    - '2018-01-10'
+    time_resample: 3H
+    time_cluster:
+    time_format: ISO8601
+    distance_unit: km
+    base_math: plan
+    extra_math:
+      my_extra_math_math: math.yaml
+  build:
+    mode: base
+    extra_math:
+    - my_extra_math_math
+    backend: gurobi
+    ensure_feasibility: false
+    objective: min_cost_optimisation
+    pre_validate_math_strings: true
+    operate:
+      window: 24h
+      horizon: 48h
+      use_cap_results: false
+  solve:
+    save_logs:
+    solver_io: lp
+    solver_options:
+      Method: 2
+      Threads: 6
+      Crossover: 0
+      BarConvTol: 0.0001
+      OptimalityTol: 0.0001
+      FeasibilityTol: 0.001
+      NumericFocus: 2
+    solver: gurobi
+    zero_threshold: 1e-07
+    shadow_prices: []
+    spores:
+      scoring_algorithm: integer
+      number: 3
+      save_per_spore_path:
+      use_latest_results: false
+      tracking_parameter:
+      score_threshold_factor: 0.1
+math:
+  init:
+    plan:
+      constraints:
+        flow_capacity_per_storage_capacity_min:
+          description: Set the lower bound of storage flow capacity relative to 
+            its storage capacity.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          where: storage_cap AND flow_cap_per_storage_cap_min
+          equations:
+          - expression: flow_cap >= storage_cap * flow_cap_per_storage_cap_min
+        flow_capacity_per_storage_capacity_max:
+          description: Set the upper bound of storage flow capacity relative to 
+            its storage capacity.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          where: storage_cap AND flow_cap_per_storage_cap_max
+          equations:
+          - expression: flow_cap <= storage_cap * flow_cap_per_storage_cap_max
+        source_capacity_equals_flow_capacity:
+          description: Set a `supply` technology's flow capacity to equal its 
+            source capacity.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          where: source_cap AND source_cap_equals_flow_cap==True
+          equations:
+          - expression: source_cap == flow_cap
+        force_zero_area_use:
+          description: Set a technology's area use to zero if its flow capacity 
+            upper bound is zero.
+          foreach:
+          - nodes
+          - techs
+          where: area_use AND flow_cap_max==0
+          equations:
+          - expression: area_use == 0
+        area_use_per_flow_capacity:
+          description: Set a fixed relationship between a technology's flow 
+            capacity and its area use.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          where: area_use AND area_use_per_flow_cap
+          equations:
+          - expression: area_use == flow_cap * area_use_per_flow_cap
+        area_use_capacity_per_loc:
+          description: Set an upper bound on the total area that all 
+            technologies with `area_use` can occupy at a given node.
+          foreach:
+          - nodes
+          where: area_use AND available_area
+          equations:
+          - expression: sum(area_use, over=techs) <= available_area
+        flow_capacity_systemwide_max:
+          description: Set an upper bound on flow capacity of a technology 
+            across all nodes in which the technology exists.
+          foreach:
+          - techs
+          - carriers
+          where: flow_cap_max_systemwide
+          equations:
+          - expression: sum(flow_cap, over=nodes) <= flow_cap_max_systemwide
+        flow_capacity_systemwide_min:
+          description: Set a lower bound on flow capacity of a technology across
+            all nodes in which the technology exists.
+          foreach:
+          - techs
+          - carriers
+          where: flow_cap_min_systemwide
+          equations:
+          - expression: sum(flow_cap, over=nodes) >= flow_cap_min_systemwide
+        balance_conversion:
+          description: Fix the relationship between a `conversion` technology's 
+            outflow and consumption.
+          foreach:
+          - nodes
+          - techs
+          - timesteps
+          where: base_tech==conversion AND NOT include_storage==true
+          equations:
+          - expression: sum(flow_out_inc_eff, over=carriers) == 
+              sum(flow_in_inc_eff, over=carriers)
+        flow_out_max:
+          description: Set the upper bound of a technology's outflow.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: carrier_out
+          equations:
+          - expression: flow_out <= flow_cap * timestep_resolution * 
+              flow_out_parasitic_eff
+        flow_out_min:
+          description: Set the lower bound of a technology's outflow.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: flow_out_min_relative
+          equations:
+          - expression: flow_out >= flow_cap * timestep_resolution * 
+              flow_out_min_relative
+        flow_in_max:
+          description: Set the upper bound of a technology's inflow.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: carrier_in
+          equations:
+          - expression: flow_in <= flow_cap * timestep_resolution
+        source_max:
+          description: Set the upper bound of a `supply` technology's source 
+            consumption.
+          foreach:
+          - nodes
+          - techs
+          - timesteps
+          where: source_cap
+          equations:
+          - expression: source_use <= timestep_resolution * source_cap
+        storage_max:
+          description: Set the upper bound of the amount of carrier a technology
+            can store.
+          foreach:
+          - nodes
+          - techs
+          - timesteps
+          where: storage
+          equations:
+          - expression: storage <= storage_cap
+        storage_discharge_depth_limit:
+          description: Set the lower bound of the stored carrier a technology 
+            must keep in reserve at all times.
+          foreach:
+          - nodes
+          - techs
+          - timesteps
+          where: storage AND storage_discharge_depth
+          equations:
+          - expression: storage - storage_discharge_depth * storage_cap >= 0
+        system_balance:
+          description: Set the global carrier balance of the optimisation 
+            problem by fixing the total production of a given carrier to equal 
+            the total consumption of that carrier at every node in every 
+            timestep.
+          foreach:
+          - nodes
+          - carriers
+          - timesteps
+          equations:
+          - expression: sum(flow_out, over=techs) - sum(flow_in, over=techs) - 
+              $flow_export + $unmet_demand_and_unused_supply == 0
+          sub_expressions:
+            flow_export:
+            - where: any(carrier_export, over=techs)
+              expression: sum(flow_export, over=techs)
+            - where: NOT any(carrier_export, over=techs)
+              expression: '0'
+            unmet_demand_and_unused_supply:
+            - where: config.ensure_feasibility==True
+              expression: unmet_demand + unused_supply
+            - where: NOT config.ensure_feasibility==True
+              expression: '0'
+        balance_demand:
+          description: Set the upper bound on, or a fixed total of, that a 
+            demand technology must dump to its sink in each timestep.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: base_tech==demand
+          equations:
+          - where: sink_use_equals
+            expression: flow_in_inc_eff == sink_use_equals * $sink_scaler
+          - where: NOT sink_use_equals AND sink_use_max
+            expression: flow_in_inc_eff <= sink_use_max * $sink_scaler
+          sub_expressions:
+            sink_scaler:
+            - where: sink_unit==per_area
+              expression: area_use
+            - where: sink_unit==per_cap
+              expression: sum(flow_cap, over=carriers)
+            - where: sink_unit==absolute
+              expression: '1'
+        balance_demand_min_use:
+          description: Set the lower bound on the quantity of flow a `demand` 
+            technology must dump to its sink in each timestep.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: sink_use_min AND NOT sink_use_equals AND base_tech==demand
+          equations:
+          - expression: flow_in_inc_eff >= sink_use_min * $sink_scaler
+          sub_expressions:
+            sink_scaler:
+            - where: sink_unit==per_area
+              expression: area_use
+            - where: sink_unit==per_cap
+              expression: sum(flow_cap, over=carriers)
+            - where: sink_unit==absolute
+              expression: '1'
+        balance_supply_no_storage:
+          description: Fix the outflow of a `supply` technology to its 
+            consumption of the available source.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: base_tech==supply AND NOT include_storage==True
+          equations:
+          - expression: flow_out_inc_eff == source_use * source_eff
+        balance_supply_with_storage:
+          description: Fix the outflow of a `supply` technology to its 
+            consumption of the available source, with a storage buffer to 
+            temporally offset the outflow from source consumption.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: storage AND base_tech==supply
+          equations:
+          - expression: storage == $storage_previous_step + source_use * 
+              source_eff - flow_out_inc_eff
+          sub_expressions:
+            storage_previous_step:
+            - where: timesteps==get_val_at_index(timesteps=0) AND NOT 
+                cyclic_storage==True
+              expression: storage_initial * storage_cap
+            - where: "(\n  (timesteps==get_val_at_index(timesteps=0) AND cyclic_storage==True)\n\
+                \  OR NOT timesteps==get_val_at_index(timesteps=0)\n) AND NOT cluster_first_timestep==True"
+              expression: (1 - storage_loss) ** roll(timestep_resolution, 
+                timesteps=1) * roll(storage, timesteps=1)
+            - where: cluster_first_timestep==True AND NOT 
+                (timesteps==get_val_at_index(timesteps=0) AND NOT 
+                cyclic_storage==True)
+              expression: (1 - storage_loss) ** 
+                select_from_lookup_arrays(timestep_resolution, 
+                timesteps=lookup_cluster_last_timestep) * 
+                select_from_lookup_arrays(storage, 
+                timesteps=lookup_cluster_last_timestep)
+        source_availability_supply:
+          description: Set the upper bound on, or a fixed total of, a `supply` 
+            technology's ability to consume its available resource.
+          foreach:
+          - nodes
+          - techs
+          - timesteps
+          where: source_use AND (source_use_equals OR source_use_max)
+          equations:
+          - where: source_use_equals
+            expression: source_use == source_use_equals * $source_scaler
+          - where: NOT source_use_equals AND source_use_max
+            expression: source_use <= source_use_max * $source_scaler
+          sub_expressions:
+            source_scaler:
+            - where: source_unit==per_area
+              expression: area_use
+            - where: source_unit==per_cap
+              expression: sum(flow_cap, over=carriers)
+            - where: source_unit==absolute
+              expression: '1'
+        balance_supply_min_use:
+          description: Set the lower bound on the quantity of its source a 
+            `supply` technology must use in each timestep.
+          foreach:
+          - nodes
+          - techs
+          - timesteps
+          where: source_use_min AND NOT source_use_equals AND base_tech==supply
+          equations:
+          - expression: source_use >= source_use_min * $source_scaler
+          sub_expressions:
+            source_scaler:
+            - where: source_unit==per_area
+              expression: area_use
+            - where: source_unit==per_cap
+              expression: sum(flow_cap, over=carriers)
+            - where: source_unit==absolute
+              expression: '1'
+        balance_storage:
+          description: Fix the quantity of carrier stored in a `storage` 
+            technology at the end of each timestep based on the net flow of 
+            carrier charged and discharged and the quantity of carrier stored at
+            the start of the timestep.
+          foreach:
+          - nodes
+          - techs
+          - timesteps
+          where: (include_storage==true or base_tech==storage) AND NOT 
+            (base_tech==supply OR base_tech==demand)
+          equations:
+          - expression: "storage == $storage_previous_step -\n  sum(flow_out_inc_eff,
+              over=carriers) + sum(flow_in_inc_eff, over=carriers)"
+          sub_expressions:
+            storage_previous_step:
+            - where: timesteps==get_val_at_index(timesteps=0) AND NOT 
+                cyclic_storage==True
+              expression: storage_initial * storage_cap
+            - where: "(\n  (timesteps==get_val_at_index(timesteps=0) AND cyclic_storage==True)\n\
+                \  OR NOT timesteps==get_val_at_index(timesteps=0)\n) AND NOT cluster_first_timestep==True"
+              expression: (1 - storage_loss) ** roll(timestep_resolution, 
+                timesteps=1) * roll(storage, timesteps=1)
+            - where: cluster_first_timestep==True AND NOT 
+                (timesteps==get_val_at_index(timesteps=0) AND NOT 
+                cyclic_storage==True)
+              expression: (1 - storage_loss) ** 
+                select_from_lookup_arrays(timestep_resolution, 
+                timesteps=lookup_cluster_last_timestep) * 
+                select_from_lookup_arrays(storage, 
+                timesteps=lookup_cluster_last_timestep)
+        set_storage_initial:
+          description: Fix the relationship between carrier stored in a 
+            `storage` technology at the start and end of the whole model period.
+          foreach:
+          - nodes
+          - techs
+          where: storage AND storage_initial AND cyclic_storage==True
+          equations:
+          - expression: "storage[timesteps=$final_step] * (\n  (1 - storage_loss)
+              ** timestep_resolution[timesteps=$final_step]\n) == storage_initial
+              * storage_cap"
+          slices:
+            final_step:
+            - expression: get_val_at_index(timesteps=-1)
+          active: true
+        balance_transmission:
+          description: Fix the relationship between between carrier flowing into
+            and out of a `transmission` link in each timestep.
+          foreach:
+          - techs
+          - timesteps
+          where: base_tech==transmission
+          equations:
+          - expression: sum(flow_out_inc_eff, over=[nodes, carriers]) == 
+              sum(flow_in_inc_eff, over=[nodes, carriers])
+        symmetric_transmission:
+          description: Fix the flow capacity of two `transmission` technologies 
+            representing the same link in the system.
+          foreach:
+          - nodes
+          - techs
+          where: base_tech==transmission
+          equations:
+          - expression: sum(flow_cap, over=carriers) == link_flow_cap
+        export_balance:
+          description: Set the lower bound of a technology's outflow to a 
+            technology's carrier export, for any technologies that can export 
+            carriers out of the system.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: flow_export
+          equations:
+          - expression: flow_out >= flow_export
+        ramping_up:
+          description: Set the upper bound on a technology's ability to ramp 
+            outflow up beyond a certain percentage compared to the previous 
+            timestep.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: flow_ramping AND NOT timesteps==get_val_at_index(timesteps=0)
+          equations:
+          - expression: $flow - roll($flow, timesteps=1) <= flow_ramping * 
+              flow_cap
+          sub_expressions:
+            flow:
+            - where: carrier_out AND NOT carrier_in
+              expression: flow_out / timestep_resolution
+            - where: carrier_in AND NOT carrier_out
+              expression: flow_in / timestep_resolution
+            - where: carrier_in AND carrier_out
+              expression: (flow_out - flow_in) / timestep_resolution
+        ramping_down:
+          description: Set the upper bound on a technology's ability to ramp 
+            outflow down beyond a certain percentage compared to the previous 
+            timestep.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: flow_ramping AND NOT timesteps==get_val_at_index(timesteps=0)
+          equations:
+          - expression: -1 * flow_ramping * flow_cap <= $flow - roll($flow, 
+              timesteps=1)
+          sub_expressions:
+            flow:
+            - where: carrier_out AND NOT carrier_in
+              expression: flow_out / timestep_resolution
+            - where: carrier_in AND NOT carrier_out
+              expression: flow_in / timestep_resolution
+            - where: carrier_in AND carrier_out
+              expression: (flow_out - flow_in) / timestep_resolution
+      variables:
+        flow_cap:
+          title: Technology flow (a.k.a. nominal) capacity
+          description: A technology's flow capacity, also known as its nominal 
+            or nameplate capacity.
+          default: 0
+          unit: power
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          bounds:
+            min: flow_cap_min
+            max: flow_cap_max
+        link_flow_cap:
+          title: Link flow capacity
+          description: A transmission technology's flow capacity, also known as 
+            its nominal or nameplate capacity.
+          default: 0
+          unit: power
+          foreach:
+          - techs
+          where: base_tech==transmission
+          bounds:
+            min: 0
+            max: .inf
+        flow_out:
+          title: Carrier outflow
+          description: The outflow of a technology per timestep, also known as 
+            the flow discharged (from `storage` technologies) or the flow 
+            received (by `transmission` technologies) on a link.
+          default: 0
+          unit: energy
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: carrier_out
+          bounds:
+            min: 0
+            max: .inf
+        flow_in:
+          title: Carrier inflow
+          description: The inflow to a technology per timestep, also known as 
+            the flow consumed (by `storage` technologies) or the flow sent (by 
+            `transmission` technologies) on a link.
+          default: 0
+          unit: energy
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: carrier_in
+          bounds:
+            min: 0
+            max: .inf
+        flow_export:
+          title: Carrier export
+          description: The flow of a carrier exported outside the system 
+            boundaries by a technology per timestep.
+          default: 0
+          unit: energy
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: carrier_export
+          bounds:
+            min: export_min
+            max: export_max
+        area_use:
+          title: Area utilisation
+          description: The area in space utilised directly (e.g., solar PV 
+            panels) or indirectly (e.g., biofuel crops) by a technology.
+          default: 0
+          unit: area
+          foreach:
+          - nodes
+          - techs
+          where: (area_use_min OR area_use_max OR area_use_per_flow_cap OR 
+            sink_unit==per_area OR source_unit==per_area)
+          bounds:
+            min: area_use_min
+            max: area_use_max
+        source_use:
+          title: Source flow use
+          description: The carrier flow consumed from outside the system 
+            boundaries by a `supply` technology.
+          default: 0
+          unit: energy
+          foreach:
+          - nodes
+          - techs
+          - timesteps
+          where: base_tech==supply
+          bounds:
+            min: 0
+            max: .inf
+        source_cap:
+          title: Source flow capacity
+          description: The upper limit on a flow that can be consumed from 
+            outside the system boundaries by a `supply` technology in each 
+            timestep.
+          default: 0
+          unit: power
+          foreach:
+          - nodes
+          - techs
+          where: base_tech==supply
+          bounds:
+            min: source_cap_min
+            max: source_cap_max
+        storage_cap:
+          title: Stored carrier capacity
+          description: The upper limit on a carrier that can be stored by a 
+            technology in any timestep.
+          default: 0
+          unit: energy
+          foreach:
+          - nodes
+          - techs
+          where: include_storage==True OR base_tech==storage
+          domain: real
+          bounds:
+            min: storage_cap_min
+            max: storage_cap_max
+          active: true
+        storage:
+          title: Stored carrier
+          description: The carrier stored by a `storage` technology in each 
+            timestep.
+          default: 0
+          unit: energy
+          foreach:
+          - nodes
+          - techs
+          - timesteps
+          where: include_storage==True OR base_tech==storage
+          bounds:
+            min: 0
+            max: .inf
+        unmet_demand:
+          title: Unmet demand (load shedding)
+          description: Virtual source of carrier flow to ensure model 
+            feasibility. This should only be considered a debugging rather than 
+            a modelling tool as it may distort the model in other ways due to 
+            the large impact it has on the objective function value. When 
+            present in a model in which it has been requested, it indicates an 
+            inability for technologies in the model to reach a sufficient 
+            combined supply capacity to meet demand.
+          default: 0
+          unit: energy
+          foreach:
+          - nodes
+          - carriers
+          - timesteps
+          where: config.ensure_feasibility==True
+          bounds:
+            min: 0
+            max: .inf
+        unused_supply:
+          title: Unused supply (curtailment)
+          description: 'Virtual sink of carrier flow to ensure model feasibility.
+            This should only be considered a debugging rather than a modelling tool
+            as it may distort the model in other ways due to the large impact it has
+            on the objective function value. In model results, the negation of this
+            variable is combined with `unmet_demand` and presented as only one variable:
+            `unmet_demand`. When present in a model in which it has been requested,
+            it indicates an inability for technologies in the model to reach a sufficient
+            combined consumption capacity to meet required outflow (e.g. from renewables
+            without the possibility of curtailment).'
+          default: 0
+          unit: energy
+          foreach:
+          - nodes
+          - carriers
+          - timesteps
+          where: config.ensure_feasibility==True
+          bounds:
+            min: -.inf
+            max: 0
+      objectives:
+        min_cost_optimisation:
+          description: Minimise the total cost of installing and operating all 
+            technologies in the system. If multiple cost classes are present 
+            (e.g., monetary and co2 emissions), the weighted sum of total costs 
+            is minimised. Cost class weights can be defined in the indexed 
+            parameter `objective_cost_weights`.
+          equations:
+          - where: any(cost, over=[nodes, techs, costs])
+            expression: "sum(\n  sum(cost, over=[nodes, techs])\n  * objective_cost_weights,\n\
+              \  over=costs\n) + $unmet_demand"
+          - where: NOT any(cost, over=[nodes, techs, costs])
+            expression: $unmet_demand
+          sub_expressions:
+            unmet_demand:
+            - where: config.ensure_feasibility==True
+              expression: "sum(\n  sum(unmet_demand - unused_supply, over=[carriers,
+                nodes])\n  * timestep_weights,\n  over=timesteps\n) * bigM"
+            - where: NOT config.ensure_feasibility==True
+              expression: '0'
+          sense: minimise
+          active: true
+      global_expressions:
+        flow_out_inc_eff:
+          title: Carrier outflow including losses
+          description: Outflows after taking efficiency losses into account.
+          default: 0
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: flow_out
+          equations:
+          - where: base_tech==transmission
+            expression: "flow_out / (\n  flow_out_eff * flow_out_parasitic_eff *\n\
+              \  flow_out_eff_per_distance ** distance\n)"
+          - where: NOT base_tech==transmission
+            expression: flow_out / (flow_out_eff * flow_out_parasitic_eff)
+        flow_in_inc_eff:
+          title: Carrier inflow including losses
+          description: Inflows after taking efficiency losses into account.
+          default: 0
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: flow_in
+          equations:
+          - where: base_tech==transmission
+            expression: flow_in * flow_in_eff * flow_in_eff_per_distance ** 
+              distance
+          - where: NOT base_tech==transmission
+            expression: flow_in * flow_in_eff
+        cost_operation_variable:
+          title: Variable operating costs
+          description: The operating costs per timestep of a technology.
+          default: 0
+          unit: cost_per_time
+          foreach:
+          - nodes
+          - techs
+          - costs
+          - timesteps
+          where: cost_export OR cost_flow_in OR cost_flow_out
+          equations:
+          - expression: timestep_weights * ($cost_export + $cost_flow_out + 
+              $cost_flow_in)
+          sub_expressions:
+            cost_export:
+            - where: any(carrier_export, over=carriers) AND any(cost_export, 
+                over=carriers)
+              expression: sum(cost_export * flow_export, over=carriers)
+            - where: NOT (any(carrier_export, over=carriers) AND 
+                any(cost_export, over=carriers))
+              expression: '0'
+            cost_flow_in:
+            - where: base_tech==supply
+              expression: cost_flow_in * source_use
+            - where: NOT base_tech==supply
+              expression: sum(cost_flow_in * flow_in, over=carriers)
+            cost_flow_out:
+            - expression: sum(cost_flow_out * flow_out, over=carriers)
+        cost_investment_flow_cap:
+          title: Flow capacity investment costs
+          description: The investment costs associated with the nominal/rated 
+            capacity of a technology.
+          default: 0
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - costs
+          where: flow_cap AND (cost_flow_cap OR cost_flow_cap_per_distance)
+          equations:
+          - expression: $cost_sum * flow_cap
+          sub_expressions:
+            cost_sum:
+            - where: base_tech==transmission
+              expression: (cost_flow_cap + cost_flow_cap_per_distance * 
+                distance) * 0.5
+            - where: NOT base_tech==transmission
+              expression: cost_flow_cap
+        cost_investment_storage_cap:
+          title: Storage capacity investment costs
+          description: The investment costs associated with the storage capacity
+            of a technology.
+          default: 0
+          foreach:
+          - nodes
+          - techs
+          - costs
+          where: cost_storage_cap AND storage_cap
+          equations:
+          - expression: cost_storage_cap * storage_cap
+        cost_investment_source_cap:
+          title: Source flow capacity investment costs
+          description: The investment costs associated with the source 
+            consumption capacity of a technology.
+          default: 0
+          foreach:
+          - nodes
+          - techs
+          - costs
+          where: cost_source_cap AND source_cap
+          equations:
+          - expression: cost_source_cap * source_cap
+        cost_investment_area_use:
+          title: Area utilisation investment costs
+          description: The investment costs associated with the area used by a 
+            technology.
+          default: 0
+          foreach:
+          - nodes
+          - techs
+          - costs
+          where: cost_area_use AND area_use
+          equations:
+          - expression: cost_area_use * area_use
+        cost_investment:
+          title: Total investment costs
+          description: The installation costs of a technology, including those 
+            linked to the nameplate capacity, land use, and storage size.
+          default: 0
+          unit: cost
+          foreach:
+          - nodes
+          - techs
+          - costs
+          where: cost_investment_flow_cap OR cost_investment_storage_cap OR 
+            cost_investment_source_cap OR cost_investment_area_use
+          equations:
+          - expression: sum(default_if_empty(cost_investment_flow_cap, 0), 
+              over=carriers) + default_if_empty(cost_investment_storage_cap, 0) 
+              + default_if_empty(cost_investment_source_cap, 0) + 
+              default_if_empty(cost_investment_area_use, 0)
+        cost_investment_annualised:
+          title: Equivalent annual investment costs
+          description: An annuity factor has been applied to scale lifetime 
+            investment costs to annual values that can be directly compared to 
+            operation costs. If the modeling period is not equal to one full 
+            year, this will be scaled accordingly.
+          default: 0
+          unit: cost
+          foreach:
+          - nodes
+          - techs
+          - costs
+          where: cost_investment
+          equations:
+          - expression: $annualisation_weight * $depreciation_rate * 
+              cost_investment
+          sub_expressions:
+            annualisation_weight:
+            - expression: sum(timestep_resolution * timestep_weights, 
+                over=timesteps) / 8760
+            depreciation_rate:
+            - where: cost_depreciation_rate
+              expression: cost_depreciation_rate
+            - where: NOT cost_depreciation_rate AND cost_interest_rate==0
+              expression: 1 / lifetime
+            - where: NOT cost_depreciation_rate AND cost_interest_rate>0
+              expression: (cost_interest_rate * ((1 + cost_interest_rate) ** 
+                lifetime)) / (((1 + cost_interest_rate) ** lifetime) - 1)
+        cost_operation_fixed:
+          title: Total fixed operation costs
+          description: The fixed, annual operation costs of a technology, which 
+            are calculated relative to investment costs. If the modeling period 
+            is not equal to one full year, this will be scaled accordingly.
+          default: 0
+          unit: cost
+          foreach:
+          - nodes
+          - techs
+          - costs
+          where: cost_investment AND (cost_om_annual OR 
+            cost_om_annual_investment_fraction)
+          equations:
+          - expression: "$annualisation_weight * (\n  sum(cost_om_annual * flow_cap,
+              over=carriers) +\n  cost_investment * cost_om_annual_investment_fraction\n\
+              )"
+          sub_expressions:
+            annualisation_weight:
+            - expression: sum(timestep_resolution * timestep_weights, 
+                over=timesteps) / 8760
+        cost:
+          title: Total costs
+          description: The total annualised costs of a technology, including 
+            installation and operation costs.
+          default: 0
+          unit: cost
+          foreach:
+          - nodes
+          - techs
+          - costs
+          where: cost_investment_annualised OR cost_operation_variable OR 
+            cost_operation_fixed
+          equations:
+          - expression: default_if_empty(cost_investment_annualised, 0) + 
+              $cost_operation_sum + default_if_empty(cost_operation_fixed, 0)
+          sub_expressions:
+            cost_operation_sum:
+            - where: cost_operation_variable
+              expression: sum(cost_operation_variable, over=timesteps)
+            - where: NOT cost_operation_variable
+              expression: '0'
+          active: true
+      piecewise_constraints: {}
+    operate:
+      constraints:
+        flow_capacity_per_storage_capacity_min:
+          active: false
+        flow_capacity_per_storage_capacity_max:
+          active: false
+        source_capacity_equals_flow_capacity:
+          active: false
+        force_zero_area_use:
+          active: false
+        area_use_per_flow_capacity:
+          active: false
+        area_use_capacity_per_loc:
+          active: false
+        flow_capacity_systemwide_max:
+          active: false
+        flow_capacity_systemwide_min:
+          active: false
+        symmetric_transmission:
+          active: false
+        storage_capacity_units_milp:
+          active: false
+        flow_capacity_units_milp:
+          active: false
+        unit_capacity_max_systemwide_milp:
+          active: false
+        unit_capacity_min_systemwide_milp:
+          active: false
+      variables:
+        flow_cap:
+          active: false
+        area_use:
+          active: false
+        source_cap:
+          active: false
+        storage_cap:
+          active: false
+        purchased_units:
+          active: false
+      global_expressions:
+        cost_investment:
+          active: false
+        cost_investment_annualised:
+          active: false
+        cost_investment_flow_cap:
+          active: false
+        cost_investment_storage_cap:
+          active: false
+        cost_investment_source_cap:
+          active: false
+        cost_investment_area_use:
+          active: false
+        cost_investment_purchase:
+          active: false
+        cost:
+          where: cost_operation_variable
+          equations:
+          - expression: sum(cost_operation_variable, over=timesteps)
+    spores:
+      constraints:
+        total_system_cost_max:
+          description: "Limit total system cost in SPORES mode. Applies a maximum
+            relaxation to the system cost compared to the least-cost objective function
+            value.\n"
+          equations:
+          - where: any(cost, over=[nodes, techs, costs])
+            expression: "sum(\n  sum(cost, over=[nodes, techs])\n  * objective_cost_weights,\n\
+              \  over=costs\n) + $unmet_demand <= spores_baseline_cost * (1 + spores_slack)"
+          - where: NOT any(cost, over=[nodes, techs, costs])
+            expression: $unmet_demand <= spores_baseline_cost * (1 + 
+              spores_slack)
+          sub_expressions:
+            unmet_demand:
+            - where: config.ensure_feasibility==True
+              expression: "sum(\n  sum(unmet_demand - unused_supply, over=[carriers,
+                nodes])\n  * timestep_weights,\n  over=timesteps\n) * bigM"
+            - where: NOT config.ensure_feasibility==True
+              expression: '0'
+      global_expressions:
+        spores_score_cumulative:
+          description: Track SPORES score to include in the spanish_model 
+            results
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          equations:
+          - expression: spores_score
+        spores_baseline_cost_tracked:
+          description: Track SPORES baseline cost to include in the 
+            spanish_model results
+          equations:
+          - expression: spores_baseline_cost
+      objectives:
+        min_spores:
+          description: SPORES score minimisation objective, activated for all 
+            iterations after the baseline optimisation. The SPORES scores are 
+            applied to flow capacity for each technology at each node.
+          equations:
+          - expression: sum(flow_cap * spores_score, over=[nodes, techs, 
+              carriers]) + $unmet_demand
+          sub_expressions:
+            unmet_demand:
+            - where: config.ensure_feasibility==True
+              expression: "sum(\n  sum(unmet_demand - unused_supply, over=[carriers,
+                nodes])\n  * timestep_weights,\n  over=timesteps\n) * bigM"
+            - where: NOT config.ensure_feasibility==True
+              expression: '0'
+          sense: minimise
+    storage_inter_cluster:
+      constraints:
+        storage_max:
+          active: false
+        balance_supply_with_storage:
+          sub_expressions:
+            storage_previous_step:
+            - where: timesteps==get_val_at_index(timesteps=0) AND NOT 
+                cyclic_storage==True
+              expression: storage_initial * storage_cap
+            - where: "(\n  (timesteps==get_val_at_index(timesteps=0) AND cyclic_storage==True)\n\
+                \  OR NOT timesteps==get_val_at_index(timesteps=0)\n) AND NOT lookup_cluster_last_timestep"
+              expression: (1 - storage_loss) ** roll(timestep_resolution, 
+                timesteps=1) * roll(storage, timesteps=1)
+            - where: lookup_cluster_last_timestep AND NOT 
+                (timesteps==get_val_at_index(timesteps=0) AND NOT 
+                cyclic_storage==True)
+              expression: '0'
+        balance_storage:
+          sub_expressions:
+            storage_previous_step:
+            - where: timesteps==get_val_at_index(timesteps=0) AND NOT 
+                cyclic_storage==True
+              expression: storage_initial * storage_cap
+            - where: "(\n  (timesteps==get_val_at_index(timesteps=0) AND cyclic_storage==True)\n\
+                \  OR NOT timesteps==get_val_at_index(timesteps=0)\n) AND NOT lookup_cluster_last_timestep"
+              expression: (1 - storage_loss) ** roll(timestep_resolution, 
+                timesteps=1) * roll(storage, timesteps=1)
+            - where: lookup_cluster_last_timestep AND NOT 
+                (timesteps==get_val_at_index(timesteps=0) AND NOT 
+                cyclic_storage==True)
+              expression: '0'
+        set_storage_initial:
+          equations:
+          - expression: storage_inter_cluster[datesteps=$final_step] * ((1 - 
+              storage_loss) ** 24) == storage_initial * storage_cap
+          slices:
+            final_step:
+            - expression: get_val_at_index(datesteps=-1)
+        storage_intra_max:
+          description: Set the upper bound of a `storage` technology's stored 
+            carrier within a clustered day
+          foreach:
+          - nodes
+          - techs
+          - timesteps
+          where: include_storage==True OR base_tech==storage
+          equations:
+          - expression: storage <= storage_intra_cluster_max[clusters=$cluster]
+          slices:
+            cluster:
+            - expression: timestep_cluster
+        storage_intra_min:
+          description: Set the lower bound of a `storage` technology's stored 
+            carrier within a clustered day
+          foreach:
+          - nodes
+          - techs
+          - timesteps
+          where: include_storage==True OR base_tech==storage
+          equations:
+          - expression: storage >= storage_intra_cluster_min[clusters=$cluster]
+          slices:
+            cluster:
+            - expression: timestep_cluster
+        storage_inter_max:
+          description: Set the upper bound of a `storage` technology's stored 
+            carrier across all days in the timeseries.
+          foreach:
+          - nodes
+          - techs
+          - datesteps
+          where: include_storage==True OR base_tech==storage
+          equations:
+          - expression: storage_inter_cluster + 
+              storage_intra_cluster_max[clusters=$cluster] <= storage_cap
+          slices:
+            cluster:
+            - expression: lookup_datestep_cluster
+        storage_inter_min:
+          description: Set the lower bound of a `storage` technology's stored 
+            carrier across all days in the timeseries.
+          foreach:
+          - nodes
+          - techs
+          - datesteps
+          where: include_storage==True OR base_tech==storage
+          equations:
+          - expression: storage_inter_cluster * ((1 - storage_loss) ** 24) + 
+              storage_intra_cluster_min[clusters=$cluster] >= 0
+          slices:
+            cluster:
+            - expression: lookup_datestep_cluster
+        balance_storage_inter:
+          description: Fix the relationship between one day and the next of a 
+            `storage` technology's available stored carrier, according to the 
+            previous day's representative storage fluctuations and the excess 
+            stored carrier available from all days up to this day.
+          foreach:
+          - nodes
+          - techs
+          - datesteps
+          where: include_storage==True OR base_tech==storage
+          equations:
+          - expression: storage_inter_cluster == $storage_previous_step + 
+              $storage_intra
+          sub_expressions:
+            storage_previous_step:
+            - where: datesteps==get_val_at_index(datesteps=0) AND NOT 
+                cyclic_storage==True
+              expression: storage_initial
+            - where: (datesteps==get_val_at_index(datesteps=0) AND 
+                cyclic_storage==True) OR NOT 
+                datesteps==get_val_at_index(datesteps=0)
+              expression: ((1 - storage_loss) ** 24) * 
+                roll(storage_inter_cluster, datesteps=1)
+            storage_intra:
+            - where: datesteps==get_val_at_index(datesteps=0) AND NOT 
+                cyclic_storage==True
+              expression: '0'
+            - where: NOT (datesteps==get_val_at_index(datesteps=0) AND NOT 
+                cyclic_storage==True)
+              expression: storage[timesteps=$final_step]
+          slices:
+            final_step:
+            - expression: roll(lookup_datestep_last_cluster_timestep, 
+                datesteps=1)
+      variables:
+        storage:
+          title: Virtual stored carrier
+          description: The virtual carrier stored by any technology using 
+            storage in each timestep of a clustered day. Stored carrier can be 
+            negative so long as it does not go below the carrier stored in 
+            `storage_inter_cluster`. Only together with `storage_inter_cluster` 
+            does this variable's values gain physical significance.
+          unit: energy
+          bounds:
+            min: -.inf
+        storage_inter_cluster:
+          title: Virtual inter-cluster stored carrier
+          description: The virtual carrier stored by any technology using 
+            storage between days of the entire timeseries. Only together with 
+            `storage` does this variable's values gain physical significance.
+          foreach:
+          - nodes
+          - techs
+          - datesteps
+          where: include_storage==True OR base_tech==storage
+          bounds:
+            min: 0
+            max: .inf
+        storage_intra_cluster_max:
+          title: Virtual maximum intra-cluster stored carrier
+          description: Virtual variable to limit the maximum value of `storage` 
+            in a given representative day.
+          unit: energy
+          foreach:
+          - nodes
+          - techs
+          - clusters
+          where: include_storage==True OR base_tech==storage
+          bounds:
+            min: -.inf
+            max: .inf
+        storage_intra_cluster_min:
+          title: Virtual minimum intra-cluster stored carrier
+          description: Virtual variable to limit the minimum value of `storage` 
+            in a given representative day.
+          unit: energy
+          foreach:
+          - nodes
+          - techs
+          - clusters
+          where: include_storage==True OR base_tech==storage
+          bounds:
+            min: -.inf
+            max: .inf
+    milp:
+      variables:
+        purchased_units:
+          title: Number of purchased units
+          description: "Integer number of a technology that has been purchased, for
+            any technology set to require integer capacity purchasing. This is used
+            to allow installation of fixed capacity units of technologies ( if `flow_cap_max`
+            == `flow_cap_min`) and/or to set a fixed cost for a technology, irrespective
+            of its installed capacity. On top of a fixed technology cost, a continuous
+            cost for the quantity of installed capacity can still be applied.\nSince
+            technology capacity is no longer a continuous decision variable, it is
+            possible for these technologies to have a lower bound set on outflow/consumption
+            which will only be enforced in those timesteps that the technology is
+            operating. Otherwise, the same lower bound forces the technology to produce/consume
+            that minimum amount of carrier in *every* timestep."
+          default: 0
+          unit: integer
+          foreach:
+          - nodes
+          - techs
+          where: cap_method==integer
+          domain: integer
+          bounds:
+            min: purchased_units_min
+            max: purchased_units_max
+        operating_units:
+          title: Number of operating units
+          description: Integer number of a technology that is operating in each 
+            timestep, for any technology set to require integer capacity 
+            purchasing.
+          default: 0
+          unit: integer
+          foreach:
+          - nodes
+          - techs
+          - timesteps
+          where: integer_dispatch==True AND cap_method==integer
+          domain: integer
+          bounds:
+            min: 0
+            max: .inf
+        async_flow_switch:
+          title: Asynchronous carrier flow switch
+          description: Binary switch to force asynchronous outflow/consumption 
+            of technologies with both `flow_in` and `flow_out` defined. This 
+            ensures that a technology with carrier flow efficiencies < 100% 
+            cannot produce and consume a flow simultaneously to remove unwanted 
+            carrier from the system.
+          default: 0
+          unit: integer
+          foreach:
+          - nodes
+          - techs
+          - timesteps
+          where: force_async_flow==True
+          domain: integer
+          bounds:
+            min: 0
+            max: 1
+        available_flow_cap:
+          title: Available carrier flow capacity
+          description: Flow capacity that will be set to zero if the technology 
+            is not operating in a given timestep and will be set to the value of
+            the decision variable `flow_cap` otherwise. This is useful when you 
+            want to set a minimum flow capacity for any technology investment, 
+            but also want to allow the model to decide the capacity. It is 
+            expected to only be used when `purchased_units_max == 1`, i.e., the 
+            `purchased_units` decision variable is binary. If 
+            `purchased_units_max > 1`, you may get strange results and should 
+            instead use the less flexible `flow_cap_per_unit`.
+          default: 0
+          unit: power
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: integer_dispatch==True AND flow_cap_max AND NOT 
+            flow_cap_per_unit
+          bounds:
+            min: 0
+            max: .inf
+        flow_cap:
+          description: A technology's flow capacity, also known as its nominal 
+            or nameplate capacity. Minimum is set to 0 and handled in a distinct
+            constraint to handle the integer purchase variable.
+          bounds:
+            min: 0
+        area_use:
+          description: The area in space utilised directly (e.g., solar PV 
+            panels) or indirectly (e.g., biofuel crops) by a technology. Minimum
+            is set to 0 and handled in a distinct constraint to handle the 
+            integer purchase variable.
+          bounds:
+            min: 0
+        source_cap:
+          description: The upper limit on a flow that can be consumed from 
+            outside the system boundaries by a `supply` technology in each 
+            timestep. Minimum is set to 0 and handled in a distinct constraint 
+            to handle the integer purchase variable.
+          bounds:
+            min: 0
+        storage_cap:
+          description: The upper limit on a carrier that can be stored by a 
+            technology in any timestep. Minimum is set to 0 and handled in a 
+            distinct constraint to handle the integer purchase variable.
+          bounds:
+            min: 0
+      constraints:
+        unit_commitment_milp:
+          description: Set the upper bound of the number of integer units of 
+            technology that can exist, for any technology using integer units to
+            define its capacity.
+          foreach:
+          - nodes
+          - techs
+          - timesteps
+          where: operating_units AND purchased_units
+          equations:
+          - expression: operating_units <= purchased_units
+        flow_out_max_milp:
+          description: Set the upper bound of a technology's ability to produce 
+            carriers, for any technology using integer units to define its 
+            capacity.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: flow_out AND operating_units AND flow_cap_per_unit
+          equations:
+          - expression: flow_out <= operating_units * timestep_resolution * 
+              flow_cap_per_unit * flow_out_parasitic_eff
+        flow_in_max_milp:
+          description: Set the upper bound of a technology's ability to consume 
+            carriers, for any technology using integer units to define its 
+            capacity.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: flow_in AND operating_units AND flow_cap_per_unit
+          equations:
+          - expression: flow_in <= operating_units * timestep_resolution * 
+              flow_cap_per_unit
+        flow_out_min_milp:
+          description: Set the lower bound of a technology's ability to produce 
+            carriers, for any technology using integer units to define its 
+            capacity.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: flow_out AND operating_units AND flow_out_min_relative
+          equations:
+          - where: flow_cap_per_unit
+            expression: flow_out >= operating_units * timestep_resolution * 
+              flow_cap_per_unit * flow_out_min_relative
+          - where: available_flow_cap
+            expression: flow_out >= available_flow_cap * timestep_resolution * 
+              flow_out_min_relative
+        storage_capacity_units_milp:
+          description: Fix the storage capacity of any technology using integer 
+            units to define its capacity.
+          foreach:
+          - nodes
+          - techs
+          where: storage AND purchased_units AND storage_cap_per_unit
+          equations:
+          - expression: storage_cap == purchased_units * storage_cap_per_unit
+        flow_capacity_units_milp:
+          description: Fix the flow capacity of any technology using integer 
+            units to define its capacity.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          where: purchased_units AND flow_cap_per_unit
+          equations:
+          - expression: flow_cap == purchased_units * flow_cap_per_unit
+        flow_capacity_max_purchase_milp:
+          description: Set the upper bound on a technology's flow capacity, for 
+            any technology with integer capacity purchasing.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          where: purchased_units
+          equations:
+          - where: flow_cap_max
+            expression: flow_cap <= flow_cap_max * purchased_units
+          - where: NOT flow_cap_max
+            expression: flow_cap <= bigM * purchased_units
+        storage_capacity_max_purchase_milp:
+          description: Set the upper bound on a technology's storage capacity, 
+            for any technology with integer capacity purchasing.
+          foreach:
+          - nodes
+          - techs
+          where: purchased_units AND storage_cap_max
+          equations:
+          - expression: storage_cap <= storage_cap_max * purchased_units
+        unit_capacity_max_systemwide_milp:
+          description: Set the upper bound on the total number of units of a 
+            technology that can be purchased across all nodes where the 
+            technology can exist, for any technology using integer units to 
+            define its capacity.
+          foreach:
+          - techs
+          where: purchased_units AND purchased_units_max_systemwide
+          equations:
+          - expression: sum(purchased_units, over=nodes) <= 
+              purchased_units_max_systemwide
+        unit_capacity_min_systemwide_milp:
+          description: Set the lower bound on the total number of units of a 
+            technology that can be purchased across all nodes where the 
+            technology can exist, for any technology using integer units to 
+            define its capacity.
+          foreach:
+          - techs
+          where: purchased_units AND purchased_units_max_systemwide
+          equations:
+          - expression: sum(purchased_units, over=nodes) >= 
+              purchased_units_min_systemwide
+        async_flow_in_milp:
+          description: Set a technology's ability to have inflow in the same 
+            timestep that it has outflow, for any technology using the 
+            asynchronous flow binary switch.
+          foreach:
+          - nodes
+          - techs
+          - timesteps
+          where: async_flow_switch
+          equations:
+          - expression: sum(flow_in, over=carriers) <= (1 - async_flow_switch) *
+              bigM
+        async_flow_out_milp:
+          description: Set a technology's ability to have outflow in the same 
+            timestep that it has inflow, for any technology using the 
+            asynchronous flow binary switch.
+          foreach:
+          - nodes
+          - techs
+          - timesteps
+          where: async_flow_switch
+          equations:
+          - expression: sum(flow_out, over=carriers) <= async_flow_switch * bigM
+        available_flow_cap_continuous:
+          description: Limit flow capacity to the value of the `flow_cap` 
+            decision variable when the technology is operating in a given 
+            timestep.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: available_flow_cap
+          equations:
+          - expression: available_flow_cap <= flow_cap
+        available_flow_cap_binary:
+          description: Limit flow capacity to zero if the technology is not 
+            operating in a given timestep.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: available_flow_cap
+          equations:
+          - expression: available_flow_cap <= flow_cap_max * operating_units
+        available_flow_cap_max_binary_continuous_switch:
+          description: Force flow capacity to equal the value of the `flow_cap` 
+            decision variable if the technology is operating in a given 
+            timestep, zero otherwise.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: available_flow_cap
+          equations:
+          - expression: available_flow_cap >= flow_cap + ((operating_units - 
+              purchased_units) * flow_cap_max)
+        flow_capacity_minimum:
+          description: Set the lower bound on a technology's flow capacity, for 
+            any technology with a non-zero lower bound, with or without integer 
+            capacity purchasing.
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          where: flow_cap_min
+          equations:
+          - where: NOT purchased_units
+            expression: flow_cap >= flow_cap_min
+          - where: purchased_units
+            expression: flow_cap >= flow_cap_min * purchased_units
+        storage_capacity_minimum:
+          description: Set the lower bound on a technology's storage capacity 
+            for any technology with a non-zero lower bound, with or without 
+            integer capacity purchasing.
+          foreach:
+          - nodes
+          - techs
+          where: storage_cap_min
+          equations:
+          - where: NOT purchased_units
+            expression: storage_cap >= storage_cap_min
+          - where: purchased_units
+            expression: storage_cap >= storage_cap_min * purchased_units
+        area_use_minimum:
+          description: Set the lower bound on a technology's area use for any 
+            technology with a non-zero lower bound, with or without integer 
+            capacity purchasing.
+          foreach:
+          - nodes
+          - techs
+          where: area_use_min
+          equations:
+          - where: NOT purchased_units
+            expression: area_use >= area_use_min
+          - where: purchased_units
+            expression: area_use >= area_use_min * purchased_units
+        source_capacity_minimum:
+          description: Set the lower bound on a technology's source capacity for
+            any supply technology with a non-zero lower bound, with or without 
+            integer capacity purchasing.
+          foreach:
+          - nodes
+          - techs
+          where: base_tech==supply AND source_cap_min
+          equations:
+          - where: NOT purchased_units
+            expression: source_cap >= source_cap_min
+          - where: purchased_units
+            expression: source_cap >= source_cap_min * purchased_units
+        flow_out_max:
+          description: Set the upper bound of a continuous technology's outflow.
+          where: carrier_out AND NOT operating_units
+        flow_out_min:
+          description: Set the lower bound of a continuous technology's outflow.
+          where: flow_out_min_relative AND NOT operating_units
+        flow_in_max:
+          description: Set the upper bound of a continuous technology's inflow.
+          where: carrier_in AND NOT operating_units
+      global_expressions:
+        cost_investment_purchase:
+          title: Binary purchase investment costs
+          description: The investment costs associated with the binary purchase 
+            of a technology.
+          default: 0
+          foreach:
+          - nodes
+          - techs
+          - costs
+          where: cost_purchase AND purchased_units
+          order: -1
+          equations:
+          - where: base_tech==transmission
+            expression: (cost_purchase + cost_purchase_per_distance * distance) 
+              * purchased_units * 0.5
+          - where: NOT base_tech==transmission
+            expression: cost_purchase * purchased_units
+        cost_investment:
+          title: Total investment costs
+          description: The installation costs of a technology, including those 
+            linked to the nameplate capacity, land use, storage size, and 
+            binary/integer unit purchase.
+          where: cost_investment_flow_cap OR cost_investment_storage_cap OR 
+            cost_investment_source_cap OR cost_investment_area_use OR 
+            cost_investment_purchase
+          equations:
+          - expression: sum(default_if_empty(cost_investment_flow_cap, 0), 
+              over=carriers) + default_if_empty(cost_investment_storage_cap, 0) 
+              + default_if_empty(cost_investment_source_cap, 0) + 
+              default_if_empty(cost_investment_area_use, 0) + 
+              default_if_empty(cost_investment_purchase, 0)
+    my_extra_math_math:
+      global_expressions:
+        flow_out_transmission_techs:
+          foreach:
+          - nodes
+          - techs
+          - carriers
+          - timesteps
+          where: base_tech==transmission
+          equations:
+          - expression: flow_out
+      constraints:
+        systemwide_co2_cap:
+          title: System-wide 
