@@ -8,15 +8,33 @@ global_expressions:
       - expression: flow_out
     default: 0
 
-parameters:
+lookups:
+  ng_carrier:
+    description: carrier for NG
+    dtype: string
+
+  limit_ng_tech:
+    description: boolean flag for technologies that can produce NG
+    dtype: bool
+
+  
+parameters: # general deinition of parameters. For more details, see model.yaml
   co2_limit:
     description: System-wide CO2 cap
     unit: mass
     default: .nan
+  
+
   local_cap_import_limit:
     description: Share limit on imports relative to total energy balance
     unit: unitless
     default: 1
+  
+  ng_share_cap:  # Test parameter
+    description: Share of any single tech producing NG to the total NG production
+    unit: unitless
+    default: 0.7 #share
+
 
   # Wind onshore capacity group limits (power)
   wind_tech_limit_esp_1: {unit: power, default: .nan}
@@ -98,6 +116,20 @@ parameters:
 
 constraints:
   ###  --- System balance constraints --- ###
+
+  ng_share_cap_constraint_test:
+    description: Constraint on the share of any single tech producing NG to the total NG production
+    foreach: [techs]
+    where: limit_ng_tech
+    equations:
+      - expression: sum(flow_out[carriers=$carrier], over=[nodes, carriers, timesteps]) <= ng_share_cap * sum(flow_out[carriers=$carrier], over=[nodes, techs, carriers, timesteps])
+    slices:
+      carrier:
+        - expression: "[natural_gas]"
+    active: True
+  
+
+
   systemwide_co2_cap:
     title: System-wide carbon emissions cap
     description: "Cap total CO2 emissions across the system"

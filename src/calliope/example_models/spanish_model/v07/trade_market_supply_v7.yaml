@@ -27,10 +27,12 @@ templates:
     carrier_out: natural_gas
     base_tech: supply
     lifetime: 25
+
     cost_flow_cap: # No costs associted to capacity
       data: [ 0, 0, 0 ] # EUR /MW
       index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
       dims: costs
+    limit_ng_tech: true
 
   natural_gas_liquid:
     name: Natural gas imports (liquid)
