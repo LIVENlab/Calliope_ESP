@@ -10,7 +10,7 @@ templates:
     flow_in_eff: 0.9273 # Eurocalliope
     flow_out_eff: 0.9273
     storage_cap_max: .inf # Corrected to.inf
-    energy_eff: 0.95  # 0.86 round trip efficiency
+    flow_out_eff: 0.95  # 0.86 round trip efficiency
     storage_loss: 0 # Assumption
     lifetime: 25
     flow_cap_min: 0
@@ -36,7 +36,7 @@ techs:
       carrier_in: electricity
       carrier_out: electricity
       lifetime: 50
-      energy_eff: 0.75 # 160 Pumped hydro storage, danish energy agency
+      flow_out_eff: 0.75 # 160 Pumped hydro storage, danish energy agency
       cost_flow_cap:
         data: [5222, 13808, 0.5]  # EUR/MW # kg CO2/MW
         index: [monetary, co2, vulnerability]
@@ -137,7 +137,7 @@ techs:
   #     carrier_out: electricity
   #     flow_cap_max: .inf
   #     storage_cap_max: .inf
-  #     energy_eff: 0.8832 # 0.78 round-trip
+  #     flow_out_eff: 0.8832 # 0.78 round-trip
   #     lifetime: 55
   #     cost_flow_cap:
   #       data: [1, 1, 0.5] # TODO: update
@@ -164,7 +164,7 @@ techs:
   #   carrier_out: electricity
   #   flow_cap_max: .inf # Corrected to.inf
   #   storage_cap_max: .inf # Corrected to.inf
-  #   energy_eff: 0.8832 # 0.78 round-trip
+  #   flow_out_eff: 0.8832 # 0.78 round-trip
   #   lifetime: 55
   #   cost_flow_cap:
   #     data: [ 1, 1, 0.5] # TODO:

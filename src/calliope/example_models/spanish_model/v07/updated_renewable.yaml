@@ -86,7 +86,7 @@ templates:
     base_tech: supply
     carrier_out: electricity
     template: interest_rate_new
-    energy_eff: 0.28
+    flow_out_eff: 0.28
     energy_ramping: 0.1 # Assumption
     flow_out_min_relative: 0.2 # Assumption
     lifetime: 25
@@ -110,7 +110,7 @@ templates:
     base_tech: supply
     template: interest_rate_new
     carrier_out: electricity
-    energy_eff: 0.4        # efficiency modelled within the input resource stream to avoid poor numerical scaling
+    flow_out_eff: 0.4        # efficiency modelled within the input resource stream to avoid poor numerical scaling
     lifetime: 25
     energy_ramping: 0.1 # Assumption
     storage_cap_max: .inf
