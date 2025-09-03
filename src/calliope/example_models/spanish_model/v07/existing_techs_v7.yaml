@@ -32,7 +32,7 @@ techs:
         data: [16397] #  | Danish energy agency (technology data for el/dh, 20 onshore turbines, 2050)
         index: [monetary]
         dims: [costs]
-      cost_om_prod:
+      cost_flow_out:
         data: [2.11] #| Danish energy agency (technology data for el/dh, 20 onshore turbines, 2050)
         index: [monetary]
         dims: [costs]
@@ -44,7 +44,7 @@ techs:
         template: interest_rate_existing
         carrier_out: electricity
         carrier_in: oil
-        energy_eff: 0.35 #assumption
+        flow_out_eff: 0.35 #assumption
         #flow_out_min_relative: 0.1 # Italy spanish_model
         energy_ramping: 0.05 #assumption
         lifetime: 35
@@ -56,7 +56,7 @@ techs:
           data: [2000] # €/MW/year
           index: [monetary]
           dims: [costs]
-        cost_om_prod:
+        cost_flow_out:
           data: [0.3] # €/MWh
           index: [monetary]
           dims: [costs]
@@ -67,7 +67,7 @@ techs:
         carrier_out: electricity
         template: interest_rate_existing
         base_tech: storage
-        energy_eff: 0.75 # Italy spanish_model
+        flow_out_eff: 0.75 # Italy spanish_model
         lifetime: 50
         flow_cap_per_storage_cap_max: 0.167
         storage_cap_max: .inf
@@ -89,7 +89,7 @@ techs:
         carrier_out: electricity
         #flow_out_min_relative: 0.3 # Italy spanish_model
         energy_ramping: 0.2
-        energy_eff: 0.47 #  [Technology Data for Generation of Electricity and District Heating, Danish Energy Agency]
+        flow_out_eff: 0.47 #  [Technology Data for Generation of Electricity and District Heating, Danish Energy Agency]
         lifetime: 25
         cost_flow_cap:
           data: [0] # Existing
@@ -99,7 +99,7 @@ techs:
           data: [10633.72] # , Danish energy agency (technology data for el/dh, 06 gas engines, 2050)
           index: [monetary]
           dims: [costs]
-        cost_om_prod:
+        cost_flow_out:
             data: [5.74] #  Danish energy agency (technology data for el/dh, 06 gas engines, 2050)
             index: [monetary]
             dims: [costs]
@@ -109,7 +109,7 @@ techs:
         base_tech: supply
         carrier_out: electricity
         template: interest_rate_existing
-        energy_eff: 0.28 # Danish energy agency (technology data for el/dh, Woodchips 2030)
+        flow_out_eff: 0.28 # Danish energy agency (technology data for el/dh, Woodchips 2030)
         #flow_out_min_relative: 0.3 # Italy spanish_model
         lifetime: 25 # Danish energy agency (technology data for el/dh, Woodchips 2030)
         energy_ramping: 0.10
@@ -122,7 +122,7 @@ techs:
           data: [163759.40] # e/MW/year Danish energy agency (technology data for el/dh, Woodchips 2030)
           index: [monetary]
           dims: [costs]
-        cost_om_prod:
+        cost_flow_out:
           data: [4.77] # e/MWh Italy spanish_model Danish energy agency (technology data for el/dh, Woodchips 2030)
           index: [monetary]
           dims: [costs]
@@ -138,7 +138,7 @@ techs:
         template: interest_rate_existing
         include_storage: true
         carrier_out: electricity
-        energy_eff: 0.4 # efficiency modelled within the input resource stream to avoid poor numerical scaling
+        flow_out_eff: 0.4 # efficiency modelled within the input resource stream to avoid poor numerical scaling
         lifetime: 25
         #flow_out_min_relative: 0.3
         storage_cap_max: .inf
@@ -152,7 +152,7 @@ techs:
           data: [10367.884]  # 06 Gas engines, biogas
           index: [monetary]
           dims: [costs]
-        cost_om_prod:
+        cost_flow_out:
           data: [7.976] # # 06 Gas engines, biogas
           index: [monetary]
           dims: [costs]
@@ -210,7 +210,7 @@ techs:
         carrier_in: uranium
         template: interest_rate_existing
         carrier_out: electricity
-        energy_eff: 0.4 # Eurocalliope
+        flow_out_eff: 0.4 # Eurocalliope
         lifetime: 50
         capacity_factor_min: 0.75
         capacity_factor_max: 0.8
@@ -219,7 +219,7 @@ techs:
           index: [monetary]
           dims: [costs]
         cost_om_annual:
-          data: [76116]  # (10,000 EUR2015/MW/year)
+          data: [76116]  # EUR/MW 
           index: [monetary]
           dims: [costs]
 
@@ -230,7 +230,7 @@ techs:
         template: interest_rate_existing
         carrier_in: coal
         carrier_out: electricity
-        energy_eff: 0.37 # [IEA (2012), Technology Roadmap - High-Efficiency, Low-Emissions Coal-Fired Power Generation, IEA, Paris https://www.iea.org/reports/technology-roadmap-high-efficiency-low-emissions-coal-fired-power-generation]
+        flow_out_eff: 0.37 # [IEA (2012), Technology Roadmap - High-Efficiency, Low-Emissions Coal-Fired Power Generation, IEA, Paris https://www.iea.org/reports/technology-roadmap-high-efficiency-low-emissions-coal-fired-power-generation]
         energy_ramping: 0.6 # UK spanish_model
         lifetime: 30 # PNIEC
         #flow_cap_max: 11311 # MW  [PNIEC, table A.19]
@@ -239,7 +239,7 @@ techs:
           data: [0] # Existing
           index: [monetary]
           dims: [costs]
-        cost_om_prod:
+        cost_flow_out:
           data: [3.21] # EUR/MWh_e 01 Coal CHP, Danish energy 2025
           index: [ monetary ]
           dims: [ costs ]
@@ -255,7 +255,7 @@ techs:
         carrier_in: natural_gas
         base_tech: conversion
         template: interest_rate_existing
-        energy_eff: 0.58 # source: 05 Gas turb. CC, steam extract. 2020
+        flow_out_eff: 0.58 # source: 05 Gas turb. CC, steam extract. 2020
         lifetime: 25
         energy_ramping: 0.15
         cost_flow_cap:
@@ -266,7 +266,7 @@ techs:
           data: [31156.82]
           index: [monetary]
           dims: [costs]
-        cost_om_prod:
+        cost_flow_out:
           data: [4.678]
           index: [ monetary ]
           dims: [ costs ]
@@ -277,13 +277,13 @@ techs:
           base_tech: supply
           carrier_out: electricity
           template: interest_rate_existing
-          energy_eff: 0.23
+          flow_out_eff: 0.23
           lifetime: 24 # Italy spanish_model
           cost_flow_cap:
             data: [0] # Existing
             index: [monetary]
             dims: [costs]
-          cost_om_prod:
+          cost_flow_out:
             data: [26.9]
             index: [ monetary ]
             dims: [ costs ]

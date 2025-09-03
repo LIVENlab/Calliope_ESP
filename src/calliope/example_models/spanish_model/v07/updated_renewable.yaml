@@ -48,7 +48,7 @@ templates:
       data: [32493]         # (EUR2015/MW) | Danish energy agency (technology data for el/dh, 22 photovoltaics large, 2050)
       index: [monetary]
       dims: [costs]
-    cost_om_prod:
+    cost_flow_out:
       data: [2.4]
       index: [monetary]          # (EUR2013/MW) | Danish energy agency (technology data for el/dh, average of 21 offshore and nearshore turbines, 2050)
       dims: ['costs']
@@ -65,7 +65,7 @@ templates:
       data: [16662.66]
       index: [monetary]
       dims: [costs]
-    cost_om_prod:
+    cost_flow_out:
       data: [1.98]
       index: [monetary]
       dims: ['costs']
@@ -91,7 +91,7 @@ templates:
     flow_out_min_relative: 0.2 # Assumption
     lifetime: 25
     interest_rate: 0.10
-    cost_om_prod:
+    cost_flow_out:
       data: [ 4.75, 1330 ] # e/MWh Danish energy agency # ISPRA 2018
       index: [ monetary, co2 ]
       dims: costs
@@ -119,7 +119,7 @@ templates:
       data: [9889.3662774]  # 06 Gas engines, biogas, 2030
       index: [monetary]
       dims: [costs]
-    cost_om_prod:
+    cost_flow_out:
       data: [7.443609026]
       index: [monetary]
       dims: [costs]
