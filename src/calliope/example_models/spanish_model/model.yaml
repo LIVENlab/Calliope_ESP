@@ -16,7 +16,7 @@ config:
   init:
     name: Calliope Spain
     subset:
-      timesteps: ["2018-04-01", "2018-06-10"]
+      timesteps: ["2018-04-01", "2018-04-10"]
     calliope_version:  0.7.0
     resample:
       timesteps: 3h
@@ -78,7 +78,7 @@ parameters:
     # ---System balance parameters (used in math.yaml)---
     ###
     co2_limit: 20603000000.0  # total allowable CO₂ emissions in the spanish_model's currency/unit -- kg according to PNIEC.
-
+    uranium_share_cap: 0.716 # Max % of uranium production met by one technology
 
     # Local import cap limit:
     # Allow every node to import up to 25% of the total generation.

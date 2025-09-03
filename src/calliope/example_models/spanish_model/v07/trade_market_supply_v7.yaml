@@ -17,6 +17,7 @@ templates:
     carrier_out: uranium
     base_tech: supply
     lifetime: 25
+    limit_uranium_tech: true # Flag to be used in the math.yaml file
     cost_flow_cap: # No costs associted to capacity
       data: [ 0, 0, 0 ] # EUR /MW
       index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
@@ -103,6 +104,8 @@ techs:
   uranium_UK:
       name: "Uranium imports from UK"
       template: uranium
+      group_cap: uranium_cap
+      limit_uranium_tech: true
       cost_flow_out:
         data: [ 0.183, 0.48, 0.5] # EUR /kWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
@@ -111,6 +114,8 @@ techs:
   uranium_USA:
       name: "Uranium imports from USA"
       template: uranium
+      group_cap: uranium_cap
+      limit_uranium_tech: true
       cost_flow_out:
         data: [ 0.18, 0.46, 0.5 ] # EUR /kWh
         index: [ monetary, co2, vul] # kg CO2-eq/ kWh of product

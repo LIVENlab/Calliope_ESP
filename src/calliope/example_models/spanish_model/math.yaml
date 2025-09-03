@@ -9,14 +9,19 @@ global_expressions:
     default: 0
 
 lookups:
-  ng_carrier:
-    description: carrier for NG
+  group_cap:
+    description: groups of technologies
     dtype: string
 
   limit_ng_tech:
     description: boolean flag for technologies that can produce NG
     dtype: bool
 
+  limit_uranium_tech:
+    description: boolean flag for technologies that can produce uranium
+    dtype: bool
+    default: false
+  
   
 parameters: # general deinition of parameters. For more details, see model.yaml
   co2_limit:
@@ -35,6 +40,10 @@ parameters: # general deinition of parameters. For more details, see model.yaml
     unit: unitless
     default: 0.7 #share
 
+  uranium_share_cap:
+    description: Share of any single tech producing uranium to the total uranium production
+    unit: unitless
+    default: 0.716 # Uranium Uk in datatable
 
   # Wind onshore capacity group limits (power)
   wind_tech_limit_esp_1: {unit: power, default: .nan}
@@ -116,7 +125,6 @@ parameters: # general deinition of parameters. For more details, see model.yaml
 
 constraints:
   ###  --- System balance constraints --- ###
-
   ng_share_cap_constraint_test:
     description: Constraint on the share of any single tech producing NG to the total NG production
     foreach: [techs]
@@ -129,6 +137,25 @@ constraints:
     active: True
   
 
+  uranium_share_cap_constraint_test:
+    description: Constraint on the share of any single tech producing uranium to the total uranium production
+    foreach: [techs]
+    where: limit_uranium_tech and base_tech==supply
+    equations:
+      - expression: >
+          sum(flow_out[carriers=$carrier], over=[nodes, timesteps]) <= 
+          uranium_share_cap * 
+          sum(flow_out[carriers=$carrier, techs=$uranium_group],
+           over=[nodes, techs, timesteps])
+    slices:
+      carrier:
+        - expression: "uranium"
+      uranium_group:
+        - expression: limit_uranium_tech
+    active: True
+  
+  
+  
 
   systemwide_co2_cap:
     title: System-wide carbon emissions cap
@@ -141,7 +168,7 @@ constraints:
     active: True
 
   # Test group constraint fuels
-  # grouped_cap_
+  
 
   # Individual import cap constraints #TODO: Create a general expression instead of the clumsy multiple solution
   import_cap_ESP_1:
