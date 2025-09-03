@@ -47,8 +47,8 @@ data_tables:
         rows: timesteps
         columns: nodes
         add_dims:
-            techs: [open_field_pv_CN, roof_mounted_pv_DE, roof_mounted_pv_NL,
-                    roof_mounted_pv_PT, roof_mounted_pv_MY, roof_mounted_pv_ESP]
+            techs: [open_field_pv_CN, open_field_pv_DE, open_field_pv_NL,
+                    open_field_pv_PT, open_field_pv_MY, open_field_pv_ESP]
             parameters: source_use_max
 
 
@@ -57,7 +57,7 @@ data_tables:
         rows: timesteps
         columns: nodes
         add_dims:
-            techs: existing_hydro_run_of_river
+            techs: [existing_hydro_run_of_river]
             parameters: source_use_max
 
     hydro_reservoir_capacity_factors:
@@ -65,7 +65,7 @@ data_tables:
         rows: timesteps
         columns: nodes
         add_dims:
-            techs: existing_hydro_reservoir
+            techs: [existing_hydro_reservoir]
             parameters: source_use_max
 
 
