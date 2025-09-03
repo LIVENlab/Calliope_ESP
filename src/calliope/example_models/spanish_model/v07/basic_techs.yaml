@@ -20,7 +20,7 @@ techs:
       template: el_import
       #resource: .inf TODO: VALIDATE
       cost_flow_in:
-        data: [22.3, 57, 0.0 ] # EUR /kWh  https://www.sistemaelectrico-ree.es/es/informe-del-sistema-electrico/intercambios/francia?utm_source=chatgpt.com
+        data: [22.3, 57, 0.0] # EUR /kWh  https://www.sistemaelectrico-ree.es/es/informe-del-sistema-electrico/intercambios/francia?utm_source=chatgpt.com
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
         dims: [costs]
 

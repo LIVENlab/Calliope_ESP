@@ -69,7 +69,8 @@ techs:
         base_tech: storage
         flow_out_eff: 0.75 # Italy spanish_model
         lifetime: 50
-        flow_cap_per_storage_cap_max: 0.167
+        flow_capacity_per_storage_cap_max: 0.167
+        flow_capacity_per_storage_cap_min: 0.167
         storage_cap_max: .inf
         # storage_cap_equals: 46252600 #kWh Italy spanish_model # Fixed -- outdated
         cost_flow_cap: # Existing technology
@@ -142,7 +143,8 @@ techs:
         lifetime: 25
         #flow_out_min_relative: 0.3
         storage_cap_max: .inf
-        flow_cap_per_storage_cap_max: 0.0033
+        flow_capacity_per_storage_cap_max: 0.0033
+        flow_capacity_per_storage_cap_min: 0.0033
         energy_ramping: 0.10
         cost_flow_cap:
           data: [0] # Existing
@@ -193,7 +195,8 @@ techs:
         #source_use_max: file=capacityfactors-hydro-reservoir-inflow.csv
         source_unit: per_cap
         lifetime: 60
-        flow_cap_per_storage_cap_equals: 0.15
+        flow_capacity_per_storage_cap_max: 0.15
+        flow_capacity_per_storage_cap_min: 0.15
         cost_flow_out:
           data: [5.0] #  fixed: EUR/MWh from [@JRC:2014] Table 12
           index: [monetary]
@@ -212,8 +215,6 @@ techs:
         carrier_out: electricity
         flow_out_eff: 0.4 # Eurocalliope
         lifetime: 50
-        capacity_factor_min: 0.75
-        capacity_factor_max: 0.8
         cost_flow_cap:
           data: [0]  # Existing
           index: [monetary]

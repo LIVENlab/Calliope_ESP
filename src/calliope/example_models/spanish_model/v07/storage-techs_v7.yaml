@@ -23,7 +23,7 @@ templates:
       data: [8100]
       index: [monetary]
       dims: [costs]
-    cost_om_prod:
+    cost_flow_out:
       data: [ 1.94 ]
       index: [ monetary ]
       dims: [ costs ]
@@ -41,7 +41,7 @@ techs:
         data: [5222, 13808, 0.5]  # EUR/MW # kg CO2/MW
         index: [monetary, co2, vulnerability]
         dims: ['costs']
-      cost_om_prod:
+      cost_flow_out:
         data: [ 5.0 ]     # (EUR2013/MW/yr) from [@JRC:2014] Table 14
         index: [ monetary ]
         dims: [ costs ]
@@ -65,7 +65,7 @@ techs:
       data: [ 139025, 4180, 0.5 ]      # (EUR2013/MW) from [@JRC:2014] Table 12
       index: [ monetary, co2, vul ]
       dims: [ costs ]
-    cost_om_prod:
+    cost_flow_out:
       data: [ 5 ]   # (EUR2013/MW/yr) from [@JRC:2014] Table 12
       index: [ monetary ]
       dims: [ costs ]
@@ -152,7 +152,7 @@ techs:
   #         data: [7357.260000000001] # (EUR2015/MW/year), 8 $2015
   #         index: [monetary]
   #         dims: ['costs']
-  #     cost_om_prod:
+  #     cost_flow_out:
   #         data: [0001.0200000000000001] # (EUR2015/MWh), 1 $2015, rounded to 1€ for numeric range
   #         index: [monetary]
   #         dims: ['costs']
@@ -179,7 +179,7 @@ techs:
   #     data: [7357.260000000001] # (EUR2015/MW/year), 8 $2015
   #     index: [monetary]
   #     dims: ['costs']
-  #   cost_om_prod:
+  #   cost_flow_out:
   #     data: [0001.0200000000000001] # (EUR2015/MWh), 1 $2015, rounded to 1€ for numeric range
   #     index: monetary
   #     dims: ['costs']
