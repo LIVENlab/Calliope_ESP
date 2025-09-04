@@ -79,6 +79,14 @@ parameters:
     ###
     co2_limit: 20603000000.0  # total allowable CO₂ emissions in the spanish_model's currency/unit -- kg according to PNIEC.
     uranium_share_cap: 0.716 # Max % of uranium production met by one technology
+    ng_share_cap_max: 0.97 # Max % of NG production met by one technology
+    ng_share_cap_min: 0.02 # Min % of NG production met by one technology
+    ng_liquid_share_cap_max: 0.35 # Max % of NG liquid production met by one technology
+    ng_liquid_share_cap_min: 0.08 # Min % of NG liquid production met by one technology
+    coal_share_cap_max: 0.27 # Max % of coal production met by one technology
+    coal_share_cap_min: 0.03 # Min % of coal production met by one technology
+    oil_share_cap_max: 0.18 # Max % of oil production met by one technology
+    oil_share_cap_min: 0.07 # Min % of oil production met by one technology
 
     # Local import cap limit:
     # Allow every node to import up to 25% of the total generation.

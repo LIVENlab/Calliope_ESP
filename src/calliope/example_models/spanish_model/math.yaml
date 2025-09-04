@@ -9,18 +9,78 @@ global_expressions:
     default: 0
 
 lookups:
-  group_cap:
-    description: groups of technologies
-    dtype: string
-
-  limit_ng_tech:
+  ## Flags for technology groups
+  ng_flag:
     description: boolean flag for technologies that can produce NG
     dtype: bool
+    default: false
+
+  ng_liquid_flag:
+    description: boolean flag for technologies that can produce NG liquid
+    dtype: bool
+    default: false
+
+  coal_flag:
+    description: boolean flag for technologies that can produce coal
+    dtype: bool
+    default: false
 
   limit_uranium_tech:
     description: boolean flag for technologies that can produce uranium
     dtype: bool
     default: false
+  
+  oil_flag:
+    description: boolean flag for technologies that can produce oil
+    dtype: bool
+    default: false
+  
+  pumped_hydro_flag:
+    description: boolean flag for technologies that can produce pumped hydro
+    dtype: bool
+    default: false
+  
+  battery_flag:
+    description: boolean flag for technologies that can produce battery
+    dtype: bool
+    default: false
+  
+  biogas_to_electricity_flag:
+    description: boolean flag for technologies that can produce biogas to electricity
+    dtype: bool
+    default: false
+  
+  biomass_turbine_flag:
+    description: boolean flag for technologies that can produce biomass turbine
+    dtype: bool
+    default: false
+  
+  wind_offshore_flag:
+    description: boolean flag for technologies that can produce wind offshore
+    dtype: bool
+    default: false
+  
+  wind_onshore_flag:
+    description: boolean flag for technologies that can produce wind onshore
+    dtype: bool
+    default: false
+  
+  wind_onshore_monopoly_flag:
+    description: boolean flag for technologies that can produce wind onshore monopoly
+    dtype: bool
+    default: false
+  
+  rooftop_pv_flag:
+    description: boolean flag for technologies that can produce rooftop PV
+    dtype: bool
+    default: false
+
+  solar_flag:
+    description: boolean flag for technologies that can produce solar
+    dtype: bool
+    default: false
+  
+
   
   
 parameters: # general deinition of parameters. For more details, see model.yaml
@@ -29,21 +89,55 @@ parameters: # general deinition of parameters. For more details, see model.yaml
     unit: mass
     default: .nan
   
-
   local_cap_import_limit:
     description: Share limit on imports relative to total energy balance
     unit: unitless
     default: 1
   
-  ng_share_cap:  # Test parameter
+  ng_share_cap_max:  # Test parameter
     description: Share of any single tech producing NG to the total NG production
     unit: unitless
-    default: 0.7 #share
+    default: 0.97 #share
+
+  ng_share_cap_min:  # Test parameter
+    description: Share of any single tech producing NG to the total NG production
+    unit: unitless
+    default: 0.02 #share
+  
+  ng_liquid_share_cap_max:
+    description: Share of any single tech producing NG liquid to the total NG liquid production
+    unit: unitless
+    default: 0.35 #share
+  
+  ng_liquid_share_cap_min:
+    description: Share of any single tech producing NG liquid to the total NG liquid production
+    unit: unitless
+    default: 0.08 #share
 
   uranium_share_cap:
     description: Share of any single tech producing uranium to the total uranium production
     unit: unitless
     default: 0.716 # Uranium Uk in datatable
+  
+  coal_share_cap_max:
+    description: Share of any single tech producing coal to the total coal production
+    unit: unitless
+    default: 0.27 # Coal RUS in datatable
+  
+  coal_share_cap_min:
+    description: Share of any single tech producing coal to the total coal production
+    unit: unitless
+    default: 0.03 # Coal RUS in datatable
+  
+  oil_share_cap_max:
+    description: Share of any single tech producing oil to the total oil production
+    unit: unitless
+    default: 0.18 # Oil in datatable
+  
+  oil_share_cap_min:
+    description: Share of any single tech producing oil to the total oil production
+    unit: unitless
+    default: 0.07 # Oil in datatable
 
   # Wind onshore capacity group limits (power)
   wind_tech_limit_esp_1: {unit: power, default: .nan}
@@ -123,21 +217,12 @@ parameters: # general deinition of parameters. For more details, see model.yaml
   biogas_resource_esp_10: {unit: power, default: .nan}
   biogas_resource_esp_11: {unit: power, default: .nan}
 
-constraints:
-  ###  --- System balance constraints --- ###
-  ng_share_cap_constraint_test:
-    description: Constraint on the share of any single tech producing NG to the total NG production
-    foreach: [techs]
-    where: limit_ng_tech
-    equations:
-      - expression: sum(flow_out[carriers=$carrier], over=[nodes, carriers, timesteps]) <= ng_share_cap * sum(flow_out[carriers=$carrier], over=[nodes, techs, carriers, timesteps])
-    slices:
-      carrier:
-        - expression: "[natural_gas]"
-    active: True
-  
 
-  uranium_share_cap_constraint_test:
+
+constraints:
+  # Technology group constraints
+
+  uranium_share_cap_constraint:
     description: Constraint on the share of any single tech producing uranium to the total uranium production
     foreach: [techs]
     where: limit_uranium_tech and base_tech==supply
@@ -154,9 +239,136 @@ constraints:
         - expression: limit_uranium_tech
     active: True
   
-  
-  
+  coal_supply_cap_constraint_share_max:
+    description: Constraint on the share of any single tech producing coal to the total coal production
+    foreach: [techs]
+    where: coal_flag and base_tech==supply
+    equations:
+      - expression: >
+          sum(flow_out[carriers=$carrier], over=[nodes, timesteps])
+           <= coal_share_cap_max * sum(flow_out[carriers=$carrier, techs=$coal_group],
+            over=[nodes, techs, timesteps])
+    slices:
+      carrier:
+        - expression: "coal"
+      coal_group:
+        - expression: coal_flag
+    active: True
 
+  coal_supply_cap_constraint_share_min:
+    description: Constraint on the share of any single tech producing coal to the total coal production
+    foreach: [techs]
+    where: coal_flag and base_tech==supply
+    equations:
+      - expression: >
+          sum(flow_out[carriers=$carrier], over=[nodes, timesteps])
+           >= coal_share_cap_min * sum(flow_out[carriers=$carrier, techs=$coal_group],
+            over=[nodes, techs, timesteps])
+    slices:
+      carrier:
+        - expression: "coal"
+      coal_group:
+        - expression: coal_flag
+    active: True
+
+
+  oil_supply_cap_constraint_share_max:
+    description: Constraint on the share of any single tech producing oil to the total oil production
+    foreach: [techs]
+    where: oil_flag and base_tech==supply
+    equations:
+      - expression: >
+          sum(flow_out[carriers=$carrier], over=[nodes, timesteps])
+           <= oil_share_cap_max * sum(flow_out[carriers=$carrier, techs=$oil_group],
+            over=[nodes, techs, timesteps])
+    slices:
+      carrier:
+        - expression: oil
+      oil_group:
+        - expression: oil_flag
+    active: True
+  
+  oil_supply_cap_constraint_share_min:
+    description: Constraint on the share of any single tech producing oil to the total oil production
+    foreach: [techs]
+    where: oil_flag and base_tech==supply
+    equations:
+      - expression: >
+          sum(flow_out[carriers=$carrier], over=[nodes, timesteps])
+           >= oil_share_cap_min * sum(flow_out[carriers=$carrier, techs=$oil_group],
+            over=[nodes, techs, timesteps])
+    slices:
+      carrier:
+        - expression: oil
+      oil_group:
+        - expression: oil_flag
+    active: True
+  
+  ng_supply_cap_constraint_share_max:
+    description: Constraint on the share of any single tech producing NG to the total NG production
+    foreach: [techs]
+    where: ng_flag and base_tech==supply
+    equations:
+      - expression: >
+          sum(flow_out[carriers=$carrier], over=[nodes, timesteps])
+           <= ng_share_cap_max * sum(flow_out[carriers=$carrier, techs=$ng_group],
+            over=[nodes, techs, timesteps])
+    slices:
+      carrier:
+        - expression: natural_gas
+      ng_group:
+        - expression: ng_flag
+    active: True
+
+  ng_supply_cap_constraint_share_min:
+    description: Constraint on the share of any single tech producing NG to the total NG production
+    foreach: [techs]
+    where: ng_flag and base_tech==supply
+    equations:
+      - expression: >
+          sum(flow_out[carriers=$carrier], over=[nodes, timesteps])
+           >= ng_share_cap_min * sum(flow_out[carriers=$carrier, techs=$ng_group],
+            over=[nodes, techs, timesteps])
+    slices:
+      carrier:
+        - expression: natural_gas
+      ng_group:
+        - expression: ng_flag
+    active: True
+
+  ng_liquid_supply_cap_constraint_share_max:
+    description: Constraint on the share of any single tech producing NG liquid to the total NG liquid production
+    foreach: [techs]
+    where: ng_liquid_flag and base_tech==supply
+    equations:
+      - expression: >
+          sum(flow_out[carriers=$carrier], over=[nodes, timesteps])
+           <= ng_liquid_share_cap_max * sum(flow_out[carriers=$carrier, techs=$ng_liquid_group],
+            over=[nodes, techs, timesteps])
+    slices:
+      carrier:
+        - expression: natural_gas
+      ng_liquid_group:
+        - expression: ng_liquid_flag
+    active: True
+  
+  ng_liquid_supply_cap_constraint_share_min:
+    description: Constraint on the share of any single tech producing NG liquid to the total NG liquid production
+    foreach: [techs]
+    where: ng_liquid_flag and base_tech==supply
+    equations:
+      - expression: >
+          sum(flow_out[carriers=$carrier], over=[nodes, timesteps])
+           >= ng_liquid_share_cap_min * sum(flow_out[carriers=$carrier, techs=$ng_liquid_group],
+            over=[nodes, techs, timesteps])
+    slices:
+      carrier:
+        - expression: natural_gas
+      ng_liquid_group:
+        - expression: ng_liquid_flag
+    
+
+  ###  --- System balance constraints --- ###
   systemwide_co2_cap:
     title: System-wide carbon emissions cap
     description: "Cap total CO2 emissions across the system"
@@ -183,6 +395,7 @@ constraints:
         - expression: "[ESP_1]"
       carrier: # The carrier for which to limit imports
         - expression: electricity
+
 
   import_cap_ESP_2:
     description: Limit upper bound on annual electricity imports a in the model as a share of combined electricty flows in those ESP_1.
