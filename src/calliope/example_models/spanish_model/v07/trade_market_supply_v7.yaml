@@ -7,6 +7,7 @@ templates:
     carrier_out: coal
     base_tech: supply
     lifetime: 25 # Check if this makes any sense here #TODO
+    coal_flag: true
     cost_flow_cap: # No costs associted to capacity
       data: [ 0, 0, 0 ] # EUR /MW
       index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
@@ -28,18 +29,18 @@ templates:
     carrier_out: natural_gas
     base_tech: supply
     lifetime: 25
-
+    ng_flag: true
     cost_flow_cap: # No costs associted to capacity
       data: [ 0, 0, 0 ] # EUR /MW
       index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
       dims: costs
-    limit_ng_tech: true
 
   natural_gas_liquid:
     name: Natural gas imports (liquid)
     carrier_out: natural_gas
     base_tech: supply
     lifetime: 25
+    ng_liquid_flag: true
     cost_flow_cap: # No costs associted to capacity
       data: [ 0, 0, 0 ] # EUR /MW
       index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
@@ -50,11 +51,11 @@ templates:
       carrier_out: oil
       base_tech: supply
       lifetime: 25
+      oil_flag: true
       cost_flow_cap: # No costs associted to capacity
         data: [ 0, 0, 0 ] # EUR /MW
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
         dims: costs
-
 
 
 techs:
@@ -178,7 +179,7 @@ techs:
 
   natural_gas_NOR:
       name: "NG-gas imports from Norway"
-      template: natural_gas_liquid
+      template: natural_gas
       cost_flow_out:
         data: [ 3.755, 9.93, 0.5] # EUR /MWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
@@ -186,7 +187,7 @@ techs:
 
   natural_gas_PT:
       name: "NG-gas imports from Portugal"
-      template: natural_gas_liquid
+      template: natural_gas
       cost_flow_out:
         data: [ 9.447, 24.97, 0.5] # EUR /MWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
@@ -194,7 +195,7 @@ techs:
 
   natural_gas_DNK:
       name: "NG-gas imports from Denmark"
-      template: natural_gas_liquid
+      template: natural_gas
       cost_flow_out:
         data: [ 9.04, 23.9, 0.5] # EUR /MWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
@@ -202,7 +203,7 @@ techs:
 
   natural_gas_DEU:
       name: "NG-gas imports from Germany"
-      template: natural_gas_liquid
+      template: natural_gas
       cost_flow_out:
         data: [ 497.88, 1316.50, 0.5 ] # EUR /MWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
@@ -210,8 +211,7 @@ techs:
 
   natural_gas_BEL:
       name: "NG-gas imports from Belgium"
-      template: natural_gas_liquid
-
+      template: natural_gas
       cost_flow_out:
         data: [ 11.87, 31.40, 0.5 ] # EUR /MWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
