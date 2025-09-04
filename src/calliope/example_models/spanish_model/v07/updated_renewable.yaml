@@ -19,6 +19,7 @@ templates:
     lifetime: 40       # [@JRC:2014] Table 7, EUROCALLIOPE
     area_use_per_flow_cap: 0.01226
     source_unit: per_cap
+    open_field_pv_flag: true
     #resource_unit: per_cap
     cost_om_annual:
       data: [9500]         # (EUR2015/MW) | Danish energy agency (technology data for el/dh, 22 photovoltaics large, 2050)
@@ -31,6 +32,7 @@ templates:
     source_unit: per_cap
     #resource_unit: per_cap
     area_use_per_flow_cap: 0.00457
+    rooftop_pv_flag: true
     cost_om_annual:
       data: [10700]         # (EUR2015/MW) | Danish energy agency (technology data for el/dh, 22 photovoltaics large, 2050)
       index: [monetary]
@@ -44,6 +46,7 @@ templates:
     template: interest_rate_new
     source_unit: per_cap
     lifetime: 30         # [@JRC:2014] Table 5
+    wind_offshore_flag: true
     cost_om_annual:
       data: [32493]         # (EUR2015/MW) | Danish energy agency (technology data for el/dh, 22 photovoltaics large, 2050)
       index: [monetary]
@@ -74,12 +77,15 @@ templates:
   wind_onshore_monopoly:
     name: Onshore wind without land competition
     template: wind_onshore
+    wind_onshore_monopoly_flag: true
 
 
   wind_onshore_competing:
     name: Onshore wind competing with open field PV on land
     template: wind_onshore
     area_use_per_flow_cap: 12.5 # from [@EuropeanEnvironmentAgency:2009]
+    wind_onshore_competing_flag: true
+
 
   biomass:
     name: Solid biomass power plant
@@ -87,10 +93,11 @@ templates:
     carrier_out: electricity
     template: interest_rate_new
     flow_out_eff: 0.28
-    energy_ramping: 0.1 # Assumption
+    flow_ramping: 0.1 # Assumption
     flow_out_min_relative: 0.2 # Assumption
     lifetime: 25
     interest_rate: 0.10
+    biomass_turbine_flag: true
     cost_flow_out:
       data: [ 4.75, 1330 ] # e/MWh Danish energy agency # ISPRA 2018
       index: [ monetary, co2 ]
@@ -112,9 +119,11 @@ templates:
     carrier_out: electricity
     flow_out_eff: 0.4        # efficiency modelled within the input resource stream to avoid poor numerical scaling
     lifetime: 25
-    energy_ramping: 0.1 # Assumption
+    flow_ramping: 0.1 # Assumption
     storage_cap_max: .inf
-    flow_cap_per_storage_cap_max: 0.0033
+    flow_capacity_per_storage_capacity_min: 0.0033
+    flow_capacity_per_storage_capacity_max: 0.0033
+    biogas_to_electricity_flag: true
     cost_om_annual:
       data: [9889.3662774]  # 06 Gas engines, biogas, 2030
       index: [monetary]
@@ -264,6 +273,7 @@ techs:
   wind_onshore_monopoly_CN:
     name: Wind CN
     template: wind_onshore_monopoly
+    wind_onshore_monopoly_flag: true
     cost_flow_cap:
       data: [49790,131655, 0.19]
       index: [monetary, co2, vul]
@@ -272,6 +282,7 @@ techs:
   wind_onshore_monopoly_IND:
     name: Wind IND
     template: wind_onshore_monopoly
+    wind_onshore_monopoly_flag: true
     cost_flow_cap:
       data: [50435, 133358, 0.15]
       index: [monetary, co2, vul]
@@ -281,6 +292,7 @@ techs:
   wind_onshore_monopoly_DE:
     name: Wind DE
     template: wind_onshore_monopoly
+    wind_onshore_monopoly_flag: true
     cost_flow_cap:
       data: [17337, 45843, 0.15]
       index: [monetary, co2, vul]
@@ -290,6 +302,7 @@ techs:
   wind_onshore_monopoly_PT:
     name: Wind PT
     template: wind_onshore_monopoly
+    wind_onshore_monopoly_flag: true
     cost_flow_cap:
       data: [11905, 31480, 0.07]
       index: [monetary, co2, vul]
@@ -299,6 +312,7 @@ techs:
   wind_onshore_monopoly_FR:
     name: Wind FR
     template: wind_onshore_monopoly
+    wind_onshore_monopoly_flag: true
     cost_flow_cap:
       data: [13122, 34697, 0.02]
       index: [monetary, co2, vul]
@@ -308,6 +322,7 @@ techs:
   wind_onshore_monopoly_NDL:
     name: Wind NDL
     template: wind_onshore_monopoly
+    wind_onshore_monopoly_flag: true
     cost_flow_cap:
       data: [181182, 95055.3, 0.02]
       index: [monetary, co2, vul]
@@ -316,6 +331,7 @@ techs:
   wind_onshore_monopoly_ESP:
     name: Wind ESP
     template: wind_onshore_monopoly
+    wind_onshore_monopoly_flag: true
     cost_flow_cap:
       data: [6748, 17843, 0.16]
       index: [monetary, co2, vul]
@@ -479,6 +495,7 @@ techs:
   biogas_to_electricity_supply_FR:
     name: Electricity from anaerobically digested biofuel-FR
     template: biogas_to_electricity_supply
+    biogas_to_electricity_flag: true
     cost_flow_cap:
       data: [2836190, 7499390, 0.5]
       index: [monetary, co2, vul]
@@ -488,6 +505,7 @@ techs:
   biogas_to_electricity_supply_CAN:
     name: Electricity from anaerobically digested biofuel-CAN
     template: biogas_to_electricity_supply
+    biogas_to_electricity_flag: true
     cost_flow_cap:
       data: [2444216, 6462942, 0.5]
       index: [monetary, co2, vul]
@@ -497,6 +515,7 @@ techs:
   biogas_to_electricity_supply_USA:
     name: Electricity from anaerobically digested biofuel-USA
     template: biogas_to_electricity_supply
+    biogas_to_electricity_flag: true
     cost_flow_cap:
       data: [1463007, 3752886, 0.5]
       index: [monetary, co2, vul]
@@ -506,6 +525,7 @@ techs:
   biogas_to_electricity_supply_FSM:
     name: Electricity from anaerobically digested biofuel-FSM
     template: biogas_to_electricity_supply
+    biogas_to_electricity_flag: true
     cost_flow_cap:
       data: [1419302, 3752886, 0.5]
       index: [monetary, co2, vul]
@@ -515,6 +535,7 @@ techs:
   biogas_to_electricity_supply_UK:
     name: Electricity from anaerobically digested biofuel-UK
     template: biogas_to_electricity_supply
+    biogas_to_electricity_flag: true
     cost_flow_cap:
       data: [1976764, 5226915, 0.5]
       index: [monetary, co2, vul]
@@ -524,6 +545,7 @@ techs:
   biogas_to_electricity_supply_BEL:
     name: Electricity from anaerobically digested biofuel-BEL
     template: biogas_to_electricity_supply
+    biogas_to_electricity_flag: true
     cost_flow_cap:
       data: [95855, 253458, 0.5]
       index: [monetary, co2, vul]

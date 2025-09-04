@@ -10,10 +10,10 @@ templates:
     flow_in_eff: 0.9273 # Eurocalliope
     flow_out_eff: 0.9273
     storage_cap_max: .inf # Corrected to.inf
-    flow_out_eff: 0.95  # 0.86 round trip efficiency
     storage_loss: 0 # Assumption
     lifetime: 25
-    flow_cap_min: 0
+    #flow_cap_min: 0
+    battery_flag: true
     #flow_cap_per_storage_cap_min: 0.25 # Italy spanish_model
     cost_storage_cap:
       data: [900] # Assumption based on Eurocalliope (EUR2015/MWh), 802 $2015
@@ -39,7 +39,7 @@ techs:
       flow_out_eff: 0.75 # 160 Pumped hydro storage, danish energy agency
       cost_flow_cap:
         data: [5222, 13808, 0.5]  # EUR/MW # kg CO2/MW
-        index: [monetary, co2, vulnerability]
+        index: [monetary, co2, vul]
         dims: ['costs']
       cost_flow_out:
         data: [ 5.0 ]     # (EUR2013/MW/yr) from [@JRC:2014] Table 14
@@ -51,7 +51,7 @@ techs:
         dims: [costs]
       cost_interest_rate:
         data: [0.05, 0.035, 0.1]  # 5% interest rate
-        index: [monetary, co2, vulnerability]
+        index: [monetary, co2, vul]
         dims: ['costs']
 
   pumped_hydro_ESP:
