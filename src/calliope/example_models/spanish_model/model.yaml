@@ -62,8 +62,8 @@ templates:
   interest_rate_new:
     cost_interest_rate:
       data: [0.05, 0.08, 0.0]
-      index: [ monetary,co2, vul ]
-      dims: [costs ]
+      index: [monetary,co2, vul]   
+      dims: [costs]
 
 ###
 # ---- Parameter definition
@@ -97,6 +97,7 @@ parameters:
     wind_onshore_share_cap_min: 0.005
     biomass_turbine_share_cap_max: 0.97
     biomass_turbine_share_cap_min: 0.03
+    european_capacity_share: 0.4 # 40 % of capacity installed coming from EU 
 
     # Local import cap limit:
     # Allow every node to import up to 25% of the total generation.

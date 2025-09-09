@@ -7,9 +7,42 @@ global_expressions:
     equations:
       - expression: flow_out
     default: 0
+  
+  flow_cap_existing_technologies:
+    foreach: [techs, nodes, carriers]
+    where:  existing_techs_flag
+    equations:
+      - expression: flow_cap
+  
+  flow_cap_european_countries:
+    foreach: [techs, nodes, carriers]
+    where:  european_flag
+    equations:
+      - expression: flow_cap
+
+  flow_cap_new_non_demand_transmission: # capacity without demand nor transmission
+    title: Total capacity without transmission, demand and existing capacity
+    foreach: [techs, nodes, carriers]
+    where: base_tech == supply or base_tech == storage
+    equations:
+      - expression: flow_cap 
+
+  
+
 
 lookups:
   ## Flags for technology groups
+  european_flag:
+    description: boolean flag to tag europan technologies
+    dtype: bool 
+    default: false
+  
+  existing_techs_flag:
+    description: flag existing technologies
+    dtype: bool
+    default: false
+  
+
   ng_flag:
     description: boolean flag for technologies that can produce NG
     dtype: bool
@@ -87,6 +120,11 @@ parameters: # general deinition of parameters. For more details, see model.yaml
     description: System-wide CO2 cap
     unit: mass
     default: .nan
+  
+  european_capacity_share:
+    description: share of european capcity installed (used in scenario D and E)
+    unit: unitless
+    default: 0.4
   
   local_cap_import_limit:
     description: Share limit on imports relative to total energy balance
@@ -271,6 +309,21 @@ parameters: # general deinition of parameters. For more details, see model.yaml
 
 constraints:
   # Technology group constraints
+  european_capacity_share_cap:
+    description: Force a minimum % of european installed capacity
+    foreach: [tech]
+    #where: base_tech == supply or base_tech == storage
+    equations:
+      - expression: >
+              sum(flow_cap_european_countries[carriers=$carrier], over=[nodes]) 
+              >= european_capacity_share *
+              (sum(flow_cap_new_non_demand_transmission[carriers=$carrier], over=[nodes, techs]) -
+              sum(flow_cap_existing_technologies[carriers=$carrier], over=[nodes, techs])
+    slices:
+      carrier:
+        - expression: electricity
+    active: true
+
   uranium_share_cap_constraint:
     description: Constraint on the share of any single tech producing uranium to the total uranium production
     foreach: [techs]
