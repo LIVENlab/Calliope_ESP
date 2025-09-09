@@ -100,7 +100,13 @@ overrides:
         templates.interest_rate_new.cost_interest_rate.data: [0.04, 0.07, 0.0]
 
 
+    cap_russia:
+      techs.natural_gas_liquid_RUS.flow_cap_max: 0
+    
+    
+    
 
+      
 
 scenarios:
   cost_optimization: ["monetary_testing", "link_cap_X1" ]
@@ -112,3 +118,5 @@ scenarios:
   IR_test_3: ["monetary_and_emissions_testing", "link_cap_X1", "ir_existing_07", "ir_new_04"]
   IR_test_4: ["emissions_testing", "link_cap_X1", "ir_new_04"]
   IR_test_5: ["monetary_and_emissions_testing", "link_cap_X1", "ir_new_04"]
+
+

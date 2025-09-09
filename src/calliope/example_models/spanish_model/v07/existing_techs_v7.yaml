@@ -46,7 +46,7 @@ techs:
         carrier_in: oil
         flow_out_eff: 0.35 #assumption
         #flow_out_min_relative: 0.1 # Italy spanish_model
-        energy_ramping: 0.05 #assumption
+        flow_ramping: 0.05 #assumption
         lifetime: 35
         cost_flow_cap:
           data: [0] # €/kW
@@ -69,8 +69,8 @@ techs:
         base_tech: storage
         flow_out_eff: 0.75 # Italy spanish_model
         lifetime: 50
-        flow_capacity_per_storage_cap_max: 0.167
-        flow_capacity_per_storage_cap_min: 0.167
+        flow_capacity_per_storage_capacity_max: 0.167
+        flow_capacity_per_storage_capacity_min: 0.167
         storage_cap_max: .inf
         # storage_cap_equals: 46252600 #kWh Italy spanish_model # Fixed -- outdated
         cost_flow_cap: # Existing technology
@@ -89,7 +89,7 @@ techs:
         carrier_in: natural_gas
         carrier_out: electricity
         #flow_out_min_relative: 0.3 # Italy spanish_model
-        energy_ramping: 0.2
+        flow_ramping: 0.2
         flow_out_eff: 0.47 #  [Technology Data for Generation of Electricity and District Heating, Danish Energy Agency]
         lifetime: 25
         cost_flow_cap:
@@ -113,7 +113,7 @@ techs:
         flow_out_eff: 0.28 # Danish energy agency (technology data for el/dh, Woodchips 2030)
         #flow_out_min_relative: 0.3 # Italy spanish_model
         lifetime: 25 # Danish energy agency (technology data for el/dh, Woodchips 2030)
-        energy_ramping: 0.10
+        flow_ramping: 0.10
         source_use_max: .inf
         cost_flow_cap:
           data: [0] # existing
@@ -127,7 +127,7 @@ techs:
           data: [4.77] # e/MWh Italy spanish_model Danish energy agency (technology data for el/dh, Woodchips 2030)
           index: [monetary]
           dims: [costs]
-        cost_om_con:
+        cost_flow_in:
           data: [150]  # Brichs et al 2021
           index: [monetary]
           dims: [costs]
@@ -143,9 +143,9 @@ techs:
         lifetime: 25
         #flow_out_min_relative: 0.3
         storage_cap_max: .inf
-        flow_capacity_per_storage_cap_max: 0.0033
-        flow_capacity_per_storage_cap_min: 0.0033
-        energy_ramping: 0.10
+        flow_capacity_per_storage_capacity_max: 0.0033
+        flow_capacity_per_storage_capacity_min: 0.0033
+        flow_ramping: 0.10
         cost_flow_cap:
           data: [0] # Existing
           index: [monetary]
@@ -158,7 +158,7 @@ techs:
           data: [7.976] # # 06 Gas engines, biogas
           index: [monetary]
           dims: [costs]
-        cost_om_con:
+        cost_flow_in:
           data: [63.45908437668863] # (EUR/MWh)]
           index: [monetary]
           dims: [costs]
@@ -171,7 +171,7 @@ techs:
         #source_use_max: file=capacityfactors-hydro-ror.csv
         source_unit: per_cap
         lifetime: 60
-        energy_ramping: 0.10
+        flow_ramping: 0.10
         cost_flow_cap:
           data: [0]  # Existing
           index: [monetary]
@@ -192,11 +192,14 @@ techs:
         template: interest_rate_existing
         include_storage: true
         carrier_out: electricity
-        #source_use_max: file=capacityfactors-hydro-reservoir-inflow.csv
         source_unit: per_cap
         lifetime: 60
-        flow_capacity_per_storage_cap_max: 0.15
-        flow_capacity_per_storage_cap_min: 0.15
+        flow_capacity_per_storage_capacity_max: 0.15
+        flow_capacity_per_storage_capacity_min: 0.15
+        cost_flow_cap:
+          data: [0]  # Existing
+          index: [monetary]
+          dims: [costs]
         cost_flow_out:
           data: [5.0] #  fixed: EUR/MWh from [@JRC:2014] Table 12
           index: [monetary]
@@ -232,7 +235,7 @@ techs:
         carrier_in: coal
         carrier_out: electricity
         flow_out_eff: 0.37 # [IEA (2012), Technology Roadmap - High-Efficiency, Low-Emissions Coal-Fired Power Generation, IEA, Paris https://www.iea.org/reports/technology-roadmap-high-efficiency-low-emissions-coal-fired-power-generation]
-        energy_ramping: 0.6 # UK spanish_model
+        flow_ramping: 0.6 # UK spanish_model
         lifetime: 30 # PNIEC
         #flow_cap_max: 11311 # MW  [PNIEC, table A.19]
         #flow_cap_min: 0     # Condition *2
@@ -258,7 +261,7 @@ techs:
         template: interest_rate_existing
         flow_out_eff: 0.58 # source: 05 Gas turb. CC, steam extract. 2020
         lifetime: 25
-        energy_ramping: 0.15
+        flow_ramping: 0.15
         cost_flow_cap:
           data: [0]  # (EUR2015/MW) | Existing
           index: [monetary]

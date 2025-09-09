@@ -105,7 +105,6 @@ techs:
   uranium_UK:
       name: "Uranium imports from UK"
       template: uranium
-      group_cap: uranium_cap
       limit_uranium_tech: true
       cost_flow_out:
         data: [ 0.183, 0.48, 0.5] # EUR /kWh
@@ -115,7 +114,6 @@ techs:
   uranium_USA:
       name: "Uranium imports from USA"
       template: uranium
-      group_cap: uranium_cap
       limit_uranium_tech: true
       cost_flow_out:
         data: [ 0.18, 0.46, 0.5 ] # EUR /kWh

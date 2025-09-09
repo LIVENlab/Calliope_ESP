@@ -96,7 +96,6 @@ templates:
     flow_ramping: 0.1 # Assumption
     flow_out_min_relative: 0.2 # Assumption
     lifetime: 25
-    interest_rate: 0.10
     biomass_turbine_flag: true
     cost_flow_out:
       data: [ 4.75, 1330 ] # e/MWh Danish energy agency # ISPRA 2018
@@ -106,7 +105,7 @@ templates:
       data: [ 148872.18 ]
       index: [ monetary ]
       dims: costs
-    cost_om_con:
+    cost_flow_in:
       data: [1500]
       index: [monetary]
       dims: costs

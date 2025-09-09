@@ -61,9 +61,9 @@ templates:
 
   interest_rate_new:
     cost_interest_rate:
-      data: [ 0.05, 0.08, 0.0]
+      data: [0.05, 0.08, 0.0]
       index: [ monetary,co2, vul ]
-      dims: [ costs ]
+      dims: [costs ]
 
 ###
 # ---- Parameter definition
@@ -87,6 +87,16 @@ parameters:
     coal_share_cap_min: 0.03 # Min % of coal production met by one technology
     oil_share_cap_max: 0.18 # Max % of oil production met by one technology
     oil_share_cap_min: 0.07 # Min % of oil production met by one technology
+    open_field_pv_share_cap_max: 0.81 # Max % of open field PV production met by one technology
+    open_field_pv_share_cap_min: 0.01 # Min % of open field PV production met by one technology
+    biogas_to_electricity_share_cap_max: 0.47
+    biogas_to_electricity_share_cap_min: 0.01
+    battery_share_cap_min: 0.03
+    battery_share_cap_max: 0.53
+    wind_onshore_share_cap_max: 0.990
+    wind_onshore_share_cap_min: 0.005
+    biomass_turbine_share_cap_max: 0.97
+    biomass_turbine_share_cap_min: 0.03
 
     # Local import cap limit:
     # Allow every node to import up to 25% of the total generation.
