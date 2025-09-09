@@ -1,5 +1,8 @@
 # ----------------------------
 # Imports & constants
+# @LexPascal
+# Since it is not possible to override math constraints in the current version, the "override" acting on math constraints
+# will be conducted through a direct modification of the self defined math file. 
 # ----------------------------
 import calliope
 import yaml
@@ -118,6 +121,21 @@ def build_scenario(overrides_file: str,
 # ----------------------------
 # Domain-level operations
 # ----------------------------
+
+def fix_european_capacity(math_yaml: str) -> None:
+    """
+    This function activates a predefined constraint defined in math.yaml
+    It directly modifies the file as overrides over math are not allowed
+    """
+    with open(math_yaml, "r") as f:
+        config = yaml.safe_load(f)
+    
+    config["constraints"]["european_capacity_share_cap"]["active"] = True
+
+    with open(math_yaml,"w") as f:
+        yaml.dump(config,f)    
+
+
 def cap_half_china(model: calliope.model.Model,
                    override_yaml: str,
                    out_path: str):
@@ -144,6 +162,26 @@ def fix_spanish_capacity(model: calliope.model.Model,
 # ----------------------------
 # High-level orchestration
 # ----------------------------
+
+def create_scenario_B(results_file: str,
+                      override_yaml: str,
+                      new_override: str):
+    """
+    General call for scenario B
+    """
+
+    path_results = Path(results_file)
+    model = calliope.read_netcdf(path_results)
+
+    fix_spanish_capacity(model, new_override, new_override)
+
+    build_scenario(new_override,
+                   ["cap_russia", "FREEZE_SPANISH_CAPACITY", "link_cap_X1"],
+                   scenario_name="SCENARIO_B")
+    
+
+
+
 def create_scenrio_C(results_file: str,
                      override_yaml: str,
                      new_override: str):
@@ -157,9 +195,30 @@ def create_scenrio_C(results_file: str,
     fix_spanish_capacity(model, new_override, new_override)
 
     build_scenario(new_override,
-                   ["CHINA_CAP", "FREEZE_SPANISH_CAPACITY", "link_cap_X1"],
+                   ["cap_russia", "CHINA_CAP", "FREEZE_SPANISH_CAPACITY", "link_cap_X1"],
                    scenario_name="SCENARIO_C")
 
+
+def create_scenario_D(math_yaml: str,
+                      override_yaml: str):
+    """
+    General call for scenario D
+    """
+    fix_european_capacity(math_yaml)
+    build_scenario(override_yaml,
+                   ["link_cap_X1"],
+                   scenario_name="SCENARIO_D")
+    
+
+def create_scenario_E(override_yaml: str):
+    """
+    General call for scenario D
+    """
+    #fix_european_capacity(math_yaml) --> previously activated in D
+    build_scenario(override_yaml,
+                   ["link_cap_X1", "cap_russia"],
+                   scenario_name="SCENARIO_D")
+    
 
 
 if __name__ == "__main__":
