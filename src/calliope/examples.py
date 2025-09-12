@@ -9,6 +9,14 @@ from calliope.model import read_yaml
 
 _EXAMPLE_MODEL_DIR = Path(importlib.resources.files("calliope")) / "example_models"
 
+def spanish_model(filename: str = "model.yaml", *args, **kwargs):
+    """
+    Returns the built-in Spanish model example.
+    Pointing to other models is possible to avoid API issues.
+    """
+    model_path = _EXAMPLE_MODEL_DIR / "spanish_model" / filename
+    return read_yaml( model_path, *args, **kwargs)
+
 
 def national_scale(*args, **kwargs):
     """Returns the built-in national-scale example model."""
