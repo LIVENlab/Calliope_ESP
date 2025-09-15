@@ -58,6 +58,7 @@ techs:
     carrier_out: electricity
     source_unit: per_cap
     lifetime: 60
+    european_flag: true
     cost_flow_cap:
       data: [ 139025, 4180, 0.5 ]      # (EUR2013/MW) from [@JRC:2014] Table 12
       index: [ monetary, co2, vul ]
@@ -84,6 +85,7 @@ techs:
   battery_CZ:
       name: Battery CZ
       template: battery
+      european_flag: true
       cost_flow_cap:
           data: [17265, 45652, 0.1]  # Eur/MW # # kg Co2/ MW
           index: [monetary, co2, vul]
@@ -101,6 +103,7 @@ techs:
   battery_HU:
       name: Battery PT
       template: battery
+      european_flag: true
       cost_flow_cap:
           data: [19201, 50772, 0.07]  # Eur/MW # # kg Co2/ MW TODO: ADAPT MAGNITUDE
           index: [ monetary, co2, vul]
@@ -109,6 +112,7 @@ techs:
   battery_PL:
       name: Battery CN
       template: battery
+      european_flag: true
       cost_flow_cap:
           data: [17559, 46430, 0.06]  # Eur/MW # # kg Co2/ MW T
           index: [ monetary, co2, vul ]
@@ -117,6 +121,7 @@ techs:
   battery_ESP:
     name: Battery ESP
     template: battery
+    european_flag: true
     cost_flow_cap:
       data: [ 50886, 5779, 0.03 ]  # Eur/MW # # kg Co2/ MW
       index: [ monetary, co2, vul]

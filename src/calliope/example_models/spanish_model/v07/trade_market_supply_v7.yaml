@@ -107,7 +107,7 @@ techs:
       template: uranium
       limit_uranium_tech: true
       cost_flow_out:
-        data: [ 0.183, 0.48, 0.5] # EUR /kWh
+        data: [ 0.183, 0.48, 0.5] # EUR /MWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -116,7 +116,7 @@ techs:
       template: uranium
       limit_uranium_tech: true
       cost_flow_out:
-        data: [ 0.18, 0.46, 0.5 ] # EUR /kWh
+        data: [0.18, 0.46, 0.5] # EUR /MWh
         index: [ monetary, co2, vul] # kg CO2-eq/ kWh of product
         dims: costs
 

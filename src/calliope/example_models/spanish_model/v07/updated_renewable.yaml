@@ -146,6 +146,7 @@ techs:
   open_field_pv_DE:
     name: Open field PV DE
     template: open_pv
+    european_flag: true
     cost_flow_cap:
       data: [77489, 204915, 0.05] # cost_flow_cap (€ /MW), kg CO2eq / MW, vulnerability
       index: [monetary, co2, vul]
@@ -154,6 +155,7 @@ techs:
   open_field_pv_NL: # check NL, NDL... #TODO: Check
     name: Open field PV NL
     template: open_pv
+    european_flag: true
     cost_flow_cap:
       data: [69593, 184035, 0.03]
       index: [monetary, co2, vul]
@@ -162,6 +164,7 @@ techs:
   open_field_pv_PT:
     name: Open field PV PT
     template: open_pv
+    european_flag: true
     cost_flow_cap:
       data: [117709, 311275, 0.03]
       index: [monetary, co2, vul]
@@ -178,6 +181,7 @@ techs:
   open_field_pv_ESP:
     name: Open field PV ESP
     template: open_pv
+    european_flag: true
     cost_flow_cap:
       data: [687476, 263720, 0.16]
       index: [monetary, co2, vul]
@@ -203,6 +207,7 @@ techs:
     name: Roof mounted PV DE
     template: pv_on_roof
     carrier_out: electricity
+    european_flag: true
     cost_om_annual:
       data: [ 7900 ]         # (EUR2015/MW) | Danish energy agency (technology data for el/dh, 22 photovoltaics large, 2050)
       index: [ monetary ]
@@ -217,6 +222,7 @@ techs:
     name: Roof mounted PV NL
     template: pv_on_roof
     carrier_out: electricity
+    european_flag: true
     cost_om_annual:
       data: [ 7900 ]         # (EUR2015/MW) | Danish energy agency (technology data for el/dh, 22 photovoltaics large, 2050)
       index: [ monetary ]
@@ -231,6 +237,7 @@ techs:
     name: Roof mounted PV PT
     template: pv_on_roof
     carrier_out: electricity
+    european_flag: true
     cost_om_annual:
       data: [ 7900 ]         # (EUR2015/MW) | Danish energy agency (technology data for el/dh, 22 photovoltaics large, 2050)
       index: [ monetary ]
@@ -258,6 +265,7 @@ techs:
     name: Roof mounted PV - ESP
     template: pv_on_roof
     carrier_out: electricity
+    european_flag: true
     cost_om_annual:
       data: [ 7900 ]         # (EUR2015/MW) | Danish energy agency (technology data for el/dh, 22 photovoltaics large, 2050)
       index: [ monetary ]
@@ -292,6 +300,7 @@ techs:
     name: Wind DE
     template: wind_onshore_monopoly
     wind_onshore_monopoly_flag: true
+    european_flag: true
     cost_flow_cap:
       data: [17337, 45843, 0.15]
       index: [monetary, co2, vul]
@@ -302,6 +311,7 @@ techs:
     name: Wind PT
     template: wind_onshore_monopoly
     wind_onshore_monopoly_flag: true
+    european_flag: true
     cost_flow_cap:
       data: [11905, 31480, 0.07]
       index: [monetary, co2, vul]
@@ -312,6 +322,7 @@ techs:
     name: Wind FR
     template: wind_onshore_monopoly
     wind_onshore_monopoly_flag: true
+    european_flag: true
     cost_flow_cap:
       data: [13122, 34697, 0.02]
       index: [monetary, co2, vul]
@@ -322,6 +333,7 @@ techs:
     name: Wind NDL
     template: wind_onshore_monopoly
     wind_onshore_monopoly_flag: true
+    european_flag: true
     cost_flow_cap:
       data: [181182, 95055.3, 0.02]
       index: [monetary, co2, vul]
@@ -331,6 +343,7 @@ techs:
     name: Wind ESP
     template: wind_onshore_monopoly
     wind_onshore_monopoly_flag: true
+    european_flag: true
     cost_flow_cap:
       data: [6748, 17843, 0.16]
       index: [monetary, co2, vul]
@@ -359,6 +372,7 @@ techs:
   wind_onshore_competing_DE:
     name: Wind onshore competing DE
     template: wind_onshore_competing
+    european_flag: true
     cost_flow_cap:
       data: [17337, 45843, 0.15]
       index: [monetary, co2, vul]
@@ -368,6 +382,7 @@ techs:
   wind_onshore_competing_PT:
     name: Wind onshore competing PT
     template: wind_onshore_competing
+    european_flag: true
     cost_flow_cap:
       data: [11905, 31480, 0.07]
       index: [monetary, co2, vul]
@@ -377,6 +392,7 @@ techs:
   wind_onshore_competing_FR:
     name: Wind onshore competing FR
     template: wind_onshore_competing
+    european_flag: true
     cost_flow_cap:
       data: [13122, 34697, 0.02]
       index: [monetary, co2, vul]
@@ -386,6 +402,7 @@ techs:
   wind_onshore_competing_NDL:
     name: Wind onshore competing NDL
     template: wind_onshore_competing
+    european_flag: true
     cost_flow_cap:
       data: [6748, 17843, 0.02]
       index: [monetary, co2, vul]
@@ -395,6 +412,7 @@ techs:
   wind_onshore_competing_ESP:
     name: Wind onshore competing ESP
     template: wind_onshore_competing
+    european_flag: true
     cost_flow_cap:
       data: [62013826, 7043261, 0.16]
       index: [monetary, co2, vul]
@@ -422,6 +440,7 @@ techs:
   wind_offshore_DE:
     name: Wind DE
     template: wind_offshore
+    european_flag: true
     cost_flow_cap:
       data: [17337, 45843, 0.15]
       index: [monetary, co2, vul]
@@ -431,6 +450,7 @@ techs:
   wind_offshore_PT:
     name: Wind PT
     template: wind_offshore
+    european_flag: true
     cost_flow_cap:
       data:  [11905, 31480, 0.07]
       index: [monetary, co2, vul]
@@ -440,6 +460,7 @@ techs:
   wind_offshore_FR:
     name: Wind FR
     template: wind_offshore
+    european_flag: true
     cost_flow_cap:
       data: [13122, 34697, 0.02]
       index: [monetary, co2, vul]
@@ -449,6 +470,7 @@ techs:
   wind_offshore_NDL:
     name: Wind offshore NDL
     template: wind_offshore
+    european_flag: true
     cost_flow_cap:
       data: [6748, 17843, 0.02]
       index: [monetary, co2, vul]
@@ -458,6 +480,7 @@ techs:
   wind_offshore_ESP:
     name: Wind offshore NDL
     template: wind_offshore
+    european_flag: true
     cost_flow_cap:
       data: [62013826, 7043261, 0.16]
       index: [monetary, co2, vul]
@@ -467,6 +490,7 @@ techs:
   biomass_IT:
     name: biomass turbine IT
     template: biomass
+    european_flag: true
     cost_flow_cap:
       data: [4440, 11739, 0.5]
       index: [monetary, co2, vul]
@@ -476,6 +500,7 @@ techs:
   biomass_FR:
     name: biomass turbine FR
     template: biomass
+    european_flag: true
     cost_flow_cap:
       data: [147, 388, 0.5]
       index: [monetary, co2, vul]
@@ -484,6 +509,7 @@ techs:
   biomass_ESP:
     name: biomass turbine ESP
     template: biomass
+    european_flag: true
     cost_flow_cap:
       data: [2844, 86, 0.5]
       index: [monetary, co2, vul]
@@ -495,6 +521,7 @@ techs:
     name: Electricity from anaerobically digested biofuel-FR
     template: biogas_to_electricity_supply
     biogas_to_electricity_flag: true
+    european_flag: true
     cost_flow_cap:
       data: [2836190, 7499390, 0.5]
       index: [monetary, co2, vul]
@@ -545,6 +572,7 @@ techs:
     name: Electricity from anaerobically digested biofuel-BEL
     template: biogas_to_electricity_supply
     biogas_to_electricity_flag: true
+    european_flag: true
     cost_flow_cap:
       data: [95855, 253458, 0.5]
       index: [monetary, co2, vul]

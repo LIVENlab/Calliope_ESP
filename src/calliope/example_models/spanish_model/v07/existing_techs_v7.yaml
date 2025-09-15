@@ -24,6 +24,7 @@ techs:
       carrier_out: electricity
       source_unit: per_cap
       lifetime: 27 # [@JRC:2014] Table 4
+      existing_techs_flag: true
       cost_flow_cap:
         data: [ 0 ] # existing tech
         index: [ monetary ]
@@ -48,6 +49,7 @@ techs:
         #flow_out_min_relative: 0.1 # Italy spanish_model
         flow_ramping: 0.05 #assumption
         lifetime: 35
+        existing_techs_flag: true
         cost_flow_cap:
           data: [0] # €/kW
           index: [monetary]
@@ -72,6 +74,7 @@ techs:
         flow_capacity_per_storage_capacity_max: 0.167
         flow_capacity_per_storage_capacity_min: 0.167
         storage_cap_max: .inf
+        existing_techs_flag: true
         # storage_cap_equals: 46252600 #kWh Italy spanish_model # Fixed -- outdated
         cost_flow_cap: # Existing technology
           data: [ 0 ] # €/kW
@@ -92,6 +95,7 @@ techs:
         flow_ramping: 0.2
         flow_out_eff: 0.47 #  [Technology Data for Generation of Electricity and District Heating, Danish Energy Agency]
         lifetime: 25
+        existing_techs_flag: true
         cost_flow_cap:
           data: [0] # Existing
           index: [monetary]
@@ -115,6 +119,7 @@ techs:
         lifetime: 25 # Danish energy agency (technology data for el/dh, Woodchips 2030)
         flow_ramping: 0.10
         source_use_max: .inf
+        existing_techs_flag: true
         cost_flow_cap:
           data: [0] # existing
           index: [monetary]
@@ -146,6 +151,7 @@ techs:
         flow_capacity_per_storage_capacity_max: 0.0033
         flow_capacity_per_storage_capacity_min: 0.0033
         flow_ramping: 0.10
+        existing_techs_flag: true
         cost_flow_cap:
           data: [0] # Existing
           index: [monetary]
@@ -172,6 +178,7 @@ techs:
         source_unit: per_cap
         lifetime: 60
         flow_ramping: 0.10
+        existing_techs_flag: true
         cost_flow_cap:
           data: [0]  # Existing
           index: [monetary]
@@ -196,6 +203,7 @@ techs:
         lifetime: 60
         flow_capacity_per_storage_capacity_max: 0.15
         flow_capacity_per_storage_capacity_min: 0.15
+        existing_techs_flag: true
         cost_flow_cap:
           data: [0]  # Existing
           index: [monetary]
@@ -218,6 +226,7 @@ techs:
         carrier_out: electricity
         flow_out_eff: 0.4 # Eurocalliope
         lifetime: 50
+        existing_techs_flag: true
         cost_flow_cap:
           data: [0]  # Existing
           index: [monetary]
@@ -237,6 +246,7 @@ techs:
         flow_out_eff: 0.37 # [IEA (2012), Technology Roadmap - High-Efficiency, Low-Emissions Coal-Fired Power Generation, IEA, Paris https://www.iea.org/reports/technology-roadmap-high-efficiency-low-emissions-coal-fired-power-generation]
         flow_ramping: 0.6 # UK spanish_model
         lifetime: 30 # PNIEC
+        existing_techs_flag: true
         #flow_cap_max: 11311 # MW  [PNIEC, table A.19]
         #flow_cap_min: 0     # Condition *2
         cost_flow_cap:
@@ -262,6 +272,7 @@ techs:
         flow_out_eff: 0.58 # source: 05 Gas turb. CC, steam extract. 2020
         lifetime: 25
         flow_ramping: 0.15
+        existing_techs_flag: true
         cost_flow_cap:
           data: [0]  # (EUR2015/MW) | Existing
           index: [monetary]
@@ -283,6 +294,7 @@ techs:
           template: interest_rate_existing
           flow_out_eff: 0.23
           lifetime: 24 # Italy spanish_model
+          existing_techs_flag: true
           cost_flow_cap:
             data: [0] # Existing
             index: [monetary]
@@ -304,6 +316,7 @@ techs:
         lifetime: 30
         source_unit: per_cap
         template: interest_rate_existing
+        existing_techs_flag: true
         #resource_unit: energy_per_cap
         area_use_per_flow_cap: 0.00636 # Danish energy agency (technology data for el/dh, average of 22 photovoltaics small and medium, 2030)
         cost_flow_cap:
@@ -323,6 +336,7 @@ techs:
         lifetime: 25
         area_use_per_flow_cap: 0.02025 # Danish energy agency
         source_unit: per_cap
+        existing_techs_flag: true
         #resource_unit: energy_per_cap
         cost_flow_cap:
           data: [0] # Existing|
