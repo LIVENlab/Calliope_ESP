@@ -33,6 +33,14 @@ rule process_sample:
         "echo Processing {wildcards.sample} > {output}"
 
 
+rule all:
+    input:
+        expand("results/results_test_scenario_B_{cost}.done", cost=COSTS),
+        expand("results/results_test_scenario_C_{cost}.done", cost=COSTS),
+        expand("results/results_test_scenario_D_{cost}.done", cost=COSTS),
+        expand("results/results_test_scenario_E_{cost}.done", cost=COSTS)
+
+
 
 # ----------------------------
 # Scenario A definitions
@@ -54,8 +62,8 @@ rule scenario_A:
         nc_out = output.nc
         done_marker = output.done
         csv_folder = f"results/results_test_scenario_A_{cost}_csv"
-        lp_file = f"results/my_model{cost}.lp"
-        results_ilp = f"results/my_model{cost}.ilp"
+        lp_file = f"results/my_model_A_{cost}.lp"
+        results_ilp = f"results/my_model_A_{cost}.ilp"
         inter_logs.info(f"--- Running scenario_A for cost {cost} ---")
 
         create_scenario_A()
@@ -130,9 +138,17 @@ rule scenario_B:
         nc_out = output.nc
         done_marker = output.done
         csv_folder = f"results/results_test_scenario_B_{cost}_csv"
-        lp_file = f"results/my_model{cost}.lp"
-        results_ilp = f"results/my_model{cost}.ilp"
+        lp_file = f"results/my_model_B_{cost}.lp"
+        results_ilp = f"results/my_model_B_{cost}.ilp"
         inter_logs.info(f"--- Running scenario_B for cost {cost} ---")
+        inter_logs.debug(
+            f"inputs passed in snakemake:\n"
+            f"  cost: {cost}\n"
+            f"  nc_out: {nc_out}\n"
+            f"  done_marker: {done_marker}\n"
+            f"  lp_file: {lp_file}\n"
+            f"  results_ilp: {results_ilp}"
+            )
 
         create_scenario_B(
             input.results_A,
@@ -152,10 +168,9 @@ rule scenario_B:
             model.to_netcdf(nc_out)
             model.to_csv(csv_folder, allow_overwrite=True)
 
-            # Create the directory for the done file
+           
             os.makedirs(os.path.dirname(done_marker), exist_ok=True)
             
-            # This creates the .done file in the location expected by the all rule.
             with open(output.done, 'w') as f:
                 f.write("completed")
                 inter_logs.info("running compelted")
@@ -213,8 +228,8 @@ rule scenario_C:
         nc_out = output.nc
         done_marker = output.done
         csv_folder = f"results/results_test_scenario_C_{cost}_csv"
-        lp_file = f"results/my_model{cost}.lp"
-        results_ilp = f"results/my_model{cost}.ilp"
+        lp_file = f"results/my_model_C_{cost}.lp"
+        results_ilp = f"results/my_model_C_{cost}.ilp"
         inter_logs.info(f"--- Running scenario_C for cost {cost} ---")
 
         create_scenario_C(
@@ -235,10 +250,8 @@ rule scenario_C:
             model.to_netcdf(nc_out)
             model.to_csv(csv_folder, allow_overwrite=True)
 
-            # Create the directory for the done file
             os.makedirs(os.path.dirname(done_marker), exist_ok=True)
             
-            # This creates the .done file in the location expected by the all rule.
             with open(output.done, 'w') as f:
                 f.write("completed")
                 inter_logs.info("running compelted")
@@ -265,12 +278,12 @@ rule scenario_C:
 
             if os.path.exists(results_ilp):
                 inter_logs.info("Gurobi completed successfully")
-                # Create the done file even though the main process failed
+                
                 os.makedirs(os.path.dirname(done_marker), exist_ok=True)
                 with open(done_marker, 'w') as f:
                     f.write("completed_with_gurobi_fallback")
 
-
+            
 # ----------------------------
 # Scenario D definitions --> Run after C
 # ----------------------------
@@ -295,8 +308,8 @@ rule scenario_D: # Run after scenario C call
         nc_out = output.nc
         done_marker = output.done
         csv_folder = f"results/results_test_scenario_D_{cost}_csv"
-        lp_file = f"results/my_model{cost}.lp"
-        results_ilp = f"results/my_model{cost}.ilp"
+        lp_file = f"results/my_model_D_{cost}.lp"
+        results_ilp = f"results/my_model_D_{cost}.ilp"
         inter_logs.info(f"--- Running scenario_D for cost {cost} ---")
 
         create_scenario_D(
@@ -329,6 +342,9 @@ rule scenario_D: # Run after scenario C call
             
             if len(model.results.dims) == 0: # Non solution condition
                 raise InfeasibleModelException("Model was unfeasible")
+            
+            restore_european_capacity('math.yaml') # Set back again the constraint modified by create_scenario_D to False
+
 
         except Exception as e:
             inter_logs.error(f"file error: {e}")
@@ -374,8 +390,8 @@ rule scenario_E: # Run after scenario C call
         nc_out = output.nc
         done_marker = output.done
         csv_folder = f"results/results_test_scenario_E_{cost}_csv"
-        lp_file = f"results/my_model{cost}.lp"
-        results_ilp = f"results/my_model{cost}.ilp"
+        lp_file = f"results/my_model_E_{cost}.lp"
+        results_ilp = f"results/my_model_E_{cost}.ilp"
         inter_logs.info(f"--- Running scenario_E for cost {cost} ---")
 
         create_scenario_E(

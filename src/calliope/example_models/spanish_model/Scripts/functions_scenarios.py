@@ -9,6 +9,7 @@ import yaml
 import xarray as xr
 import pandas as pd
 from ruamel.yaml import YAML
+from ruamel.yaml.comments import CommentedSeq
 from pathlib import Path
 from typing import Callable, Literal, Dict, List, Union
 import sys
@@ -156,44 +157,85 @@ def build_scenario(overrides_file: str,
     The scenario will be triplicated according to the costs:
     scenario_name_{cost}, including in each single optimization weights
     """
+    """
+    Append a scenario definition into the YAML file.
+    The scenario will be triplicated according to the costs:
+    scenario_name_{cost}, including in each single optimization weights
+    """
     inter_logs.info(f"Building scenario {scenario_name}")
 
+    yaml = YAML()
+    yaml.preserve_quotes = True
+    yaml.default_flow_style = False
+    yaml.sort_keys = False
+
     with open(overrides_file, "r") as f:
-        config = yaml.safe_load(f)
+        config = yaml.load(f)
 
     _validate_overrides(config, overrides)
     scenarios = _extend_scenarios(scenario_name, overrides)
-   
+
+    # Convert each list to flow-style sequence
+    for k, v in scenarios.items():
+        seq = CommentedSeq(v)
+        seq.fa.set_flow_style()   # force inline
+        scenarios[k] = seq
+
     config['scenarios'].update(scenarios)
 
-    yaml.add_representer(list, repr_inline_list)
-
-    yaml_str = yaml.dump(config, default_flow_style=False, sort_keys=False)
-    
     with open(overrides_file, "w") as f:
-        f.write(yaml_str)
+        yaml.dump(config, f)
 
-    inter_logs.debug(f"Scenario construction for {scenario_name}: { {scenario_name: overrides} }")
-    inter_logs.info(f"Scenario construction done")
-
+    # Debugging
+    inter_logs.debug(f"Scenario construction for {scenario_name}: {scenarios}")
+    inter_logs.debug(f"Scenarios section after update:\n{config['scenarios']}")
+    inter_logs.debug(f"Scenario written in: {os.path.abspath(overrides_file)}")
 
 # ----------------------------
 # Domain-level operations
 # ----------------------------
+def restore_european_capacity(math_yaml: str) -> None:
+    """
+    This function deactivates a predefined constraint defined in math.yaml
+    It directly modifies the file as overrides over math are not allowed
+    """
+    yaml = YAML()
+    yaml.preserve_quotes = True  
+
+    with open(math_yaml, "r") as f:
+        config = yaml.load(f)
+
+    
+    config["constraints"]["european_capacity_share_cap"]["active"] = False
+
+    inter_logs.info(
+        f"Math yaml has been updated {config['constraints']['european_capacity_share_cap']}"
+    )
+
+    with open(math_yaml, "w") as f:
+        yaml.dump(config, f)  
+
+
 def fix_european_capacity(math_yaml: str) -> None:
     """
     This function activates a predefined constraint defined in math.yaml
     It directly modifies the file as overrides over math are not allowed
     """
+    yaml = YAML()
+    yaml.preserve_quotes = True  
+
     with open(math_yaml, "r") as f:
-        config = yaml.safe_load(f)
+        config = yaml.load(f)
+
     
     config["constraints"]["european_capacity_share_cap"]["active"] = True
 
-    inter_logs.info(f"Math yaml has been updated {config["constraints"]["european_capacity_share_cap"]}")
-    
-    with open(math_yaml,"w") as f:
-        yaml.dump(config,f)    
+    inter_logs.info(
+        f"Math yaml has been updated {config['constraints']['european_capacity_share_cap']}"
+    )
+
+    with open(math_yaml, "w") as f:
+        yaml.dump(config, f)   
 
 
 def cap_half_china(model: calliope.model.Model,
@@ -201,13 +243,16 @@ def cap_half_china(model: calliope.model.Model,
                    out_path: str):
     CN_techs = _extract_country_technologies("_CN", model)
     
-
+    
     caps_ = model.results.flow_cap.sel(
         techs=CN_techs, carriers="electricity"
     ).to_series().dropna()
 
     new_caps = caps_ * _SCENARIO_B_CAP
     _write_cap_override(new_caps, override_yaml, "CHINA_CAP", out_path, mode="max")
+
+    inter_logs.debug(f"technologies filtered: {CN_techs}")
+    inter_logs.debug(f"caps passed for CN techs: {caps_}")
 
 
 def fix_spanish_capacity(model: calliope.model.Model,
@@ -220,7 +265,7 @@ def fix_spanish_capacity(model: calliope.model.Model,
         techs=ESP_techs, carriers="electricity"
     ).to_series().dropna()
 
-    _write_cap_override(caps_, override_yaml, "FREEZE_SPANISH_CAPACITY", out_path, "equals")
+    _write_cap_override(caps_, override_yaml, "FREEZE_SPANISH_CAPACITY", out_path, "max")
 
     inter_logs.debug(f"technologies filtered: {ESP_techs}")
     inter_logs.debug(f"caps passed for spanish techs: {caps_}")
@@ -266,7 +311,7 @@ def create_scenario_B(results_file: str,
     fix_spanish_capacity(model, override_yaml, new_override)
 
     build_scenario(new_override,
-                   ["cap_russia", "FREEZE_SPANISH_CAPACITY", "link_cap_X1"],
+                   ["cap_russia", "exclude_spanish_diversity","FREEZE_SPANISH_CAPACITY", "link_cap_X1"],
                    scenario_name="scenario_B")
     
 
@@ -285,7 +330,7 @@ def create_scenario_C(results_file: str,
     fix_spanish_capacity(model, new_override, new_override)
 
     build_scenario(new_override,
-                   ["cap_russia", "CHINA_CAP", "FREEZE_SPANISH_CAPACITY", "link_cap_X1"],
+                   ["cap_russia", "CHINA_CAP", "exclude_spanish_diversity", "FREEZE_SPANISH_CAPACITY", "link_cap_X1"],
                    scenario_name="scenario_C")
 
 
