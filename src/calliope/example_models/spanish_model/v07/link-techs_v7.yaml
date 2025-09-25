@@ -76,7 +76,6 @@ techs:
         link_from: ESP_1
         link_to: ESP_2
         template: ac_transmission
-
         cost_flow_cap:
             data: [175000]
             index: [ monetary ]
@@ -86,7 +85,6 @@ techs:
         link_from: ESP_1
         link_to: PRT_1
         template: ac_transmission
-
         cost_flow_cap:
             data: [175000] # EUR/MW
             index: [monetary]

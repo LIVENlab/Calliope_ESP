@@ -11,12 +11,13 @@ import:
     - 'data_tables.yaml'
     - 'overrides.yaml'
 
+
 # Data
 config:
   init:
     name: Calliope Spain
     subset:
-      timesteps: ["2018-04-01", "2018-04-10"]
+      timesteps: ["2018-01-01", "2018-12-31"]
     calliope_version:  0.7.0
     resample:
       timesteps: 3h
@@ -62,15 +63,17 @@ templates:
   interest_rate_new:
     cost_interest_rate:
       data: [0.05, 0.08, 0.0]
-      index: [monetary,co2, vul]   
+      index: [monetary,co2, vul]
       dims: [costs]
+
 
 ###
 # ---- Parameter definition
 ###
+
 parameters:
     objective_cost_weights:
-        data: [1, 1, 0] # switch according to scenario
+        data: [3.05, 0.16, 191.8] # switch according to scenario
         index: [monetary, co2, vul]
         dims: ['costs']
     #bigM: 1e6
@@ -97,7 +100,7 @@ parameters:
     wind_onshore_share_cap_min: 0.005
     biomass_turbine_share_cap_max: 0.97
     biomass_turbine_share_cap_min: 0.03
-    european_capacity_share: 0.4 # 40 % of capacity installed coming from EU 
+    european_capacity_share: 0.4 # 40 % of capacity installed coming from EU
 
     # Local import cap limit:
     # Allow every node to import up to 25% of the total generation.

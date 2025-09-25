@@ -15,6 +15,7 @@ def spanish_model(filename: str = "model.yaml", *args, **kwargs):
     Pointing to other models is possible to avoid API issues.
     """
     model_path = _EXAMPLE_MODEL_DIR / "spanish_model" / filename
+    print(model_path, args)
     return read_yaml( model_path, *args, **kwargs)
 
 

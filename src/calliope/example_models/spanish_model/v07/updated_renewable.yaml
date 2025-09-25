@@ -152,7 +152,7 @@ techs:
       index: [monetary, co2, vul]
       dims: ['costs']
 
-  open_field_pv_NL: # check NL, NDL... #TODO: Check
+  open_field_pv_NL: # check NL, NDL...
     name: Open field PV NL
     template: open_pv
     european_flag: true
@@ -345,7 +345,7 @@ techs:
     wind_onshore_monopoly_flag: true
     european_flag: true
     cost_flow_cap:
-      data: [6748, 17843, 0.16]
+      data: [62013826, 17843, 0.16]
       index: [monetary, co2, vul]
       dims: ['costs']
 
@@ -492,7 +492,7 @@ techs:
     template: biomass
     european_flag: true
     cost_flow_cap:
-      data: [4440, 11739, 0.5]
+      data: [4440, 11739, 0.12]
       index: [monetary, co2, vul]
       dims: ['costs']
 
@@ -502,7 +502,7 @@ techs:
     template: biomass
     european_flag: true
     cost_flow_cap:
-      data: [147, 388, 0.5]
+      data: [147, 388, 0.12]
       index: [monetary, co2, vul]
       dims: ['costs']
 
@@ -511,7 +511,7 @@ techs:
     template: biomass
     european_flag: true
     cost_flow_cap:
-      data: [2844, 86, 0.5]
+      data: [2844, 86, 0.12]
       index: [monetary, co2, vul]
       dims: ['costs']
 
@@ -523,7 +523,7 @@ techs:
     biogas_to_electricity_flag: true
     european_flag: true
     cost_flow_cap:
-      data: [2836190, 7499390, 0.5]
+      data: [2836190, 7499390, 0.12]
       index: [monetary, co2, vul]
       dims: ['costs']
 
@@ -533,7 +533,7 @@ techs:
     template: biogas_to_electricity_supply
     biogas_to_electricity_flag: true
     cost_flow_cap:
-      data: [2444216, 6462942, 0.5]
+      data: [2444216, 6462942, 0.12]
       index: [monetary, co2, vul]
       dims: ['costs']
 
@@ -543,7 +543,7 @@ techs:
     template: biogas_to_electricity_supply
     biogas_to_electricity_flag: true
     cost_flow_cap:
-      data: [1463007, 3752886, 0.5]
+      data: [1463007, 3752886, 0.12]
       index: [monetary, co2, vul]
       dims: ['costs']
 
@@ -553,7 +553,7 @@ techs:
     template: biogas_to_electricity_supply
     biogas_to_electricity_flag: true
     cost_flow_cap:
-      data: [1419302, 3752886, 0.5]
+      data: [1419302, 3752886, 0.12]
       index: [monetary, co2, vul]
       dims: ['costs']
 
@@ -563,7 +563,7 @@ techs:
     template: biogas_to_electricity_supply
     biogas_to_electricity_flag: true
     cost_flow_cap:
-      data: [1976764, 5226915, 0.5]
+      data: [1976764, 5226915, 0.12]
       index: [monetary, co2, vul]
       dims: ['costs']
 
@@ -574,7 +574,7 @@ techs:
     biogas_to_electricity_flag: true
     european_flag: true
     cost_flow_cap:
-      data: [95855, 253458, 0.5]
+      data: [95855, 253458, 0.12]
       index: [monetary, co2, vul]
       dims: ['costs']
 

@@ -6,12 +6,13 @@ import yaml
 import subprocess
 import os
 import traceback
-
+import logging
+logging.basicConfig(force=True)
 
 inter_logs.info("=== Snakemake logger started ===")
 COSTS = ["monetary", "co2", "vul"]
 
-
+SCENARIOS_SINGLE = ["B","C","D","E"]
 
 
 class InfeasibleModelException(Exception):
@@ -22,15 +23,6 @@ class InfeasibleModelException(Exception):
 # Test
 # ----------------------------
 
-rule example_all:
-    input:
-        expand("output_{cost}.txt", cost=COSTS)
-
-rule process_sample:
-    output:
-        "output_{sample}.txt"
-    shell:
-        "echo Processing {wildcards.sample} > {output}"
 
 
 rule all:
@@ -41,6 +33,9 @@ rule all:
         expand("results/results_test_scenario_E_{cost}.done", cost=COSTS)
 
 
+rule all_single:
+    input:
+        expand("results/results_test_scenario_{sc}.done", sc=SCENARIOS_SINGLE)
 
 # ----------------------------
 # Scenario A definitions
@@ -66,7 +61,9 @@ rule scenario_A:
         results_ilp = f"results/my_model_A_{cost}.ilp"
         inter_logs.info(f"--- Running scenario_A for cost {cost} ---")
 
-        create_scenario_A()
+        create_scenario_A(
+            expand_costs=False
+        )
 
         try:
             model = calliope.examples.spanish_model(
@@ -74,7 +71,7 @@ rule scenario_A:
                 scenario=f"scenario_A_{cost}"
             )
             model.build()
-            model.backend.verbose_strings() 
+            model.backend.verbose_strings()
             model.backend.to_lp(lp_file)
             model.solve()
             model.to_netcdf(nc_out)
@@ -82,23 +79,23 @@ rule scenario_A:
 
             # Create the directory for the done file
             os.makedirs(os.path.dirname(done_marker), exist_ok=True)
-            
+
             # This creates the .done file in the location expected by the all rule.
             with open(output.done, 'w') as f:
                 f.write("completed")
                 inter_logs.info("running compelted")
-            
+
             if not os.path.exists(nc_out):
                 raise Exception(f"NetCDF file {nc_out} was not created")
-            
+
             inter_logs.info(f"Successfully completed scenario_A_{cost}")
 
         except Exception as e:
             inter_logs.error(f"file error: {e}")
             inter_logs.error(f"Traceback: {traceback.format_exc()}")
             inter_logs.info("Analysing error with Gurobi...")
-            
-            
+
+
             if not os.path.exists(lp_file):
                 inter_logs.error(f"LP file {lp_file} does not exist, cannot run Gurobi")
                 raise
@@ -153,7 +150,7 @@ rule scenario_B:
         create_scenario_B(
             input.results_A,
             input.overrides,
-            input.overrides
+            input.overrides,expand_costs=True
         )
 
         try:
@@ -162,22 +159,22 @@ rule scenario_B:
                 scenario=f"scenario_B_{cost}"
             )
             model.build()
-            model.backend.verbose_strings() 
+            model.backend.verbose_strings()
             model.backend.to_lp(lp_file)
             model.solve()
             model.to_netcdf(nc_out)
             model.to_csv(csv_folder, allow_overwrite=True)
 
-           
+
             os.makedirs(os.path.dirname(done_marker), exist_ok=True)
-            
+
             with open(output.done, 'w') as f:
                 f.write("completed")
                 inter_logs.info("running compelted")
-            
+
             if not os.path.exists(nc_out):
                 raise Exception(f"NetCDF file {nc_out} was not created")
-            
+
             if len(model.results.dims) == 0: # Non solution condition
                 raise InfeasibleModelException("Model was unfeasible")
 
@@ -185,8 +182,8 @@ rule scenario_B:
             inter_logs.error(f"file error: {e}")
             inter_logs.error(f"Traceback: {traceback.format_exc()}")
             inter_logs.info("Analysing error with Gurobi...")
-            
-            
+
+
             if not os.path.exists(lp_file):
                 inter_logs.error(f"LP file {lp_file} does not exist, cannot run Gurobi")
                 raise
@@ -195,7 +192,7 @@ rule scenario_B:
             result = subprocess.run(cmd, capture_output=True, text=True, check=True)
             inter_logs.info(f"Gurobi report at {results_ilp}")
 
-            
+
             if os.path.exists(results_ilp):
                 inter_logs.info("Gurobi completed successfully")
                 # Create the done file even though the main process failed
@@ -244,21 +241,21 @@ rule scenario_C:
                 scenario=f"scenario_C_{cost}"
             )
             model.build()
-            model.backend.verbose_strings() 
+            model.backend.verbose_strings()
             model.backend.to_lp(lp_file)
             model.solve()
             model.to_netcdf(nc_out)
             model.to_csv(csv_folder, allow_overwrite=True)
 
             os.makedirs(os.path.dirname(done_marker), exist_ok=True)
-            
+
             with open(output.done, 'w') as f:
                 f.write("completed")
                 inter_logs.info("running compelted")
-            
+
             if not os.path.exists(nc_out):
                 raise Exception(f"NetCDF file {nc_out} was not created")
-            
+
             if len(model.results.dims) == 0: # Non solution condition
                 raise InfeasibleModelException("Model was unfeasible")
 
@@ -266,8 +263,8 @@ rule scenario_C:
             inter_logs.error(f"file error: {e}")
             inter_logs.error(f"Traceback: {traceback.format_exc()}")
             inter_logs.info("Analysing error with Gurobi...")
-            
-            
+
+
             if not os.path.exists(lp_file):
                 inter_logs.error(f"LP file {lp_file} does not exist, cannot run Gurobi")
                 raise
@@ -278,12 +275,12 @@ rule scenario_C:
 
             if os.path.exists(results_ilp):
                 inter_logs.info("Gurobi completed successfully")
-                
+
                 os.makedirs(os.path.dirname(done_marker), exist_ok=True)
                 with open(done_marker, 'w') as f:
                     f.write("completed_with_gurobi_fallback")
 
-            
+
 # ----------------------------
 # Scenario D definitions --> Run after C
 # ----------------------------
@@ -323,7 +320,7 @@ rule scenario_D: # Run after scenario C call
                 scenario=f"scenario_D_{cost}"
             )
             model.build()
-            model.backend.verbose_strings() 
+            model.backend.verbose_strings()
             model.backend.to_lp(lp_file)
             model.solve()
             model.to_netcdf(nc_out)
@@ -331,18 +328,18 @@ rule scenario_D: # Run after scenario C call
 
             # Create the directory for the done file
             os.makedirs(os.path.dirname(done_marker), exist_ok=True)
-            
+
             # This creates the .done file in the location expected by the all rule.
             with open(output.done, 'w') as f:
                 f.write("completed")
                 inter_logs.info("running compelted")
-            
+
             if not os.path.exists(nc_out):
                 raise Exception(f"NetCDF file {nc_out} was not created")
-            
+
             if len(model.results.dims) == 0: # Non solution condition
                 raise InfeasibleModelException("Model was unfeasible")
-            
+
             restore_european_capacity('math.yaml') # Set back again the constraint modified by create_scenario_D to False
 
 
@@ -350,8 +347,8 @@ rule scenario_D: # Run after scenario C call
             inter_logs.error(f"file error: {e}")
             inter_logs.error(f"Traceback: {traceback.format_exc()}")
             inter_logs.info("Analysing error with Gurobi...")
-            
-            
+
+
             if not os.path.exists(lp_file):
                 inter_logs.error(f"LP file {lp_file} does not exist, cannot run Gurobi")
                 raise
@@ -359,7 +356,7 @@ rule scenario_D: # Run after scenario C call
             cmd = ["gurobi_cl", f"ResultFile={results_ilp}", lp_file]
             result = subprocess.run(cmd, capture_output=True, text=True, check=True)
             inter_logs.info(f"Gurobi report at {results_ilp}")
-            
+
             if os.path.exists(results_ilp):
                 inter_logs.info("Gurobi completed successfully")
                 # Create the done file even though the main process failed
@@ -404,7 +401,7 @@ rule scenario_E: # Run after scenario C call
                 scenario=f"scenario_E_{cost}"
             )
             model.build()
-            model.backend.verbose_strings() 
+            model.backend.verbose_strings()
             model.backend.to_lp(lp_file)
             model.solve()
             model.to_netcdf(nc_out)
@@ -412,15 +409,15 @@ rule scenario_E: # Run after scenario C call
 
             # Create the directory for the done file
             os.makedirs(os.path.dirname(done_marker), exist_ok=True)
-            
+
             # This creates the .done file in the location expected by the all rule.
             with open(output.done, 'w') as f:
                 f.write("completed")
                 inter_logs.info("running compelted")
-            
+
             if not os.path.exists(nc_out):
                 raise Exception(f"NetCDF file {nc_out} was not created")
-            
+
             if len(model.results.dims) == 0: # Non solution condition
                 raise InfeasibleModelException("Model was unfeasible")
 
@@ -428,8 +425,8 @@ rule scenario_E: # Run after scenario C call
             inter_logs.error(f"file error: {e}")
             inter_logs.error(f"Traceback: {traceback.format_exc()}")
             inter_logs.info("Analysing error with Gurobi...")
-            
-            
+
+
             if not os.path.exists(lp_file):
                 inter_logs.error(f"LP file {lp_file} does not exist, cannot run Gurobi")
                 raise
@@ -437,10 +434,335 @@ rule scenario_E: # Run after scenario C call
             cmd = ["gurobi_cl", f"ResultFile={results_ilp}", lp_file]
             result = subprocess.run(cmd, capture_output=True, text=True, check=True)
             inter_logs.info(f"Gurobi report at {results_ilp}")
-            
+
             if os.path.exists(results_ilp):
                 inter_logs.info("Gurobi completed successfully")
                 # Create the done file even though the main process failed
                 os.makedirs(os.path.dirname(done_marker), exist_ok=True)
                 with open(done_marker, 'w') as f:
                     f.write("completed_with_gurobi_fallback")
+
+# ----------------------------
+# SINGLE SCENARIOS
+# ----------------------------
+rule scenario_A_single:
+    input:
+        model_config="model.yaml",
+        overrides='overrides.yaml'
+    output:
+        nc="results/results_test_scenario_A.nc",
+        done="results/results_test_scenario_A.done"
+    run:
+        inter_logs.info("--- Running scenario_A (single) ---")
+        nc_out = output.nc
+        done_marker = output.done
+        csv_folder = f"results/results_test_scenario_A_csv"
+        lp_file = f"results/my_model_A.lp"
+        results_ilp = f"results/my_model_A.ilp"
+
+        # Build a single scenario entry (no cost subscenarios)
+        from Scripts.functions_scenarios import create_scenario_A
+        create_scenario_A(expand_costs=False)
+
+        try:
+            model = calliope.examples.spanish_model(
+                filename=input.model_config,
+                scenario="scenario_A"
+            )
+            model.build()
+            model.backend.verbose_strings()
+            model.backend.to_lp(lp_file)
+            model.solve()
+            model.to_netcdf(nc_out)
+            model.to_csv(csv_folder, allow_overwrite=True)
+
+            os.makedirs(os.path.dirname(done_marker), exist_ok=True)
+            with open(done_marker, 'w') as f:
+                f.write("completed")
+
+            if not os.path.exists(nc_out):
+                raise Exception(f"NetCDF file {nc_out} was not created")
+
+            inter_logs.info("Successfully completed scenario_A (single)")
+
+        except Exception as e:
+            inter_logs.error(f"file error: {e}")
+            inter_logs.error(traceback.format_exc())
+            inter_logs.info("Analysing error with Gurobi...")
+            if not os.path.exists(lp_file):
+                inter_logs.error(f"LP file {lp_file} does not exist, cannot run Gurobi")
+                raise
+            cmd = ["gurobi_cl", f"ResultFile={results_ilp}", lp_file]
+            subprocess.run(cmd, capture_output=True, text=True, check=True)
+            inter_logs.info(f"Gurobi report at {results_ilp}")
+            # Mark as finished-with-fallback so pipeline can continue
+            os.makedirs(os.path.dirname(done_marker), exist_ok=True)
+            with open(done_marker, 'w') as f:
+                f.write("completed_with_gurobi_fallback")
+
+
+rule scenario_B_single:
+    input:
+        model_config="model.yaml",
+        overrides='overrides.yaml'
+    output:
+        nc="results/results_test_scenario_B.nc",
+        done="results/results_test_scenario_B.done"
+    run:
+        inter_logs.info("--- Running scenario_B (single) ---")
+        nc_out = output.nc
+        done_marker = output.done
+        csv_folder = f"results/results_test_scenario_B_csv"
+        lp_file = f"results/my_model_B.lp"
+        results_ilp = f"results/my_model_B.ilp"
+
+        # path to the existing scenario A result (we don't declare it as an input to avoid forcing A)
+        results_A_path = "results/results_test_scenario_A.nc"
+
+        # sanity check: require that the A .nc exists (fail early with a clear message)
+        if not os.path.exists(results_A_path):
+            raise FileNotFoundError(
+                f"Required result from scenario A not found at {results_A_path}. "
+                "Place the file there or run scenario_A first."
+            )
+
+        from Scripts.functions_scenarios import create_scenario_B
+        # create scenario_B using the results from the single-run A
+        create_scenario_B(results_A_path, input.overrides, input.overrides, expand_costs=False)
+
+        try:
+            model = calliope.examples.spanish_model(
+                filename=input.model_config,
+                scenario="scenario_B"   # no cost suffix
+            )
+            model.build()
+            model.backend.verbose_strings()
+            model.backend.to_lp(lp_file)
+            model.solve()
+            model.to_netcdf(nc_out)
+            model.to_csv(csv_folder, allow_overwrite=True)
+
+            os.makedirs(os.path.dirname(done_marker), exist_ok=True)
+            with open(done_marker, 'w') as f:
+                f.write("completed")
+
+            if not os.path.exists(nc_out):
+                raise Exception(f"NetCDF file {nc_out} was not created")
+
+            if len(model.results.dims) == 0:
+                raise InfeasibleModelException("Model was unfeasible")
+
+            inter_logs.info("Successfully completed scenario_B (single)")
+
+        except Exception as e:
+            inter_logs.error(f"file error: {e}")
+            inter_logs.error(traceback.format_exc())
+            inter_logs.info("Analysing error with Gurobi...")
+            if not os.path.exists(lp_file):
+                inter_logs.error(f"LP file {lp_file} does not exist, cannot run Gurobi")
+                raise
+            cmd = ["gurobi_cl", f"ResultFile={results_ilp}", lp_file]
+            subprocess.run(cmd, capture_output=True, text=True, check=True)
+            inter_logs.info(f"Gurobi report at {results_ilp}")
+            os.makedirs(os.path.dirname(done_marker), exist_ok=True)
+            with open(done_marker, 'w') as f:
+                f.write("completed_with_gurobi_fallback")
+
+
+rule scenario_C_single:
+    input:
+        model_config="model.yaml",
+        overrides='overrides.yaml'
+    output:
+        nc="results/results_test_scenario_C.nc",
+        done="results/results_test_scenario_C.done"
+    run:
+        inter_logs.info("--- Running scenario_C (single) ---")
+        nc_out = output.nc
+        done_marker = output.done
+        csv_folder = f"results/results_test_scenario_C_csv"
+        lp_file = f"results/my_model_C.lp"
+        results_ilp = f"results/my_model_C.ilp"
+
+        # path to the existing scenario A result (we don't declare it as an input to avoid forcing A)
+        results_A_path = "results/results_test_scenario_A.nc"
+
+        # sanity check: require that the A .nc exists (fail early with a clear message)
+        if not os.path.exists(results_A_path):
+            raise FileNotFoundError(
+                f"Required result from scenario A not found at {results_A_path}. "
+                "Place the file there or run scenario_A first."
+            )
+
+        from Scripts.functions_scenarios import create_scenario_C
+        # create scenario_C using the results from the single-run A
+        create_scenario_C(results_A_path, input.overrides, input.overrides, expand_costs=False)
+
+        try:
+            model = calliope.examples.spanish_model(
+                filename=input.model_config,
+                scenario="scenario_C"   # no cost suffix
+            )
+            model.build()
+            model.backend.verbose_strings()
+            model.backend.to_lp(lp_file)
+            model.solve()
+            model.to_netcdf(nc_out)
+            model.to_csv(csv_folder, allow_overwrite=True)
+
+            os.makedirs(os.path.dirname(done_marker), exist_ok=True)
+            with open(done_marker, 'w') as f:
+                f.write("completed")
+
+            if not os.path.exists(nc_out):
+                raise Exception(f"NetCDF file {nc_out} was not created")
+
+            if len(model.results.dims) == 0:
+                raise InfeasibleModelException("Model was unfeasible")
+
+            inter_logs.info("Successfully completed scenario_C (single)")
+
+        except Exception as e:
+            inter_logs.error(f"file error: {e}")
+            inter_logs.error(traceback.format_exc())
+            inter_logs.info("Analysing error with Gurobi...")
+            if not os.path.exists(lp_file):
+                inter_logs.error(f"LP file {lp_file} does not exist, cannot run Gurobi")
+                raise
+            cmd = ["gurobi_cl", f"ResultFile={results_ilp}", lp_file]
+            subprocess.run(cmd, capture_output=True, text=True, check=True)
+            inter_logs.info(f"Gurobi report at {results_ilp}")
+            os.makedirs(os.path.dirname(done_marker), exist_ok=True)
+            with open(done_marker, 'w') as f:
+                f.write("completed_with_gurobi_fallback")
+
+rule scenario_D_single:
+    input:
+        model_config="model.yaml",
+        overrides='overrides.yaml',
+        math_file= "math.yaml"
+    output:
+        nc="results/results_test_scenario_D.nc",
+        done="results/results_test_scenario_D.done"
+    run:
+        inter_logs.info("--- Running scenario_D (single) ---")
+        nc_out = output.nc
+        done_marker = output.done
+        csv_folder = f"results/results_test_scenario_E_csv"
+        lp_file = f"results/my_model_D.lp"
+        results_ilp = f"results/my_model_D.ilp"
+
+        from Scripts.functions_scenarios import create_scenario_D
+        # create scenario_D using provided math.yaml and overrides
+        create_scenario_D(input.math_file,
+        input.overrides,
+        expand_costs=False)
+
+        try:
+            model = calliope.examples.spanish_model(
+                filename=input.model_config,
+                scenario="scenario_D"   # no cost suffix
+            )
+            model.build()
+            model.backend.verbose_strings()
+            model.backend.to_lp(lp_file)
+            #restore_european_capacity('math.yaml')  # Set back again the constraint modified by create_scenario_D to False
+            model.solve()
+            model.to_netcdf(nc_out)
+            model.to_csv(csv_folder, allow_overwrite=True)
+
+            os.makedirs(os.path.dirname(done_marker), exist_ok=True)
+            with open(done_marker, 'w') as f:
+                f.write("completed")
+
+
+            if not os.path.exists(nc_out):
+                raise Exception(f"NetCDF file {nc_out} was not created")
+
+            if len(model.results.dims) == 0:
+                raise InfeasibleModelException("Model was unfeasible")
+
+            inter_logs.info("Successfully completed scenario_D (single)")
+
+        except Exception as e:
+            inter_logs.error(f"file error: {e}")
+            inter_logs.error(traceback.format_exc())
+            inter_logs.info("Analysing error with Gurobi...")
+            if not os.path.exists(lp_file):
+                inter_logs.error(f"LP file {lp_file} does not exist, cannot run Gurobi")
+                raise
+            cmd = ["gurobi_cl", f"ResultFile={results_ilp}", lp_file]
+            subprocess.run(cmd, capture_output=True, text=True, check=True)
+            inter_logs.info(f"Gurobi report at {results_ilp}")
+            os.makedirs(os.path.dirname(done_marker), exist_ok=True)
+            with open(done_marker, 'w') as f:
+                f.write("completed_with_gurobi_fallback")
+
+rule scenario_E_single:
+    input:
+        model_config="model.yaml",
+        overrides='overrides.yaml',
+        math_file = "math.yaml"
+    output:
+        nc="results/results_test_scenario_E.nc",
+        done="results/results_test_scenario_E.done"
+    run:
+        inter_logs.info("--- Running scenario_E (single) ---")
+        nc_out = output.nc
+        done_marker = output.done
+        csv_folder = f"results/results_test_scenario_E_csv"
+        lp_file = f"results/my_model_E.lp"
+        results_ilp = f"results/my_model_E.ilp"
+
+        # path to the existing scenario A result (we don't declare it as an input to avoid forcing A)
+        results_A_path = "results/results_test_scenario_A.nc"
+
+        # sanity check: require that the A .nc exists (fail early with a clear message)
+        if not os.path.exists(results_A_path):
+            raise FileNotFoundError(
+                f"Required result from scenario A not found at {results_A_path}. "
+                "Place the file there or run scenario_A first."
+            )
+
+        # create scenario_E using provided overrides/math
+        create_scenario_E(override_yaml=input.overrides, expand_costs=False)
+
+        try:
+            model = calliope.examples.spanish_model(
+                filename=input.model_config,
+                scenario="scenario_E"  # no cost suffix
+            )
+            model.build()
+            model.backend.verbose_strings()
+            model.backend.to_lp(lp_file)
+            restore_european_capacity('math.yaml')  # Set back again the constraint modified by create_scenario_D to False
+            inter_logs.info("RUNNING UPDATED SCENARIO E")
+            model.solve()
+            model.to_netcdf(nc_out)
+            model.to_csv(csv_folder,allow_overwrite=True)
+
+            os.makedirs(os.path.dirname(done_marker),exist_ok=True)
+            with open(done_marker,'w') as f:
+                f.write("completed")
+
+            if not os.path.exists(nc_out):
+                raise Exception(f"NetCDF file {nc_out} was not created")
+
+            if len(model.results.dims) == 0:
+                raise InfeasibleModelException("Model was unfeasible")
+
+            inter_logs.info("Successfully completed scenario_E (single)")
+
+        except Exception as e:
+            inter_logs.error(f"file error: {e}")
+            inter_logs.error(traceback.format_exc())
+            inter_logs.info("Analysing error with Gurobi...")
+            if not os.path.exists(lp_file):
+                inter_logs.error(f"LP file {lp_file} does not exist, cannot run Gurobi")
+                raise
+            cmd = ["gurobi_cl", f"ResultFile={results_ilp}", lp_file]
+            subprocess.run(cmd,capture_output=True,text=True,check=True)
+            inter_logs.info(f"Gurobi report at {results_ilp}")
+            os.makedirs(os.path.dirname(done_marker),exist_ok=True)
+            with open(done_marker,'w') as f:
+                f.write("completed_with_gurobi_fallback")

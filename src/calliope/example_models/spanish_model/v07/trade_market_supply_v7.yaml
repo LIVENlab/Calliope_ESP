@@ -72,7 +72,7 @@ techs:
       name: "Coal imports from Colombia"
       template: coal
       cost_flow_out:
-        data: [ 3.53, 9.34, 0.5 ] #
+        data: [ 3.53, 9.34, 0.12 ] #
         index: [ monetary, co2, vul] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -80,7 +80,7 @@ techs:
       name: "Coal imports from Australia"
       template: coal
       cost_flow_out:
-        data: [ 5.03, 13.31, 0.5 ] #
+        data: [ 5.03, 13.31, 0.12 ] #
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -89,7 +89,7 @@ techs:
       name: "Coal imports from USA"
       template: coal
       cost_flow_out:
-        data: [6.22, 16.44, 0.5] # EUR /kWh
+        data: [6.22, 16.44, 0.12] # EUR /kWh
         index: [ monetary, co2, vul] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -97,7 +97,7 @@ techs:
       name: "Coal imports from Italia"
       template: coal
       cost_flow_out:
-        data: [ 3.63, 9.59, 0.5 ] # EUR /kWh
+        data: [ 3.63, 9.59, 0.12 ] # EUR /kWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -107,7 +107,7 @@ techs:
       template: uranium
       limit_uranium_tech: true
       cost_flow_out:
-        data: [ 0.183, 0.48, 0.5] # EUR /MWh
+        data: [ 0.183, 0.48, 0.12] # EUR /MWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -116,7 +116,7 @@ techs:
       template: uranium
       limit_uranium_tech: true
       cost_flow_out:
-        data: [0.18, 0.46, 0.5] # EUR /MWh
+        data: [0.18, 0.46, 0.12] # EUR /MWh
         index: [ monetary, co2, vul] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -126,7 +126,7 @@ techs:
       name: "NG-Liquid imports from USA"
       template: natural_gas_liquid
       cost_flow_out:
-        data: [ 8.97, 23.72, 0.5 ] # EUR /kWh
+        data: [ 8.97, 23.72, 0.12 ] # EUR /kWh
         index: [ monetary, co2, vul] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -135,7 +135,7 @@ techs:
       name: "NG-Liquid imports from Russia"
       template: natural_gas_liquid
       cost_flow_out:
-        data: [ 6.39, 16.89, 0.5] # EUR /kWh
+        data: [ 6.39, 16.89, 0.12] # EUR /kWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -144,7 +144,7 @@ techs:
       name: "NG-Liquid imports from Nigeria"
       template: natural_gas_liquid
       cost_flow_out:
-        data: [5.12, 13.54, 0.5 ] # EUR /kWh
+        data: [5.12, 13.54, 0.12 ] # EUR /kWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -153,7 +153,7 @@ techs:
       name: "NG-Liquid imports from Algeria"
       template: natural_gas_liquid
       cost_flow_out:
-        data: [4.32, 12.62, 0.5 ] # EUR / MWh
+        data: [4.32, 12.62, 0.12 ] # EUR / MWh
         index: [monetary, co2, vul ] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -162,7 +162,7 @@ techs:
       name: "NG-Liquid imports from Qatar"
       template: natural_gas_liquid
       cost_flow_out:
-        data: [4.772, 12.62, 0.5] # EUR /MWh
+        data: [4.772, 12.62, 0.12] # EUR /MWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -171,7 +171,7 @@ techs:
       name: "NG-gas imports from Algeria"
       template: natural_gas
       cost_flow_out:
-        data: [ 3.635, 9.61, 0.5] # EUR /MWh
+        data: [ 3.635, 9.61, 0.12] # EUR /MWh
         index: [ monetary, co2, vul] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -179,7 +179,7 @@ techs:
       name: "NG-gas imports from Norway"
       template: natural_gas
       cost_flow_out:
-        data: [ 3.755, 9.93, 0.5] # EUR /MWh
+        data: [ 3.755, 9.93, 0.12] # EUR /MWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -187,7 +187,7 @@ techs:
       name: "NG-gas imports from Portugal"
       template: natural_gas
       cost_flow_out:
-        data: [ 9.447, 24.97, 0.5] # EUR /MWh
+        data: [ 9.447, 24.97, 0.12] # EUR /MWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -195,7 +195,7 @@ techs:
       name: "NG-gas imports from Denmark"
       template: natural_gas
       cost_flow_out:
-        data: [ 9.04, 23.9, 0.5] # EUR /MWh
+        data: [ 9.04, 23.9, 0.12] # EUR /MWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -203,7 +203,7 @@ techs:
       name: "NG-gas imports from Germany"
       template: natural_gas
       cost_flow_out:
-        data: [ 497.88, 1316.50, 0.5 ] # EUR /MWh
+        data: [ 497.88, 1316.50, 0.12 ] # EUR /MWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -211,7 +211,7 @@ techs:
       name: "NG-gas imports from Belgium"
       template: natural_gas
       cost_flow_out:
-        data: [ 11.87, 31.40, 0.5 ] # EUR /MWh
+        data: [ 11.87, 31.40, 0.12 ] # EUR /MWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -220,7 +220,7 @@ techs:
       name: "Oil imports from Nigeria"
       template: oil
       cost_flow_out:
-        data: [ 7.58, 20.05, 0.5 ] # EUR /MWh
+        data: [ 7.58, 20.05, 0.12 ] # EUR /MWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -228,7 +228,7 @@ techs:
       name: "Oil imports from Mexico"
       template: oil
       cost_flow_out:
-        data: [ 6.25, 16.5, 0.5] # EUR /MWh
+        data: [ 6.25, 16.5, 0.12] # EUR /MWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -237,7 +237,7 @@ techs:
       template: oil
 
       cost_flow_out:
-        data: [ 7.37, 19.5, 0.5 ] # EUR /MWh
+        data: [ 7.37, 19.5, 0.12 ] # EUR /MWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -245,7 +245,7 @@ techs:
       name: "Oil imports from SA"
       template: oil
       cost_flow_out:
-        data: [ 7.93, 20.97, 0.5 ] # EUR /MWh
+        data: [ 7.93, 20.97, 0.12 ] # EUR /MWh
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
         dims: costs
 
@@ -253,7 +253,7 @@ techs:
       name: "Oil imports from SA"
       template: oil
       cost_flow_out:
-        data: [ 7.24, 19.14, 0.5 ] # EUR /MWh
+        data: [ 7.24, 19.14, 0.12 ] # EUR /MWh
         index: [ monetary, co2 , vul] # kg CO2-eq/ kWh of product
         dims: costs
 

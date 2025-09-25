@@ -38,7 +38,7 @@ techs:
       lifetime: 50
       flow_out_eff: 0.75 # 160 Pumped hydro storage, danish energy agency
       cost_flow_cap:
-        data: [5222, 13808, 0.5]  # EUR/MW # kg CO2/MW
+        data: [5222, 13808, 0.12]  # EUR/MW # kg CO2/MW
         index: [monetary, co2, vul]
         dims: ['costs']
       cost_flow_out:
@@ -49,7 +49,7 @@ techs:
         data: [8507]      # ( EUR2013/MW/yr) 3% from [@JRC:2014] Table 14
         index: [monetary]
         dims: [costs]
-      
+
 
   pumped_hydro_ESP:
     name: pumped SPAIN.
@@ -60,7 +60,7 @@ techs:
     lifetime: 60
     european_flag: true
     cost_flow_cap:
-      data: [ 139025, 4180, 0.5 ]      # (EUR2013/MW) from [@JRC:2014] Table 12
+      data: [ 139025, 4180, 0.12 ]      # (EUR2013/MW) from [@JRC:2014] Table 12
       index: [ monetary, co2, vul ]
       dims: [ costs ]
     cost_flow_out:
@@ -71,7 +71,7 @@ techs:
       data: [ 101100 ]    # (EUR2013/MW/yr) from [@JRC:2014] Table 12
       index: [ monetary ]
       dims: [ costs ]
-    
+
 
   # """" Batteries """" Considered code: 85065090
   battery_CN:

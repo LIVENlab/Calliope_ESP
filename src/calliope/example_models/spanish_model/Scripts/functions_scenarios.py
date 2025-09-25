@@ -2,7 +2,7 @@
 # Imports & constants
 # @LexPascal
 # Since it is not possible to override math constraints in the current version, the "override" acting on math constraints
-# will be conducted through a direct modification of the self defined math file. 
+# will be conducted through a direct modification of the self defined math file.
 # ----------------------------
 import calliope
 import yaml
@@ -22,7 +22,7 @@ from logger_config import inter_logs
 CUTOFF = 0.001 # MW --> Values below that will be consider numerical dust and therefore 0
 _SCENARIO_B_CAP = 0.5  # Scenario B caps china to 50%
 _COSTS = ["monetary", "co2", "vul"] # Iterate scenarios over costs
-COST_MAPPING = { 
+COST_MAPPING = {
     "monetary" : "monetary_optimization",
     "co2": "emissions_optimization",
     "vul" : "vulnerability_optimization"
@@ -50,26 +50,34 @@ def _extract_country_technologies(keyword: str,
     """
 
     all_techs = dataset.results.flow_cap.coords['techs'].values
-    techs = [tech for tech in all_techs 
+    techs = [tech for tech in all_techs
              if keyword in tech and "transmission" not in tech]
-    
+
     if len(techs) < 1:
         raise KeyError(f"no technologies found with key {keyword}")
     return techs
 
 
 
-def _extend_scenarios(scenario_name:str, overrides: list) -> Dict[str, List[str]]:
+def _extend_scenarios(scenario_name:str,
+                      overrides: list,
+                      expand_costs: bool = True,
+                      cost_mapping: Dict[str, str] = COST_MAPPING
+                      ) -> Dict[str, List[str]]:
 
     scenarios = {}
 
-    for k,v in COST_MAPPING.items():
-        override_list=overrides + [v]
-        scenarios[f"{scenario_name}_{k}"] = override_list 
-    
-    inter_logs.debug(f"Extended scenarios: {scenarios}")
+    if expand_costs:
+        for k,v in cost_mapping.items():
+            override_list=overrides + [v]
+            scenarios[f"{scenario_name}_{k}"] = override_list
+    else:
+        # Single scenario without cost expansion
+        scenarios[scenario_name] = list(overrides)
+
+    inter_logs.debug(f"Extended scenarios (expand_costs={expand_costs}): {scenarios}")
     return scenarios
-    
+
 # ----------------------------
 # Cap dictionary builders
 # ----------------------------
@@ -93,7 +101,7 @@ def _equals_cap(data: pd.Series, cap_name: str) -> dict:
     Convert pd.Series indexed by (node,tech) into a dot notation lines (override-like format)
     Define equal capacity
     """
-    
+
 
     overrides: Dict[str, Dict[str, Union[int, float]]] = {cap_name: {}}
 
@@ -124,7 +132,7 @@ def _write_cap_override(caps: pd.Series,
     Write a capacity override into a YAML file.
     """
     inter_logs.info(f"Started writing caps...")
-    
+
     caps[caps < CUTOFF] = 0.0  # FLAG: NUMERICAL DUST
 
     if mode not in CAP_BUILDERS:
@@ -143,7 +151,7 @@ def _write_cap_override(caps: pd.Series,
 
     with open(out_path, "w") as f:
         f.write(yaml_str)
-    
+
     inter_logs.debug(f"Caps applied: {override_dict}")
     inter_logs.info(f"Finished writing caps...")
 
@@ -151,7 +159,10 @@ def _write_cap_override(caps: pd.Series,
 
 def build_scenario(overrides_file: str,
                    overrides: list[str],
-                   scenario_name: str):
+                   scenario_name: str,
+                   expand_costs: bool = True,
+
+        ):
     """
     Append a scenario definition into the YAML file.
     The scenario will be triplicated according to the costs:
@@ -173,7 +184,7 @@ def build_scenario(overrides_file: str,
         config = yaml.load(f)
 
     _validate_overrides(config, overrides)
-    scenarios = _extend_scenarios(scenario_name, overrides)
+    scenarios = _extend_scenarios(scenario_name, overrides, expand_costs)
 
     # Convert each list to flow-style sequence
     for k, v in scenarios.items():
@@ -200,12 +211,12 @@ def restore_european_capacity(math_yaml: str) -> None:
     It directly modifies the file as overrides over math are not allowed
     """
     yaml = YAML()
-    yaml.preserve_quotes = True  
+    yaml.preserve_quotes = True
 
     with open(math_yaml, "r") as f:
         config = yaml.load(f)
 
-    
+
     config["constraints"]["european_capacity_share_cap"]["active"] = False
 
     inter_logs.info(
@@ -213,7 +224,7 @@ def restore_european_capacity(math_yaml: str) -> None:
     )
 
     with open(math_yaml, "w") as f:
-        yaml.dump(config, f)  
+        yaml.dump(config, f)
 
 
 def fix_european_capacity(math_yaml: str) -> None:
@@ -222,12 +233,12 @@ def fix_european_capacity(math_yaml: str) -> None:
     It directly modifies the file as overrides over math are not allowed
     """
     yaml = YAML()
-    yaml.preserve_quotes = True  
+    yaml.preserve_quotes = True
 
     with open(math_yaml, "r") as f:
         config = yaml.load(f)
 
-    
+
     config["constraints"]["european_capacity_share_cap"]["active"] = True
 
     inter_logs.info(
@@ -235,15 +246,15 @@ def fix_european_capacity(math_yaml: str) -> None:
     )
 
     with open(math_yaml, "w") as f:
-        yaml.dump(config, f)   
+        yaml.dump(config, f)
 
 
 def cap_half_china(model: calliope.model.Model,
                    override_yaml: str,
                    out_path: str):
     CN_techs = _extract_country_technologies("_CN", model)
-    
-    
+
+
     caps_ = model.results.flow_cap.sel(
         techs=CN_techs, carriers="electricity"
     ).to_series().dropna()
@@ -259,7 +270,7 @@ def fix_spanish_capacity(model: calliope.model.Model,
                          override_yaml: str,
                          out_path: str):
     inter_logs.info("starting fix spanish capacity")
-    
+
     ESP_techs = _extract_country_technologies("_ESP", model)
     caps_ = model.results.flow_cap.sel(
         techs=ESP_techs, carriers="electricity"
@@ -277,7 +288,7 @@ def fix_spanish_capacity(model: calliope.model.Model,
 # High-level orchestration
 # ----------------------------
 
-def create_scenario_A():
+def create_scenario_A(expand_costs: bool = True):
     """
     General call to create scenario A
     """
@@ -285,7 +296,8 @@ def create_scenario_A():
     build_scenario(
         overrides_file="overrides.yaml",
         overrides=["link_cap_X1"],
-        scenario_name="scenario_A"
+        scenario_name="scenario_A",
+        expand_costs=expand_costs
     )
 
     inter_logs.info(f"scenario A created")
@@ -294,7 +306,8 @@ def create_scenario_A():
 
 def create_scenario_B(results_file: str,
                       override_yaml: str,
-                      new_override: str):
+                      new_override: str,
+                      expand_costs: bool = True):
     """
     General call for scenario B
     * results_file: path to the nc files from scenario A
@@ -312,14 +325,16 @@ def create_scenario_B(results_file: str,
 
     build_scenario(new_override,
                    ["cap_russia", "exclude_spanish_diversity","FREEZE_SPANISH_CAPACITY", "link_cap_X1"],
-                   scenario_name="scenario_B")
-    
+                   scenario_name="scenario_B",
+                   expand_costs=expand_costs)
+
 
 
 
 def create_scenario_C(results_file: str,
                      override_yaml: str,
-                     new_override: str):
+                     new_override: str,
+                    expand_costs: bool = True):
     """
     General call for scenario C.
     """
@@ -331,28 +346,32 @@ def create_scenario_C(results_file: str,
 
     build_scenario(new_override,
                    ["cap_russia", "CHINA_CAP", "exclude_spanish_diversity", "FREEZE_SPANISH_CAPACITY", "link_cap_X1"],
-                   scenario_name="scenario_C")
+                   scenario_name="scenario_C",
+                   expand_costs=expand_costs)
 
 
 def create_scenario_D(math_yaml: str,
-                      override_yaml: str):
+                      override_yaml: str,
+                      expand_costs: bool = True):
     """
     General call for scenario D
     """
     fix_european_capacity(math_yaml)
     build_scenario(override_yaml,
                    ["link_cap_X1"],
-                   scenario_name="scenario_D")
-    
+                   scenario_name="scenario_D",
+                   expand_costs=expand_costs)
 
-def create_scenario_E(override_yaml: str):
+
+def create_scenario_E(math_yaml, override_yaml: str, expand_costs: bool= True):
     """
     General call for scenario D
     """
-    #fix_european_capacity(math_yaml) --> previously activated in D
+    #fix_european_capacity(math_yaml)
+    fix_european_capacity(math_yaml)
     build_scenario(override_yaml,
                    ["link_cap_X1", "cap_russia"],
-                   scenario_name="scenario_E")
-    
+                   scenario_name="scenario_E", expand_costs=expand_costs)
+
 
 
