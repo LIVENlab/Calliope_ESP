@@ -93,7 +93,8 @@ lookups:
     default: false
 
   wind_onshore_monopoly_flag:
-    description: boolean flag for technologies that can produce wind onshore monopoly
+    description: boolean flag for technologies that can produce wind onshore 
+      monopoly
     dtype: bool
     default: false
 
@@ -108,7 +109,8 @@ lookups:
     default: false
 
   biogas_to_electricity_flag:
-    description: boolean flag for technologies that can produce biogas to electricity
+    description: boolean flag for technologies that can produce biogas to 
+      electricity
     dtype: bool
     default: false
 
@@ -130,92 +132,101 @@ parameters: # general deinition of parameters. For more details, see model.yaml
     default: 1
 
   ng_share_cap_max:  # Test parameter
-    description: Share of any single tech producing NG to the total NG production
+    description: Share of any single tech producing NG to the total NG 
+      production
     unit: unitless
     default: 0.97 #share
 
   ng_share_cap_min:  # Test parameter
-    description: Share of any single tech producing NG to the total NG production
+    description: Share of any single tech producing NG to the total NG 
+      production
     unit: unitless
     default: 0.02 #share
   ng_liquid_share_cap_max:
-    description: Share of any single tech producing NG liquid to the total NG liquid
-      production
+    description: Share of any single tech producing NG liquid to the total NG 
+      liquid production
     unit: unitless
     default: 0.35 #share
   ng_liquid_share_cap_min:
-    description: Share of any single tech producing NG liquid to the total NG liquid
-      production
+    description: Share of any single tech producing NG liquid to the total NG 
+      liquid production
     unit: unitless
     default: 0.08 #share
 
   uranium_share_cap:
-    description: Share of any single tech producing uranium to the total uranium production
+    description: Share of any single tech producing uranium to the total uranium
+      production
     unit: unitless
     default: 0.716 # Uranium Uk in datatable
   coal_share_cap_max:
-    description: Share of any single tech producing coal to the total coal production
+    description: Share of any single tech producing coal to the total coal 
+      production
     unit: unitless
     default: 0.27 # Coal RUS in datatable
   coal_share_cap_min:
-    description: Share of any single tech producing coal to the total coal production
+    description: Share of any single tech producing coal to the total coal 
+      production
     unit: unitless
     default: 0.03 # Coal RUS in datatable
   oil_share_cap_max:
-    description: Share of any single tech producing oil to the total oil production
+    description: Share of any single tech producing oil to the total oil 
+      production
     unit: unitless
     default: 0.18 # Oil in datatable
   oil_share_cap_min:
-    description: Share of any single tech producing oil to the total oil production
+    description: Share of any single tech producing oil to the total oil 
+      production
     unit: unitless
     default: 0.07 # Oil in datatable
   open_field_pv_share_cap_max:
-    description: Share of any single tech producing open field PV to the total open
-      field PV production
+    description: Share of any single tech producing open field PV to the total 
+      open field PV production
     unit: unitless
     default: 0.81 # Open field PV in datatable
   open_field_pv_share_cap_min:
-    description: Share of any single tech producing open field PV to the total open
-      field PV production
+    description: Share of any single tech producing open field PV to the total 
+      open field PV production
     unit: unitless
     default: 0.01 # Open field PV in datatable
   wind_onshore_share_cap_max:
-    description: Share of any single tech producing wind onshore to the total wind
-      onshore production
+    description: Share of any single tech producing wind onshore to the total 
+      wind onshore production
     unit: unitless
     default: 0.99 # Wind onshore in datatable
   wind_onshore_share_cap_min:
-    description: Share of any single tech producing wind onshore to the total wind
-      onshore production
+    description: Share of any single tech producing wind onshore to the total 
+      wind onshore production
     unit: unitless
     default: 0.005 # Wind onshore in datatable
   battery_share_cap_max:
-    description: Share of any single tech producing battery to the total battery production
+    description: Share of any single tech producing battery to the total battery
+      production
     unit: unitless
     default: 0.53 # Battery in datatable
   battery_share_cap_min:
-    description: Share of any single tech producing battery to the total battery production
+    description: Share of any single tech producing battery to the total battery
+      production
     unit: unitless
     default: 0.03 # Battery in datatable
   biogas_to_electricity_share_cap_max:
-    description: Share of any single tech producing biogas to electricity to the total
-      biogas to electricity production
+    description: Share of any single tech producing biogas to electricity to the
+      total biogas to electricity production
     unit: unitless
     default: 0.47 # Biogas to electricity in datatable
   biogas_to_electricity_share_cap_min:
-    description: Share of any single tech producing biogas to electricity to the total
-      biogas to electricity production
+    description: Share of any single tech producing biogas to electricity to the
+      total biogas to electricity production
     unit: unitless
     default: 0.01 # Biogas to electricity in datatable
   biomass_turbine_share_cap_max:
-    description: Share of any single tech producing biogas to electricity to the total
-      biogas to electricity production
+    description: Share of any single tech producing biogas to electricity to the
+      total biogas to electricity production
     unit: unitless
     default: 0.97 # Biogas to electricity in datatable
 
   biomass_turbine_share_cap_min:
-    description: Share of any single tech producing biogas to electricity to the total
-      biogas to electricity production
+    description: Share of any single tech producing biogas to electricity to the
+      total biogas to electricity production
     unit: unitless
     default: 0.03
 
@@ -315,11 +326,11 @@ constraints:
     slices:
       carrier:
       - expression: electricity
-    active: False
+    active: false
 
   uranium_share_cap_constraint:
-    description: Constraint on the share of any single tech producing uranium to the
-      total uranium production
+    description: Constraint on the share of any single tech producing uranium to
+      the total uranium production
     foreach: [techs]
     where: limit_uranium_tech and base_tech==supply
     equations:
@@ -335,8 +346,8 @@ constraints:
     active: true
 
   coal_supply_cap_constraint_share_max:
-    description: Constraint on the share of any single tech producing coal to the
-      total coal production
+    description: Constraint on the share of any single tech producing coal to 
+      the total coal production
     foreach: [techs]
     where: coal_flag and base_tech==supply
     equations:
@@ -352,8 +363,8 @@ constraints:
     active: true
 
   coal_supply_cap_constraint_share_min:
-    description: Constraint on the share of any single tech producing coal to the
-      total coal production
+    description: Constraint on the share of any single tech producing coal to 
+      the total coal production
     foreach: [techs]
     where: coal_flag and base_tech==supply
     equations:
@@ -370,8 +381,8 @@ constraints:
 
 
   oil_supply_cap_constraint_share_max:
-    description: Constraint on the share of any single tech producing oil to the total
-      oil production
+    description: Constraint on the share of any single tech producing oil to the
+      total oil production
     foreach: [techs]
     where: oil_flag and base_tech==supply
     equations:
@@ -387,8 +398,8 @@ constraints:
     active: true
 
   oil_supply_cap_constraint_share_min:
-    description: Constraint on the share of any single tech producing oil to the total
-      oil production
+    description: Constraint on the share of any single tech producing oil to the
+      total oil production
     foreach: [techs]
     where: oil_flag and base_tech==supply
     equations:
@@ -404,8 +415,8 @@ constraints:
     active: true
 
   ng_supply_cap_constraint_share_max:
-    description: Constraint on the share of any single tech producing NG to the total
-      NG production
+    description: Constraint on the share of any single tech producing NG to the 
+      total NG production
     foreach: [techs]
     where: ng_flag and base_tech==supply
     equations:
@@ -421,8 +432,8 @@ constraints:
     active: true
 
   ng_supply_cap_constraint_share_min:
-    description: Constraint on the share of any single tech producing NG to the total
-      NG production
+    description: Constraint on the share of any single tech producing NG to the 
+      total NG production
     foreach: [techs]
     where: ng_flag and base_tech==supply
     equations:
@@ -438,8 +449,8 @@ constraints:
     active: true
 
   ng_liquid_supply_cap_constraint_share_max:
-    description: Constraint on the share of any single tech producing NG liquid to
-      the total NG liquid production
+    description: Constraint on the share of any single tech producing NG liquid 
+      to the total NG liquid production
     foreach: [techs]
     where: ng_liquid_flag and base_tech==supply
     equations:
@@ -455,8 +466,8 @@ constraints:
     active: true
 
   ng_liquid_supply_cap_constraint_share_min:
-    description: Constraint on the share of any single tech producing NG liquid to
-      the total NG liquid production
+    description: Constraint on the share of any single tech producing NG liquid 
+      to the total NG liquid production
     foreach: [techs]
     where: ng_liquid_flag and base_tech==supply
     equations:
@@ -471,8 +482,8 @@ constraints:
       - expression: ng_liquid_flag
 
   open_field_pv_supply_cap_constraint_share_max:
-    description: Constraint on the share of any single tech producing open field PV
-      to the total open field PV production
+    description: Constraint on the share of any single tech producing open field
+      PV to the total open field PV production
     foreach: [techs]
     where: open_field_pv_flag and base_tech==supply
     equations:
@@ -488,8 +499,8 @@ constraints:
     active: true
 
   open_field_pv_supply_cap_constraint_share_min:
-    description: Constraint on the share of any single tech producing open field PV
-      to the total open field PV production
+    description: Constraint on the share of any single tech producing open field
+      PV to the total open field PV production
     foreach: [techs]
     where: open_field_pv_flag and base_tech==supply
     equations:
@@ -506,8 +517,8 @@ constraints:
 
 
   rooftop_pv_supply_cap_constraint_share_max:
-    description: Constraint on the share of any single tech producing open field PV
-      to the total open field PV production
+    description: Constraint on the share of any single tech producing open field
+      PV to the total open field PV production
     foreach: [techs]
     where: rooftop_pv_flag and base_tech==supply
     equations:
@@ -523,8 +534,8 @@ constraints:
     active: true
 
   rooftop_pv_supply_cap_constraint_share_min:
-    description: Constraint on the share of any single tech producing open field PV
-      to the total open field PV production
+    description: Constraint on the share of any single tech producing open field
+      PV to the total open field PV production
     foreach: [techs]
     where: rooftop_pv_flag and base_tech==supply
     equations:
@@ -541,8 +552,8 @@ constraints:
 
 
   wind_onshore_competing_share_cap_max:
-    description: Constraint on the share of any single tech producing wind onshore
-      to the total wind onshore production
+    description: Constraint on the share of any single tech producing wind 
+      onshore to the total wind onshore production
     foreach: [techs]
     where: wind_onshore_competing_flag and base_tech==supply
     equations:
@@ -558,8 +569,8 @@ constraints:
     active: true
 
   wind_onshore_competing_share_cap_min:
-    description: Constraint on the share of any single tech producing wind onshore
-      to the total wind onshore production
+    description: Constraint on the share of any single tech producing wind 
+      onshore to the total wind onshore production
     foreach: [techs]
     where: wind_onshore_competing_flag and base_tech==supply
     equations:
@@ -575,8 +586,8 @@ constraints:
     active: true
 
   wind_onshore_monopoly_share_cap_max_:
-    description: Constraint on the share of any single tech producing wind onshore
-      to the total wind onshore production
+    description: Constraint on the share of any single tech producing wind 
+      onshore to the total wind onshore production
     foreach: [techs]
     where: wind_onshore_monopoly_flag and base_tech==supply
     equations:
@@ -592,8 +603,8 @@ constraints:
     active: true
 
   wind_onshore_monopoly_share_cap_min_:
-    description: Constraint on the share of any single tech producing wind onshore
-      to the total wind onshore production
+    description: Constraint on the share of any single tech producing wind 
+      onshore to the total wind onshore production
     foreach: [techs]
     where: wind_onshore_monopoly_flag and base_tech==supply
     equations:
@@ -609,8 +620,8 @@ constraints:
     active: true
 
   wind_offshore_share_cap_max:
-    description: Constraint on the share of any single tech producing wind offshore
-      to the total wind offshore production
+    description: Constraint on the share of any single tech producing wind 
+      offshore to the total wind offshore production
     foreach: [techs]
     where: wind_offshore_flag and base_tech==supply
     equations:
@@ -626,8 +637,8 @@ constraints:
     active: true
 
   wind_offshore_share_cap_min:
-    description: Constraint on the share of any single tech producing wind offshore
-      to the total wind offshore production
+    description: Constraint on the share of any single tech producing wind 
+      offshore to the total wind offshore production
     foreach: [techs]
     where: wind_offshore_flag and base_tech==supply
     equations:
@@ -644,8 +655,8 @@ constraints:
 
 
   battery_share_cap_max_:
-    description: Constraint on the share of any single tech producing battery to the
-      total battery production
+    description: Constraint on the share of any single tech producing battery to
+      the total battery production
     foreach: [techs]
     where: battery_flag and base_tech==storage
     equations:
@@ -661,8 +672,8 @@ constraints:
     active: true
 
   battery_share_cap_min_:
-    description: Constraint on the share of any single tech producing battery to the
-      total battery production
+    description: Constraint on the share of any single tech producing battery to
+      the total battery production
     foreach: [techs]
     where: battery_flag and base_tech==storage
     equations:
@@ -678,8 +689,8 @@ constraints:
     active: true
 
   biogas_to_electricity_share_cap_max_:
-    description: Constraint on the share of any single tech producing biogas to electricity
-      to the total biogas to electricity production
+    description: Constraint on the share of any single tech producing biogas to 
+      electricity to the total biogas to electricity production
     foreach: [techs]
     where: biogas_to_electricity_flag and base_tech==supply
     equations:
@@ -696,8 +707,8 @@ constraints:
     active: true
 
   biogas_to_electricity_share_cap_min_:
-    description: Constraint on the share of any single tech producing biogas to electricity
-      to the total biogas to electricity production
+    description: Constraint on the share of any single tech producing biogas to 
+      electricity to the total biogas to electricity production
     foreach: [techs]
     where: biogas_to_electricity_flag and base_tech==supply
     equations:
@@ -714,8 +725,8 @@ constraints:
     active: true
 
   biomass_turbine_share_cap_max_:
-    description: Constraint on the share of any single tech producing biomass turbine
-      to the total biomass turbine production
+    description: Constraint on the share of any single tech producing biomass 
+      turbine to the total biomass turbine production
     foreach: [techs]
     where: biomass_turbine_flag and base_tech==supply
     equations:
@@ -731,8 +742,8 @@ constraints:
     active: true
 
   biomass_turbine_share_cap_min_:
-    description: Constraint on the share of any single tech producing biomass turbine
-      to the total biomass turbine production
+    description: Constraint on the share of any single tech producing biomass 
+      turbine to the total biomass turbine production
     foreach: [techs]
     where: biomass_turbine_flag and base_tech==supply
     equations:
@@ -755,23 +766,25 @@ constraints:
     - expression: $total_co2 <= co2_limit
     sub_expressions:
       total_co2:
-      - expression: sum(cost[costs=co2], over=[nodes, techs, carriers, timesteps])
+      - expression: sum(cost[costs=co2], over=[nodes, techs, carriers, 
+          timesteps])
     active: true
 
   # Test group constraint fuels
 
   # Individual import cap constraints #TODO: Create a general expression instead of the clumsy multiple solution
   import_cap_ESP_1:
-    description: Limit upper bound on annual electricity imports a in the model as
-      a share of combined electricty flows in those ESP_1.
+    description: Limit upper bound on annual electricity imports a in the model 
+      as a share of combined electricty flows in those ESP_1.
     equations:
-    - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group,
-        carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    - expression: local_cap_import_limit * 
+        sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], 
+        over=[nodes, techs, timesteps]) <= $total_energy_balance
     sub_expressions:
       total_energy_balance:
-      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes,
-          techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier],
-          over=[nodes, techs, timesteps])
+      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], 
+          over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, 
+          carriers=$carrier], over=[nodes, techs, timesteps])
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_1]"
@@ -780,16 +793,17 @@ constraints:
 
 
   import_cap_ESP_2:
-    description: Limit upper bound on annual electricity imports a in the model as
-      a share of combined electricty flows in those ESP_1.
+    description: Limit upper bound on annual electricity imports a in the model 
+      as a share of combined electricty flows in those ESP_1.
     equations:
-    - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group,
-        carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    - expression: local_cap_import_limit * 
+        sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], 
+        over=[nodes, techs, timesteps]) <= $total_energy_balance
     sub_expressions:
       total_energy_balance:
-      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes,
-          techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier],
-          over=[nodes, techs, timesteps])
+      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], 
+          over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, 
+          carriers=$carrier], over=[nodes, techs, timesteps])
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_2]"
@@ -797,16 +811,17 @@ constraints:
       - expression: electricity
 
   import_cap_ESP_3:
-    description: Limit upper bound on annual electricity imports a in the model as
-      a share of combined electricty flows in those ESP_1.
+    description: Limit upper bound on annual electricity imports a in the model 
+      as a share of combined electricty flows in those ESP_1.
     equations:
-    - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group,
-        carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    - expression: local_cap_import_limit * 
+        sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], 
+        over=[nodes, techs, timesteps]) <= $total_energy_balance
     sub_expressions:
       total_energy_balance:
-      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes,
-          techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier],
-          over=[nodes, techs, timesteps])
+      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], 
+          over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, 
+          carriers=$carrier], over=[nodes, techs, timesteps])
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_3]"
@@ -814,16 +829,17 @@ constraints:
       - expression: electricity
 
   import_cap_ESP_4:
-    description: Limit upper bound on annual electricity imports a in the model as
-      a share of combined electricty flows in those ESP_1.
+    description: Limit upper bound on annual electricity imports a in the model 
+      as a share of combined electricty flows in those ESP_1.
     equations:
-    - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group,
-        carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    - expression: local_cap_import_limit * 
+        sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], 
+        over=[nodes, techs, timesteps]) <= $total_energy_balance
     sub_expressions:
       total_energy_balance:
-      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes,
-          techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier],
-          over=[nodes, techs, timesteps])
+      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], 
+          over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, 
+          carriers=$carrier], over=[nodes, techs, timesteps])
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_4]"
@@ -831,16 +847,17 @@ constraints:
       - expression: electricity
 
   import_cap_ESP_5:
-    description: Limit upper bound on annual electricity imports a in the model as
-      a share of combined electricty flows in those ESP_1.
+    description: Limit upper bound on annual electricity imports a in the model 
+      as a share of combined electricty flows in those ESP_1.
     equations:
-    - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group,
-        carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    - expression: local_cap_import_limit * 
+        sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], 
+        over=[nodes, techs, timesteps]) <= $total_energy_balance
     sub_expressions:
       total_energy_balance:
-      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes,
-          techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier],
-          over=[nodes, techs, timesteps])
+      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], 
+          over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, 
+          carriers=$carrier], over=[nodes, techs, timesteps])
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_5]"
@@ -848,16 +865,17 @@ constraints:
       - expression: electricity
 
   import_cap_ESP_6:
-    description: Limit upper bound on annual electricity imports a in the model as
-      a share of combined electricty flows in those ESP_1.
+    description: Limit upper bound on annual electricity imports a in the model 
+      as a share of combined electricty flows in those ESP_1.
     equations:
-    - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group,
-        carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    - expression: local_cap_import_limit * 
+        sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], 
+        over=[nodes, techs, timesteps]) <= $total_energy_balance
     sub_expressions:
       total_energy_balance:
-      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes,
-          techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier],
-          over=[nodes, techs, timesteps])
+      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], 
+          over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, 
+          carriers=$carrier], over=[nodes, techs, timesteps])
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_6]"
@@ -865,16 +883,17 @@ constraints:
       - expression: electricity
 
   import_cap_ESP_7:
-    description: Limit upper bound on annual electricity imports a in the model as
-      a share of combined electricty flows in those ESP_1.
+    description: Limit upper bound on annual electricity imports a in the model 
+      as a share of combined electricty flows in those ESP_1.
     equations:
-    - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group,
-        carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    - expression: local_cap_import_limit * 
+        sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], 
+        over=[nodes, techs, timesteps]) <= $total_energy_balance
     sub_expressions:
       total_energy_balance:
-      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes,
-          techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier],
-          over=[nodes, techs, timesteps])
+      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], 
+          over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, 
+          carriers=$carrier], over=[nodes, techs, timesteps])
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_7]"
@@ -883,16 +902,17 @@ constraints:
 
 
   import_cap_ESP_8:
-    description: Limit upper bound on annual electricity imports a in the model as
-      a share of combined electricty flows in those ESP_1.
+    description: Limit upper bound on annual electricity imports a in the model 
+      as a share of combined electricty flows in those ESP_1.
     equations:
-    - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group,
-        carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    - expression: local_cap_import_limit * 
+        sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], 
+        over=[nodes, techs, timesteps]) <= $total_energy_balance
     sub_expressions:
       total_energy_balance:
-      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes,
-          techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier],
-          over=[nodes, techs, timesteps])
+      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], 
+          over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, 
+          carriers=$carrier], over=[nodes, techs, timesteps])
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_8]"
@@ -900,16 +920,17 @@ constraints:
       - expression: electricity
 
   import_cap_ESP_9:
-    description: Limit upper bound on annual electricity imports a in the model as
-      a share of combined electricty flows in those ESP_1.
+    description: Limit upper bound on annual electricity imports a in the model 
+      as a share of combined electricty flows in those ESP_1.
     equations:
-    - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group,
-        carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    - expression: local_cap_import_limit * 
+        sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], 
+        over=[nodes, techs, timesteps]) <= $total_energy_balance
     sub_expressions:
       total_energy_balance:
-      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes,
-          techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier],
-          over=[nodes, techs, timesteps])
+      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], 
+          over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, 
+          carriers=$carrier], over=[nodes, techs, timesteps])
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_9]"
@@ -917,16 +938,17 @@ constraints:
       - expression: electricity
 
   import_cap_ESP_10:
-    description: Limit upper bound on annual electricity imports a in the model as
-      a share of combined electricty flows in those ESP_1.
+    description: Limit upper bound on annual electricity imports a in the model 
+      as a share of combined electricty flows in those ESP_1.
     equations:
-    - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group,
-        carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    - expression: local_cap_import_limit * 
+        sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], 
+        over=[nodes, techs, timesteps]) <= $total_energy_balance
     sub_expressions:
       total_energy_balance:
-      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes,
-          techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier],
-          over=[nodes, techs, timesteps])
+      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], 
+          over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, 
+          carriers=$carrier], over=[nodes, techs, timesteps])
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_10]"
@@ -934,16 +956,17 @@ constraints:
       - expression: electricity
 
   import_cap_ESP_11:
-    description: Limit upper bound on annual electricity imports a in the model as
-      a share of combined electricty flows in those ESP_1.
+    description: Limit upper bound on annual electricity imports a in the model 
+      as a share of combined electricty flows in those ESP_1.
     equations:
-    - expression: local_cap_import_limit * sum(flow_out_transmission_techs[nodes=$node_group,
-        carriers=$carrier], over=[nodes, techs, timesteps]) <= $total_energy_balance
+    - expression: local_cap_import_limit * 
+        sum(flow_out_transmission_techs[nodes=$node_group, carriers=$carrier], 
+        over=[nodes, techs, timesteps]) <= $total_energy_balance
     sub_expressions:
       total_energy_balance:
-      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], over=[nodes,
-          techs, timesteps]) - sum(flow_in[nodes=$node_group, carriers=$carrier],
-          over=[nodes, techs, timesteps])
+      - expression: sum(flow_out[nodes=$node_group, carriers=$carrier], 
+          over=[nodes, techs, timesteps]) - sum(flow_in[nodes=$node_group, 
+          carriers=$carrier], over=[nodes, techs, timesteps])
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_11]"
@@ -953,10 +976,11 @@ constraints:
 
   ### --- Wind onshore total group cap constraints ---
   total_wind_cap_1:
-    description: Maximum total flow capacity for specified wind technologies in ESP_1
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_1
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_tech_limit_esp_1
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_1
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_1]"
@@ -969,10 +993,11 @@ constraints:
     active: true
 
   total_wind_cap_2:
-    description: Maximum total flow capacity for specified wind technologies in ESP_2
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_2
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_tech_limit_esp_2
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_2
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_2]"
@@ -985,10 +1010,11 @@ constraints:
     active: true
 
   total_wind_cap_3:
-    description: Maximum total flow capacity for specified wind technologies in ESP_3
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_3
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_tech_limit_esp_3
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_3
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_3]"
@@ -1001,10 +1027,11 @@ constraints:
     active: true
 
   total_wind_cap_4:
-    description: Maximum total flow capacity for specified wind technologies in ESP_4
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_4
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_tech_limit_esp_4
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_4
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_4]"
@@ -1017,10 +1044,11 @@ constraints:
     active: true
 
   total_wind_cap_5:
-    description: Maximum total flow capacity for specified wind technologies in ESP_5
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_5
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_tech_limit_esp_5
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_5
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_5]"
@@ -1033,10 +1061,11 @@ constraints:
     active: true
 
   total_wind_cap_6:
-    description: Maximum total flow capacity for specified wind technologies in ESP_6
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_6
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_tech_limit_esp_6
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_6
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_6]"
@@ -1049,10 +1078,11 @@ constraints:
     active: true
 
   total_wind_cap_7:
-    description: Maximum total flow capacity for specified wind technologies in ESP_7
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_7
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_tech_limit_esp_7
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_7
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_7]"
@@ -1065,10 +1095,11 @@ constraints:
     active: true
 
   total_wind_cap_8:
-    description: Maximum total flow capacity for specified wind technologies in ESP_8
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_8
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_tech_limit_esp_8
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_8
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_8]"
@@ -1081,10 +1112,11 @@ constraints:
     active: true
 
   total_wind_cap_9:
-    description: Maximum total flow capacity for specified wind technologies in ESP_9
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_9
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_tech_limit_esp_9
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_9
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_9]"
@@ -1097,10 +1129,11 @@ constraints:
     active: true
 
   total_wind_cap_10:
-    description: Maximum total flow capacity for specified wind technologies in ESP_10
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_10
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_tech_limit_esp_10
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_10
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_10]"
@@ -1113,10 +1146,11 @@ constraints:
     active: true
 
   total_wind_cap_11:
-    description: Maximum total flow capacity for specified wind technologies in ESP_11
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_11
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_tech_limit_esp_11
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= wind_tech_limit_esp_11
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_11]"
@@ -1131,10 +1165,12 @@ constraints:
 
   ### --- Wind offshore total cap constraints
   total_wind_offshore_cap_1:
-    description: Maximum total flow capacity for specified wind technologies in ESP_1
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_1
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_offshore_techlimit_esp_1
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        wind_offshore_techlimit_esp_1
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_1]"
@@ -1146,10 +1182,12 @@ constraints:
     active: true
 
   total_wind_offshore_cap_2:
-    description: Maximum total flow capacity for specified wind technologies in ESP_2
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_2
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_offshore_techlimit_esp_2
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        wind_offshore_techlimit_esp_2
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_2]"
@@ -1161,10 +1199,12 @@ constraints:
     active: true
 
   total_wind_offshore_cap_3:
-    description: Maximum total flow capacity for specified wind technologies in ESP_3
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_3
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_offshore_techlimit_esp_3
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        wind_offshore_techlimit_esp_3
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_3]"
@@ -1176,10 +1216,12 @@ constraints:
     active: true
 
   total_wind_offshore_cap_4:
-    description: Maximum total flow capacity for specified wind technologies in ESP_4
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_4
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_offshore_techlimit_esp_4
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        wind_offshore_techlimit_esp_4
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_4]"
@@ -1191,10 +1233,12 @@ constraints:
     active: true
 
   total_wind_offshore_cap_5:
-    description: Maximum total flow capacity for specified wind technologies in ESP_5
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_5
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_offshore_techlimit_esp_5
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        wind_offshore_techlimit_esp_5
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_5]"
@@ -1206,10 +1250,12 @@ constraints:
     active: true
 
   total_wind_offshore_cap_6:
-    description: Maximum total flow capacity for specified wind technologies in ESP_6
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_6
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_offshore_techlimit_esp_6
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        wind_offshore_techlimit_esp_6
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_6]"
@@ -1221,10 +1267,12 @@ constraints:
     active: true
 
   total_wind_offshore_cap_7:
-    description: Maximum total flow capacity for specified wind technologies in ESP_7
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_7
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_offshore_techlimit_esp_7
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        wind_offshore_techlimit_esp_7
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_7]"
@@ -1236,10 +1284,12 @@ constraints:
     active: true
 
   total_wind_offshore_cap_8:
-    description: Maximum total flow capacity for specified wind technologies in ESP_8
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_8
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_offshore_techlimit_esp_8
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        wind_offshore_techlimit_esp_8
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_8]"
@@ -1251,10 +1301,12 @@ constraints:
     active: true
 
   total_wind_offshore_cap_9:
-    description: Maximum total flow capacity for specified wind technologies in ESP_9
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_9
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_offshore_techlimit_esp_9
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        wind_offshore_techlimit_esp_9
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_9]"
@@ -1266,10 +1318,12 @@ constraints:
     active: true
 
   total_wind_offshore_cap_10:
-    description: Maximum total flow capacity for specified wind technologies in ESP_10
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_10
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_offshore_techlimit_esp_10
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        wind_offshore_techlimit_esp_10
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_10]"
@@ -1281,10 +1335,12 @@ constraints:
     active: true
 
   total_wind_offshore_cap_11:
-    description: Maximum total flow capacity for specified wind technologies in ESP_11
+    description: Maximum total flow capacity for specified wind technologies in 
+      ESP_11
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, carriers=$carrier_pass],
-        over=[nodes,techs]) <= wind_offshore_techlimit_esp_11
+    - expression: sum(flow_cap[nodes=$node_group, techs=$wind_offshore, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        wind_offshore_techlimit_esp_11
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_11]"
@@ -1300,8 +1356,8 @@ constraints:
   total_rooftop_cap_1:
     description: Maximum total flow capacity for specified rooftop in ESP_1
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pv_roof_cap_esp_1
+    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_1
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_1]"
@@ -1315,8 +1371,8 @@ constraints:
   total_rooftop_cap_2:
     description: Maximum total flow capacity for specified rooftop in ESP_2
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pv_roof_cap_esp_2
+    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_2
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_2]"
@@ -1330,8 +1386,8 @@ constraints:
   total_rooftop_cap_3:
     description: Maximum total flow capacity for specified rooftop in ESP_3
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pv_roof_cap_esp_3
+    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_3
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_3]"
@@ -1345,8 +1401,8 @@ constraints:
   total_rooftop_cap_4:
     description: Maximum total flow capacity for specified rooftop in ESP_4
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pv_roof_cap_esp_4
+    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_4
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_4]"
@@ -1360,8 +1416,8 @@ constraints:
   total_rooftop_cap_5:
     description: Maximum total flow capacity for specified rooftop in ESP_5
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pv_roof_cap_esp_5
+    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_5
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_5]"
@@ -1375,8 +1431,8 @@ constraints:
   total_rooftop_cap_6:
     description: Maximum total flow capacity for specified rooftop in ESP_6
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pv_roof_cap_esp_6
+    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_6
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_6]"
@@ -1390,8 +1446,8 @@ constraints:
   total_rooftop_cap_7:
     description: Maximum total flow capacity for specified rooftop in ESP_7
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pv_roof_cap_esp_7
+    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_7
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_7]"
@@ -1405,8 +1461,8 @@ constraints:
   total_rooftop_cap_8:
     description: Maximum total flow capacity for specified rooftop in ESP_8
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pv_roof_cap_esp_8
+    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_8
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_8]"
@@ -1420,8 +1476,8 @@ constraints:
   total_rooftop_cap_9:
     description: Maximum total flow capacity for specified rooftop in ESP_9
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pv_roof_cap_esp_9
+    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_9
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_9]"
@@ -1435,8 +1491,8 @@ constraints:
   total_rooftop_cap_10:
     description: Maximum total flow capacity for specified rooftop in ESP_10
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pv_roof_cap_esp_10
+    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_10
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_10]"
@@ -1450,8 +1506,8 @@ constraints:
   total_rooftop_cap_11:
     description: Maximum total flow capacity for specified rooftop in ESP_11
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pv_roof_cap_esp_11
+    - expression: sum(flow_cap[nodes=$node_group, techs=$rooftop_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= pv_roof_cap_esp_11
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_11]"
@@ -1465,11 +1521,12 @@ constraints:
 
   # Pumped hydro capacity group caps
   total_pumped_cap_1:
-    description: Maximum total flow capacity for specified hydro pumped storage in
-      ESP_1
+    description: Maximum total flow capacity for specified hydro pumped storage 
+      in ESP_1
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pumped_hydro_techlimit_esp_1
+    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        pumped_hydro_techlimit_esp_1
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_1]"
@@ -1480,11 +1537,12 @@ constraints:
     active: true
 
   total_pumped_cap_2:
-    description: Maximum total flow capacity for specified hydro pumped storage in
-      ESP_2
+    description: Maximum total flow capacity for specified hydro pumped storage 
+      in ESP_2
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pumped_hydro_techlimit_esp_2
+    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        pumped_hydro_techlimit_esp_2
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_2]"
@@ -1495,11 +1553,12 @@ constraints:
     active: true
 
   total_pumped_cap_3:
-    description: Maximum total flow capacity for specified hydro pumped storage in
-      ESP_3
+    description: Maximum total flow capacity for specified hydro pumped storage 
+      in ESP_3
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pumped_hydro_techlimit_esp_3
+    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        pumped_hydro_techlimit_esp_3
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_3]"
@@ -1511,11 +1570,12 @@ constraints:
 
 
   total_pumped_cap_4:
-    description: Maximum total flow capacity for specified hydro pumped storage in
-      ESP_4
+    description: Maximum total flow capacity for specified hydro pumped storage 
+      in ESP_4
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pumped_hydro_techlimit_esp_4
+    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        pumped_hydro_techlimit_esp_4
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_4]"
@@ -1526,11 +1586,12 @@ constraints:
     active: true
 
   total_pumped_cap_5:
-    description: Maximum total flow capacity for specified hydro pumped storage in
-      ESP_5
+    description: Maximum total flow capacity for specified hydro pumped storage 
+      in ESP_5
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pumped_hydro_techlimit_esp_5
+    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        pumped_hydro_techlimit_esp_5
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_5]"
@@ -1541,11 +1602,12 @@ constraints:
     active: true
 
   total_pumped_cap_6:
-    description: Maximum total flow capacity for specified hydro pumped storage in
-      ESP_6
+    description: Maximum total flow capacity for specified hydro pumped storage 
+      in ESP_6
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pumped_hydro_techlimit_esp_6
+    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        pumped_hydro_techlimit_esp_6
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_6]"
@@ -1556,11 +1618,12 @@ constraints:
     active: true
 
   total_pumped_cap_7:
-    description: Maximum total flow capacity for specified hydro pumped storage in
-      ESP_7
+    description: Maximum total flow capacity for specified hydro pumped storage 
+      in ESP_7
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pumped_hydro_techlimit_esp_7
+    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        pumped_hydro_techlimit_esp_7
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_7]"
@@ -1571,11 +1634,12 @@ constraints:
     active: true
 
   total_pumped_cap_8:
-    description: Maximum total flow capacity for specified hydro pumped storage in
-      ESP_8
+    description: Maximum total flow capacity for specified hydro pumped storage 
+      in ESP_8
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pumped_hydro_techlimit_esp_8
+    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        pumped_hydro_techlimit_esp_8
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_8]"
@@ -1586,11 +1650,12 @@ constraints:
     active: true
 
   total_pumped_cap_9:
-    description: Maximum total flow capacity for specified hydro pumped storage in
-      ESP_9
+    description: Maximum total flow capacity for specified hydro pumped storage 
+      in ESP_9
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pumped_hydro_techlimit_esp_9
+    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        pumped_hydro_techlimit_esp_9
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_9]"
@@ -1602,11 +1667,12 @@ constraints:
 
 
   total_pumped_cap_10:
-    description: Maximum total flow capacity for specified hydro pumped storage in
-      ESP_10
+    description: Maximum total flow capacity for specified hydro pumped storage 
+      in ESP_10
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pumped_hydro_techlimit_esp_10
+    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        pumped_hydro_techlimit_esp_10
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_10]"
@@ -1617,11 +1683,12 @@ constraints:
     active: true
 
   total_pumped_cap_11:
-    description: Maximum total flow capacity for specified hydro pumped storage in
-      ESP_11
+    description: Maximum total flow capacity for specified hydro pumped storage 
+      in ESP_11
     equations:
-    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, carriers=$carrier_pass],
-        over=[nodes,techs]) <= pumped_hydro_techlimit_esp_11
+    - expression: sum(flow_cap[nodes=$node_group, techs=$pumped_techs, 
+        carriers=$carrier_pass], over=[nodes,techs]) <= 
+        pumped_hydro_techlimit_esp_11
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_11]"
@@ -1635,10 +1702,11 @@ constraints:
 
   # Biogas capacity caps
   storage_biogas_cap_esp_1:
-    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    description: Limit storage capacity of a group of technologies.(Emulates 
+      storage_cap_equals)
     equations:
-    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        == biogas_to_electricity_cap_1
+    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) == biogas_to_electricity_cap_1
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_1]"
@@ -1649,10 +1717,11 @@ constraints:
     active: true
 
   storage_biogas_cap_esp_2:
-    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    description: Limit storage capacity of a group of technologies.(Emulates 
+      storage_cap_equals)
     equations:
-    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        == biogas_to_electricity_cap_2
+    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) == biogas_to_electricity_cap_2
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_2]"
@@ -1663,10 +1732,11 @@ constraints:
     active: true
 
   storage_biogas_cap_esp_3:
-    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    description: Limit storage capacity of a group of technologies.(Emulates 
+      storage_cap_equals)
     equations:
-    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        == biogas_to_electricity_cap_3
+    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) == biogas_to_electricity_cap_3
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_3]"
@@ -1677,10 +1747,11 @@ constraints:
     active: true
 
   storage_biogas_cap_esp_4:
-    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    description: Limit storage capacity of a group of technologies.(Emulates 
+      storage_cap_equals)
     equations:
-    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        == biogas_to_electricity_cap_4
+    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) == biogas_to_electricity_cap_4
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_4]"
@@ -1691,10 +1762,11 @@ constraints:
     active: true
 
   storage_biogas_cap_esp_5:
-    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    description: Limit storage capacity of a group of technologies.(Emulates 
+      storage_cap_equals)
     equations:
-    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        == biogas_to_electricity_cap_5
+    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) == biogas_to_electricity_cap_5
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_5]"
@@ -1705,10 +1777,11 @@ constraints:
     active: true
 
   storage_biogas_cap_esp_6:
-    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    description: Limit storage capacity of a group of technologies.(Emulates 
+      storage_cap_equals)
     equations:
-    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        == biogas_to_electricity_cap_6
+    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) == biogas_to_electricity_cap_6
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_6]"
@@ -1719,10 +1792,11 @@ constraints:
     active: true
 
   storage_biogas_cap_esp_7:
-    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    description: Limit storage capacity of a group of technologies.(Emulates 
+      storage_cap_equals)
     equations:
-    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        == biogas_to_electricity_cap_7
+    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) == biogas_to_electricity_cap_7
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_7]"
@@ -1733,10 +1807,11 @@ constraints:
     active: true
 
   storage_biogas_cap_esp_8:
-    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    description: Limit storage capacity of a group of technologies.(Emulates 
+      storage_cap_equals)
     equations:
-    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        == biogas_to_electricity_cap_8
+    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) == biogas_to_electricity_cap_8
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_8]"
@@ -1747,10 +1822,11 @@ constraints:
     active: true
 
   storage_biogas_cap_esp_9:
-    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    description: Limit storage capacity of a group of technologies.(Emulates 
+      storage_cap_equals)
     equations:
-    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        == biogas_to_electricity_cap_9
+    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) == biogas_to_electricity_cap_9
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_9]"
@@ -1762,10 +1838,11 @@ constraints:
     active: true
 
   storage_biogas_cap_esp_10:
-    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    description: Limit storage capacity of a group of technologies.(Emulates 
+      storage_cap_equals)
     equations:
-    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        == biogas_to_electricity_cap_10
+    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) == biogas_to_electricity_cap_10
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_10]"
@@ -1776,10 +1853,11 @@ constraints:
     active: true
 
   storage_biogas_cap_esp_11:
-    description: Limit storage capacity of a group of technologies.(Emulates storage_cap_equals)
+    description: Limit storage capacity of a group of technologies.(Emulates 
+      storage_cap_equals)
     equations:
-    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        == biogas_to_electricity_cap_11
+    - expression: sum(storage_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) == biogas_to_electricity_cap_11
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_11]"
@@ -1791,10 +1869,11 @@ constraints:
 
 
   biogas_cap_resource_esp_1:
-    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    description: Limit resource capacity of a group of technologies.(Emulates 
+      resource_max)
     equations:
-    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        <= biogas_resource_esp_1
+    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) <= biogas_resource_esp_1
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_1]"
@@ -1805,10 +1884,11 @@ constraints:
     active: true
 
   biogas_cap_resource_esp_2:
-    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    description: Limit resource capacity of a group of technologies.(Emulates 
+      resource_max)
     equations:
-    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        <= biogas_resource_esp_2
+    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) <= biogas_resource_esp_2
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_2]"
@@ -1820,10 +1900,11 @@ constraints:
 
 
   biogas_cap_resource_esp_3:
-    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    description: Limit resource capacity of a group of technologies.(Emulates 
+      resource_max)
     equations:
-    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        <= biogas_resource_esp_3
+    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) <= biogas_resource_esp_3
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_3]"
@@ -1834,10 +1915,11 @@ constraints:
     active: true
 
   biogas_cap_resource_esp_4:
-    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    description: Limit resource capacity of a group of technologies.(Emulates 
+      resource_max)
     equations:
-    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        <= biogas_resource_esp_4
+    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) <= biogas_resource_esp_4
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_4]"
@@ -1848,10 +1930,11 @@ constraints:
     active: true
 
   biogas_cap_resource_esp_5:
-    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    description: Limit resource capacity of a group of technologies.(Emulates 
+      resource_max)
     equations:
-    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        <= biogas_resource_esp_5
+    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) <= biogas_resource_esp_5
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_5]"
@@ -1862,10 +1945,11 @@ constraints:
     active: true
 
   biogas_cap_resource_esp_6:
-    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    description: Limit resource capacity of a group of technologies.(Emulates 
+      resource_max)
     equations:
-    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        <= biogas_resource_esp_6
+    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) <= biogas_resource_esp_6
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_6]"
@@ -1876,10 +1960,11 @@ constraints:
     active: true
 
   biogas_cap_resource_esp_7:
-    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    description: Limit resource capacity of a group of technologies.(Emulates 
+      resource_max)
     equations:
-    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        <= biogas_resource_esp_7
+    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) <= biogas_resource_esp_7
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_7]"
@@ -1890,10 +1975,11 @@ constraints:
     active: true
 
   biogas_cap_resource_esp_8:
-    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    description: Limit resource capacity of a group of technologies.(Emulates 
+      resource_max)
     equations:
-    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        <= biogas_resource_esp_8
+    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) <= biogas_resource_esp_8
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_8]"
@@ -1904,10 +1990,11 @@ constraints:
     active: true
 
   biogas_cap_resource_esp_9:
-    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    description: Limit resource capacity of a group of technologies.(Emulates 
+      resource_max)
     equations:
-    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        <= biogas_resource_esp_9
+    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) <= biogas_resource_esp_9
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_9]"
@@ -1918,10 +2005,11 @@ constraints:
     active: true
 
   biogas_cap_resource_esp_10:
-    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    description: Limit resource capacity of a group of technologies.(Emulates 
+      resource_max)
     equations:
-    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        <= biogas_resource_esp_10
+    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) <= biogas_resource_esp_10
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_10]"
@@ -1932,10 +2020,11 @@ constraints:
     active: true
 
   biogas_cap_resource_esp_11:
-    description: Limit resource capacity of a group of technologies.(Emulates resource_max)
+    description: Limit resource capacity of a group of technologies.(Emulates 
+      resource_max)
     equations:
-    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], over=[nodes,techs])
-        <= biogas_resource_esp_11
+    - expression: sum(source_cap[nodes=$node_group, techs=$biogas_techs], 
+        over=[nodes,techs]) <= biogas_resource_esp_11
     slices:
       node_group: # The subset of nodes in which to limit heat imports
       - expression: "[ESP_11]"

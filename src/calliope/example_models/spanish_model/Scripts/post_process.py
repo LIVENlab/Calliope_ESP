@@ -101,7 +101,7 @@ def flow_out_sum(path: str,
     check_oil_production(result, path)
     check_coal_production(result, path)
     result, _ = rename_flow_out_columns(result, output_name, scenario_name)
-    
+
     # Save to CSV
     _ = f"{_}.csv"
     output_path = new_path(path, _)
@@ -395,18 +395,18 @@ def check_european_capacity(df: pd.DataFrame, source_csv_path: str | None = None
     Check if the rooftop production is greater than the open field PV demand
     """
    #open_field_pv_df = df[df['carriers'].str.contains('electricity', case=False, na=False)].copy()
-    
 
-    local_capacity = df[df['nodes'].str.contains("ESP_", case=False, na=False)] 
-    local_capacity = local_capacity[~local_capacity['techs'].str.contains("transmission|demand|existing", case=False, na=False)] 
 
-    
-    
+    local_capacity = df[df['nodes'].str.contains("ESP_", case=False, na=False)]
+    local_capacity = local_capacity[~local_capacity['techs'].str.contains("transmission|demand|existing", case=False, na=False)]
+
+
+
     filter_european_techs = '|'.join(european_techs_list)
-    european_techs = df[df['techs'].str.contains(filter_european_techs, case=False, na=False)] 
-    
+    european_techs = df[df['techs'].str.contains(filter_european_techs, case=False, na=False)]
 
-    
+
+
 
     by_tech = (
         european_techs.groupby(['techs'], as_index=False)['flow_cap']
@@ -437,7 +437,7 @@ def check_capacities(path:str) -> None:
     check_rooftop_capacities(df)
     check_wind_monopoly_capacities(df)
     check_battery_capacities(df)
-    
+
 
 def check_node_production(df:pd.DataFrame):
     df=df[df['carriers'].str.contains('electricity', case=False, na=False)]
@@ -447,5 +447,5 @@ def check_node_production(df:pd.DataFrame):
     pass
 
 #wind_capacity_check(r'C:\Users\1496051\PycharmProjects\Calliope_ESP\src\calliope\example_models\spanish_model\output_uranium_testing\results_flow_cap.csv')
-flow_out_sum(r'C:\Users\1496051\PycharmProjects\Calliope_ESP\src\calliope\example_models\spanish_model\results\results_test_scenario_A_monetary_csv\results_flow_out.csv', 'EXPORT')
+flow_out_sum(r'C:\Users\1496051\PycharmProjects\Calliope_ESP\src\calliope\example_models\spanish_model\results\results_test_scenario_A_csv\results_flow_out.csv', 'EXPORT')
 #check_capacities(r'C:\Users\1496051\PycharmProjects\Calliope_ESP\src\calliope\example_models\spanish_model\results\results_test_scenario_B_monetary_csv\results_flow_cap.csv')

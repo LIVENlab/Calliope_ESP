@@ -89,23 +89,28 @@ overrides:
     nodes.ESP_1.techs.pumped_hydro_ESP.flow_cap_max: 0.014020568864915808
     nodes.ESP_1.techs.roof_mounted_pv_ESP.flow_cap_max: 0.14342279494114585
     nodes.ESP_1.techs.wind_offshore_ESP.flow_cap_max: 0.0024763765552565124
-    nodes.ESP_1.techs.wind_onshore_competing_ESP.flow_cap_max: 0.003985685609500548
-    nodes.ESP_1.techs.wind_onshore_monopoly_ESP.flow_cap_max: 0.12161080698920008
+    nodes.ESP_1.techs.wind_onshore_competing_ESP.flow_cap_max: 
+      0.003985685609500548
+    nodes.ESP_1.techs.wind_onshore_monopoly_ESP.flow_cap_max: 
+      0.12161080698920008
     nodes.ESP_10.techs.battery_ESP.flow_cap_max: 49.99644927787106
     nodes.ESP_10.techs.biomass_ESP.flow_cap_max: 0.0
     nodes.ESP_10.techs.open_field_pv_ESP.flow_cap_max: 50.21774274965193
     nodes.ESP_10.techs.pumped_hydro_ESP.flow_cap_max: 0.0
     nodes.ESP_10.techs.roof_mounted_pv_ESP.flow_cap_max: 0.7281509394241013
     nodes.ESP_10.techs.wind_offshore_ESP.flow_cap_max: 0.0022923142949617423
-    nodes.ESP_10.techs.wind_onshore_competing_ESP.flow_cap_max: 0.002958975946951472
-    nodes.ESP_10.techs.wind_onshore_monopoly_ESP.flow_cap_max: 2680.9976678513526
+    nodes.ESP_10.techs.wind_onshore_competing_ESP.flow_cap_max: 
+      0.002958975946951472
+    nodes.ESP_10.techs.wind_onshore_monopoly_ESP.flow_cap_max: 
+      2680.9976678513526
     nodes.ESP_11.techs.battery_ESP.flow_cap_max: 47.09448037320621
     nodes.ESP_11.techs.biomass_ESP.flow_cap_max: 0.0
     nodes.ESP_11.techs.open_field_pv_ESP.flow_cap_max: 50.58298826876543
     nodes.ESP_11.techs.pumped_hydro_ESP.flow_cap_max: 0.03571611696199994
     nodes.ESP_11.techs.roof_mounted_pv_ESP.flow_cap_max: 1.9566996196890412
     nodes.ESP_11.techs.wind_offshore_ESP.flow_cap_max: 0.002402435172879806
-    nodes.ESP_11.techs.wind_onshore_competing_ESP.flow_cap_max: 0.0029428882157624043
+    nodes.ESP_11.techs.wind_onshore_competing_ESP.flow_cap_max: 
+      0.0029428882157624043
     nodes.ESP_11.techs.wind_onshore_monopoly_ESP.flow_cap_max: 7738.236922600993
     nodes.ESP_2.techs.battery_ESP.flow_cap_max: 0.22535543583372192
     nodes.ESP_2.techs.biomass_ESP.flow_cap_max: 0.0
@@ -113,7 +118,8 @@ overrides:
     nodes.ESP_2.techs.pumped_hydro_ESP.flow_cap_max: 0.0180283500837531
     nodes.ESP_2.techs.roof_mounted_pv_ESP.flow_cap_max: 0.6643599978161582
     nodes.ESP_2.techs.wind_offshore_ESP.flow_cap_max: 0.0024008462381879887
-    nodes.ESP_2.techs.wind_onshore_competing_ESP.flow_cap_max: 0.003023834773671822
+    nodes.ESP_2.techs.wind_onshore_competing_ESP.flow_cap_max: 
+      0.003023834773671822
     nodes.ESP_2.techs.wind_onshore_monopoly_ESP.flow_cap_max: 1697.3334182203441
     nodes.ESP_3.techs.battery_ESP.flow_cap_max: 40.942678123552305
     nodes.ESP_3.techs.biomass_ESP.flow_cap_max: 0.0
@@ -121,7 +127,8 @@ overrides:
     nodes.ESP_3.techs.pumped_hydro_ESP.flow_cap_max: 0.03165299476872204
     nodes.ESP_3.techs.roof_mounted_pv_ESP.flow_cap_max: 21.22671555829788
     nodes.ESP_3.techs.wind_offshore_ESP.flow_cap_max: 0.0
-    nodes.ESP_3.techs.wind_onshore_competing_ESP.flow_cap_max: 0.002939708260740707
+    nodes.ESP_3.techs.wind_onshore_competing_ESP.flow_cap_max: 
+      0.002939708260740707
     nodes.ESP_3.techs.wind_onshore_monopoly_ESP.flow_cap_max: 1966.1045134405845
     nodes.ESP_4.techs.battery_ESP.flow_cap_max: 51.52514933578735
     nodes.ESP_4.techs.biomass_ESP.flow_cap_max: 0.0
@@ -129,7 +136,8 @@ overrides:
     nodes.ESP_4.techs.pumped_hydro_ESP.flow_cap_max: 0.0
     nodes.ESP_4.techs.roof_mounted_pv_ESP.flow_cap_max: 36.3038467161859
     nodes.ESP_4.techs.wind_offshore_ESP.flow_cap_max: 0.0023112990113632256
-    nodes.ESP_4.techs.wind_onshore_competing_ESP.flow_cap_max: 0.003477368478881743
+    nodes.ESP_4.techs.wind_onshore_competing_ESP.flow_cap_max: 
+      0.003477368478881743
     nodes.ESP_4.techs.wind_onshore_monopoly_ESP.flow_cap_max: 2732.72729762062
     nodes.ESP_5.techs.battery_ESP.flow_cap_max: 0.5499608301629528
     nodes.ESP_5.techs.biomass_ESP.flow_cap_max: 0.0
@@ -137,7 +145,8 @@ overrides:
     nodes.ESP_5.techs.pumped_hydro_ESP.flow_cap_max: 0.03318687954473027
     nodes.ESP_5.techs.roof_mounted_pv_ESP.flow_cap_max: 1.2207854950069703
     nodes.ESP_5.techs.wind_offshore_ESP.flow_cap_max: 0.0
-    nodes.ESP_5.techs.wind_onshore_competing_ESP.flow_cap_max: 0.0029158586379595644
+    nodes.ESP_5.techs.wind_onshore_competing_ESP.flow_cap_max: 
+      0.0029158586379595644
     nodes.ESP_5.techs.wind_onshore_monopoly_ESP.flow_cap_max: 275.7825962811728
     nodes.ESP_6.techs.battery_ESP.flow_cap_max: 55.33423892995563
     nodes.ESP_6.techs.biomass_ESP.flow_cap_max: 0.0
@@ -145,7 +154,8 @@ overrides:
     nodes.ESP_6.techs.pumped_hydro_ESP.flow_cap_max: 0.03421958630077039
     nodes.ESP_6.techs.roof_mounted_pv_ESP.flow_cap_max: 2.2180963497938815
     nodes.ESP_6.techs.wind_offshore_ESP.flow_cap_max: 0.002430202198657619
-    nodes.ESP_6.techs.wind_onshore_competing_ESP.flow_cap_max: 0.003449682363946238
+    nodes.ESP_6.techs.wind_onshore_competing_ESP.flow_cap_max: 
+      0.003449682363946238
     nodes.ESP_6.techs.wind_onshore_monopoly_ESP.flow_cap_max: 10784.249683360795
     nodes.ESP_7.techs.battery_ESP.flow_cap_max: 59.33059432526119
     nodes.ESP_7.techs.biomass_ESP.flow_cap_max: 0.0
@@ -153,7 +163,8 @@ overrides:
     nodes.ESP_7.techs.pumped_hydro_ESP.flow_cap_max: 0.0
     nodes.ESP_7.techs.roof_mounted_pv_ESP.flow_cap_max: 1.006152067775005
     nodes.ESP_7.techs.wind_offshore_ESP.flow_cap_max: 0.0
-    nodes.ESP_7.techs.wind_onshore_competing_ESP.flow_cap_max: 0.0038115799169188844
+    nodes.ESP_7.techs.wind_onshore_competing_ESP.flow_cap_max: 
+      0.0038115799169188844
     nodes.ESP_7.techs.wind_onshore_monopoly_ESP.flow_cap_max: 3500.979619573791
     nodes.ESP_8.techs.battery_ESP.flow_cap_max: 0.11920809692578425
     nodes.ESP_8.techs.biomass_ESP.flow_cap_max: 0.0
@@ -161,15 +172,18 @@ overrides:
     nodes.ESP_8.techs.pumped_hydro_ESP.flow_cap_max: 0.02435386545149403
     nodes.ESP_8.techs.roof_mounted_pv_ESP.flow_cap_max: 0.15607599297889704
     nodes.ESP_8.techs.wind_offshore_ESP.flow_cap_max: 0.0
-    nodes.ESP_8.techs.wind_onshore_competing_ESP.flow_cap_max: 0.0030096515299377347
-    nodes.ESP_8.techs.wind_onshore_monopoly_ESP.flow_cap_max: 0.12683082956092523
+    nodes.ESP_8.techs.wind_onshore_competing_ESP.flow_cap_max: 
+      0.0030096515299377347
+    nodes.ESP_8.techs.wind_onshore_monopoly_ESP.flow_cap_max: 
+      0.12683082956092523
     nodes.ESP_9.techs.battery_ESP.flow_cap_max: 49.35196582063784
     nodes.ESP_9.techs.biomass_ESP.flow_cap_max: 0.0
     nodes.ESP_9.techs.open_field_pv_ESP.flow_cap_max: 49.780671933298144
     nodes.ESP_9.techs.pumped_hydro_ESP.flow_cap_max: 0.03605914035210807
     nodes.ESP_9.techs.roof_mounted_pv_ESP.flow_cap_max: 2.032337405886563
     nodes.ESP_9.techs.wind_offshore_ESP.flow_cap_max: 0.0
-    nodes.ESP_9.techs.wind_onshore_competing_ESP.flow_cap_max: 0.002974605384517722
+    nodes.ESP_9.techs.wind_onshore_competing_ESP.flow_cap_max: 
+      0.002974605384517722
     nodes.ESP_9.techs.wind_onshore_monopoly_ESP.flow_cap_max: 2961.406954596894
   CHINA_CAP:
     nodes.ESP_1.techs.battery_CN.flow_cap_max: 0.0833081741213636
@@ -177,70 +191,80 @@ overrides:
     nodes.ESP_1.techs.pumped_hydro_CN.flow_cap_max: 0.13565805894048255
     nodes.ESP_1.techs.roof_mounted_pv_CN.flow_cap_max: 0.0830083069004716
     nodes.ESP_1.techs.wind_offshore_CN.flow_cap_max: 0.01801465010073975
-    nodes.ESP_1.techs.wind_onshore_competing_CN.flow_cap_max: 0.055310058190068546
+    nodes.ESP_1.techs.wind_onshore_competing_CN.flow_cap_max: 
+      0.055310058190068546
     nodes.ESP_1.techs.wind_onshore_monopoly_CN.flow_cap_max: 0.07959132332985716
     nodes.ESP_10.techs.battery_CN.flow_cap_max: 396.67812849716626
     nodes.ESP_10.techs.open_field_pv_CN.flow_cap_max: 1783.2817973408826
     nodes.ESP_10.techs.pumped_hydro_CN.flow_cap_max: 0.0
     nodes.ESP_10.techs.roof_mounted_pv_CN.flow_cap_max: 0.4841803442229878
     nodes.ESP_10.techs.wind_offshore_CN.flow_cap_max: 0.07124610864263643
-    nodes.ESP_10.techs.wind_onshore_competing_CN.flow_cap_max: 0.06845025079668782
+    nodes.ESP_10.techs.wind_onshore_competing_CN.flow_cap_max: 
+      0.06845025079668782
     nodes.ESP_10.techs.wind_onshore_monopoly_CN.flow_cap_max: 8.793464116455896
     nodes.ESP_11.techs.battery_CN.flow_cap_max: 168.2721060324999
     nodes.ESP_11.techs.open_field_pv_CN.flow_cap_max: 2380.475541587439
     nodes.ESP_11.techs.pumped_hydro_CN.flow_cap_max: 20.1424811249298
     nodes.ESP_11.techs.roof_mounted_pv_CN.flow_cap_max: 1.9595058774939866
     nodes.ESP_11.techs.wind_offshore_CN.flow_cap_max: 0.027362277053053774
-    nodes.ESP_11.techs.wind_onshore_competing_CN.flow_cap_max: 0.05472678981212462
+    nodes.ESP_11.techs.wind_onshore_competing_CN.flow_cap_max: 
+      0.05472678981212462
     nodes.ESP_11.techs.wind_onshore_monopoly_CN.flow_cap_max: 11.082478525018788
     nodes.ESP_2.techs.battery_CN.flow_cap_max: 0.14222734196763906
     nodes.ESP_2.techs.open_field_pv_CN.flow_cap_max: 0.4874342320425347
     nodes.ESP_2.techs.pumped_hydro_CN.flow_cap_max: 0.19695567348191945
     nodes.ESP_2.techs.roof_mounted_pv_CN.flow_cap_max: 0.4066327750120556
     nodes.ESP_2.techs.wind_offshore_CN.flow_cap_max: 0.024512773904716113
-    nodes.ESP_2.techs.wind_onshore_competing_CN.flow_cap_max: 0.05822151878777584
+    nodes.ESP_2.techs.wind_onshore_competing_CN.flow_cap_max: 
+      0.05822151878777584
     nodes.ESP_2.techs.wind_onshore_monopoly_CN.flow_cap_max: 9.097401174440874
     nodes.ESP_3.techs.battery_CN.flow_cap_max: 100.46910151226153
     nodes.ESP_3.techs.open_field_pv_CN.flow_cap_max: 451.6836033078058
     nodes.ESP_3.techs.pumped_hydro_CN.flow_cap_max: 119.97503298883971
     nodes.ESP_3.techs.roof_mounted_pv_CN.flow_cap_max: 29.699346732572838
     nodes.ESP_3.techs.wind_offshore_CN.flow_cap_max: 0.0
-    nodes.ESP_3.techs.wind_onshore_competing_CN.flow_cap_max: 0.04224589537932545
+    nodes.ESP_3.techs.wind_onshore_competing_CN.flow_cap_max: 
+      0.04224589537932545
     nodes.ESP_3.techs.wind_onshore_monopoly_CN.flow_cap_max: 8.717885588906345
     nodes.ESP_4.techs.battery_CN.flow_cap_max: 460.3864725651864
     nodes.ESP_4.techs.open_field_pv_CN.flow_cap_max: 1.4622807086313383
     nodes.ESP_4.techs.pumped_hydro_CN.flow_cap_max: 0.0
     nodes.ESP_4.techs.roof_mounted_pv_CN.flow_cap_max: 2700.726450627633
     nodes.ESP_4.techs.wind_offshore_CN.flow_cap_max: 0.03313447702246036
-    nodes.ESP_4.techs.wind_onshore_competing_CN.flow_cap_max: 0.05847464333692355
+    nodes.ESP_4.techs.wind_onshore_competing_CN.flow_cap_max: 
+      0.05847464333692355
     nodes.ESP_4.techs.wind_onshore_monopoly_CN.flow_cap_max: 10.279712863768522
     nodes.ESP_5.techs.battery_CN.flow_cap_max: 0.34268356759891594
     nodes.ESP_5.techs.open_field_pv_CN.flow_cap_max: 40.01109375860024
     nodes.ESP_5.techs.pumped_hydro_CN.flow_cap_max: 0.485397182571245
     nodes.ESP_5.techs.roof_mounted_pv_CN.flow_cap_max: 0.7150704272005467
     nodes.ESP_5.techs.wind_offshore_CN.flow_cap_max: 0.0
-    nodes.ESP_5.techs.wind_onshore_competing_CN.flow_cap_max: 0.05030164355500737
+    nodes.ESP_5.techs.wind_onshore_competing_CN.flow_cap_max: 
+      0.05030164355500737
     nodes.ESP_5.techs.wind_onshore_monopoly_CN.flow_cap_max: 7.875396966669672
     nodes.ESP_6.techs.battery_CN.flow_cap_max: 664.577804670128
     nodes.ESP_6.techs.open_field_pv_CN.flow_cap_max: 4137.884113133936
     nodes.ESP_6.techs.pumped_hydro_CN.flow_cap_max: 1.9721856716041128
     nodes.ESP_6.techs.roof_mounted_pv_CN.flow_cap_max: 2.5352577755756736
     nodes.ESP_6.techs.wind_offshore_CN.flow_cap_max: 0.04368980950415306
-    nodes.ESP_6.techs.wind_onshore_competing_CN.flow_cap_max: 0.058771275202457035
+    nodes.ESP_6.techs.wind_onshore_competing_CN.flow_cap_max: 
+      0.058771275202457035
     nodes.ESP_6.techs.wind_onshore_monopoly_CN.flow_cap_max: 11.853014602142544
     nodes.ESP_7.techs.battery_CN.flow_cap_max: 1040.4201780913302
     nodes.ESP_7.techs.open_field_pv_CN.flow_cap_max: 3136.629528536601
     nodes.ESP_7.techs.pumped_hydro_CN.flow_cap_max: 0.0
     nodes.ESP_7.techs.roof_mounted_pv_CN.flow_cap_max: 0.7708395911620558
     nodes.ESP_7.techs.wind_offshore_CN.flow_cap_max: 0.0
-    nodes.ESP_7.techs.wind_onshore_competing_CN.flow_cap_max: 0.07248803297471244
+    nodes.ESP_7.techs.wind_onshore_competing_CN.flow_cap_max: 
+      0.07248803297471244
     nodes.ESP_7.techs.wind_onshore_monopoly_CN.flow_cap_max: 12.246777303153905
     nodes.ESP_8.techs.battery_CN.flow_cap_max: 0.07908580418224669
     nodes.ESP_8.techs.open_field_pv_CN.flow_cap_max: 0.06937468064181071
     nodes.ESP_8.techs.pumped_hydro_CN.flow_cap_max: 0.16515598733862807
     nodes.ESP_8.techs.roof_mounted_pv_CN.flow_cap_max: 0.08203191744972285
     nodes.ESP_8.techs.wind_offshore_CN.flow_cap_max: 0.0
-    nodes.ESP_8.techs.wind_onshore_competing_CN.flow_cap_max: 0.03651493398330049
+    nodes.ESP_8.techs.wind_onshore_competing_CN.flow_cap_max: 
+      0.03651493398330049
     nodes.ESP_8.techs.wind_onshore_monopoly_CN.flow_cap_max: 0.07755062477333688
     nodes.ESP_9.techs.battery_CN.flow_cap_max: 297.2708963055646
     nodes.ESP_9.techs.open_field_pv_CN.flow_cap_max: 1935.116852718168
@@ -261,7 +285,9 @@ overrides:
 scenarios:
 
   scenario_A: [link_cap_X1]
-  scenario_B: [cap_russia, exclude_spanish_diversity, FREEZE_SPANISH_CAPACITY, link_cap_X1]
+  scenario_B: [cap_russia, exclude_spanish_diversity, FREEZE_SPANISH_CAPACITY, 
+      link_cap_X1]
   scenario_D: [link_cap_X1]
-  scenario_C: [cap_russia, CHINA_CAP, exclude_spanish_diversity, FREEZE_SPANISH_CAPACITY,
-    link_cap_X1]
+  scenario_C: [cap_russia, CHINA_CAP, exclude_spanish_diversity, 
+      FREEZE_SPANISH_CAPACITY, link_cap_X1]
+  scenario_E: [link_cap_X1, cap_russia]
