@@ -10,9 +10,71 @@
 
 <img src="https://raw.githubusercontent.com/calliope-project/calliope/main/docs/img/logo.png" width="364">
 
-*A multi-scale energy systems modelling framework* | [www.callio.pe](http://www.callio.pe/)
+*A multi-scale energy systems modelling framework* (Fork with Spanish Model)| [www.callio.pe](http://www.callio.pe/)
 
 ---
+## About this Fork
+- This is a fork of the original Calliope project
+- It includes the model of the Spanish Energy System along with the scenarios to assess the [PNIEC](https://www.miteco.gob.es/es/energia/estrategia-normativa/pniec-23-30.html) 2021-2030.
+- This result is part of the project TED2021-132032A-I00, funded by MCIN/AEI/10.13039/501100011033 and by the European Union “NextGenerationEU”/PRTR.
+
+## Fork installation
+Clone this repository and install the requirements with pip:
+```bash
+cd requirements
+pip install -r requirements.txt
+pip install -r dev.txt
+```
+You can then install Calliope in editable mode:
+```bash
+pip install -e .
+```
+Finally, install the [Gurobi](https://www.gurobi.com/downloads/gurobi-optimizer-eula/) solver and activate your license.
+
+## Calliope Spain: Usage
+We have saved the model and scenarios into the example_models folder. You can run the model with the following command:
+
+```bash
+cd src/calliope/example_models/spain_model
+calliope run model.yaml  --save_netcdf=results.nc --scenario=scenario_A
+```
+You can also run the model from a Python script:
+```python
+import calliope
+
+model = calliope.examples.spanish_model(
+    filename="model.yaml",
+    scenario="scenario_A"  # PNIEC BaU scenario
+)
+
+# Build and solve
+model.build()
+model.backend.verbose_strings()
+model.backend.to_lp("demo.lp")  # Save the LP file
+model.solve()
+
+# Save results
+model.to_netcdf(my_demo.nc)
+```
+To run the full assessment of the scenarios assessed during the project, use the [snakemake](https://github.com/LIVENlab/Calliope_ESP/blob/main/src/calliope/example_models/spanish_model/Snakefile) file. You can run it with the following command:
+```bash
+snakemake all_single --cores 1
+```
+## About the scenarios
+The scenarios included in this repository are:
+- scenario_A: PNIEC 2021-2030 Business as Usual (BaU) scenario
+- scenario_B: PNIEC 2021-2030 but removing natural gas imports from Russia
+- scenario_C: Diversification of gas imports & Renewable Energy Technology (RET)Imports
+- scenario_D: Self-sufficency scenario
+- scenario_E: scenario D + B
+
+You can check the details of the scenario production in the Scripts [file](https://github.com/LIVENlab/Calliope_ESP/blob/main/src/calliope/example_models/spanish_model/Scripts/functions_scenarios.py)
+## Contact
+- **Maintainer (Spanish model)**: [Alexander de Tomás](mailto:alexander.detomas@uab.cat)
+- **Organization**: [LIVENlab](https://github.com/LIVENlab)
+- **Scenario development**: [ Sam Marot Robinson](mailto:Samuel.Marot@uab.cat)
+- **Team lead**: [Cristina Madrid López](mailto:Cristina.Madrid@ciemat.es)
+
 
 ## Contents
 
