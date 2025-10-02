@@ -26,9 +26,100 @@ global_expressions:
     equations:
     - expression: flow_cap
 
+  flow_cap_european_pv:
+    foreach: [techs, nodes, carriers]
+    where: european_flag and open_field_pv_flag
+    equations:
+    - expression: flow_cap
 
+  flow_cap_pv:
+    foreach: [techs, nodes, carriers]
+    where: open_field_pv_flag and base_tech == supply
+    equations:
+    - expression: flow_cap
 
+  flow_cap_european_pv_rooftop:
+    foreach: [techs, nodes, carriers]
+    where: european_flag and rooftop_pv_flag
+    equations:
+    - expression: flow_cap
 
+  flow_cap_pv_rooftop:
+    foreach: [techs, nodes, carriers]
+    where: rooftop_pv_flag and base_tech == supply
+    equations:
+    - expression: flow_cap
+
+  flow_cap_european_wind_offshore:
+    foreach: [techs, nodes, carriers]
+    where: european_flag and wind_offshore_flag
+    equations:
+    - expression: flow_cap
+
+  flow_cap_wind_offshore:
+    foreach: [techs, nodes, carriers]
+    where: wind_offshore_flag and base_tech == supply
+    equations:
+    - expression: flow_cap
+
+  flow_cap_european_battery:
+    foreach: [techs, nodes, carriers]
+    where: european_flag and battery_flag
+    equations:
+    - expression: flow_cap
+
+  flow_cap_battery:
+    foreach: [techs, nodes, carriers]
+    where: battery_flag and base_tech == storage
+    equations:
+    - expression: flow_cap
+
+  flow_cap_european_wind_onshore_monopoly:
+    foreach: [techs, nodes, carriers]
+    where: european_flag and wind_onshore_monopoly_flag
+    equations:
+    - expression: flow_cap
+
+  flow_cap_wind_onshore_monopoly:
+    foreach: [techs, nodes, carriers]
+    where: wind_onshore_monopoly_flag and base_tech == supply
+    equations:
+    - expression: flow_cap
+
+  flow_cap_european_wind_onshore_competing:
+    foreach: [techs, nodes, carriers]
+    where: european_flag and wind_onshore_competing_flag
+    equations:
+    - expression: flow_cap
+
+  flow_cap_wind_onshore_competing:
+    foreach: [techs, nodes, carriers]
+    where: wind_onshore_competing_flag and base_tech == supply
+    equations:
+    - expression: flow_cap
+
+  flow_cap_european_biomass_turbine:
+    foreach: [techs, nodes, carriers]
+    where: european_flag and biomass_turbine_flag
+    equations:
+    - expression: flow_cap
+
+  flow_cap_biomass_turbine:
+    foreach: [techs, nodes, carriers]
+    where: biomass_turbine_flag and base_tech == supply
+    equations:
+    - expression: flow_cap
+
+  flow_cap_european_biogas_to_electricity:
+    foreach: [techs, nodes, carriers]
+    where: european_flag and biogas_to_electricity_flag
+    equations:
+    - expression: flow_cap
+  flow_cap_biogas_to_electricity_techs:
+    foreach: [techs, nodes, carriers]
+    where: biogas_to_electricity_flag and base_tech == supply
+    equations:
+    - expression: flow_cap
 lookups:
   ## Flags for technology groups
   european_flag:
@@ -311,6 +402,9 @@ parameters: # general deinition of parameters. For more details, see model.yaml
 
 
 constraints:
+  ####
+  # European capacity constraints
+  ####
   # Technology group constraints
   european_capacity_share_cap:
     description: Force a minimum % of european installed capacity
@@ -328,6 +422,135 @@ constraints:
       - expression: electricity
     active: false
 
+  european_pv_share_cap_min:
+    description: Constraint on the share of european rooftop pv capacity
+    foreach: [techs]
+    equations:
+    - expression: >
+        sum(flow_cap_european_pv[carriers=$carrier], over=[nodes, techs])
+        >= european_capacity_share
+        *
+        (sum(flow_cap_pv[carriers=$carrier],over=[nodes, techs]))
+    slices:
+      carrier:
+      - expression: electricity
+      pv_group:
+      - expression: open_field_pv_flag
+    active: true
+
+
+  european_pv_rooftop_share_cap_min:
+    description: Constraint on the share of european rooftop pv capacity
+    foreach: [techs]
+    equations:
+    - expression: >
+        sum(flow_cap_european_pv_rooftop[carriers=$carrier], over=[nodes, techs])
+        >= european_capacity_share
+        *
+        (sum(flow_cap_pv_rooftop[carriers=$carrier],over=[nodes, techs]))
+    slices:
+      carrier:
+      - expression: electricity
+
+    active: true
+
+  european_wind_offshore_share_cap_min:
+    description: Constraint on the share of european wind offshore capacity
+    foreach: [techs]
+    equations:
+    - expression: >
+        sum(flow_cap_european_wind_offshore[carriers=$carrier], over=[nodes, techs])
+        >= european_capacity_share
+        *
+        (sum(flow_cap_wind_offshore[carriers=$carrier],over=[nodes, techs]))
+    slices:
+      carrier:
+      - expression: electricity
+    active: true
+
+  european_battery_share_cap_min:
+    description: Constraint on the share of european battery capacity
+    foreach: [techs]
+    where: battery_flag and base_tech==storage
+    equations:
+    - expression: >
+        sum(flow_cap_european_battery[carriers=$carrier], over=[nodes, techs])
+        >= european_capacity_share
+        *
+        sum(flow_cap_battery[carriers=$carrier],over=[nodes, techs])
+    slices:
+      carrier:
+      - expression: electricity
+      battery_group:
+      - expression: battery_flag
+    active: true
+
+  european_wind_onshore_monopoly_share_cap_min:
+    description: Constraint on the share of european wind onshore monopoly 
+      capacity
+    foreach: [techs]
+    equations:
+    - expression: >
+        sum(flow_cap_european_wind_onshore_monopoly[carriers=$carrier], over=[nodes,
+        techs])
+        >= european_capacity_share
+        *
+        (sum(flow_cap_wind_onshore_monopoly[carriers=$carrier],over=[nodes, techs]))
+    slices:
+      carrier:
+      - expression: electricity
+    active: true
+
+  european_wind_onshore_competing_share_cap_min:
+    description: Constraint on the share of european wind onshore competing 
+      capacity
+    foreach: [techs]
+    equations:
+    - expression: >
+        sum(flow_cap_european_wind_onshore_competing[carriers=$carrier], over=[nodes,
+        techs])
+        >= european_capacity_share
+        *
+        (sum(flow_cap_wind_onshore_competing[carriers=$carrier],over=[nodes, techs]))
+    slices:
+      carrier:
+      - expression: electricity
+    active: true
+
+  european_biomass_turbine_share_cap_min:
+    description: Constraint on the share of european biomass turbine capacity
+    foreach: [techs]
+    equations:
+    - expression: >
+        sum(flow_cap_european_biomass_turbine[carriers=$carrier], over=[nodes, techs])
+        >= european_capacity_share
+        *
+        sum(flow_cap_biomass_turbine[carriers=$carrier],over=[nodes, techs])
+    slices:
+      carrier:
+      - expression: electricity
+    active: true
+
+  european_biogas_to_electricity_share_cap_min:
+    description: Constraint on the share of european biogas to electricity 
+      capacity
+    foreach: [techs]
+    equations:
+    - expression: >
+        sum(flow_cap_european_biogas_to_electricity[carriers=$carrier], over=[nodes,
+        techs])
+        >= european_capacity_share
+        *
+        sum(flow_cap_biogas_to_electricity_techs[carriers=$carrier],over=[nodes, techs])
+    slices:
+      carrier:
+      - expression: electricity
+    active: true
+
+
+  ####
+  # End european capacity constraints
+  ###
   uranium_share_cap_constraint:
     description: Constraint on the share of any single tech producing uranium to
       the total uranium production
@@ -497,6 +720,7 @@ constraints:
       open_field_pv_group:
       - expression: open_field_pv_flag
     active: true
+
 
   open_field_pv_supply_cap_constraint_share_min:
     description: Constraint on the share of any single tech producing open field
