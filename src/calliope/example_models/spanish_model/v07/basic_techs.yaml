@@ -18,7 +18,6 @@ techs:
   el_import_FR:
       name: 'Electricity imports from France'
       template: el_import
-      #resource: .inf TODO: VALIDATE
       cost_flow_in:
         data: [22.3, 57, 0.12] # EUR /kWh  https://www.sistemaelectrico-ree.es/es/informe-del-sistema-electrico/intercambios/francia?utm_source=chatgpt.com
         index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
@@ -27,7 +26,6 @@ techs:
   el_import_PT:
     name: 'Electricity imports from Portugal'
     template: el_import
-    #resource: .inf # TODO: VALIDATE
     cost_flow_in:
       data: [ 0.28, 389, 0.12 ] # EUR /kWh  https://www.ree.es/en/press-office/news/press-release/2023/12/spanish-electricity-system-receives-eu793?utm_source=chatgpt.com
       index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
@@ -36,7 +34,6 @@ techs:
   el_import_MA:
     name: 'Electricity imports from Portugal'
     template: el_import
-    # resource: .inf
     cost_flow_in: #https://www.moroccotomorrow.org/spain-to-build-700-mw-cable-with-morocco-amid-import-surge/?utm_source=chatgpt.com
       data: [ 35.0, 693, 0.12 ] # EUR /kWh
       index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product

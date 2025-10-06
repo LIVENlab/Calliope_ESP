@@ -6,11 +6,11 @@ templates:
     name: Coal imports
     carrier_out: coal
     base_tech: supply
-    lifetime: 25 # Check if this makes any sense here #TODO
+    lifetime: 25
     coal_flag: true
     cost_flow_cap: # No costs associted to capacity
       data: [ 0, 0, 0 ] # EUR /MW
-      index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+      index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
       dims: costs
 
   uranium:
@@ -21,7 +21,7 @@ templates:
     limit_uranium_tech: true # Flag to be used in the math.yaml file
     cost_flow_cap: # No costs associted to capacity
       data: [ 0, 0, 0 ] # EUR /MW
-      index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+      index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
       dims: costs
 
   natural_gas:
@@ -32,7 +32,7 @@ templates:
     ng_flag: true
     cost_flow_cap: # No costs associted to capacity
       data: [ 0, 0, 0 ] # EUR /MW
-      index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+      index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
       dims: costs
 
   natural_gas_liquid:
@@ -43,7 +43,7 @@ templates:
     ng_liquid_flag: true
     cost_flow_cap: # No costs associted to capacity
       data: [ 0, 0, 0 ] # EUR /MW
-      index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+      index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
       dims: costs
 
   oil:
@@ -54,7 +54,7 @@ templates:
       oil_flag: true
       cost_flow_cap: # No costs associted to capacity
         data: [ 0, 0, 0 ] # EUR /MW
-        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
         dims: costs
 
 
@@ -65,7 +65,7 @@ techs:
       template: coal
       cost_flow_out:
         data: [3.79, 10.01, 0.5] # EUR /MWh
-        index: [monetary, co2, vul] # kg CO2-eq/ kWh of product
+        index: [monetary, co2, vul] # kg CO2-eq/ MWh of product
         dims: costs
 
   coal_COL:
@@ -73,7 +73,7 @@ techs:
       template: coal
       cost_flow_out:
         data: [ 3.53, 9.34, 0.12 ] #
-        index: [ monetary, co2, vul] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul] # kg CO2-eq/ MWh of product
         dims: costs
 
   coal_AUS:
@@ -81,7 +81,7 @@ techs:
       template: coal
       cost_flow_out:
         data: [ 5.03, 13.31, 0.12 ] #
-        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
         dims: costs
 
 
@@ -90,7 +90,7 @@ techs:
       template: coal
       cost_flow_out:
         data: [6.22, 16.44, 0.12] # EUR /kWh
-        index: [ monetary, co2, vul] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul] # kg CO2-eq/ MWh of product
         dims: costs
 
   coal_ITA:
@@ -98,7 +98,7 @@ techs:
       template: coal
       cost_flow_out:
         data: [ 3.63, 9.59, 0.12 ] # EUR /kWh
-        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
         dims: costs
 
   ### URANIUM ####### Enriched uranium ---- Costs information --> product_relevant_regions, col[J,R]
@@ -108,7 +108,7 @@ techs:
       limit_uranium_tech: true
       cost_flow_out:
         data: [ 0.183, 0.48, 0.12] # EUR /MWh
-        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
         dims: costs
 
   uranium_USA:
@@ -117,7 +117,7 @@ techs:
       limit_uranium_tech: true
       cost_flow_out:
         data: [0.18, 0.46, 0.12] # EUR /MWh
-        index: [ monetary, co2, vul] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul] # kg CO2-eq/ MWh of product
         dims: costs
 
 
@@ -127,7 +127,7 @@ techs:
       template: natural_gas_liquid
       cost_flow_out:
         data: [ 8.97, 23.72, 0.12 ] # EUR /kWh
-        index: [ monetary, co2, vul] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul] # kg CO2-eq/ MWh of product
         dims: costs
 
 
@@ -136,7 +136,7 @@ techs:
       template: natural_gas_liquid
       cost_flow_out:
         data: [ 6.39, 16.89, 0.12] # EUR /kWh
-        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
         dims: costs
 
 
@@ -145,7 +145,7 @@ techs:
       template: natural_gas_liquid
       cost_flow_out:
         data: [5.12, 13.54, 0.12 ] # EUR /kWh
-        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
         dims: costs
 
 
@@ -154,7 +154,7 @@ techs:
       template: natural_gas_liquid
       cost_flow_out:
         data: [4.32, 12.62, 0.12 ] # EUR / MWh
-        index: [monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        index: [monetary, co2, vul ] # kg CO2-eq/ MWh of product
         dims: costs
 
 
@@ -163,7 +163,7 @@ techs:
       template: natural_gas_liquid
       cost_flow_out:
         data: [4.772, 12.62, 0.12] # EUR /MWh
-        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
         dims: costs
 
   # Natural gas -gas  Gaseous petroleum gas and other gaseous hydrocarbons
@@ -172,7 +172,7 @@ techs:
       template: natural_gas
       cost_flow_out:
         data: [ 3.635, 9.61, 0.12] # EUR /MWh
-        index: [ monetary, co2, vul] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul] # kg CO2-eq/ MWh of product
         dims: costs
 
   natural_gas_NOR:
@@ -180,7 +180,7 @@ techs:
       template: natural_gas
       cost_flow_out:
         data: [ 3.755, 9.93, 0.12] # EUR /MWh
-        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
         dims: costs
 
   natural_gas_PT:
@@ -188,7 +188,7 @@ techs:
       template: natural_gas
       cost_flow_out:
         data: [ 9.447, 24.97, 0.12] # EUR /MWh
-        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
         dims: costs
 
   natural_gas_DNK:
@@ -196,7 +196,7 @@ techs:
       template: natural_gas
       cost_flow_out:
         data: [ 9.04, 23.9, 0.12] # EUR /MWh
-        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
         dims: costs
 
   natural_gas_DEU:
@@ -204,7 +204,7 @@ techs:
       template: natural_gas
       cost_flow_out:
         data: [ 497.88, 1316.50, 0.12 ] # EUR /MWh
-        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
         dims: costs
 
   natural_gas_BEL:
@@ -212,7 +212,7 @@ techs:
       template: natural_gas
       cost_flow_out:
         data: [ 11.87, 31.40, 0.12 ] # EUR /MWh
-        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
         dims: costs
 
   #### Oil ##### Crude petroleum or bituminous mineral oils
@@ -221,7 +221,7 @@ techs:
       template: oil
       cost_flow_out:
         data: [ 7.58, 20.05, 0.12 ] # EUR /MWh
-        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
         dims: costs
 
   oil_MEX:
@@ -229,7 +229,7 @@ techs:
       template: oil
       cost_flow_out:
         data: [ 6.25, 16.5, 0.12] # EUR /MWh
-        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
         dims: costs
 
   oil_LBY:
@@ -238,7 +238,7 @@ techs:
 
       cost_flow_out:
         data: [ 7.37, 19.5, 0.12 ] # EUR /MWh
-        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
         dims: costs
 
   oil_USA:
@@ -246,7 +246,7 @@ techs:
       template: oil
       cost_flow_out:
         data: [ 7.93, 20.97, 0.12 ] # EUR /MWh
-        index: [ monetary, co2, vul ] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2, vul ] # kg CO2-eq/ MWh of product
         dims: costs
 
   oil_SA:
@@ -254,7 +254,7 @@ techs:
       template: oil
       cost_flow_out:
         data: [ 7.24, 19.14, 0.12 ] # EUR /MWh
-        index: [ monetary, co2 , vul] # kg CO2-eq/ kWh of product
+        index: [ monetary, co2 , vul] # kg CO2-eq/ MWh of product
         dims: costs
 
 

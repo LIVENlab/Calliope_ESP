@@ -5,7 +5,6 @@ templates:
         base_tech: transmission
         carrier_in: electricity
         carrier_out: electricity
-        #flow_cap_max: 0.1
         flow_out_eff_per_distance: 0.99
         lifetime: 60 # [@JRC:2014]
 
@@ -15,9 +14,8 @@ templates:
         base_tech: transmission
         carrier_in: electricity
         carrier_out: electricity
-        flow_out_eff_per_distance: 0.95 # (1/m)
+        flow_out_eff_per_distance: 0.95
         lifetime: 60 # [@JRC:2014]
-        #flow_cap_max: 40000 # (MW) (fixed from 100,000 MW original units)
 
 
     # International trade transmission
@@ -164,7 +162,7 @@ techs:
         cost_flow_cap:
             data: [175000]
             index: [monetary]
-            dims: [costs]  # (100,000 MW)
+            dims: [costs]
 
     ESP_3_ESP_7_ac_ohl_transmission:
         link_from: ESP_2
@@ -173,7 +171,7 @@ techs:
         cost_flow_cap:
             data: [175000]
             index: [monetary]
-            dims: [costs]  # (100,000 MW)
+            dims: [costs]
 
     ESP_4_ESP_5_techs_ac_ohl_transmission:
         link_from: ESP_4
@@ -182,7 +180,7 @@ techs:
         cost_flow_cap:
             data: [175000]
             index: [monetary]
-            dims: [costs]  # (100,000 MW)
+            dims: [costs]
 
     ESP_5_ESP_11_ac_ohl_transmission:
         link_from: ESP_5
@@ -191,7 +189,7 @@ techs:
         cost_flow_cap:
             data: [175000]
             index: [monetary]
-            dims: [costs]  # (100,000 MW)
+            dims: [costs]
 
     ESP_5_ESP_6_techs_ac_ohl_transmission:
         link_from: ESP_5
@@ -200,7 +198,7 @@ techs:
         cost_flow_cap:
             data: [175000]
             index: [monetary]
-            dims: [costs]  # (100,000 MW)
+            dims: [costs]
 
     ESP_6_ESP_11_ac_ohl_transmission:
         link_from: ESP_6
@@ -209,7 +207,7 @@ techs:
         cost_flow_cap:
             data: [175000]
             index: [monetary]
-            dims: [costs]  # (100,000 MW)
+            dims: [costs]
 
     ESP_7_ESP_11_ac_ohl_transmission:
         link_from: ESP_7
@@ -218,7 +216,7 @@ techs:
         cost_flow_cap:
             data: [175000]
             index: [monetary]
-            dims: [costs]  # (100,000 MW)
+            dims: [costs]
 
     ESP_7_ESP_8_ac_ohl_transmission:
         link_from: ESP_7
@@ -227,7 +225,7 @@ techs:
         cost_flow_cap:
             data: [175000]
             index: [monetary]
-            dims: [costs]  # (100,000 MW)
+            dims: [costs]
 
     ESP_8_ESP_10_ac_ohl_transmission:
         link_from: ESP_8
@@ -236,7 +234,7 @@ techs:
         cost_flow_cap:
             data: [175000]
             index: [monetary]
-            dims: [costs]  # (100,000 MW)
+            dims: [costs]
 
     ESP_8_ESP_9_ac_ohl_transmission:
         link_from: ESP_8
@@ -245,7 +243,7 @@ techs:
         cost_flow_cap:
             data: [175000]
             index: [monetary]
-            dims: [costs]  # (100,000 MW)
+            dims: [costs]
 
     ESP_8_PRT_2_ac_ohl_transmission:
         link_from: ESP_8
@@ -254,7 +252,7 @@ techs:
         cost_flow_cap:
             data: [175000]
             index: [monetary]
-            dims: [costs]  # (100,000 MW)
+            dims: [costs]
 
     ESP_9_ESP_10_ac_ohl_transmission:
         link_from: ESP_9
@@ -263,7 +261,7 @@ techs:
         cost_flow_cap:
             data: [175000]
             index: [monetary]
-            dims: [costs]  # (100,000 MW)
+            dims: [costs]
 
     ESP_9_PRT_2_ac_ohl_transmission:
         link_from: ESP_9
@@ -272,7 +270,7 @@ techs:
         cost_flow_cap:
             data: [175000]
             index: [monetary]
-            dims: [costs]  # (100,000 MW)
+            dims: [costs]
 
     PRT_1_PRT_2_ac_ohl_transmission:
         link_from: PRT_1
@@ -281,7 +279,7 @@ techs:
         cost_flow_cap:
             data: [175000]
             index: [monetary]
-            dims: [costs]  # (100,000 MW)
+            dims: [costs]
 
 
     ESP_4_FRA_1_dc_underground_transmission:
@@ -291,7 +289,7 @@ techs:
         cost_flow_cap:
             data: [755000]
             index: [monetary]
-            dims: [costs]  # (100,000 MW)
+            dims: [costs]
 
     ESP_4_FRA_1_dc_subsea_transmission:
         link_from: ESP_4
@@ -300,7 +298,7 @@ techs:
         cost_flow_cap:
             data: [942000]
             index: [monetary]
-            dims: [costs]  # (100,000 MW)
+            dims: [costs]
 
     ESP_4_FRA_1_ac_ohl_mountain_transmission:
         link_from: ESP_4
@@ -309,7 +307,7 @@ techs:
         cost_flow_cap:
             data: [ 516000 ]
             index: [ monetary ]
-            dims: [ costs ]  # (100,000 MW)
+            dims: [ costs ]
 
     ESP_5_FRA_1_ac_ohl_transmission:
         link_from: ESP_5
@@ -318,7 +316,7 @@ techs:
         cost_flow_cap:
             data: [ 175000 ]
             index: [ monetary ]
-            dims: [ costs ]  # (100,000 MW)
+            dims: [ costs ]
 
     ESP_6_FRA_2_dc_underground_transmission:
         link_from: ESP_6
@@ -327,7 +325,7 @@ techs:
         cost_flow_cap:
             data: [755000]
             index: [monetary]
-            dims: [costs]  # (100,000 MW)
+            dims: [costs]
 
 
     ESP_6_FRA_2_ac_ohl_mountain_transmission:
@@ -337,7 +335,7 @@ techs:
         cost_flow_cap:
             data: [516000]
             index: [monetary]
-            dims: [costs]  # (100,000 MW)
+            dims: [costs]
 
 
     ESP_6_FRA_3_dc_subsea_transmission:
@@ -348,9 +346,9 @@ techs:
         cost_flow_cap:
             data: [942000]
             index: [monetary]
-            dims: [costs]  # (100,000 MW)
+            dims: [costs]
 
-    ESP_9_MA_dc_subsea_transmission: #link_toDO: adapt values
+    ESP_9_MA_dc_subsea_transmission:
         link_from: ESP_6
         link_to: FRA_3
         template: dc_transmission
