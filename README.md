@@ -14,7 +14,7 @@
 
 ---
 ## About this Fork
-- This is a fork of the original Calliope project
+- This is a fork of the original  [Calliope](https://github.com/calliope-project/calliope) project, originally released under the Apache 2.0 license. Modifications © 2025 LivenLab
 - It includes the model of the Spanish Energy System along with the scenarios to assess the [PNIEC](https://www.miteco.gob.es/es/energia/estrategia-normativa/pniec-23-30.html) 2021-2030.
 - This result is part of the project TED2021-132032A-I00, funded by MCIN/AEI/10.13039/501100011033 and by the European Union “NextGenerationEU”/PRTR.
 
